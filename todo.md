@@ -156,6 +156,14 @@
 - [x] RELEASE_NOTES_4.0.3.md 작성 (한/영 App Store용)
 - [x] 시뮬레이터 빌드 검증 (BUILD SUCCEEDED)
 
+## 무료 사용 코드 (개발자용 프로모션) - 완료 (2026-07-13)
+- [x] SubscriptionManager: 고정 코드 `DALBIT-MOON`, 리딤 시 1개월 프리미엄(UserDefaults 만료일), isPremium 판정에 반영
+- [x] SubscriptionView: 페이월 하단 "무료 사용 코드가 있나요?" → 입력필드/적용 버튼, 성공 시 만료일 표시 후 자동 닫힘
+- [x] AnalyticsManager: promo_redeem 이벤트 추가
+- [x] 로컬라이제이션 5키 (ko/en) string catalog 추가
+- [x] 시뮬레이터 빌드 검증 (BUILD SUCCEEDED)
+- 참고: 코드 변경은 SubscriptionManager.promoCode 상수 한 곳
+
 ## 남은 작업 (수동 - 코드 아님)
 - [x] dev 브랜치 코드 변경 push / PR → main 머지로 완료 (2026-07-13)
 - [ ] App Store Connect: App Description 또는 EULA 필드에 표준 약관 링크 추가

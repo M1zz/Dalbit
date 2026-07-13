@@ -164,9 +164,17 @@
 - [x] 시뮬레이터 빌드 검증 (BUILD SUCCEEDED)
 - 참고: 코드 변경은 SubscriptionManager.promoCode 상수 한 곳
 
+## GitHub 저장소 RelaxOn → Dalbit 리네임 반영 - 완료 (2026-07-14)
+- [x] README 리브랜딩: 제목 달빛(Dalbit), App Store 링크 새 앱명, 스크린샷/지원/개인정보 링크 새 URL
+- [x] SubscriptionView 개인정보 처리방침 URL 수정 (구 URL은 404): m1zz.github.io/Dalbit/privacy.html
+- [x] docs/index.html GitHub 링크 → github.com/M1zz/Dalbit
+- [x] 로컬 git remote → https://github.com/M1zz/Dalbit.git
+- [x] CLAUDE.md의 "저장소·Pages는 여전히 RelaxOn" 문구 갱신
+- [ ] (수동) App Store Connect: Privacy Policy URL 필드도 새 URL로 갱신 필요
+
 ## 남은 작업 (수동 - 코드 아님)
 - [x] dev 브랜치 코드 변경 push / PR → main 머지로 완료 (2026-07-13)
 - [ ] App Store Connect: App Description 또는 EULA 필드에 표준 약관 링크 추가
-- [ ] App Store Connect: Privacy Policy 필드에 https://m1zz.github.io/RelaxOn/privacy.html 입력
+- [ ] App Store Connect: Privacy Policy 필드에 https://m1zz.github.io/Dalbit/privacy.html 입력 (저장소 리네임으로 URL 변경됨)
 - [ ] Guideline 2.3.3: 6.5"/5.5" iPhone 스크린샷을 최신 UI로 교체 (수동)
 - [ ] Apple에 회신

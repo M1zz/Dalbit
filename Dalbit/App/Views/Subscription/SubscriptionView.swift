@@ -29,7 +29,7 @@ struct SubscriptionView: View {
 
     // 법적 링크 (App Store 가이드라인 3.1.2 필수)
     private let termsOfUseURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
-    private let privacyPolicyURL = URL(string: "https://m1zz.github.io/RelaxOn/privacy.html")!
+    private let privacyPolicyURL = URL(string: "https://m1zz.github.io/Dalbit/privacy.html")!
 
     var body: some View {
         ZStack {

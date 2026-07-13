@@ -37,3 +37,9 @@ MVVM
 - SwiftUI
 - Combine
 - AVFoundation
+
+## Support & Legal 📄
+- 지원 페이지 / Support: https://m1zz.github.io/RelaxOn/
+- 개인정보 처리방침 / Privacy Policy: https://m1zz.github.io/RelaxOn/privacy.html
+- 이용약관 / Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+- 문의 / Contact: mizzking75@gmail.com

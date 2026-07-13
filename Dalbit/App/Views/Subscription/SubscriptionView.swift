@@ -17,6 +17,16 @@ struct SubscriptionView: View {
     @State private var showError = false
     @State private var errorMessage = ""
 
+    // 무료 사용 코드 입력
+    @State private var showPromoField = false
+    @State private var promoInput = ""
+    @State private var promoResult: PromoResult?
+
+    private enum PromoResult {
+        case success(expiry: Date)
+        case invalid
+    }
+
     // 법적 링크 (App Store 가이드라인 3.1.2 필수)
     private let termsOfUseURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
     private let privacyPolicyURL = URL(string: "https://m1zz.github.io/RelaxOn/privacy.html")!
@@ -65,6 +75,9 @@ struct SubscriptionView: View {
                                 .foregroundColor(DS.Colors.textSecondary)
                                 .underline()
                         }
+
+                        // 무료 사용 코드 입력
+                        promoCodeSection()
 
                         // 법적 고지 및 약관/개인정보 링크
                         legalSection()
@@ -266,6 +279,83 @@ struct SubscriptionView: View {
                 }
                 .padding()
             }
+        }
+    }
+
+    // MARK: - Promo Code Section (무료 사용 코드)
+
+    @ViewBuilder
+    private func promoCodeSection() -> some View {
+        VStack(spacing: DS.Spacing.sm) {
+            if !showPromoField {
+                Button(action: {
+                    withAnimation { showPromoField = true }
+                }) {
+                    Text(L.Subscription.promoTitle.localized)
+                        .font(DS.Font.subhead())
+                        .foregroundColor(DS.Colors.textSecondary)
+                        .underline()
+                }
+            } else {
+                VStack(spacing: DS.Spacing.sm) {
+                    HStack(spacing: DS.Spacing.xs) {
+                        TextField(L.Subscription.promoPlaceholder.localized, text: $promoInput)
+                            .textFieldStyle(.plain)
+                            .font(DS.Font.body())
+                            .foregroundColor(DS.Colors.textPrimary)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.characters)
+                            .padding(.horizontal, DS.Spacing.sm)
+                            .padding(.vertical, DS.Spacing.xs)
+                            .background(
+                                RoundedRectangle(cornerRadius: DS.Radius.sm, style: .continuous)
+                                    .fill(DS.Colors.surface)
+                            )
+                            .onSubmit { redeemPromo() }
+
+                        Button(action: { redeemPromo() }) {
+                            Text(L.Subscription.promoApply.localized)
+                                .font(DS.Font.subhead().weight(.semibold))
+                                .foregroundColor(DS.Colors.onAccent)
+                                .padding(.horizontal, DS.Spacing.md)
+                                .padding(.vertical, DS.Spacing.xs)
+                                .background(
+                                    RoundedRectangle(cornerRadius: DS.Radius.sm, style: .continuous)
+                                        .fill(DS.Colors.accent)
+                                )
+                        }
+                        .disabled(promoInput.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+
+                    if let result = promoResult {
+                        switch result {
+                        case .success(let expiry):
+                            Text(String(format: L.Subscription.promoSuccess.localized,
+                                        expiry.formatted(date: .abbreviated, time: .omitted)))
+                                .font(DS.Font.caption())
+                                .foregroundColor(DS.Colors.success)
+                                .multilineTextAlignment(.center)
+                        case .invalid:
+                            Text(L.Subscription.promoInvalid.localized)
+                                .font(DS.Font.caption())
+                                .foregroundColor(.red)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private func redeemPromo() {
+        if subscriptionManager.redeemPromoCode(promoInput) {
+            Haptics.soft()
+            promoResult = .success(expiry: subscriptionManager.promoExpiryDate ?? Date())
+            // 성공 메시지를 잠깐 보여준 뒤 페이월 닫기
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                dismiss()
+            }
+        } else {
+            promoResult = .invalid
         }
     }
 

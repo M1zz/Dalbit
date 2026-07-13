@@ -21,6 +21,7 @@ enum AnalyticsEvent {
     case timerCancel
     case subscriptionView
     case subscriptionPurchase(productId: String)
+    case promoRedeem
 
     var name: String {
         switch self {
@@ -32,6 +33,7 @@ enum AnalyticsEvent {
         case .timerCancel: return "timer_cancel"
         case .subscriptionView: return "subscription_view"
         case .subscriptionPurchase: return "subscription_purchase"
+        case .promoRedeem: return "promo_redeem"
         }
     }
 
@@ -45,7 +47,7 @@ enum AnalyticsEvent {
             return ["minutes": minutes]
         case let .subscriptionPurchase(productId):
             return ["product_id": productId]
-        case .soundStop, .soundDelete, .timerCancel, .subscriptionView:
+        case .soundStop, .soundDelete, .timerCancel, .subscriptionView, .promoRedeem:
             return nil
         }
     }

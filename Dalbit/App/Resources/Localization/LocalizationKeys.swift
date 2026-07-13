@@ -490,6 +490,11 @@ enum L {
         static let privacyPolicy = "subscription.privacy_policy"
         static let legalNotice = "subscription.legal_notice"
         static let upgradeBadge = "subscription.upgrade_badge"
+        static let promoTitle = "subscription.promo_title"
+        static let promoPlaceholder = "subscription.promo_placeholder"
+        static let promoApply = "subscription.promo_apply"
+        static let promoSuccess = "subscription.promo_success"
+        static let promoInvalid = "subscription.promo_invalid"
     }
 
     // MARK: - Preset Categories

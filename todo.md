@@ -144,8 +144,20 @@
 - [ ] (수동) ASC: 앱 설명 또는 EULA 필드에 표준 EULA 링크
 - [ ] (수동) 새 빌드 아카이브·업로드 후 Apple 회신 + 화면 녹화 첨부
 
+## 브랜치 정리 - 완료 (2026-07-13)
+- [x] docs/readme-support-link → main 머지
+- [x] dev → main 머지 (AlarmKit·페이월 배지·로컬라이제이션 등 전부 반영, commit 8ef5876)
+- [x] main push, 머지된 브랜치 로컬/원격 삭제
+- [x] main에서 dev 새로 생성 후 push (origin/dev 추적)
+
+## 무료 음원 확장 + v4.0.3 - 완료 (2026-07-13)
+- [x] 무료 카테고리 2개 → 5개 확장 (물방울·싱잉볼 + 새소리·빗소리·앰비언트, ASMR만 프리미엄 유지) — SubscriptionManager.freeCategories
+- [x] MARKETING_VERSION 4.0.1 → 4.0.3 (빌드번호 4 유지)
+- [x] RELEASE_NOTES_4.0.3.md 작성 (한/영 App Store용)
+- [x] 시뮬레이터 빌드 검증 (BUILD SUCCEEDED)
+
 ## 남은 작업 (수동 - 코드 아님)
-- [ ] dev 브랜치 코드 변경 push / PR (원하면 진행)
+- [x] dev 브랜치 코드 변경 push / PR → main 머지로 완료 (2026-07-13)
 - [ ] App Store Connect: App Description 또는 EULA 필드에 표준 약관 링크 추가
 - [ ] App Store Connect: Privacy Policy 필드에 https://m1zz.github.io/RelaxOn/privacy.html 입력
 - [ ] Guideline 2.3.3: 6.5"/5.5" iPhone 스크린샷을 최신 UI로 교체 (수동)

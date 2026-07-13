@@ -13,7 +13,8 @@ class SubscriptionManager: ObservableObject {
 
     static let productId = "month"
     static let freeMaxCustomSounds = 3
-    static let freeCategories: Set<SoundCategory> = [.WaterDrop, .SingingBowl]
+    // 무료로 개방된 사운드 카테고리 (6개 중 5개 — ASMR만 프리미엄)
+    static let freeCategories: Set<SoundCategory> = [.WaterDrop, .SingingBowl, .Bird, .Rain, .Ambient]
 
     @Published var isPremium: Bool = false
     @Published var products: [Product] = []

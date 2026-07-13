@@ -1,8 +1,10 @@
-# RelaxOn - 프로젝트 컨텍스트
+# 달빛 (Dalbit) - 프로젝트 컨텍스트
+
+> 앱 표시 이름: **달빛 / Dalbit** (구 RelaxOn). 루트 디렉토리·프로젝트·스킴·소스 폴더·타깃 모두 `Dalbit`으로 리네임 완료(2026-06-22). **번들ID(`com.leeo.LullabyRecipe`)만 유지.** 루트 경로: `Dalbit/`, Xcode 프로젝트: `Dalbit.xcodeproj`, 소스 폴더: `Dalbit/`, 스킴: `Dalbit`. **GitHub 저장소·Pages URL은 여전히 `RelaxOn`** (원격 remote만 RelaxOn 유지).
 
 ## 📱 프로젝트 개요
 
-**RelaxOn**은 여러 개의 자연 소리를 레이어처럼 겹쳐 나만의 완벽한 백색소음 사운드를 만들 수 있는 iOS 앱입니다.
+**달빛(Dalbit)**은 여러 개의 자연 소리를 레이어처럼 겹쳐 나만의 완벽한 백색소음 사운드를 만들 수 있는 iOS 앱입니다.
 
 ### 🎯 타겟 사용자
 
@@ -13,7 +15,7 @@
 - 마음에 드는 조합을 찾기 위해 시간을 낭비하고
 - 원하는 조합을 찾아도 매번 같은 과정을 반복해야 했습니다
 
-**RelaxOn은 이런 문제를 해결합니다:**
+**달빛은 이런 문제를 해결합니다:**
 - 원하는 소리들을 직접 선택하고 조합
 - 볼륨, 피치 등 세밀한 조정 가능
 - 한 번 만든 조합을 저장하여 언제든 재사용
@@ -33,7 +35,7 @@
 - **UI 프레임워크**: SwiftUI
 - **오디오**: AVFoundation (AVAudioEngine)
 - **아키텍처**: MVVM 패턴
-- **최소 지원**: iOS 15.0+
+- **최소 지원**: iOS 26.0+
 
 ### 주요 디자인 패턴
 - MVVM (Model-View-ViewModel)
@@ -44,7 +46,7 @@
 ## 📂 프로젝트 구조
 
 ```
-RelaxOn/
+Dalbit/
 ├── App/
 │   ├── Manager/
 │   │   ├── AudioEngineManager.swift      # 메인 오디오 엔진 (싱글톤)
@@ -300,7 +302,7 @@ LinearGradient(
 
 1. **오디오 파일 준비**
    - 형식: MP3
-   - 경로: `RelaxOn/App/Assets/Sound/`
+   - 경로: `Dalbit/App/Assets/Sound/`
 
 2. **Enum 추가**
 ```swift
@@ -331,7 +333,7 @@ AvailableSound(
 
 ### 새로운 배경 음악 추가
 
-1. **파일 추가**: `RelaxOn/App/Assets/Sound/music/`
+1. **파일 추가**: `Dalbit/App/Assets/Sound/music/`
 2. **BackgroundSound enum 수정**
 ```swift
 enum BackgroundSound: String, CaseIterable {
@@ -356,16 +358,16 @@ enum BackgroundSound: String, CaseIterable {
 ```bash
 # 클린 빌드
 xcodebuild clean build \
-  -project RelaxOn.xcodeproj \
-  -scheme RelaxOn \
+  -project Dalbit.xcodeproj \
+  -scheme Dalbit \
   -sdk iphonesimulator \
   -configuration Debug
 
 # 시뮬레이터에서 실행
 open -a Simulator
 xcodebuild build \
-  -project RelaxOn.xcodeproj \
-  -scheme RelaxOn \
+  -project Dalbit.xcodeproj \
+  -scheme Dalbit \
   -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
 
@@ -456,11 +458,11 @@ refactor: 네비게이션 구조 전면 리팩토링
 - [SwiftUI Navigation](https://developer.apple.com/documentation/swiftui/navigationstack)
 
 ### 프로젝트 문서
-- [AudioLayerManager 설계](RelaxOn/App/Manager/AudioLayerManager.swift)
-- [CustomSound 모델](RelaxOn/App/Models/CustomSound.swift)
+- [AudioLayerManager 설계](Dalbit/App/Manager/AudioLayerManager.swift)
+- [CustomSound 모델](Dalbit/App/Models/CustomSound.swift)
 
 ---
 
 **Last Updated**: 2025-01-17
-**Current Version**: 4.0.0
-**Maintained by**: RelaxOn Team
+**Current Version**: 4.0.1
+**Maintained by**: 달빛(Dalbit) Team

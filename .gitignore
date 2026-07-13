@@ -1,2 +1,6 @@
 xcuserdata/
 .DS_Store
+
+# 빌드 로그
+*.log
+build_log.txt

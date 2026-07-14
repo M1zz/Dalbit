@@ -53,6 +53,18 @@ final class AudioEngineManager: ObservableObject {
     @Published private var currentPlayingSound: Playable?
     @Published var interval: Double = 1.0
 
+    /// 전역 효과음(레이어 사운드) 끄기 — 켜면 배경음악만 재생. 보관함 토글로 제어.
+    @Published var effectsMuted: Bool = UserDefaults.standard.bool(forKey: "effectsMuted") {
+        didSet {
+            guard oldValue != effectsMuted else { return }
+            UserDefaults.standard.set(effectsMuted, forKey: "effectsMuted")
+            // 재생 중이면 현재 사운드를 다시 평가해 효과음 유무를 즉시 반영
+            if let sound = currentPlayingSound {
+                play(with: sound)
+            }
+        }
+    }
+
     // 실제 재생 이벤트를 알리기 위한 Publisher
     let soundDidPlay = PassthroughSubject<(volume: Float, pitch: Float), Never>()
 
@@ -423,6 +435,25 @@ extension AudioEngineManager {
         engine.mainMixerNode.outputVolume = 0
 
         currentPlayingSound = sound
+
+        // 전역 효과음 끄기: 효과음 레이어는 건너뛰고 배경음악만 재생
+        if effectsMuted {
+            if let customSound = sound as? CustomSound,
+               let backgroundSoundName = customSound.backgroundSound,
+               let backgroundSound = BackgroundSound.from(backgroundSoundName) {
+                if let savedBackgroundVolume = customSound.backgroundVolume {
+                    self.backgroundVolume = savedBackgroundVolume
+                }
+                audioVariation = customSound.audioVariation
+                playBackground(backgroundSound)
+                masterFadeIn()
+            } else {
+                // 배경음악이 없는 사운드는 효과음이 꺼지면 무음 (마스터 볼륨 복원)
+                engine.mainMixerNode.outputVolume = 1.0
+                print("🔇 [AudioEngineManager] 효과음 꺼짐 · 배경음악 없음 → 무음")
+            }
+            return
+        }
 
         // CustomSound이면서 레이어 방식인 경우
         if let customSound = sound as? CustomSound, customSound.isLayeredSound {

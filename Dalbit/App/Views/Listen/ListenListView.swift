@@ -9,6 +9,35 @@ import SwiftUI
 import UIKit
 import MediaPlayer
 import CoreMotion
+import TipKit
+
+/// 효과음(레이어 사운드)이 거슬리면 아래로 스와이프해 보관함에서 끌 수 있다고 안내하는 팁.
+/// 앱 실행 초반 최대 3회까지만 노출된다.
+struct EffectsOffTip: Tip {
+    /// 팁 액션 식별자 (보관함 열기)
+    static let openLibraryActionID = "open-library"
+
+    var title: Text {
+        Text(L.Tip.effectsOffTitle.localized)
+    }
+
+    var message: Text? {
+        Text(L.Tip.effectsOffMessage.localized)
+    }
+
+    var image: Image? {
+        Image(systemName: "speaker.slash.fill")
+    }
+
+    var actions: [Action] {
+        Action(id: Self.openLibraryActionID, title: L.Tip.openLibrary.localized)
+    }
+
+    var options: [any TipOption] {
+        // 앱 실행 초반 최대 3회 노출
+        Tips.MaxDisplayCount(3)
+    }
+}
 
 /**
  커스텀 음원 목록이 노출되는 View
@@ -65,6 +94,8 @@ struct ListenListView: View {
     @AppStorage("didUseModeSwitch") private var didUseModeSwitch = false
     // 첫 실행 1회 제스처 안내
     @AppStorage("didShowGestureCoach") private var didShowGestureCoach = false
+    // 효과음 끄기 안내 팁 (앱 실행 초반 최대 3회)
+    private let effectsOffTip = EffectsOffTip()
     @State private var showCoach = false
     @State private var countedThisSession = false
     @StateObject private var timerManager = TimerManager(viewModel: CustomSoundViewModel())
@@ -101,6 +132,23 @@ struct ListenListView: View {
                 }
                 .frame(width: W, height: H)
                 .clipped()
+            }
+
+            // 효과음 끄기 안내 팁 (홈에서만, 앱 실행 초반 최대 3회) — 상단에 표시
+            if page == 1 && !showCoach {
+                VStack {
+                    TipView(effectsOffTip) { action in
+                        if action.id == EffectsOffTip.openLibraryActionID {
+                            goTo(0)   // 아래로 굴러 보관함 열기
+                        }
+                    }
+                    .tipBackground(.ultraThinMaterial)
+                    .padding(.horizontal, DS.Spacing.screen)
+                    .padding(.top, DS.Spacing.sm)
+                    Spacer()
+                }
+                .zIndex(9)
+                .transition(.opacity)
             }
 
             // 첫 실행 1회: 제스처 사용법 안내 (스킵 가능)
@@ -728,14 +776,20 @@ struct ListenListView: View {
         )
     }
 
-    /// 달을 돌릴 때 위성을 등장시키고, 아주 천천히 한 바퀴(약 13분) 돈 뒤 사라지게.
-    /// 등장 위치(좌/우 뒤)·색상·크기는 매번 랜덤, 공전 속도(780초)만 고정.
-    private func flashSatellite(duration: Double = 780) {   // 780초 ≈ 13분
+    /// 달을 돌릴 때 위성을 등장시키고, 아주 천천히 한 바퀴(약 26분) 돈 뒤 사라지게.
+    /// 등장 위치(좌/우 뒤)·크기는 매번 랜덤, 공전 속도(1560초)만 고정. 색은 달 색과 유사하게.
+    private func flashSatellite(duration: Double = 1560) {   // 1560초 ≈ 26분
         satelliteStartTime = Date().timeIntervalSinceReferenceDate
         // 좌/우 중 랜덤 + 약간의 흔들림 → 항상 달 뒤(가려진 위치)에서 시작
         let side: Double = Bool.random() ? 1 : -1
         satelliteStartAngle = side * (0.62 + Double.random(in: -0.2...0.2))
-        satelliteHue = Double.random(in: 0...1)               // 색상 랜덤
+        // 달 색(orbTint)의 색상(hue) 근처로만 변주 → 보색 대비를 피해 눈에 덜 띄게
+        var moonHue: CGFloat = 0.7
+        UIColor(orbTint).getHue(&moonHue, saturation: nil, brightness: nil, alpha: nil)
+        var hue = Double(moonHue) + Double.random(in: -0.05...0.05)   // 유사색(analogous) 범위
+        hue = hue.truncatingRemainder(dividingBy: 1.0)
+        if hue < 0 { hue += 1 }
+        satelliteHue = hue
         satelliteScale = Double.random(in: 0.75...1.3)        // 크기 배리에이션
         withAnimation(.easeInOut(duration: 1.2)) { satelliteVisible = true }   // 달 뒤에서 서서히 등장
         satelliteToken += 1
@@ -1138,9 +1192,9 @@ struct CampfireView: View {
     /// 달 뒤로 자연스럽게 사라졌다 앞으로 나타난다. TimelineView로 매 프레임 위치를 다시 계산.
     @ViewBuilder
     private func satelliteView(front: Bool) -> some View {
-        // 약 13분에 한 바퀴 도는 아주 느린 공전 (등장 후 천천히 한 바퀴 돌고 사라짐)
+        // 약 26분에 한 바퀴 도는 아주 느린 공전 (등장 후 천천히 한 바퀴 돌고 사라짐)
         TimelineView(.animation) { context in
-            let period = 780.0     // 한 바퀴 ≈ 13분 (속도 고정)
+            let period = 1560.0     // 한 바퀴 ≈ 26분 (속도 고정, 더 천천히)
             let startAngle = satelliteStartAngle   // 등장 시작각: 달의 좌/우 뒤(랜덤, 가려진 위치)
             let elapsed = max(0, context.date.timeIntervalSinceReferenceDate - satelliteStart)
             let ang = startAngle + (elapsed / period) * 2 * Double.pi
@@ -1151,31 +1205,32 @@ struct CampfireView: View {
             let x = sin(ang) * rx
             let y = (-cos(ang) * ry) - 4
             let scale = (0.82 + 0.3 * max(0, frontness)) * satelliteScale   // 크기 배리에이션 반영
-            // 랜덤 색상 — 본체는 밝은 코어 + 색이 도는 외곽, 빛무리/그림자도 같은 색
-            let satColor = Color(hue: satelliteHue, saturation: 0.55, brightness: 1.0)
-            let satDeep = Color(hue: satelliteHue, saturation: 0.72, brightness: 0.78)
+            // 달 색과 유사한(analogous) 색 — 채도/명도를 낮춰 은은하게. 순백 코어·흰 테두리 제거해 흐릿하게.
+            let satColor = Color(hue: satelliteHue, saturation: 0.30, brightness: 0.90)
+            let satDeep = Color(hue: satelliteHue, saturation: 0.46, brightness: 0.68)
+            let satCore = Color(hue: satelliteHue, saturation: 0.12, brightness: 0.97)  // 순백 대신 부드러운 밝은 코어
             ZStack {
-                // 위성 둘레의 빛무리 (대비 확보)
+                // 위성 둘레의 은은한 빛무리 (약하게)
                 Circle()
-                    .fill(satColor.opacity(0.6))
-                    .frame(width: 44, height: 44)
-                    .blur(radius: 11)
-                // 위성 본체 — 작은 달(밝은 코어 → 색이 도는 외곽)
+                    .fill(satColor.opacity(0.30))
+                    .frame(width: 46, height: 46)
+                    .blur(radius: 14)
+                // 위성 본체 — 작은 달(부드러운 코어 → 색이 도는 외곽)
                 Circle()
                     .fill(
                         RadialGradient(
-                            colors: [Color.white, satColor, satDeep],
-                            center: UnitPoint(x: 0.36, y: 0.3),
+                            colors: [satCore, satColor, satDeep],
+                            center: UnitPoint(x: 0.38, y: 0.32),
                             startRadius: 1, endRadius: 18
                         )
                     )
-                    .frame(width: 28, height: 28)
-                    .overlay(Circle().stroke(Color.white.opacity(0.7), lineWidth: 0.5))
-                    .shadow(color: satColor.opacity(0.7), radius: 6)
+                    .frame(width: 26, height: 26)
+                    .shadow(color: satColor.opacity(0.4), radius: 5)
+                    .blur(radius: 1.1)   // 전체적으로 살짝 흐릿하게
             }
             .scaleEffect(scale)
             .offset(x: x, y: y)
-            .opacity((isFrontHalf == front) ? 1 : 0)
+            .opacity((isFrontHalf == front) ? 0.7 : 0)   // 덜 또렷하게
         }
         .allowsHitTesting(false)
     }
@@ -1568,6 +1623,7 @@ struct ListenListView_Previews: PreviewProvider {
 struct SavedSoundsListView: View {
     @EnvironmentObject var viewModel: CustomSoundViewModel
     @EnvironmentObject var subscriptionManager: SubscriptionManager
+    @ObservedObject private var audioManager = AudioEngineManager.shared
     @Environment(\.dismiss) var dismiss
     @State private var searchText = ""
     @State private var showCreateView = false
@@ -1590,6 +1646,9 @@ struct SavedSoundsListView: View {
                 if !subscriptionManager.isPremium {
                     premiumBadge()
                 }
+
+                // 효과음(물방울·새 등 레이어 사운드) 끄기 토글 — 배경음악만 듣고 싶을 때
+                effectsToggle()
 
                 if viewModel.customSounds.isEmpty {
                     emptyStateView()
@@ -1680,6 +1739,53 @@ struct SavedSoundsListView: View {
         .padding(.top, DS.Spacing.sm)
         .padding(.bottom, DS.Spacing.xs)
         .accessibilityLabel(L.Subscription.upgradeBadge.localized)
+    }
+
+    // MARK: - Effects Toggle (효과음 끄기)
+    @ViewBuilder
+    private func effectsToggle() -> some View {
+        HStack(spacing: DS.Spacing.sm) {
+            Image(systemName: audioManager.effectsMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(audioManager.effectsMuted ? DS.Colors.textSecondary : DS.Colors.accent)
+                .frame(width: 22)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(L.Library.effectsToggle.localized)
+                    .font(DS.Font.subhead().weight(.semibold))
+                    .foregroundColor(DS.Colors.textPrimary)
+                Text(L.Library.effectsToggleHint.localized)
+                    .font(DS.Font.caption())
+                    .foregroundColor(DS.Colors.textTertiary)
+            }
+
+            Spacer()
+
+            Toggle("", isOn: Binding(
+                get: { audioManager.effectsMuted },
+                set: { newValue in
+                    audioManager.effectsMuted = newValue
+                    // 사용자가 효과음 끄기를 직접 사용하면 안내 팁은 더 이상 필요 없음
+                    if newValue {
+                        EffectsOffTip().invalidate(reason: .actionPerformed)
+                    }
+                }
+            ))
+            .labelsHidden()
+            .tint(DS.Colors.accent)
+        }
+        .padding(.horizontal, DS.Spacing.lg)
+        .padding(.vertical, DS.Spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                .fill(DS.Colors.surfaceSunken)
+        )
+        .padding(.horizontal, DS.Spacing.screen)
+        .padding(.top, DS.Spacing.xs)
+        .padding(.bottom, DS.Spacing.xs)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(L.Library.effectsToggle.localized)
+        .accessibilityValue(audioManager.effectsMuted ? L.Common.on.localized : L.Common.off.localized)
     }
 
     // 새 사운드 만들기 (무료 한도 체크)

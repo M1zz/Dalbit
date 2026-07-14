@@ -172,6 +172,32 @@
 - [x] CLAUDE.md의 "저장소·Pages는 여전히 RelaxOn" 문구 갱신
 - [ ] (수동) App Store Connect: Privacy Policy URL 필드도 새 URL로 갱신 필요
 
+## 미디 음원 프리뷰 + 첫 실행 무료 음원 + 효과음 끄기 TipKit - 완료 (2026-07-14)
+방향: 미디로 만든 배경음악을 전면에. 효과음(레이어 사운드)은 끌 수 있게.
+- [x] 사운드 제작 화면 배경음악 카드 프리뷰: 탭=단독 재생, 재탭=정지, 다른 카드=전환 (CreateNewSoundView + AudioEngineManager.playBackground/stopBackground)
+  - 전체 미리듣기 중이면 기존처럼 믹스에 포함해 재시작. 카드에 재생중 배지(speaker.wave) 표시.
+- [x] 첫 실행 시 순수 미디 음원 3개 무료 제공: 달빛 피아노/포근한 로파이/고요한 명상 (효과음 레이어 없음, 배경음악만)
+  - PresetSound.toCustomSound() empty-layers 처리 → filter/category .none 배경 전용 CustomSound
+  - allPresets 맨 앞에 배치 → presetSounds.first 자동 선택되어 첫 화면에서 바로 들림
+- [x] 효과음 끄기 전역 토글: AudioEngineManager.effectsMuted (UserDefaults 영속), 켜면 배경음악만 재생
+  - 보관함(SavedSoundsListView) 상단에 토글 UI 추가. 재생 중 토글 시 현재 사운드 즉시 재평가.
+- [x] TipKit: 효과음 거슬리면 아래로 스와이프→보관함에서 끄라고 안내. 앱 실행 초반 최대 3회(MaxDisplayCount 3). '보관함 열기' 액션 → goTo(0). 사용자가 끄면 팁 invalidate.
+  - DalbitApp에서 Tips.configure 초기화. 홈(page 1)에서만 상단에 TipView.
+- [x] 로컬라이제이션(ko/en): preset_midi.* 6키, library.effects_toggle(+hint), common.on/off, tip.effects_off.*(+open_library) 추가
+- [x] 시뮬레이터 빌드 검증 (BUILD SUCCEEDED)
+
+## 위성(달 궤도) 시각 조정 - 완료 (2026-07-14)
+- [x] 더 흐릿하게: 순백 코어·흰 테두리 제거(부드러운 밝은 코어), 채도 0.55→0.30, 빛무리 opacity 0.6→0.30, 본체 blur 1.1, 표시 opacity 1→0.7
+- [x] 더 천천히: 공전 주기 780초(13분)→1560초(26분), 노출 시간도 동일하게 연장
+- [x] 색상 보색 회피: 랜덤 hue(0~1) → 달 색(orbTint) hue ±0.05 유사색으로 제한 (UIColor.getHue로 달 hue 추출)
+- [x] 시뮬레이터 빌드 성공
+
+## v4.0.4 릴리즈 - 완료 (2026-07-14)
+- [x] MARKETING_VERSION 4.0.3 → 4.0.4 (Debug/Release 둘 다)
+- [x] CURRENT_PROJECT_VERSION(빌드번호) 4 → 5 (새 바이너리 업로드용)
+- [x] RELEASE_NOTES_4.0.4.md 작성 (한/영 App Store용): 미디 음원 3곡·배경음악 프리뷰·효과음 끄기·위성 조정
+- [ ] (수동) 아카이브·업로드 후 App Store Connect 제출
+
 ## 남은 작업 (수동 - 코드 아님)
 - [x] dev 브랜치 코드 변경 push / PR → main 머지로 완료 (2026-07-13)
 - [ ] App Store Connect: App Description 또는 EULA 필드에 표준 약관 링크 추가

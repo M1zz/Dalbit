@@ -65,6 +65,21 @@ enum L {
         static let quiet = "common.quiet"
         static let loud = "common.loud"
         static let tapToCustomize = "common.tap_to_customize"
+        static let on = "common.on"
+        static let off = "common.off"
+    }
+
+    // MARK: - Library (보관함)
+    enum Library {
+        static let effectsToggle = "library.effects_toggle"
+        static let effectsToggleHint = "library.effects_toggle_hint"
+    }
+
+    // MARK: - Tips (TipKit 안내)
+    enum Tip {
+        static let effectsOffTitle = "tip.effects_off.title"
+        static let effectsOffMessage = "tip.effects_off.message"
+        static let openLibrary = "tip.open_library"
     }
 
     // MARK: - Alert
@@ -454,6 +469,22 @@ enum L {
         enum SpringForest {
             static let name = "preset_new.spring_forest.name"
             static let description = "preset_new.spring_forest.description"
+        }
+    }
+
+    // MARK: - Preset MIDI (순수 미디 음원 · 첫 실행 무료 제공)
+    enum PresetMidi {
+        enum Piano {
+            static let name = "preset_midi.piano.name"
+            static let description = "preset_midi.piano.description"
+        }
+        enum Lofi {
+            static let name = "preset_midi.lofi.name"
+            static let description = "preset_midi.lofi.description"
+        }
+        enum Meditation {
+            static let name = "preset_midi.meditation.name"
+            static let description = "preset_midi.meditation.description"
         }
     }
 

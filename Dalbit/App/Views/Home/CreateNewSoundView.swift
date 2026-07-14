@@ -22,6 +22,7 @@ struct CreateNewSoundView: View {
     @State private var showMixingOption = false
     @State private var ripples: [RippleEffect] = []
     @State private var isPreviewPlaying: Bool = false
+    @State private var previewingBackground: BackgroundSound? = nil  // 단독 배경음 프리뷰 중인 트랙
     @State private var showSubscription: Bool = false
     @ObservedObject private var audioManager = AudioEngineManager.shared
 
@@ -85,6 +86,7 @@ struct CreateNewSoundView: View {
         .trackScreen("CreateSound")
         .onDisappear {
             stopPreviewPlayback()
+            stopBackgroundPreview()
         }
         .alert(L.Alert.soundName.localized, isPresented: $showSaveAlert) {
             TextField(L.Alert.enterName.localized, text: $soundTitle)
@@ -344,6 +346,9 @@ struct CreateNewSoundView: View {
     private func startPreviewPlayback() {
         guard !viewModel.addedSounds.isEmpty else { return }
 
+        // 단독 배경음 프리뷰가 켜져 있으면 상태만 정리 (아래 play(with:)가 오디오는 재구성)
+        previewingBackground = nil
+
         // 선택된 사운드들로 임시 CustomSound 생성
         let mainSound = viewModel.addedSounds[0]
         let layers = viewModel.addedSounds.map { sound in
@@ -391,6 +396,46 @@ struct CreateNewSoundView: View {
         audioManager.stopMetering()
         isPreviewPlaying = false
         print("⏹️ [CreateNewSound] 미리듣기 중지")
+    }
+
+    // MARK: - Background Music Preview (단독 배경음 미리듣기)
+
+    /// 배경음악 카드 탭 처리: 선택 + 단독 프리뷰 토글
+    private func handleBackgroundTap(_ background: BackgroundSound) {
+        // 전체 미리듣기(효과음 믹스) 중이면 배경음을 믹스에 포함하여 재시작 (기존 동작 유지)
+        if isPreviewPlaying {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                viewModel.selectedBackground = background
+            }
+            startPreviewPlayback()
+            return
+        }
+
+        // 전체 미리듣기가 아니면: 같은 카드 재탭 → 정지, 다른 카드 → 선택 + 단독 프리뷰
+        if previewingBackground == background {
+            stopBackgroundPreview()
+        } else {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                viewModel.selectedBackground = background
+            }
+            startBackgroundPreview(background)
+        }
+    }
+
+    /// 배경음 트랙 하나만 반복 재생 (미디 음원 미리듣기)
+    private func startBackgroundPreview(_ background: BackgroundSound) {
+        audioManager.backgroundVolume = viewModel.backgroundVolume
+        audioManager.playBackground(background)
+        previewingBackground = background
+        print("🎼 [CreateNewSound] 배경음 미리듣기 시작: \(background.rawValue)")
+    }
+
+    /// 단독 배경음 프리뷰 정지
+    private func stopBackgroundPreview() {
+        guard previewingBackground != nil else { return }
+        audioManager.stopBackground()
+        previewingBackground = nil
+        print("⏹️ [CreateNewSound] 배경음 미리듣기 정지")
     }
 
     // MARK: - Original Sounds Section (카테고리별 정리)
@@ -527,6 +572,8 @@ struct CreateNewSoundView: View {
 
                 if viewModel.selectedBackground != nil {
                     Button(action: {
+                        // 단독 배경음 프리뷰 중이면 정지
+                        stopBackgroundPreview()
                         withAnimation {
                             viewModel.selectedBackground = nil
                         }
@@ -563,15 +610,10 @@ struct CreateNewSoundView: View {
                 ForEach(BackgroundSound.allCases, id: \.self) { background in
                     BackgroundMusicCard(
                         background: background,
-                        isSelected: viewModel.selectedBackground == background
+                        isSelected: viewModel.selectedBackground == background,
+                        isPreviewing: previewingBackground == background
                     ) {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            viewModel.selectedBackground = background
-                        }
-                        // 미리듣기 중이면 배경음 포함하여 재시작
-                        if isPreviewPlaying {
-                            startPreviewPlayback()
-                        }
+                        handleBackgroundTap(background)
                     }
                 }
             }
@@ -609,8 +651,8 @@ struct CreateNewSoundView: View {
                 Slider(value: $viewModel.backgroundVolume, in: 0...1)
                     .tint(DS.Colors.accent)
                     .onChange(of: viewModel.backgroundVolume) { _, newValue in
-                        // 미리듣기 중이면 오디오 엔진의 배경 볼륨도 실시간 반영
-                        if isPreviewPlaying {
+                        // 미리듣기(믹스) 또는 단독 배경음 프리뷰 중이면 배경 볼륨 실시간 반영
+                        if isPreviewPlaying || previewingBackground != nil {
                             audioManager.backgroundVolume = newValue
                         }
                     }
@@ -638,6 +680,7 @@ struct CreateNewSoundView: View {
 struct BackgroundMusicCard: View {
     let background: BackgroundSound
     let isSelected: Bool
+    var isPreviewing: Bool = false
     let onTap: () -> Void
 
     var body: some View {
@@ -655,9 +698,26 @@ struct BackgroundMusicCard: View {
                         )
                         .frame(width: 48, height: 48)
 
-                    Image(systemName: background.icon)
+                    // 프리뷰 중이면 정지 아이콘, 아니면 트랙 아이콘
+                    Image(systemName: isPreviewing ? "stop.fill" : background.icon)
                         .font(.system(size: 22))
                         .foregroundColor(isSelected ? DS.Colors.onAccent : DS.Colors.textPrimary)
+
+                    // 재생 중 표시 배지
+                    if isPreviewing {
+                        VStack {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "speaker.wave.2.fill")
+                                    .font(.system(size: 10, weight: .bold))
+                                    .foregroundColor(DS.Colors.onAccent)
+                                    .padding(4)
+                                    .background(Circle().fill(DS.Colors.accent))
+                            }
+                            Spacer()
+                        }
+                        .frame(width: 52, height: 52)
+                    }
                 }
 
                 // 이름
@@ -688,6 +748,8 @@ struct BackgroundMusicCard: View {
             .scaleEffect(isSelected ? 1.05 : 1.0)
         }
         .buttonStyle(PlainButtonStyle())
+        .accessibilityLabel(background.displayName)
+        .accessibilityHint(isPreviewing ? L.A11y.stop.localized : L.A11y.play.localized)
     }
 }
 

@@ -37,6 +37,10 @@ struct PresetSound: Identifiable, Codable {
     /// 로컬라이제이션된 이름
     var localizedName: String {
         switch id {
+        // 순수 미디 음원
+        case "midi-piano": return L.PresetMidi.Piano.name.localized
+        case "midi-lofi": return L.PresetMidi.Lofi.name.localized
+        case "midi-meditation": return L.PresetMidi.Meditation.name.localized
         case "deep-sleep": return L.PresetNew.DeepSleep.name.localized
         case "rain-sleep": return L.PresetNew.RainSleep.name.localized
         case "white-noise-sleep": return L.PresetNew.WhiteNoiseSleep.name.localized
@@ -67,6 +71,10 @@ struct PresetSound: Identifiable, Codable {
     /// 로컬라이제이션된 설명
     var localizedDescription: String {
         switch id {
+        // 순수 미디 음원
+        case "midi-piano": return L.PresetMidi.Piano.description.localized
+        case "midi-lofi": return L.PresetMidi.Lofi.description.localized
+        case "midi-meditation": return L.PresetMidi.Meditation.description.localized
         case "deep-sleep": return L.PresetNew.DeepSleep.description.localized
         case "rain-sleep": return L.PresetNew.RainSleep.description.localized
         case "white-noise-sleep": return L.PresetNew.WhiteNoiseSleep.description.localized
@@ -137,6 +145,44 @@ enum PresetCategory: String, CaseIterable, Codable {
 
 extension PresetSound {
     static let allPresets: [PresetSound] = [
+        // MARK: - 순수 미디 음원 (첫 실행 시 무료 제공 · 효과음 없는 배경음악)
+
+        PresetSound(
+            id: "midi-piano",
+            name: "달빛 피아노",
+            category: .sleep,
+            description: "잔잔한 피아노 선율로 마음을 편안하게",
+            icon: "pianokeys",
+            color: "#B39DDB",
+            layers: [],
+            backgroundSound: BackgroundSound.piano.rawValue,
+            backgroundVolume: 0.6
+        ),
+
+        PresetSound(
+            id: "midi-lofi",
+            name: "포근한 로파이",
+            category: .focus,
+            description: "따뜻한 로파이 비트로 집중과 휴식을",
+            icon: "music.note",
+            color: "#F48FB1",
+            layers: [],
+            backgroundSound: BackgroundSound.lofi.rawValue,
+            backgroundVolume: 0.6
+        ),
+
+        PresetSound(
+            id: "midi-meditation",
+            name: "고요한 명상",
+            category: .meditation,
+            description: "부드러운 명상 음악으로 깊은 이완을",
+            icon: "sparkles",
+            color: "#80CBC4",
+            layers: [],
+            backgroundSound: BackgroundSound.meditation.rawValue,
+            backgroundVolume: 0.6
+        ),
+
         // MARK: - 수면 카테고리
 
         PresetSound(
@@ -801,6 +847,21 @@ extension PresetSound {
 
     /// PresetSound를 CustomSound로 변환
     func toCustomSound() -> CustomSound {
+        // 효과음 레이어가 없는 순수 배경음악(미디 음원) 프리셋
+        if layers.isEmpty {
+            return CustomSound(
+                title: localizedName,
+                category: .none,
+                variation: AudioVariation(),
+                filter: .none,
+                color: color,
+                backgroundSound: backgroundSound,
+                backgroundVolume: backgroundVolume,
+                soundLayers: nil,
+                isPreset: true
+            )
+        }
+
         let soundLayers = layers.map { layer in
             CustomSound.SoundLayer(
                 category: layer.category,

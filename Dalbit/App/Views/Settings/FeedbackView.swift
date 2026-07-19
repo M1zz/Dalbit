@@ -46,6 +46,7 @@ struct FeedbackView: View {
     @State private var didSend = false
     @State private var isSending = false
     @State private var errorMessage: String?
+    @FocusState private var messageFocused: Bool
 
     private static let developerEmail = "mizzking75@gmail.com"
 
@@ -69,6 +70,9 @@ struct FeedbackView: View {
                 }
                 .padding(DS.Spacing.screen)
             }
+            // 스크롤을 끌어내리면 키보드가 따라 내려가고, 입력창 밖을 탭해도 내려간다
+            .scrollDismissesKeyboard(.interactively)
+            .onTapGesture { messageFocused = false }
             .dsConstrainedWidth()
         }
         .navigationTitle(L.Feedback.title.localized)
@@ -127,6 +131,7 @@ struct FeedbackView: View {
 
             ZStack(alignment: .topLeading) {
                 TextEditor(text: $message)
+                    .focused($messageFocused)
                     .font(DS.Font.body())
                     .foregroundColor(DS.Colors.textPrimary)
                     .frame(minHeight: 140)

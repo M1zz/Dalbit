@@ -330,7 +330,6 @@ enum L {
         static let heavyRainDescription = "listen.heavy_rain_description"
         static let favoriteOn = "listen.favorite_on"
         static let favoriteOff = "listen.favorite_off"
-        static let satelliteHint = "listen.satellite_hint"
     }
 
     // MARK: - Timer
@@ -606,6 +605,15 @@ enum L {
         static let soundBirds = "alarm.sound_birds"
         static let soundCuckoo = "alarm.sound_cuckoo"
         static let soundLoudBowl = "alarm.sound_loud_bowl"
+    }
+
+    // MARK: - Settings (설정)
+    enum Settings {
+        static let title = "settings.title"
+        static let sectionSound = "settings.section_sound"
+        static let sectionSupport = "settings.section_support"
+        static let sectionAbout = "settings.section_about"
+        static let version = "settings.version"
     }
 
     // MARK: - Feedback (사용자 의견 보내기)

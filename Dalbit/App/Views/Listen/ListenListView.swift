@@ -111,7 +111,7 @@ struct ListenListView: View {
     @AppStorage("didShowSwipeHint") private var didShowSwipeHint = false
     // 즐겨찾기만 재생 모드 (보관함 토글과 공유)
     @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
-    // 달 중심의 화면(global) 좌표 — 위성(하트 버튼) 탭 위치 판정용
+    // 달 중심의 화면(global) 좌표 — 달 길게 누르기(즐겨찾기) 판정용
     @State private var orbCenter: CGPoint = .zero
     // 모드 전환 안내 칩(타이머/보관함): 뉴비에게만 노출 — 써봤거나 몇 번 열면 숨김
     @AppStorage("homeAppearCount") private var homeAppearCount = 0
@@ -305,7 +305,7 @@ struct ListenListView: View {
         // 재생 상태/곡 변경 시 잠금화면 정보 갱신
         .onChange(of: viewModel.isPlaying) { _, playing in
             updateNowPlaying()
-            // 재생을 시작하면 위성(하트 버튼)이 나와 궤도를 돈다.
+            // 재생을 시작하면 위성이 나와 궤도를 돈다.
             // 이미 떠 있으면 그대로 둠 — 다시 부르면 위치가 순간이동하므로.
             if playing && !satelliteVisible { flashSatellite() }
         }
@@ -380,9 +380,8 @@ struct ListenListView: View {
                                  satelliteStart: satelliteStartTime,
                                  satelliteStartAngle: satelliteStartAngle,
                                  satelliteHue: satelliteHue,
-                                 satelliteScale: satelliteScale,
-                                 satelliteHeartFilled: isCurrentFavorite)
-                    // 위성(하트) 탭 판정용 — 달 중심의 화면(global) 좌표를 기록
+                                 satelliteScale: satelliteScale)
+                    // 달 길게 누르기(즐겨찾기) 판정용 — 달 중심의 화면(global) 좌표를 기록
                     .onGeometryChange(for: CGPoint.self) { proxy in
                         let f = proxy.frame(in: .global)
                         return CGPoint(x: f.midX, y: f.midY)
@@ -510,7 +509,7 @@ struct ListenListView: View {
 
     // MARK: - Orb Gesture (탭 / 좌우 소리 전환 / 상하 모드 전환)
     private func orbGesture() -> some Gesture {
-        // global 좌표: 탭 위치를 위성(하트 버튼) 위치와 비교하기 위해 (translation 로직은 영향 없음)
+        // global 좌표: 달 길게 누르기(즐겨찾기)의 위치 판정에 사용 (translation 로직은 영향 없음)
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onChanged { value in
                 // 터치 다운: 달 위라면 길게 누르기(즐겨찾기) 타이머 예약
@@ -591,14 +590,10 @@ struct ListenListView: View {
                         }
                     }
                 } else {
-                    // 거의 안 움직임 → 탭. 위성(하트 버튼) 위면 즐겨찾기, 아니면 재생/일시정지
+                    // 거의 안 움직임 → 탭 = 재생/일시정지 (옴폭 눌렸다 나오는 효과)
                     if hypot(dx, dy) < 10 {
-                        if satelliteHeartHit(value.location) {
-                            toggleFavoriteCurrent()
-                        } else {
-                            togglePlay()
-                            pressOrb()
-                        }
+                        togglePlay()
+                        pressOrb()
                     }
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
                         orbDragAngle = 0
@@ -799,23 +794,6 @@ struct ListenListView: View {
         viewModel.customSounds.first(where: { $0.id == currentSound.id })?.isFavorite ?? false
     }
 
-    /// 탭 위치가 위성(하트 버튼) 위인지 판정 — 하트로 변신을 마쳤고, 하트가 보이는 동안이면 탭 가능.
-    /// 뒤쪽 반(달 뒤)이라도 달 원판 밖으로 나와 보이면 눌린다 — 보이는데 안 눌리면 버튼이 아니니까.
-    /// 궤도 상수(주기 1560s, rx 140, ry 78, y -4, 변신 8~10s)는 CampfireView.satelliteView와 동일해야 한다.
-    private func satelliteHeartHit(_ location: CGPoint) -> Bool {
-        guard satelliteVisible, orbCenter != .zero else { return false }
-        let elapsed = Date().timeIntervalSinceReferenceDate - satelliteStartTime
-        guard elapsed > 10 else { return false }                     // 하트 변신이 끝난 뒤에만 버튼
-        let ang = satelliteStartAngle + (elapsed / 1560.0) * 2 * Double.pi
-        let x = orbCenter.x + CGFloat(sin(ang) * 140.0)
-        let y = orbCenter.y + CGFloat(-cos(ang) * 78.0 - 4.0)
-        if -cos(ang) <= 0 {
-            // 뒤쪽 반: 달(반지름 110)에 가려져 있으면 탭 불가, 림 밖으로 나와 보일 때만 허용
-            guard hypot(x - orbCenter.x, y - orbCenter.y) > 105 else { return false }
-        }
-        return hypot(location.x - x, location.y - y) < CGFloat(34.0 * satelliteScale)
-    }
-
     /// 달을 지그시(1초) 누름 — 즐겨찾기 토글 + 담을 때는 달 위로 하트 팝
     private func favoriteLongPress() {
         toggleFavoriteCurrent()
@@ -835,7 +813,7 @@ struct ListenListView: View {
         }
     }
 
-    /// 위성(하트 버튼) 탭 — 현재 소리를 즐겨찾기에 담거나 뺀다
+    /// 현재 소리를 즐겨찾기에 담거나 뺀다 (달 길게 누르기·접근성 액션에서 호출)
     private func toggleFavoriteCurrent() {
         let sound = currentSound
         Haptics.soft()
@@ -957,12 +935,6 @@ struct ListenListView: View {
         withAnimation(.easeInOut(duration: 1.2)) { satelliteVisible = true }   // 달 뒤에서 서서히 등장
         satelliteToken += 1
         let token = satelliteToken
-        // 위성이 하트 버튼으로 변신을 마친 직후(약 10초), 눌러도 된다고 한 번 알려준다
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.5) {
-            if token == satelliteToken && satelliteVisible {
-                flashLabel(L.Listen.satelliteHint.localized, duration: 2.6)
-            }
-        }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             if token == satelliteToken {
                 withAnimation(.easeIn(duration: 1.5)) { satelliteVisible = false }  // 천천히 사라짐
@@ -1289,7 +1261,6 @@ struct CampfireView: View {
     var satelliteStartAngle: Double = 0.62   // 등장 시작각(좌/우 뒤 랜덤)
     var satelliteHue: Double = 0             // 위성 색상(랜덤)
     var satelliteScale: Double = 1.0         // 위성 크기 배리에이션(랜덤)
-    var satelliteHeartFilled: Bool = false   // 현재 소리가 즐겨찾기면 채워진 하트
 
     @State private var breathe = false
     @State private var glow = false
@@ -1382,27 +1353,13 @@ struct CampfireView: View {
             let satColor = Color(hue: satelliteHue, saturation: 0.50, brightness: 0.72)
             let satDeep = Color(hue: satelliteHue, saturation: 0.62, brightness: 0.52)
             let satCore = Color(hue: satelliteHue, saturation: 0.35, brightness: 0.82)  // 코어도 색을 머금은 은은한 밝기
-            // 변신 타이밍: 처음엔 평범한 위성으로 돌다가(8초) → 2초에 걸쳐 분홍 하트 버튼으로 변신
-            let morph = max(0.0, min(1.0, (elapsed - 8.0) / 2.0))   // 0=위성, 1=하트 버튼
-            // '위웅 위웅' 펄스 — 하트 모드에서 1.6초 주기로 크기·빛무리·그림자가 함께 숨쉰다
-            let pulse = 0.5 + 0.5 * sin(elapsed * 2 * Double.pi / 1.6)
-            // 분홍 팔레트 (로즈 핑크)
-            let pinkGlow = Color(hue: 0.92, saturation: 0.60, brightness: 0.88)
-            let pinkCore = Color(hue: 0.90, saturation: 0.35, brightness: 0.93)
-            let pinkMid  = Color(hue: 0.92, saturation: 0.58, brightness: 0.84)
-            let pinkDeep = Color(hue: 0.93, saturation: 0.68, brightness: 0.60)
             ZStack {
-                // 위성 모드 빛무리 (은은) — 변신하며 사라짐
+                // 위성 둘레의 은은한 빛무리 (약하게)
                 Circle()
-                    .fill(satColor.opacity(0.30 * (1 - morph)))
+                    .fill(satColor.opacity(0.30))
                     .frame(width: 46, height: 46)
                     .blur(radius: 14)
-                // 하트 모드 빛무리 — 펄스에 맞춰 커졌다 작아지며 위웅위웅 빛난다
-                Circle()
-                    .fill(pinkGlow.opacity(morph * (0.28 + 0.30 * pulse)))
-                    .frame(width: 48 + CGFloat(10 * pulse), height: 48 + CGFloat(10 * pulse))
-                    .blur(radius: 13)
-                // 위성 본체 — 작은 달(부드러운 코어 → 색이 도는 외곽). 변신하며 사라짐
+                // 위성 본체 — 작은 달(부드러운 코어 → 색이 도는 외곽)
                 Circle()
                     .fill(
                         RadialGradient(
@@ -1414,34 +1371,11 @@ struct CampfireView: View {
                     .frame(width: 26, height: 26)
                     .shadow(color: satColor.opacity(0.4), radius: 5)
                     .blur(radius: 1.1)   // 전체적으로 살짝 흐릿하게
-                    .opacity(1 - morph)
-                // 하트 버튼 본체 — 또렷한 분홍 구슬. 그림자(깊이)가 펄스를 따라 출렁여 눌리는 버튼처럼 보인다
-                Circle()
-                    .fill(
-                        RadialGradient(
-                            colors: [pinkCore, pinkMid, pinkDeep],
-                            center: UnitPoint(x: 0.38, y: 0.32),
-                            startRadius: 1, endRadius: 18
-                        )
-                    )
-                    .frame(width: 26, height: 26)
-                    .shadow(color: pinkGlow.opacity(0.35 + 0.35 * pulse),
-                            radius: 4 + CGFloat(5 * pulse), y: 1)
-                    .opacity(morph)
-                // 하트 — 변신하면서 나타난다. 현재 소리가 즐겨찾기면 채워진 하트.
-                Image(systemName: satelliteHeartFilled ? "heart.fill" : "heart")
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundColor(Color(hue: 0.93, saturation: 0.72, brightness: 0.42))
-                    .opacity(morph)
             }
-            // 하트 모드에선 펄스에 맞춰 살짝 커졌다 작아진다 (위웅 위웅)
-            .scaleEffect(scale * (1 + 0.06 * morph * pulse))
+            .scaleEffect(scale)
             .offset(x: x, y: y)
-            // 위성일 땐 흐릿하게(0.7), 하트 버튼이 되면 또렷하게(0.95)
-            .opacity((isFrontHalf == front) ? (0.7 + 0.25 * morph) : 0)
+            .opacity((isFrontHalf == front) ? 0.7 : 0)   // 덜 또렷하게
         }
-        // 탭은 부모(orbGesture)가 위치로 판정한다 — 전체화면 드래그 제스처와 경합하면
-        // 자식 탭이 씹히는 문제가 있어, 여기서는 히트테스트를 받지 않는다.
         .allowsHitTesting(false)
     }
 
@@ -1846,17 +1780,13 @@ struct ListenListView_Previews: PreviewProvider {
 struct SavedSoundsListView: View {
     @EnvironmentObject var viewModel: CustomSoundViewModel
     @EnvironmentObject var subscriptionManager: SubscriptionManager
-    @ObservedObject private var audioManager = AudioEngineManager.shared
     @Environment(\.dismiss) var dismiss
     @State private var searchText = ""
     @State private var showCreateView = false
     @State private var showSubscription = false
     @State private var editingSound: CustomSound? = nil
     @State private var showEditView = false
-    @State private var showFeedback = false
-    @State private var showFeedbackInbox = false   // 개발자 전용 (의견 보내기 행 길게 누름)
-    // 즐겨찾기만 재생 모드 (홈의 곡 순환과 공유)
-    @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
+    @State private var showSettings = false
     /// 페이저에 임베드될 때 닫기(홈으로) 콜백. nil이면 일반 네비게이션 화면으로 동작.
     var onClose: (() -> Void)? = nil
     /// 세그먼트 페이저에 콘텐츠만 임베드되는 모드. 헤더/네비게이션 크롬을 숨기고, 추가(+)는 상위가 담당한다.
@@ -1873,15 +1803,6 @@ struct SavedSoundsListView: View {
                 if !subscriptionManager.isPremium {
                     premiumBadge()
                 }
-
-                // 효과음(물방울·새 등 레이어 사운드) 끄기 토글 — 배경음악만 듣고 싶을 때
-                effectsToggle()
-
-                // 즐겨찾기만 재생 — 위성 하트로 담아 둔 사운드만 순환
-                favoritesOnlyToggle()
-
-                // 개발자에게 의견 보내기 (길게 누르면 개발자 인박스 — 숨은 동선)
-                feedbackRow()
 
                 if viewModel.customSounds.isEmpty {
                     emptyStateView()
@@ -1937,11 +1858,8 @@ struct SavedSoundsListView: View {
                 .onDisappear { viewModel.loadSound() }
             }
         }
-        .navigationDestination(isPresented: $showFeedback) {
-            FeedbackView()
-        }
-        .navigationDestination(isPresented: $showFeedbackInbox) {
-            FeedbackInboxView()
+        .navigationDestination(isPresented: $showSettings) {
+            SettingsView()
         }
         .onAppear {
             viewModel.loadSound()
@@ -1978,141 +1896,6 @@ struct SavedSoundsListView: View {
         .padding(.top, DS.Spacing.sm)
         .padding(.bottom, DS.Spacing.xs)
         .accessibilityLabel(L.Subscription.upgradeBadge.localized)
-    }
-
-    // MARK: - Effects Toggle (효과음 끄기)
-    @ViewBuilder
-    private func effectsToggle() -> some View {
-        HStack(spacing: DS.Spacing.sm) {
-            Image(systemName: audioManager.effectsMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(audioManager.effectsMuted ? DS.Colors.textSecondary : DS.Colors.accent)
-                .frame(width: 22)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(L.Library.effectsToggle.localized)
-                    .font(DS.Font.subhead().weight(.semibold))
-                    .foregroundColor(DS.Colors.textPrimary)
-                Text(L.Library.effectsToggleHint.localized)
-                    .font(DS.Font.caption())
-                    .foregroundColor(DS.Colors.textTertiary)
-            }
-
-            Spacer()
-
-            Toggle("", isOn: Binding(
-                get: { audioManager.effectsMuted },
-                set: { newValue in
-                    audioManager.effectsMuted = newValue
-                    // 사용자가 효과음 끄기를 직접 사용하면 안내 팁은 더 이상 필요 없음
-                    if newValue {
-                        EffectsOffTip().invalidate(reason: .actionPerformed)
-                    }
-                }
-            ))
-            .labelsHidden()
-            .tint(DS.Colors.accent)
-        }
-        .padding(.horizontal, DS.Spacing.lg)
-        .padding(.vertical, DS.Spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
-                .fill(DS.Colors.surfaceSunken)
-        )
-        .padding(.horizontal, DS.Spacing.screen)
-        .padding(.top, DS.Spacing.xs)
-        .padding(.bottom, DS.Spacing.xs)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(L.Library.effectsToggle.localized)
-        .accessibilityValue(audioManager.effectsMuted ? L.Common.on.localized : L.Common.off.localized)
-    }
-
-    // MARK: - Favorites Only Toggle (즐겨찾기만 재생)
-    @ViewBuilder
-    private func favoritesOnlyToggle() -> some View {
-        let hasFavorites = !viewModel.customSounds.filter(\.isFavorite).isEmpty
-        HStack(spacing: DS.Spacing.sm) {
-            Image(systemName: favoritesOnlyPlayback && hasFavorites ? "heart.fill" : "heart")
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(favoritesOnlyPlayback && hasFavorites ? DS.Colors.warm : DS.Colors.textSecondary)
-                .frame(width: 22)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(L.Library.favoritesOnly.localized)
-                    .font(DS.Font.subhead().weight(.semibold))
-                    .foregroundColor(DS.Colors.textPrimary)
-                Text(hasFavorites
-                     ? L.Library.favoritesOnlyHint.localized
-                     : L.Library.favoritesOnlyEmpty.localized)
-                    .font(DS.Font.caption())
-                    .foregroundColor(DS.Colors.textTertiary)
-            }
-
-            Spacer()
-
-            Toggle("", isOn: $favoritesOnlyPlayback)
-                .labelsHidden()
-                .tint(DS.Colors.warm)
-                .disabled(!hasFavorites)
-        }
-        .opacity(hasFavorites ? 1 : 0.55)
-        .padding(.horizontal, DS.Spacing.lg)
-        .padding(.vertical, DS.Spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
-                .fill(DS.Colors.surfaceSunken)
-        )
-        .padding(.horizontal, DS.Spacing.screen)
-        .padding(.top, DS.Spacing.xs)
-        .padding(.bottom, DS.Spacing.xs)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(L.Library.favoritesOnly.localized)
-        .accessibilityValue(favoritesOnlyPlayback ? L.Common.on.localized : L.Common.off.localized)
-    }
-
-    // MARK: - Feedback Row (개발자에게 의견 보내기)
-    @ViewBuilder
-    private func feedbackRow() -> some View {
-        Button { showFeedback = true } label: {
-            HStack(spacing: DS.Spacing.sm) {
-                Image(systemName: "envelope")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(DS.Colors.accent)
-                    .frame(width: 22)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(L.Feedback.entry.localized)
-                        .font(DS.Font.subhead().weight(.semibold))
-                        .foregroundColor(DS.Colors.textPrimary)
-                    Text(L.Feedback.entryHint.localized)
-                        .font(DS.Font.caption())
-                        .foregroundColor(DS.Colors.textTertiary)
-                }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(DS.Colors.textSecondary)
-            }
-            .padding(.horizontal, DS.Spacing.lg)
-            .padding(.vertical, DS.Spacing.sm)
-            .background(
-                RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
-                    .fill(DS.Colors.surfaceSunken)
-            )
-        }
-        .buttonStyle(.plain)
-        // 숨은 동선: 길게(1.5초) 누르면 개발자 인박스 (일반 사용자는 권한이 없어 목록이 비어 보임)
-        .simultaneousGesture(
-            LongPressGesture(minimumDuration: 1.5).onEnded { _ in
-                showFeedbackInbox = true
-            }
-        )
-        .padding(.horizontal, DS.Spacing.screen)
-        .padding(.top, DS.Spacing.xs)
-        .padding(.bottom, DS.Spacing.xs)
-        .accessibilityLabel(L.Feedback.entry.localized)
     }
 
     // 새 사운드 만들기 (무료 한도 체크)
@@ -2153,6 +1936,15 @@ struct SavedSoundsListView: View {
                     .frame(width: 44, height: 44)
             }
             .accessibilityLabel(L.A11y.createNewButton.localized)
+
+            // 설정 (효과음 끄기·즐겨찾기만 재생·피드백·앱 정보)
+            Button { showSettings = true } label: {
+                Image(systemName: "gearshape.fill")
+                    .font(.system(size: 19, weight: .semibold))
+                    .foregroundColor(DS.Colors.textSecondary)
+                    .frame(width: 44, height: 44)
+            }
+            .accessibilityLabel(L.Settings.title.localized)
         }
         .padding(.horizontal, DS.Spacing.sm)
         .background(.ultraThinMaterial)
@@ -2712,8 +2504,8 @@ struct CosmicEventsView: View {
             }
             .onAppear {
                 canvas = geo.size
-                // 첫 이벤트는 비교적 이르게, 이후엔 드문드문
-                scheduleNext(after: .random(in: 20...45))
+                // 정신 사납지 않게 — 최소 4분에 한 번만 지나간다
+                scheduleNext(after: .random(in: 240...360))
             }
             .onChange(of: geo.size) { _, size in canvas = size }
         }
@@ -2860,8 +2652,8 @@ struct CosmicEventsView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.5) {
             guard tk == token else { return }
             event = nil
-            // 다음 이벤트까지는 한참 쉰다 — 드물어야 반갑다
-            scheduleNext(after: .random(in: 50...140))
+            // 다음 이벤트까지는 한참 쉰다 — 최소 4분, 드물어야 반갑다
+            scheduleNext(after: .random(in: 240...480))
         }
     }
 }

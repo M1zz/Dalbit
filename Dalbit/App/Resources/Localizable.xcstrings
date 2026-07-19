@@ -3384,13 +3384,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No favorites yet — spin the moon and tap the satellite's heart"
+            "value": "No favorites yet — press and hold the moon to add one"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "아직 즐겨찾기가 없어요 — 달을 돌려 위성의 하트를 눌러보세요"
+            "value": "아직 즐겨찾기가 없어요 — 달을 지그시 눌러 담아보세요"
           }
         }
       }
@@ -3401,13 +3401,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Only sounds hearted via the satellite play in rotation"
+            "value": "Only sounds you've favorited play in rotation"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "위성의 하트로 담아 둔 사운드만 번갈아 재생돼요"
+            "value": "달을 지그시 눌러 담아 둔 사운드만 번갈아 재생돼요"
           }
         }
       }
@@ -3782,23 +3782,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "편안한 백색소음과 함께"
-          }
-        }
-      }
-    },
-    "listen.satellite_hint": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tap the heart satellite to favorite this sound"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "하트 위성을 탭하면 이 소리가 즐겨찾기에 담겨요"
           }
         }
       }
@@ -6098,6 +6081,91 @@
         }
       }
     },
+    "settings.section_about": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정보"
+          }
+        }
+      }
+    },
+    "settings.section_sound": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "사운드"
+          }
+        }
+      }
+    },
+    "settings.section_support": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지원"
+          }
+        }
+      }
+    },
+    "settings.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정"
+          }
+        }
+      }
+    },
+    "settings.version": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Version"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱 버전"
+          }
+        }
+      }
+    },
     "sound_list.create_new": {
       "extractionState": "manual",
       "localizations": {
@@ -7141,13 +7209,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Swipe down to the Library and turn off effects to hear background music only."
+            "value": "Swipe down to the Library, open Settings (gear) at the top right, and turn off effects to hear background music only."
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "아래로 스와이프해 보관함에서 효과음을 끄면 배경음악만 들을 수 있어요."
+            "value": "아래로 스와이프해 보관함 오른쪽 위 설정(톱니)에서 효과음을 끄면 배경음악만 들을 수 있어요."
           }
         }
       }
@@ -7175,13 +7243,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hold for about a second to favorite the sound you're hearing. Tapping the heart satellite works too."
+            "value": "Hold for about a second to favorite the sound you're hearing."
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "1초쯤 길게 누르면 지금 듣는 소리가 즐겨찾기에 담겨요. 하트 위성을 탭해도 돼요."
+            "value": "1초쯤 길게 누르면 지금 듣는 소리가 즐겨찾기에 담겨요."
           }
         }
       }

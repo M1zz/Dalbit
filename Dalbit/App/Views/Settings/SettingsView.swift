@@ -1,196 +1,239 @@
 //
 //  SettingsView.swift
-//  RelaxOn
+//  Dalbit
 //
-//  Created by Claude on 2025/01/15.
+//  설정 화면 — 사운드 옵션(효과음 끄기·즐겨찾기만 재생), 피드백 보내기, 앱 정보.
+//  앱 버전을 7번 탭하면 개발자 히든 모드(접수된 피드백 인박스)가 열린다.
+//  (구 타이머 설정 화면을 대체 — 타이머는 홈 위로 스와이프 화면에 있다)
 //
 
 import SwiftUI
+import TipKit
 
-/**
- 설정 View
- 타이머와 기타 설정을 포함
- */
 struct SettingsView: View {
 
     @EnvironmentObject var viewModel: CustomSoundViewModel
-    @ObservedObject var timerManager = TimerManager(viewModel: CustomSoundViewModel())
-    @State private var hours : [Int] = Array(0...23)
-    @State private var minutes : [Int] = Array(0...59)
-    @State var isShowingSelectorView: Bool = false
-    @State var isShowingTimerProgressView: Bool = false
-    @State var progress: Double = 1.0
+    @ObservedObject private var audioManager = AudioEngineManager.shared
+    // 즐겨찾기만 재생 모드 (홈의 곡 순환과 공유)
+    @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
 
-    // 타이머가 실행 중인지 여부 (시작/일시정지 버튼의 접근성 라벨용)
-    private var isTimerRunning: Bool {
-        isShowingTimerProgressView && (timerManager.textTimer?.isValid ?? false)
+    @State private var showFeedback = false
+    @State private var showInbox = false
+    // 히든 모드: 앱 버전을 7번 탭하면 개발자 인박스
+    @State private var versionTapCount = 0
+    @State private var versionTapResetWork: DispatchWorkItem?
+
+    private var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "-"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "-"
+        return "\(version) (\(build))"
     }
 
     var body: some View {
-
         ZStack {
             ScreenBackground()
 
-            VStack(alignment: .leading, spacing: 0) {
-                // 타이틀
-                Text("Settings")
-                    .foregroundColor(DS.Colors.textPrimary)
-                    .font(DS.Font.title())
-                    .padding(.horizontal, DS.Spacing.screen)
-                    .padding(.vertical, DS.Spacing.md)
-
-                ScrollView {
-                    VStack(spacing: DS.Spacing.xl) {
-                        // 타이머 섹션
-                        timerSection()
-
-                        // 향후 다른 설정 추가 가능
-                    }
-                    .padding(.horizontal, DS.Spacing.screen)
+            ScrollView {
+                VStack(alignment: .leading, spacing: DS.Spacing.xl) {
+                    soundSection()
+                    supportSection()
+                    aboutSection()
                 }
+                .padding(.horizontal, DS.Spacing.screen)
+                .padding(.top, DS.Spacing.md)
             }
             .dsConstrainedWidth()
         }
-        .onAppear {
-            timerManager.viewModel = viewModel
-            timerManager.timerDidFinish = {
-                self.isShowingTimerProgressView = false
-            }
+        .navigationTitle(L.Settings.title.localized)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $showFeedback) {
+            FeedbackView()
+        }
+        .navigationDestination(isPresented: $showInbox) {
+            FeedbackInboxView()
         }
     }
 
+    // MARK: - Sound Section (효과음 끄기 · 즐겨찾기만 재생)
+
     @ViewBuilder
-    private func timerSection() -> some View {
-        VStack(alignment: .leading, spacing: DS.Spacing.md) {
-            // 섹션 제목
-            HStack {
-                Image(systemName: "timer")
-                    .font(DS.Font.headline())
-                    .foregroundColor(DS.Colors.accent)
-                Text(L.Timer.sleepTimer.localized)
-                    .font(DS.Font.headline())
+    private func soundSection() -> some View {
+        VStack(alignment: .leading, spacing: DS.Spacing.sm) {
+            sectionTitle(L.Settings.sectionSound.localized)
+
+            VStack(spacing: 0) {
+                // 효과음(물방울·새 등 레이어 사운드) 끄기 — 배경음악만 듣고 싶을 때
+                settingRow(icon: audioManager.effectsMuted ? "speaker.slash.fill" : "speaker.wave.2.fill",
+                           iconColor: audioManager.effectsMuted ? DS.Colors.textSecondary : DS.Colors.accent,
+                           title: L.Library.effectsToggle.localized,
+                           subtitle: L.Library.effectsToggleHint.localized) {
+                    Toggle("", isOn: Binding(
+                        get: { audioManager.effectsMuted },
+                        set: { newValue in
+                            audioManager.effectsMuted = newValue
+                            // 직접 꺼봤으면 안내 팁은 더 이상 필요 없음
+                            if newValue {
+                                EffectsOffTip().invalidate(reason: .actionPerformed)
+                            }
+                        }
+                    ))
+                    .labelsHidden()
+                    .tint(DS.Colors.accent)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(L.Library.effectsToggle.localized)
+                .accessibilityValue(audioManager.effectsMuted ? L.Common.on.localized : L.Common.off.localized)
+
+                divider()
+
+                // 즐겨찾기만 재생 — 달을 지그시 눌러 담아 둔 소리만 순환
+                let hasFavorites = !viewModel.customSounds.filter(\.isFavorite).isEmpty
+                settingRow(icon: favoritesOnlyPlayback && hasFavorites ? "heart.fill" : "heart",
+                           iconColor: favoritesOnlyPlayback && hasFavorites ? DS.Colors.warm : DS.Colors.textSecondary,
+                           title: L.Library.favoritesOnly.localized,
+                           subtitle: hasFavorites
+                               ? L.Library.favoritesOnlyHint.localized
+                               : L.Library.favoritesOnlyEmpty.localized) {
+                    Toggle("", isOn: $favoritesOnlyPlayback)
+                        .labelsHidden()
+                        .tint(DS.Colors.warm)
+                        .disabled(!hasFavorites)
+                }
+                .opacity(hasFavorites ? 1 : 0.55)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(L.Library.favoritesOnly.localized)
+                .accessibilityValue(favoritesOnlyPlayback ? L.Common.on.localized : L.Common.off.localized)
+            }
+            .background(
+                RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                    .fill(DS.Colors.surfaceSunken)
+            )
+        }
+    }
+
+    // MARK: - Support Section (피드백)
+
+    @ViewBuilder
+    private func supportSection() -> some View {
+        VStack(alignment: .leading, spacing: DS.Spacing.sm) {
+            sectionTitle(L.Settings.sectionSupport.localized)
+
+            Button { showFeedback = true } label: {
+                settingRow(icon: "envelope",
+                           iconColor: DS.Colors.accent,
+                           title: L.Feedback.entry.localized,
+                           subtitle: L.Feedback.entryHint.localized) {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(DS.Colors.textSecondary)
+                }
+            }
+            .buttonStyle(.plain)
+            .background(
+                RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                    .fill(DS.Colors.surfaceSunken)
+            )
+            .accessibilityLabel(L.Feedback.entry.localized)
+        }
+    }
+
+    // MARK: - About Section (앱 버전 · 히든 모드)
+
+    @ViewBuilder
+    private func aboutSection() -> some View {
+        VStack(alignment: .leading, spacing: DS.Spacing.sm) {
+            sectionTitle(L.Settings.sectionAbout.localized)
+
+            // 앱 버전 — 7번 연속 탭하면 개발자 인박스(접수된 피드백)가 열린다
+            Button(action: versionTapped) {
+                settingRow(icon: "moon.stars",
+                           iconColor: DS.Colors.textSecondary,
+                           title: L.Settings.version.localized,
+                           subtitle: nil) {
+                    Text(appVersion)
+                        .font(DS.Font.subhead())
+                        .foregroundColor(DS.Colors.textSecondary)
+                }
+            }
+            .buttonStyle(.plain)
+            .background(
+                RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                    .fill(DS.Colors.surfaceSunken)
+            )
+            .accessibilityLabel("\(L.Settings.version.localized) \(appVersion)")
+        }
+    }
+
+    /// 앱 버전 7번 탭 → 히든 개발자 모드(피드백 인박스). 2초 쉬면 카운트 리셋.
+    private func versionTapped() {
+        versionTapCount += 1
+        versionTapResetWork?.cancel()
+        if versionTapCount >= 7 {
+            versionTapCount = 0
+            Haptics.light()
+            showInbox = true
+        } else {
+            let work = DispatchWorkItem { versionTapCount = 0 }
+            versionTapResetWork = work
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: work)
+        }
+    }
+
+    // MARK: - Row Building Blocks
+
+    @ViewBuilder
+    private func sectionTitle(_ text: String) -> some View {
+        Text(text)
+            .font(DS.Font.caption().weight(.semibold))
+            .foregroundColor(DS.Colors.textTertiary)
+            .padding(.leading, DS.Spacing.xs)
+    }
+
+    @ViewBuilder
+    private func settingRow<Trailing: View>(icon: String,
+                                            iconColor: Color,
+                                            title: String,
+                                            subtitle: String?,
+                                            @ViewBuilder trailing: () -> Trailing) -> some View {
+        HStack(spacing: DS.Spacing.sm) {
+            Image(systemName: icon)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(iconColor)
+                .frame(width: 22)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(DS.Font.subhead().weight(.semibold))
                     .foregroundColor(DS.Colors.textPrimary)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(DS.Font.caption())
+                        .foregroundColor(DS.Colors.textTertiary)
+                }
             }
-
-            // 타이머 컨텐츠
-            VStack(spacing: DS.Spacing.lg) {
-
-                // 타이머 or 프로그레스
-                if isShowingTimerProgressView == false {
-                    TimePickerView(hours: $hours,
-                                   minutes: $minutes,
-                                   selectedTimeIndexHours: $timerManager.selectedTimeIndexHours,
-                                   selectedTimeIndexMinutes: $timerManager.selectedTimeIndexMinutes)
-                } else {
-                    TimerProgressView(timerManager: timerManager)
-                }
-
-                // 사운드 선택 버튼
-                Button {
-                    isShowingSelectorView.toggle()
-                } label: {
-                    selectSoundButton()
-                        .cornerRadius(DS.Radius.sm)
-                }
-                .navigationDestination(isPresented: $isShowingSelectorView) {
-                    TimerSoundSelectModalView()
-                }
-
-                // 컨트롤 버튼들
-                HStack(spacing: DS.Spacing.lg) {
-                    // 리셋 버튼
-                    Button {
-                        timerManager.stopTimer(timerManager: timerManager)
-                        isShowingTimerProgressView = false
-                    } label: {
-                        if isShowingTimerProgressView {
-                            Image(TimerButton.reset_activated.rawValue)
-                                .resizable()
-                                .frame(width: 70, height: 70)
-                        } else {
-                            Image(TimerButton.reset_deactivated.rawValue)
-                                .resizable()
-                                .frame(width: 70, height: 70)
-                        }
-                    }
-                    .frame(minWidth: 44, minHeight: 44)
-                    .accessibilityLabel("초기화")
-
-                    Spacer()
-
-                    // 시작/중단 버튼
-                    Button {
-                        if isShowingTimerProgressView {
-                            if let timer = timerManager.textTimer {
-                                if timer.isValid {
-                                    timerManager.pauseTimer(timerManager: timerManager)
-                                }
-                            } else {
-                                timerManager.resumeTimer(timerManager: timerManager)
-                                if let sound = viewModel.selectedSound {
-                                    viewModel.play(with: sound)
-                                }
-                            }
-                        } else {
-                            if let sound = viewModel.selectedSound {
-                                viewModel.play(with: sound)
-                            }
-                            isShowingTimerProgressView = true
-                        }
-                    } label: {
-                        if isShowingTimerProgressView == false {
-                            Image(TimerButton.start_circle.rawValue)
-                                .resizable()
-                                .frame(width: 70, height: 70)
-                        } else {
-                            if let timer = timerManager.textTimer {
-                                if timer.isValid {
-                                    Image(TimerButton.pause_circle.rawValue)
-                                        .resizable()
-                                        .frame(width: 70, height: 70)
-                                }
-                            } else {
-                                Image(TimerButton.start_circle.rawValue)
-                                    .resizable()
-                                    .frame(width: 70, height: 70)
-                            }
-                        }
-                    }
-                    .frame(minWidth: 44, minHeight: 44)
-                    .accessibilityLabel(isTimerRunning ? L.A11y.pause.localized : L.A11y.play.localized)
-                }
-                .padding(.top, DS.Spacing.xs)
-            }
-            .padding(DS.Spacing.lg)
-            .background(DS.Colors.surface)
-            .cornerRadius(DS.Radius.lg)
-            .shadow(color: DS.Shadow.card.color,
-                    radius: DS.Shadow.card.radius,
-                    y: DS.Shadow.card.y)
-        }
-    }
-
-    @ViewBuilder
-    private func selectSoundButton() -> some View {
-        HStack {
-            Text(viewModel.selectedSound?.title ?? L.SaveView.selectYourSound.localized)
-                .font(DS.Font.body())
-                .foregroundColor(DS.Colors.textPrimary)
 
             Spacer()
 
-            Image(systemName: "chevron.right")
-                .foregroundColor(DS.Colors.textSecondary)
+            trailing()
         }
         .padding(.horizontal, DS.Spacing.lg)
         .padding(.vertical, DS.Spacing.sm)
-        .background(DS.Colors.surfaceSunken)
+        .contentShape(Rectangle())
+    }
+
+    @ViewBuilder
+    private func divider() -> some View {
+        Rectangle()
+            .fill(DS.Colors.separator)
+            .frame(height: 1)
+            .padding(.leading, DS.Spacing.lg + 22 + DS.Spacing.sm)
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        NavigationStack { SettingsView() }
             .environmentObject(CustomSoundViewModel())
+            .preferredColorScheme(.dark)
     }
 }

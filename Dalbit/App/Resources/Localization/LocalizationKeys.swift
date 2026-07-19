@@ -73,6 +73,9 @@ enum L {
     enum Library {
         static let effectsToggle = "library.effects_toggle"
         static let effectsToggleHint = "library.effects_toggle_hint"
+        static let favoritesOnly = "library.favorites_only"
+        static let favoritesOnlyHint = "library.favorites_only_hint"
+        static let favoritesOnlyEmpty = "library.favorites_only_empty"
     }
 
     // MARK: - Tips (TipKit 안내)
@@ -80,6 +83,8 @@ enum L {
         static let effectsOffTitle = "tip.effects_off.title"
         static let effectsOffMessage = "tip.effects_off.message"
         static let openLibrary = "tip.open_library"
+        static let favoriteLongPressTitle = "tip.favorite_longpress.title"
+        static let favoriteLongPressMessage = "tip.favorite_longpress.message"
     }
 
     // MARK: - Alert
@@ -323,6 +328,9 @@ enum L {
         static let rainSoundDescription = "listen.rain_sound_description"
         static let heavyRain = "listen.heavy_rain"
         static let heavyRainDescription = "listen.heavy_rain_description"
+        static let favoriteOn = "listen.favorite_on"
+        static let favoriteOff = "listen.favorite_off"
+        static let satelliteHint = "listen.satellite_hint"
     }
 
     // MARK: - Timer
@@ -598,6 +606,29 @@ enum L {
         static let soundBirds = "alarm.sound_birds"
         static let soundCuckoo = "alarm.sound_cuckoo"
         static let soundLoudBowl = "alarm.sound_loud_bowl"
+    }
+
+    // MARK: - Feedback (사용자 의견 보내기)
+    enum Feedback {
+        static let entry = "feedback.entry"
+        static let entryHint = "feedback.entry_hint"
+        static let title = "feedback.title"
+        static let typeLabel = "feedback.type_label"
+        static let typeBug = "feedback.type_bug"
+        static let typeFeature = "feedback.type_feature"
+        static let typeQuestion = "feedback.type_question"
+        static let typeOther = "feedback.type_other"
+        static let messageLabel = "feedback.message_label"
+        static let placeholderBug = "feedback.placeholder_bug"
+        static let placeholderFeature = "feedback.placeholder_feature"
+        static let placeholderQuestion = "feedback.placeholder_question"
+        static let placeholderOther = "feedback.placeholder_other"
+        static let deviceInfo = "feedback.device_info"
+        static let send = "feedback.send"
+        static let sending = "feedback.sending"
+        static let sent = "feedback.sent"
+        static let errorICloud = "feedback.error_icloud"
+        static let errorSend = "feedback.error_send"
     }
 
     // MARK: - Accessibility (VoiceOver)

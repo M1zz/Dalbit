@@ -198,6 +198,54 @@
 - [x] RELEASE_NOTES_4.0.4.md 작성 (한/영 App Store용): 미디 음원 3곡·배경음악 프리뷰·효과음 끄기·위성 조정
 - [ ] (수동) 아카이브·업로드 후 App Store Connect 제출
 
+## 인앱 피드백(CloudKit) + 호흡·위성 조정 + v4.0.5 - 완료 (2026-07-19)
+방향: ClipKeyboard의 CloudKit Public DB 피드백 구조를 이식 (메일 앱 불필요, 개발자는 앱 안 인박스에서 확인)
+- [x] FeedbackService (Manager/): 컨테이너 `iCloud.com.leeo.LullabyRecipe`, "Feedback" 레코드 제출/조회/완료표시/삭제
+- [x] FeedbackView (Views/Settings/): 유형 칩(버그/제안/문의/기타)·내용·자동첨부 기기정보, CloudKit 실패 시 mailto: 폴백
+- [x] FeedbackInboxView (개발자 전용, 한국어 고정): 목록/완료 스와이프/삭제/내 userRecordName 복사
+- [x] 진입 동선: 보관함(아래 스와이프) '개발자에게 의견 보내기' 행 → FeedbackView, 같은 행 1.5초 길게 누르면 인박스(숨은 동선)
+- [x] 엔타이틀먼트에 iCloud(CloudKit) + 컨테이너 추가
+- [x] 로컬라이제이션 19키(ko/en) + L.Feedback 키 추가
+- [x] 달 호흡을 공명 호흡 연구에 맞춤: 분당 6회(반주기 5초, 0.1Hz), 진폭 ±3.25%→±1.5%로 더 미묘하게
+- [x] 위성 흰색 방지: 채도 하한↑(0.35~0.62)·명도 상한↓(0.52~0.82) — 어떤 달 색에서도 쨍한 흰 톤 없음
+- [x] MARKETING_VERSION 4.0.4→4.0.5, 빌드번호 5→6, RELEASE_NOTES_4.0.5.md 작성
+- [x] 시뮬레이터 빌드 검증 (BUILD SUCCEEDED)
+- [ ] (수동) CloudKit Dashboard: Feedback 레코드 타입 확인, World=create만 허용, admin 역할(read/write)+개발자 userRecordName 등록, 스키마 Production 배포
+- [ ] (수동) Xcode Signing & Capabilities에서 iCloud 컨테이너가 프로비저닝에 반영되는지 실기기 확인
+
+## 위성 = 하트(즐겨찾기) 버튼 + 즐겨찾기만 재생 - 완료 (2026-07-19)
+방향: 위성이 느리게 돌며 하트를 싣고 옴 — 원할 때 누를 수 없는 '느린 즐겨찾기' 컨셉
+- [x] CampfireView 위성에 하트 아이콘(빈/채움)·깊은 유사색 얇은 링(버튼 힌트) — 흰색 아님
+- [x] 위성이 궤도 앞쪽 반을 지날 때만 탭 가능(contentShape 확대) → 현재 소리 즐겨찾기 토글 + flashLabel 피드백
+- [x] VoiceOver: 오브 접근성 액션에 '즐겨찾기' 추가 (위성이 안 떠 있어도 가능)
+- [x] 즐겨찾기만 재생: @AppStorage("favoritesOnlyPlayback"), 홈 스와이프/잠금화면 ⏮⏭ 순환 풀에 반영(즐겨찾기 없으면 전체로 폴백)
+- [x] 보관함에 '즐겨찾기만 재생' 토글(즐겨찾기 없으면 비활성+안내), 로컬라이제이션 5키(ko/en)
+- [x] 재생 시작 시에도 위성 등장 (isPlaying onChange → flashSatellite, 이미 떠 있으면 유지) — 위성은 원래 스와이프 전용이었음(86f6a6a), 재생 중 달 위상 그림자(20분 주기)는 기존 그대로
+- [x] 위성 → 하트 버튼 변신 연출: 8초 평범한 위성 → 2초 모프로 분홍(로즈) 구슬 + 하트 등장, 1.6초 주기 '위웅위웅' 펄스(크기 ±6%·빛무리·그림자 radius 동반 변화), 변신 후 선명도 0.7→0.95
+- [x] 탭 판정을 부모 orbGesture(global 좌표)로 이동: 전체화면 DragGesture(minimumDistance:0)가 자식 onTapGesture를 가로채 재생/일시정지가 되던 문제 해결 — 탭 위치를 시간 기반 궤도 위치와 비교(orbCenter는 onGeometryChange로 추적), 위성 위면 즐겨찾기·아니면 재생 토글
+- [x] 뒤쪽 반이라도 달 림(반지름 110) 밖으로 보이면 탭 허용 (보이는데 안 눌리는 구간 제거)
+- [x] 변신 완료 직후 안내 라벨 1회: "하트 위성을 탭하면 이 소리가 즐겨찾기에 담겨요" (listen.satellite_hint ko/en)
+- [x] 시뮬레이터 스크린샷 검증: 분홍 하트·펄스(빛무리 크기 변화)·안내 라벨 렌더 확인 + 빌드 성공
+- [x] 달 위상 그림자 2단계: 처음 1/16(1.0→0.88)은 20초 easeOut으로 빠르게 → 나머지는 1125초 easeInOut 왕복(속도 비율 유지). 일시정지 시 moonCycleToken으로 2단계 예약 취소. 스크린샷으로 20초 시점 그림자 확인
+
+## 달 길게 누르기 = 즐겨찾기 (피로도 개선) - 완료 (2026-07-19)
+방향: 위성 하트는 '보너스'로 유지, 달을 1초 지그시 누르면 언제든 즐겨찾기 토글
+- [x] orbGesture 터치다운 시 DispatchWorkItem 예약(1.0초, 달 중심 150pt 이내만), 10pt 이상 움직이면 취소, 발동 시 onEnded의 탭/드래그 처리 건너뜀
+- [x] 발동: toggleFavoriteCurrent + pressOrb(옴폭) + 담을 때 달 위 하트 팝(스프링 등장→1초 뒤 페이드)
+- [x] FavoriteLongPressTip (TipKit, MaxDisplayCount 3): "달을 지그시 눌러보세요" — 직접 길게 누르면 invalidate. 홈 상단 효과음 팁 아래 배치
+- [x] 로컬라이제이션 2키(ko/en), 시뮬레이터에서 팁 표시 확인 + 빌드 성공
+
+## 우주 여행 앰비언트 (혜성·행성·우주선) - 완료 (2026-07-19)
+- [x] CosmicEventsView 신규: 별밭 위·달 뒤 레이어, TimelineView 시간 기반(위치 lerp·양끝 페이드·점멸)
+- [x] 혜성(꼬리+코어, 얼음청/따뜻한 주황, 5.5~8.5초 대각선) / 먼 행성(라디얼 구체+절반 확률 고리, 30~50초 수평 드리프트) / 우주선(동체+창문+0.9초 점멸등, 9~14초 사선)
+- [x] 빈도: 첫 등장 20~45초, 이후 50~140초 간격 랜덤. 달(중앙)을 피해 상단 8~26%/하단 74~90% 띠로만 지나감
+- [x] 버그 수정: onAppear 시점 geo.size가 레이아웃 확정 전 값이라 경로가 화면 꼭대기에 몰림 → canvas @State로 상시 추적, 발사 시점 크기 사용(+크기 미확정 시 3초 재시도)
+- [x] 시뮬레이터 검증: 혜성이 우측에서 정상 밴드(fy≈0.16)로 꼬리 끌며 진입하는 프레임 캡처 확인, 빌드 성공
+
+## visionOS / tvOS 지원 검토 → 하지 않기로 결정 (2026-07-19)
+- [x] 검토 결과: tvOS는 별도 타깃 필요(AlarmKit·CoreMotion·햅틱·스와이프 UI 블로커), visionOS는 'Designed for iPad' 호환만 가능
+- [x] 결정: 둘 다 지원하지 않음 — 잠시 추가했던 SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD 설정 제거 (iOS/iPadOS 전용 유지)
+
 ## 남은 작업 (수동 - 코드 아님)
 - [x] dev 브랜치 코드 변경 push / PR → main 머지로 완료 (2026-07-13)
 - [ ] App Store Connect: App Description 또는 EULA 필드에 표준 약관 링크 추가

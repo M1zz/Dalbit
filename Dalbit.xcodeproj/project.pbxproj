@@ -104,6 +104,9 @@
 		FBA0000000000000000000A3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBA0000000000000000000A2 /* FirebaseAnalytics */; };
 		FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0000000000000000000B1 /* AnalyticsManager.swift */; };
 		ALM000022F28000000000B4 /* AlarmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000012F28000000000B3 /* AlarmService.swift */; };
+		FBK000022F2A0000000000C2 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000012F2A0000000000C1 /* FeedbackService.swift */; };
+		FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000032F2A0000000000C3 /* FeedbackView.swift */; };
+		FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */; };
 		ALM000042F28000000000B6 /* AlarmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000032F28000000000B5 /* AlarmItem.swift */; };
 		ALV000022F28000000000B8 /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALV000012F28000000000B7 /* AlarmListView.swift */; };
 		AEV000022F28000000000BA /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEV000012F28000000000B9 /* AlarmEditView.swift */; };
@@ -260,6 +263,9 @@
 		EFDBD9965458E87AF0E53BAD /* TibetanBowl.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = TibetanBowl.mp3; sourceTree = "<group>"; };
 		FBA0000000000000000000B1 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		ALM000012F28000000000B3 /* AlarmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmService.swift; sourceTree = "<group>"; };
+		FBK000012F2A0000000000C1 /* FeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackService.swift; sourceTree = "<group>"; };
+		FBK000032F2A0000000000C3 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackInboxView.swift; sourceTree = "<group>"; };
 		ALM000032F28000000000B5 /* AlarmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmItem.swift; sourceTree = "<group>"; };
 		ALV000012F28000000000B7 /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
 		AEV000012F28000000000B9 /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
@@ -548,6 +554,7 @@
 				SUB000012F29000000000001 /* SubscriptionManager.swift */,
 				FBA0000000000000000000B1 /* AnalyticsManager.swift */,
 				ALM000012F28000000000B3 /* AlarmService.swift */,
+				FBK000012F2A0000000000C1 /* FeedbackService.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -659,6 +666,8 @@
 			isa = PBXGroup;
 			children = (
 				STV000012F2800000000000B /* SettingsView.swift */,
+				FBK000032F2A0000000000C3 /* FeedbackView.swift */,
+				FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -812,6 +821,9 @@
 				21EC2EDD80814105A172AAC3 /* AudioLayerManager.swift in Sources */,
 				FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */,
 				ALM000022F28000000000B4 /* AlarmService.swift in Sources */,
+				FBK000022F2A0000000000C2 /* FeedbackService.swift in Sources */,
+				FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */,
+				FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */,
 				ALM000042F28000000000B6 /* AlarmItem.swift in Sources */,
 				ALV000022F28000000000B8 /* AlarmListView.swift in Sources */,
 				AEV000022F28000000000BA /* AlarmEditView.swift in Sources */,
@@ -991,7 +1003,7 @@
 				CODE_SIGN_ENTITLEMENTS = Dalbit/Dalbit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalbit/Preview Content\"";
 				DEVELOPMENT_TEAM = QGAQ3AY3R3;
 				ENABLE_PREVIEWS = YES;
@@ -1006,7 +1018,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.4;
+				MARKETING_VERSION = 4.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.leeo.LullabyRecipe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1026,7 +1038,7 @@
 				CODE_SIGN_ENTITLEMENTS = Dalbit/Dalbit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalbit/Preview Content\"";
 				DEVELOPMENT_TEAM = QGAQ3AY3R3;
 				ENABLE_PREVIEWS = YES;
@@ -1041,7 +1053,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.4;
+				MARKETING_VERSION = 4.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.leeo.LullabyRecipe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

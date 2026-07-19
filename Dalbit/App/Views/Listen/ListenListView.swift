@@ -39,6 +39,26 @@ struct EffectsOffTip: Tip {
     }
 }
 
+/// 달을 지그시(1초) 누르면 지금 듣는 소리가 즐겨찾기에 담긴다고 안내하는 팁.
+/// 초보자에게만 가끔 — 최대 3회 노출, 직접 길게 눌러 담으면 더 이상 보이지 않는다.
+struct FavoriteLongPressTip: Tip {
+    var title: Text {
+        Text(L.Tip.favoriteLongPressTitle.localized)
+    }
+
+    var message: Text? {
+        Text(L.Tip.favoriteLongPressMessage.localized)
+    }
+
+    var image: Image? {
+        Image(systemName: "heart")
+    }
+
+    var options: [any TipOption] {
+        Tips.MaxDisplayCount(3)
+    }
+}
+
 /**
  커스텀 음원 목록이 노출되는 View
  하단 플레이어 바를 통해 음원 재생, 정지 기능
@@ -89,6 +109,10 @@ struct ListenListView: View {
     @State private var nameLabelText = ""
     @State private var nameToken = 0
     @AppStorage("didShowSwipeHint") private var didShowSwipeHint = false
+    // 즐겨찾기만 재생 모드 (보관함 토글과 공유)
+    @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
+    // 달 중심의 화면(global) 좌표 — 위성(하트 버튼) 탭 위치 판정용
+    @State private var orbCenter: CGPoint = .zero
     // 모드 전환 안내 칩(타이머/보관함): 뉴비에게만 노출 — 써봤거나 몇 번 열면 숨김
     @AppStorage("homeAppearCount") private var homeAppearCount = 0
     @AppStorage("didUseModeSwitch") private var didUseModeSwitch = false
@@ -96,6 +120,15 @@ struct ListenListView: View {
     @AppStorage("didShowGestureCoach") private var didShowGestureCoach = false
     // 효과음 끄기 안내 팁 (앱 실행 초반 최대 3회)
     private let effectsOffTip = EffectsOffTip()
+    // 달 길게 누르기 = 즐겨찾기 안내 팁 (초보자에게만 가끔, 최대 3회)
+    private let favoriteTip = FavoriteLongPressTip()
+    // 달 길게 누르기(1초) 즐겨찾기 — 터치 다운 시 예약, 움직이면 취소
+    @State private var longPressWork: DispatchWorkItem?
+    @State private var longPressFired = false
+    @State private var touchActive = false
+    // 즐겨찾기에 담을 때 달 위로 떠오르는 하트 팝
+    @State private var heartBurst = false
+    @State private var heartBurstToken = 0
     @State private var showCoach = false
     @State private var countedThisSession = false
     @StateObject private var timerManager = TimerManager(viewModel: CustomSoundViewModel())
@@ -109,6 +142,8 @@ struct ListenListView: View {
             ScreenBackground().ignoresSafeArea()
             // 우주 느낌의 은은한 별 (홈 배경)
             Starfield().ignoresSafeArea()
+            // 우주 여행 앰비언트 — 가끔 혜성·먼 행성·우주선이 지나간다 (달 뒤로)
+            CosmicEventsView().ignoresSafeArea()
 
             GeometryReader { geo in
                 let H = geo.size.height
@@ -145,6 +180,11 @@ struct ListenListView: View {
                     .tipBackground(.ultraThinMaterial)
                     .padding(.horizontal, DS.Spacing.screen)
                     .padding(.top, DS.Spacing.sm)
+                    // 달 길게 누르기 = 즐겨찾기 안내 (초보자에게만 가끔)
+                    TipView(favoriteTip)
+                        .tipBackground(.ultraThinMaterial)
+                        .padding(.horizontal, DS.Spacing.screen)
+                        .padding(.top, DS.Spacing.xxs)
                     Spacer()
                 }
                 .zIndex(9)
@@ -263,7 +303,12 @@ struct ListenListView: View {
             }
         }
         // 재생 상태/곡 변경 시 잠금화면 정보 갱신
-        .onChange(of: viewModel.isPlaying) { _, _ in updateNowPlaying() }
+        .onChange(of: viewModel.isPlaying) { _, playing in
+            updateNowPlaying()
+            // 재생을 시작하면 위성(하트 버튼)이 나와 궤도를 돈다.
+            // 이미 떠 있으면 그대로 둠 — 다시 부르면 위치가 순간이동하므로.
+            if playing && !satelliteVisible { flashSatellite() }
+        }
         .onChange(of: currentSoundTitle) { _, _ in updateNowPlaying() }
     }
 
@@ -335,7 +380,13 @@ struct ListenListView: View {
                                  satelliteStart: satelliteStartTime,
                                  satelliteStartAngle: satelliteStartAngle,
                                  satelliteHue: satelliteHue,
-                                 satelliteScale: satelliteScale)
+                                 satelliteScale: satelliteScale,
+                                 satelliteHeartFilled: isCurrentFavorite)
+                    // 위성(하트) 탭 판정용 — 달 중심의 화면(global) 좌표를 기록
+                    .onGeometryChange(for: CGPoint.self) { proxy in
+                        let f = proxy.frame(in: .global)
+                        return CGPoint(x: f.midX, y: f.midY)
+                    } action: { orbCenter = $0 }
                     .scaleEffect(orbPressed ? 0.97 : 1.0)
                     .scaleEffect(orbTapPress ? 0.92 : 1.0)              // 탭 시 옴폭
                     .offset(x: orbAppearOffsetX, y: orbAppearOffsetY)   // 등장 시 기울어진 방향에서 굴러옴
@@ -346,8 +397,21 @@ struct ListenListView: View {
                     .accessibilityValue(currentSoundTitle)
                     .accessibilityAddTraits(.isButton)
                     .accessibilityAction(named: Text(L.A11y.nextSound.localized)) { nextSound() }
+                    .accessibilityAction(named: Text(L.A11y.favorite.localized)) { toggleFavoriteCurrent() }
                     .accessibilityAction(named: Text(L.A11y.timerButton.localized)) { goTo(2) }
                     .accessibilityAction(named: Text(L.A11y.savedSoundsButton.localized)) { goTo(0) }
+
+                    // 달을 지그시 누르면 떠오르는 하트 팝 (즐겨찾기에 담았을 때)
+                    if heartBurst {
+                        Image(systemName: "heart.fill")
+                            .font(.system(size: 64))
+                            .foregroundColor(Color(hue: 0.92, saturation: 0.55, brightness: 0.90).opacity(0.9))
+                            .shadow(color: Color(hue: 0.92, saturation: 0.60, brightness: 0.85).opacity(0.6), radius: 14)
+                            .offset(y: -26)
+                            .transition(.scale(scale: 0.3).combined(with: .opacity))
+                            .allowsHitTesting(false)
+                            .accessibilityHidden(true)
+                    }
                 }
 
                 Text(nameLabelText)
@@ -446,12 +510,30 @@ struct ListenListView: View {
 
     // MARK: - Orb Gesture (탭 / 좌우 소리 전환 / 상하 모드 전환)
     private func orbGesture() -> some Gesture {
-        DragGesture(minimumDistance: 0)
+        // global 좌표: 탭 위치를 위성(하트 버튼) 위치와 비교하기 위해 (translation 로직은 영향 없음)
+        DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onChanged { value in
+                // 터치 다운: 달 위라면 길게 누르기(즐겨찾기) 타이머 예약
+                if !touchActive {
+                    touchActive = true
+                    longPressFired = false
+                    let loc = value.location
+                    if orbCenter != .zero, hypot(loc.x - orbCenter.x, loc.y - orbCenter.y) < 150 {
+                        let work = DispatchWorkItem {
+                            // 1초간 누른 채 안 움직였으면 즐겨찾기 토글
+                            guard vLock == nil else { return }
+                            longPressFired = true
+                            favoriteLongPress()
+                        }
+                        longPressWork = work
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: work)
+                    }
+                }
                 let adx = abs(value.translation.width)
                 let ady = abs(value.translation.height)
                 if vLock == nil, max(adx, ady) > 10 {
                     vLock = ady > adx   // 처음 의미있게 움직인 축으로 고정
+                    longPressWork?.cancel()   // 움직이기 시작 → 길게 누르기 취소
                 }
                 if vLock == true {
                     // 세로: 구체만 손가락 따라 굴림 (화면은 그대로 — 다 구른 뒤 전환)
@@ -462,6 +544,19 @@ struct ListenListView: View {
                 }
             }
             .onEnded { value in
+                longPressWork?.cancel()
+                longPressWork = nil
+                touchActive = false
+                // 길게 눌러 즐겨찾기가 이미 발동됐으면 탭/드래그 처리는 건너뛴다
+                if longPressFired {
+                    longPressFired = false
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
+                        orbDragAngle = 0
+                        orbPressed = false
+                    }
+                    vLock = nil
+                    return
+                }
                 let dx = value.translation.width
                 let dy = value.translation.height
                 if vLock == true {
@@ -496,10 +591,14 @@ struct ListenListView: View {
                         }
                     }
                 } else {
-                    // 거의 안 움직임 → 탭 = 재생/일시정지 (옴폭 눌렸다 나오는 효과)
+                    // 거의 안 움직임 → 탭. 위성(하트 버튼) 위면 즐겨찾기, 아니면 재생/일시정지
                     if hypot(dx, dy) < 10 {
-                        togglePlay()
-                        pressOrb()
+                        if satelliteHeartHit(value.location) {
+                            toggleFavoriteCurrent()
+                        } else {
+                            togglePlay()
+                            pressOrb()
+                        }
                     }
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
                         orbDragAngle = 0
@@ -690,6 +789,70 @@ struct ListenListView: View {
         (viewModel.selectedSound ?? viewModel.lastSound).title
     }
 
+    /// 현재(또는 마지막) 소리
+    private var currentSound: CustomSound {
+        viewModel.selectedSound ?? viewModel.lastSound
+    }
+
+    /// 현재 소리의 즐겨찾기 여부 — selectedSound는 복사본이라 원본 목록에서 id로 조회
+    private var isCurrentFavorite: Bool {
+        viewModel.customSounds.first(where: { $0.id == currentSound.id })?.isFavorite ?? false
+    }
+
+    /// 탭 위치가 위성(하트 버튼) 위인지 판정 — 하트로 변신을 마쳤고, 하트가 보이는 동안이면 탭 가능.
+    /// 뒤쪽 반(달 뒤)이라도 달 원판 밖으로 나와 보이면 눌린다 — 보이는데 안 눌리면 버튼이 아니니까.
+    /// 궤도 상수(주기 1560s, rx 140, ry 78, y -4, 변신 8~10s)는 CampfireView.satelliteView와 동일해야 한다.
+    private func satelliteHeartHit(_ location: CGPoint) -> Bool {
+        guard satelliteVisible, orbCenter != .zero else { return false }
+        let elapsed = Date().timeIntervalSinceReferenceDate - satelliteStartTime
+        guard elapsed > 10 else { return false }                     // 하트 변신이 끝난 뒤에만 버튼
+        let ang = satelliteStartAngle + (elapsed / 1560.0) * 2 * Double.pi
+        let x = orbCenter.x + CGFloat(sin(ang) * 140.0)
+        let y = orbCenter.y + CGFloat(-cos(ang) * 78.0 - 4.0)
+        if -cos(ang) <= 0 {
+            // 뒤쪽 반: 달(반지름 110)에 가려져 있으면 탭 불가, 림 밖으로 나와 보일 때만 허용
+            guard hypot(x - orbCenter.x, y - orbCenter.y) > 105 else { return false }
+        }
+        return hypot(location.x - x, location.y - y) < CGFloat(34.0 * satelliteScale)
+    }
+
+    /// 달을 지그시(1초) 누름 — 즐겨찾기 토글 + 담을 때는 달 위로 하트 팝
+    private func favoriteLongPress() {
+        toggleFavoriteCurrent()
+        favoriteTip.invalidate(reason: .actionPerformed)   // 직접 해봤으니 팁은 그만
+        // 옴폭 눌리는 촉감 (탭과 같은 시각 피드백)
+        pressOrb()
+        // 담을 때만 하트 팝 (뺄 때는 라벨만)
+        if isCurrentFavorite {
+            heartBurstToken += 1
+            let token = heartBurstToken
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) { heartBurst = true }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if token == heartBurstToken {
+                    withAnimation(.easeOut(duration: 0.5)) { heartBurst = false }
+                }
+            }
+        }
+    }
+
+    /// 위성(하트 버튼) 탭 — 현재 소리를 즐겨찾기에 담거나 뺀다
+    private func toggleFavoriteCurrent() {
+        let sound = currentSound
+        Haptics.soft()
+        viewModel.toggleFavorite(sound)
+        let nowFavorite = viewModel.customSounds.first(where: { $0.id == sound.id })?.isFavorite ?? false
+        flashLabel(nowFavorite ? L.Listen.favoriteOn.localized : L.Listen.favoriteOff.localized)
+    }
+
+    /// 재생 순환 풀 — '즐겨찾기만 재생'이 켜져 있고 즐겨찾기가 있으면 그것만 돈다
+    private var playPool: [CustomSound] {
+        if favoritesOnlyPlayback {
+            let favorites = viewModel.customSounds.filter { $0.isFavorite }
+            if !favorites.isEmpty { return favorites }
+        }
+        return viewModel.customSounds
+    }
+
     /// 비슷한 채도의 차분한 색 팔레트 (소리/분위기마다 다른 색)
     private static let orbPalette: [Color] = [
         Color(hex: "6F6AD6"), // 라벤더
@@ -714,7 +877,7 @@ struct ListenListView: View {
 
     /// 다음 배경음으로 전환 (마지막이면 처음으로 순환). 재생 중이 아니면 자동 재생.
     private func nextSound() {
-        let pool = viewModel.customSounds
+        let pool = playPool
         guard !pool.isEmpty else { return }
         Haptics.selection()
         let idx = pool.firstIndex(where: { $0.id == viewModel.selectedSound?.id }) ?? -1
@@ -742,7 +905,7 @@ struct ListenListView: View {
 
     /// 이전 배경음으로 전환 (처음이면 마지막으로 순환). 잠금화면 ⏮ 버튼용.
     private func prevSound() {
-        let pool = viewModel.customSounds
+        let pool = playPool
         guard !pool.isEmpty else { return }
         let idx = pool.firstIndex(where: { $0.id == viewModel.selectedSound?.id }) ?? 0
         let prev = pool[(idx - 1 + pool.count) % pool.count]
@@ -794,6 +957,12 @@ struct ListenListView: View {
         withAnimation(.easeInOut(duration: 1.2)) { satelliteVisible = true }   // 달 뒤에서 서서히 등장
         satelliteToken += 1
         let token = satelliteToken
+        // 위성이 하트 버튼으로 변신을 마친 직후(약 10초), 눌러도 된다고 한 번 알려준다
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.5) {
+            if token == satelliteToken && satelliteVisible {
+                flashLabel(L.Listen.satelliteHint.localized, duration: 2.6)
+            }
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             if token == satelliteToken {
                 withAnimation(.easeIn(duration: 1.5)) { satelliteVisible = false }  // 천천히 사라짐
@@ -1120,10 +1289,12 @@ struct CampfireView: View {
     var satelliteStartAngle: Double = 0.62   // 등장 시작각(좌/우 뒤 랜덤)
     var satelliteHue: Double = 0             // 위성 색상(랜덤)
     var satelliteScale: Double = 1.0         // 위성 크기 배리에이션(랜덤)
+    var satelliteHeartFilled: Bool = false   // 현재 소리가 즐겨찾기면 채워진 하트
 
     @State private var breathe = false
     @State private var glow = false
     @State private var moonPhase: Double = 1.0   // 1=보름달, 0=반달, -1=신월
+    @State private var moonCycleToken = 0        // 위상 2단계 애니메이션 취소용 (일시정지 시)
     @State private var iconShown = true          // 재생/일시정지 심볼은 잠깐 보였다 사라짐
     @State private var iconToken = 0
 
@@ -1172,7 +1343,8 @@ struct CampfireView: View {
             if playing {
                 startMoonCycle()
             } else {
-                // 일시정지 → 천천히 보름달로 복귀
+                // 일시정지 → 예약된 위상 2단계 취소 + 천천히 보름달로 복귀
+                moonCycleToken += 1
                 withAnimation(.easeInOut(duration: 6)) { moonPhase = 1.0 }
             }
         }
@@ -1205,17 +1377,32 @@ struct CampfireView: View {
             let x = sin(ang) * rx
             let y = (-cos(ang) * ry) - 4
             let scale = (0.82 + 0.3 * max(0, frontness)) * satelliteScale   // 크기 배리에이션 반영
-            // 달 색과 유사한(analogous) 색 — 채도/명도를 낮춰 은은하게. 순백 코어·흰 테두리 제거해 흐릿하게.
-            let satColor = Color(hue: satelliteHue, saturation: 0.30, brightness: 0.90)
-            let satDeep = Color(hue: satelliteHue, saturation: 0.46, brightness: 0.68)
-            let satCore = Color(hue: satelliteHue, saturation: 0.12, brightness: 0.97)  // 순백 대신 부드러운 밝은 코어
+            // 달 색과 유사한(analogous) 색 — 항상 색이 돌게 채도 하한을 두고 명도에 상한을 둬서
+            // 어떤 달 색에서도 흰색/쨍한 톤이 나오지 않는다. (테두리까지 전부 착색)
+            let satColor = Color(hue: satelliteHue, saturation: 0.50, brightness: 0.72)
+            let satDeep = Color(hue: satelliteHue, saturation: 0.62, brightness: 0.52)
+            let satCore = Color(hue: satelliteHue, saturation: 0.35, brightness: 0.82)  // 코어도 색을 머금은 은은한 밝기
+            // 변신 타이밍: 처음엔 평범한 위성으로 돌다가(8초) → 2초에 걸쳐 분홍 하트 버튼으로 변신
+            let morph = max(0.0, min(1.0, (elapsed - 8.0) / 2.0))   // 0=위성, 1=하트 버튼
+            // '위웅 위웅' 펄스 — 하트 모드에서 1.6초 주기로 크기·빛무리·그림자가 함께 숨쉰다
+            let pulse = 0.5 + 0.5 * sin(elapsed * 2 * Double.pi / 1.6)
+            // 분홍 팔레트 (로즈 핑크)
+            let pinkGlow = Color(hue: 0.92, saturation: 0.60, brightness: 0.88)
+            let pinkCore = Color(hue: 0.90, saturation: 0.35, brightness: 0.93)
+            let pinkMid  = Color(hue: 0.92, saturation: 0.58, brightness: 0.84)
+            let pinkDeep = Color(hue: 0.93, saturation: 0.68, brightness: 0.60)
             ZStack {
-                // 위성 둘레의 은은한 빛무리 (약하게)
+                // 위성 모드 빛무리 (은은) — 변신하며 사라짐
                 Circle()
-                    .fill(satColor.opacity(0.30))
+                    .fill(satColor.opacity(0.30 * (1 - morph)))
                     .frame(width: 46, height: 46)
                     .blur(radius: 14)
-                // 위성 본체 — 작은 달(부드러운 코어 → 색이 도는 외곽)
+                // 하트 모드 빛무리 — 펄스에 맞춰 커졌다 작아지며 위웅위웅 빛난다
+                Circle()
+                    .fill(pinkGlow.opacity(morph * (0.28 + 0.30 * pulse)))
+                    .frame(width: 48 + CGFloat(10 * pulse), height: 48 + CGFloat(10 * pulse))
+                    .blur(radius: 13)
+                // 위성 본체 — 작은 달(부드러운 코어 → 색이 도는 외곽). 변신하며 사라짐
                 Circle()
                     .fill(
                         RadialGradient(
@@ -1227,11 +1414,34 @@ struct CampfireView: View {
                     .frame(width: 26, height: 26)
                     .shadow(color: satColor.opacity(0.4), radius: 5)
                     .blur(radius: 1.1)   // 전체적으로 살짝 흐릿하게
+                    .opacity(1 - morph)
+                // 하트 버튼 본체 — 또렷한 분홍 구슬. 그림자(깊이)가 펄스를 따라 출렁여 눌리는 버튼처럼 보인다
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [pinkCore, pinkMid, pinkDeep],
+                            center: UnitPoint(x: 0.38, y: 0.32),
+                            startRadius: 1, endRadius: 18
+                        )
+                    )
+                    .frame(width: 26, height: 26)
+                    .shadow(color: pinkGlow.opacity(0.35 + 0.35 * pulse),
+                            radius: 4 + CGFloat(5 * pulse), y: 1)
+                    .opacity(morph)
+                // 하트 — 변신하면서 나타난다. 현재 소리가 즐겨찾기면 채워진 하트.
+                Image(systemName: satelliteHeartFilled ? "heart.fill" : "heart")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(Color(hue: 0.93, saturation: 0.72, brightness: 0.42))
+                    .opacity(morph)
             }
-            .scaleEffect(scale)
+            // 하트 모드에선 펄스에 맞춰 살짝 커졌다 작아진다 (위웅 위웅)
+            .scaleEffect(scale * (1 + 0.06 * morph * pulse))
             .offset(x: x, y: y)
-            .opacity((isFrontHalf == front) ? 0.7 : 0)   // 덜 또렷하게
+            // 위성일 땐 흐릿하게(0.7), 하트 버튼이 되면 또렷하게(0.95)
+            .opacity((isFrontHalf == front) ? (0.7 + 0.25 * morph) : 0)
         }
+        // 탭은 부모(orbGesture)가 위치로 판정한다 — 전체화면 드래그 제스처와 경합하면
+        // 자식 탭이 씹히는 문제가 있어, 여기서는 히트테스트를 받지 않는다.
         .allowsHitTesting(false)
     }
 
@@ -1290,7 +1500,8 @@ struct CampfireView: View {
                 .animation(.easeInOut(duration: 0.9), value: iconShown)
             )
             .clipShape(Circle())
-            .scaleEffect(breathe ? 1.035 : 0.97)
+            // 호흡 진폭 ±1.5% — 눈에 띄지 않고 무의식적으로 따라 쉬게 되는 미묘한 크기 변화
+            .scaleEffect(breathe ? 1.015 : 0.985)
             .shadow(color: tint.opacity(0.35), radius: 36, x: 0, y: 12)
     }
 
@@ -1307,10 +1518,19 @@ struct CampfireView: View {
         }
     }
 
-    /// 재생 중: 약 20분에 걸쳐 보름달 → 그믐달, 다시 약 20분에 걸쳐 보름달로 (무한 반복)
+    /// 재생 중: 처음 1/16(위상 1.0→0.88)은 약 20초 만에 빠르게 드리워 재생 피드백을 주고,
+    /// 나머지는 기존처럼 아주 천천히(약 19분) 그믐달까지 갔다가 되돌아온다 (무한 반복).
     private func startMoonCycle() {
-        withAnimation(.easeInOut(duration: 1200).repeatForever(autoreverses: true)) {
-            moonPhase = -0.92   // 그믐달(아주 얇은 달)
+        moonCycleToken += 1
+        let token = moonCycleToken
+        // 1단계: 그림자가 눈에 보이게 스며들기 시작 (전체 범위 1.92의 1/16 = 0.12)
+        withAnimation(.easeOut(duration: 20)) { moonPhase = 0.88 }
+        // 2단계: 나머지 15/16는 원래 속도 비율대로 천천히 (1200 × 15/16 ≈ 1125초)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+            guard token == moonCycleToken, isPlaying else { return }
+            withAnimation(.easeInOut(duration: 1125).repeatForever(autoreverses: true)) {
+                moonPhase = -0.92   // 그믐달(아주 얇은 달)
+            }
         }
     }
 
@@ -1325,8 +1545,11 @@ struct CampfireView: View {
         )
     }
 
+    /// 달의 호흡 — 공명 호흡(resonance breathing) 연구에 맞춘 분당 6회(10초 주기, 0.1Hz).
+    /// 5~7회/분에서 심박변이도(HRV)가 최대가 되고 부교감신경이 활성화되어 진정 효과가 가장 크다.
+    /// (들숨 5초 + 날숨 5초, easeInOut 대칭) 사용자가 무의식 중에 따라 쉬도록 진폭은 아주 미묘하게.
     private func startBreathing() {
-        let duration: Double = isPlaying ? 3.2 : 4.5
+        let duration: Double = 5.0   // 반주기 5초 → 한 호흡 10초 = 분당 6회
         withAnimation(.easeInOut(duration: duration).repeatForever(autoreverses: true)) {
             breathe = true
         }
@@ -1630,6 +1853,10 @@ struct SavedSoundsListView: View {
     @State private var showSubscription = false
     @State private var editingSound: CustomSound? = nil
     @State private var showEditView = false
+    @State private var showFeedback = false
+    @State private var showFeedbackInbox = false   // 개발자 전용 (의견 보내기 행 길게 누름)
+    // 즐겨찾기만 재생 모드 (홈의 곡 순환과 공유)
+    @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
     /// 페이저에 임베드될 때 닫기(홈으로) 콜백. nil이면 일반 네비게이션 화면으로 동작.
     var onClose: (() -> Void)? = nil
     /// 세그먼트 페이저에 콘텐츠만 임베드되는 모드. 헤더/네비게이션 크롬을 숨기고, 추가(+)는 상위가 담당한다.
@@ -1649,6 +1876,12 @@ struct SavedSoundsListView: View {
 
                 // 효과음(물방울·새 등 레이어 사운드) 끄기 토글 — 배경음악만 듣고 싶을 때
                 effectsToggle()
+
+                // 즐겨찾기만 재생 — 위성 하트로 담아 둔 사운드만 순환
+                favoritesOnlyToggle()
+
+                // 개발자에게 의견 보내기 (길게 누르면 개발자 인박스 — 숨은 동선)
+                feedbackRow()
 
                 if viewModel.customSounds.isEmpty {
                     emptyStateView()
@@ -1703,6 +1936,12 @@ struct SavedSoundsListView: View {
                 .environmentObject(viewModel)
                 .onDisappear { viewModel.loadSound() }
             }
+        }
+        .navigationDestination(isPresented: $showFeedback) {
+            FeedbackView()
+        }
+        .navigationDestination(isPresented: $showFeedbackInbox) {
+            FeedbackInboxView()
         }
         .onAppear {
             viewModel.loadSound()
@@ -1786,6 +2025,94 @@ struct SavedSoundsListView: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(L.Library.effectsToggle.localized)
         .accessibilityValue(audioManager.effectsMuted ? L.Common.on.localized : L.Common.off.localized)
+    }
+
+    // MARK: - Favorites Only Toggle (즐겨찾기만 재생)
+    @ViewBuilder
+    private func favoritesOnlyToggle() -> some View {
+        let hasFavorites = !viewModel.customSounds.filter(\.isFavorite).isEmpty
+        HStack(spacing: DS.Spacing.sm) {
+            Image(systemName: favoritesOnlyPlayback && hasFavorites ? "heart.fill" : "heart")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(favoritesOnlyPlayback && hasFavorites ? DS.Colors.warm : DS.Colors.textSecondary)
+                .frame(width: 22)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(L.Library.favoritesOnly.localized)
+                    .font(DS.Font.subhead().weight(.semibold))
+                    .foregroundColor(DS.Colors.textPrimary)
+                Text(hasFavorites
+                     ? L.Library.favoritesOnlyHint.localized
+                     : L.Library.favoritesOnlyEmpty.localized)
+                    .font(DS.Font.caption())
+                    .foregroundColor(DS.Colors.textTertiary)
+            }
+
+            Spacer()
+
+            Toggle("", isOn: $favoritesOnlyPlayback)
+                .labelsHidden()
+                .tint(DS.Colors.warm)
+                .disabled(!hasFavorites)
+        }
+        .opacity(hasFavorites ? 1 : 0.55)
+        .padding(.horizontal, DS.Spacing.lg)
+        .padding(.vertical, DS.Spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                .fill(DS.Colors.surfaceSunken)
+        )
+        .padding(.horizontal, DS.Spacing.screen)
+        .padding(.top, DS.Spacing.xs)
+        .padding(.bottom, DS.Spacing.xs)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(L.Library.favoritesOnly.localized)
+        .accessibilityValue(favoritesOnlyPlayback ? L.Common.on.localized : L.Common.off.localized)
+    }
+
+    // MARK: - Feedback Row (개발자에게 의견 보내기)
+    @ViewBuilder
+    private func feedbackRow() -> some View {
+        Button { showFeedback = true } label: {
+            HStack(spacing: DS.Spacing.sm) {
+                Image(systemName: "envelope")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(DS.Colors.accent)
+                    .frame(width: 22)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(L.Feedback.entry.localized)
+                        .font(DS.Font.subhead().weight(.semibold))
+                        .foregroundColor(DS.Colors.textPrimary)
+                    Text(L.Feedback.entryHint.localized)
+                        .font(DS.Font.caption())
+                        .foregroundColor(DS.Colors.textTertiary)
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(DS.Colors.textSecondary)
+            }
+            .padding(.horizontal, DS.Spacing.lg)
+            .padding(.vertical, DS.Spacing.sm)
+            .background(
+                RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                    .fill(DS.Colors.surfaceSunken)
+            )
+        }
+        .buttonStyle(.plain)
+        // 숨은 동선: 길게(1.5초) 누르면 개발자 인박스 (일반 사용자는 권한이 없어 목록이 비어 보임)
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 1.5).onEnded { _ in
+                showFeedbackInbox = true
+            }
+        )
+        .padding(.horizontal, DS.Spacing.screen)
+        .padding(.top, DS.Spacing.xs)
+        .padding(.bottom, DS.Spacing.xs)
+        .accessibilityLabel(L.Feedback.entry.localized)
     }
 
     // 새 사운드 만들기 (무료 한도 체크)
@@ -2341,6 +2668,204 @@ struct GestureCoachmark: View {
 
 /// 배경 별. 좌우로는 흐르지 않고 "위로 올라감 / 아래로 내려감 / 앞으로 나아감(줌)"
 /// 세 가지 방향을 약 5분에 한 번씩만 천천히 전환한다. 달이 우주를 떠다니는 느낌.
+// MARK: - Cosmic Events (우주 여행 앰비언트)
+
+/// 가끔 밤하늘을 지나가는 우주 여행 이벤트 — 혜성·먼 행성·우주선.
+/// 별밭 위, 달 뒤 레이어에서 낮은 빈도로 나타나 은은하게 지나간다.
+/// 위성과 같은 TimelineView 시간 기반 — 위치·페이드·점멸을 매 프레임 계산한다.
+struct CosmicEventsView: View {
+    private enum Kind { case comet, planet, spaceship }
+
+    private struct Event {
+        let kind: Kind
+        let from: CGPoint
+        let to: CGPoint
+        let start: TimeInterval     // 등장 시각
+        let duration: Double
+        let scale: CGFloat          // 크기 배리에이션
+        let hue: Double             // 색 배리에이션
+        let hasRing: Bool           // 행성 고리 여부
+        var angle: Angle {          // 진행 방향 (혜성 꼬리·우주선 기수 정렬)
+            .radians(atan2(Double(to.y - from.y), Double(to.x - from.x)))
+        }
+    }
+
+    @State private var event: Event?
+    @State private var token = 0
+    // 등장 시점이 아니라 발사 시점의 화면 크기를 쓰기 위해 상시 추적
+    // (onAppear 때는 레이아웃 확정 전이라 작은 값이 잡혀 경로가 화면 꼭대기에 몰리는 버그가 있었다)
+    @State private var canvas: CGSize = .zero
+
+    var body: some View {
+        GeometryReader { geo in
+            TimelineView(.animation) { ctx in
+                if let event {
+                    let now = ctx.date.timeIntervalSinceReferenceDate
+                    let t = max(0.0, min(1.0, (now - event.start) / event.duration))
+                    // 양 끝에서 스르륵 나타났다 사라지는 페이드
+                    let fade = min(1.0, min(t, 1.0 - t) * 6.0)
+                    eventBody(event, elapsed: now - event.start)
+                        .position(x: event.from.x + (event.to.x - event.from.x) * t,
+                                  y: event.from.y + (event.to.y - event.from.y) * t)
+                        .opacity(fade)
+                }
+            }
+            .onAppear {
+                canvas = geo.size
+                // 첫 이벤트는 비교적 이르게, 이후엔 드문드문
+                scheduleNext(after: .random(in: 20...45))
+            }
+            .onChange(of: geo.size) { _, size in canvas = size }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    // MARK: 이벤트 비주얼
+
+    @ViewBuilder
+    private func eventBody(_ event: Event, elapsed: Double) -> some View {
+        switch event.kind {
+        case .comet:
+            // 혜성 — 밝은 코어 + 뒤로 길게 흐르는 꼬리 (은은한 톤, 쨍한 흰색 없음)
+            let tail = Color(hue: event.hue, saturation: 0.35, brightness: 0.85)
+            ZStack {
+                Capsule()
+                    .fill(LinearGradient(colors: [tail.opacity(0.50), .clear],
+                                         startPoint: .trailing, endPoint: .leading))
+                    .frame(width: 90 * event.scale, height: 3.5 * event.scale)
+                    .offset(x: -45 * event.scale)
+                    .blur(radius: 1.5)
+                Circle()
+                    .fill(Color(hue: event.hue, saturation: 0.20, brightness: 0.94).opacity(0.9))
+                    .frame(width: 5.5 * event.scale, height: 5.5 * event.scale)
+                    .shadow(color: tail.opacity(0.7), radius: 5)
+                    .blur(radius: 0.4)
+            }
+            .rotationEffect(event.angle)
+
+        case .planet:
+            // 먼 행성 — 흐릿하게 천천히 떠간다. 절반 확률로 고리(토성풍)
+            let base = Color(hue: event.hue, saturation: 0.45, brightness: 0.62)
+            let deep = Color(hue: event.hue, saturation: 0.55, brightness: 0.40)
+            ZStack {
+                Circle()
+                    .fill(
+                        RadialGradient(colors: [base, deep],
+                                       center: UnitPoint(x: 0.35, y: 0.30),
+                                       startRadius: 1, endRadius: 14 * event.scale)
+                    )
+                    .frame(width: 22 * event.scale, height: 22 * event.scale)
+                if event.hasRing {
+                    Ellipse()
+                        .stroke(base.opacity(0.55), lineWidth: 1.2)
+                        .frame(width: 36 * event.scale, height: 10 * event.scale)
+                        .rotationEffect(.degrees(-18))
+                }
+            }
+            .opacity(0.7)
+            .blur(radius: 0.6)
+
+        case .spaceship:
+            // 우주선 — 작은 동체 + 창문 + 깜빡이는 점멸등
+            let blinkOn = sin(elapsed * 2 * Double.pi / 0.9) > 0
+            ZStack {
+                Capsule()
+                    .fill(Color(hue: 0.70, saturation: 0.14, brightness: 0.72))
+                    .frame(width: 18 * event.scale, height: 6.5 * event.scale)
+                HStack(spacing: 2.2 * event.scale) {
+                    ForEach(0..<3, id: \.self) { _ in
+                        Circle()
+                            .fill(Color(hue: 0.60, saturation: 0.45, brightness: 0.30))
+                            .frame(width: 1.9 * event.scale, height: 1.9 * event.scale)
+                    }
+                }
+                Circle()
+                    .fill(Color(hue: 0.02, saturation: 0.70, brightness: 0.92))
+                    .frame(width: 2.4 * event.scale, height: 2.4 * event.scale)
+                    .offset(x: -9 * event.scale, y: -4.5 * event.scale)
+                    .opacity(blinkOn ? 0.95 : 0.15)
+            }
+            .rotationEffect(event.angle)
+            .opacity(0.85)
+        }
+    }
+
+    // MARK: 스케줄링
+
+    /// delay초 뒤에 다음 이벤트를 발생시킨다 (단일 체인 — token으로 중복 방지)
+    private func scheduleNext(after delay: Double) {
+        token += 1
+        let tk = token
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            guard tk == token else { return }
+            // 레이아웃이 아직 안 잡혔으면 잠시 뒤 재시도
+            if canvas.width < 100 || canvas.height < 300 {
+                scheduleNext(after: 3)
+            } else {
+                fire(in: canvas)
+            }
+        }
+    }
+
+    /// 랜덤 종류/경로/속도로 이벤트를 하나 띄우고, 끝나면 지운 뒤 다음을 예약한다
+    private func fire(in size: CGSize) {
+        let kind: Kind = [.comet, .comet, .planet, .spaceship].randomElement()!   // 혜성을 조금 더 자주
+        let from: CGPoint
+        let to: CGPoint
+        let duration: Double
+        let scale: CGFloat
+        let hue: Double
+
+        // 달(화면 중앙)을 피해 위/아래 띠에서 지나간다
+        let topBand = size.height * CGFloat.random(in: 0.08...0.26)
+        let bottomBand = size.height * CGFloat.random(in: 0.74...0.90)
+        let leftToRight = Bool.random()
+
+        switch kind {
+        case .comet:
+            // 위쪽 하늘을 대각선으로 빠르게 가로지른다
+            let y0 = topBand
+            let y1 = y0 + CGFloat.random(in: 60...220)
+            from = CGPoint(x: leftToRight ? -70 : size.width + 70, y: y0)
+            to = CGPoint(x: leftToRight ? size.width + 70 : -70, y: y1)
+            duration = .random(in: 5.5...8.5)
+            scale = .random(in: 0.8...1.4)
+            hue = Bool.random() ? .random(in: 0.55...0.62)   // 얼음빛 청색
+                                : .random(in: 0.08...0.13)   // 따뜻한 주황
+        case .planet:
+            // 수평으로 아주 천천히 떠간다 (위 또는 아래 띠)
+            let y = Bool.random() ? topBand : bottomBand
+            from = CGPoint(x: leftToRight ? -50 : size.width + 50, y: y)
+            to = CGPoint(x: leftToRight ? size.width + 50 : -50, y: y + CGFloat.random(in: -20...20))
+            duration = .random(in: 30...50)
+            scale = .random(in: 0.7...1.5)
+            hue = .random(in: 0...1)
+        case .spaceship:
+            // 완만한 사선으로 지나간다
+            let y = Bool.random() ? topBand : bottomBand
+            from = CGPoint(x: leftToRight ? -40 : size.width + 40, y: y)
+            to = CGPoint(x: leftToRight ? size.width + 40 : -40, y: y + CGFloat.random(in: -70...70))
+            duration = .random(in: 9...14)
+            scale = .random(in: 0.9...1.4)
+            hue = 0
+        }
+
+        event = Event(kind: kind, from: from, to: to,
+                      start: Date().timeIntervalSinceReferenceDate,
+                      duration: duration, scale: scale, hue: hue,
+                      hasRing: Bool.random())
+        token += 1
+        let tk = token
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.5) {
+            guard tk == token else { return }
+            event = nil
+            // 다음 이벤트까지는 한참 쉰다 — 드물어야 반갑다
+            scheduleNext(after: .random(in: 50...140))
+        }
+    }
+}
+
 struct Starfield: View {
     private let count = 64
     private func frac(_ v: Double) -> Double { v - floor(v) }

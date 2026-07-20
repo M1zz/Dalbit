@@ -20,6 +20,24 @@
 		58DE618A2839C13A00F25769 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DE61892839C13A00F25769 /* Preview Assets.xcassets */; };
 		58DE61C22841C20A00F25769 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58DE61C12841C20A00F25769 /* Launch Screen.storyboard */; };
 		58EB682F2FE81574006D84DF /* space_1min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58EB682E2FE81574006D84DF /* space_1min.mp3 */; };
+		BM85B0000000000000000000 /* brain_massage_01_sub_drone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */; };
+		BM85B0000000000000000001 /* brain_massage_02_bass_root.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */; };
+		BM85B0000000000000000002 /* brain_massage_03_low_fifth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */; };
+		BM85B0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */; };
+		BM85B0000000000000000004 /* brain_massage_05_color_tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */; };
+		BM85B0000000000000000005 /* brain_massage_06_ninth_layer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */; };
+		BM85B0000000000000000006 /* brain_massage_07_mid_harmony.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */; };
+		BM85B0000000000000000007 /* brain_massage_08_high_extension.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */; };
+		BM85B0000000000000000008 /* brain_massage_09_air_shimmer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */; };
+		BM85B0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */; };
+		BM85B0000000000000000010 /* brainmassage_bright.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000010 /* brainmassage_bright.mp3 */; };
+		BM85B0000000000000000011 /* brainmassage_celeste.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000011 /* brainmassage_celeste.mp3 */; };
+		BM85B0000000000000000012 /* brainmassage_deep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000012 /* brainmassage_deep.mp3 */; };
+		BM85B0000000000000000013 /* brainmassage_drone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000013 /* brainmassage_drone.mp3 */; };
+		BM85B0000000000000000014 /* brainmassage_full.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000014 /* brainmassage_full.mp3 */; };
+		BM85B0000000000000000015 /* brainmassage_glow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000015 /* brainmassage_glow.mp3 */; };
+		BM85B0000000000000000016 /* brainmassage_midnight.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000016 /* brainmassage_midnight.mp3 */; };
+		BM85B0000000000000000017 /* brainmassage_warm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000017 /* brainmassage_warm.mp3 */; };
 		58F3CDF92EF195C30059A247 /* meditation_10min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58F3CDF72EF195C30059A247 /* meditation_10min.mp3 */; };
 		58F3CDFA2EF195C30059A247 /* guitar_10min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58F3CDF52EF195C30059A247 /* guitar_10min.mp3 */; };
 		58F3CDFB2EF195C30059A247 /* lofi_10min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58F3CDF62EF195C30059A247 /* lofi_10min.mp3 */; };
@@ -174,6 +192,24 @@
 		58DE61BE283E77E700F25769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		58DE61C12841C20A00F25769 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		58EB682E2FE81574006D84DF /* space_1min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_1min.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_01_sub_drone.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_02_bass_root.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_03_low_fifth.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_04_warm_chord_low.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_05_color_tone.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_06_ninth_layer.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_07_mid_harmony.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_08_high_extension.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_09_air_shimmer.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_10_sparkle_bells.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000010 /* brainmassage_bright.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_bright.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000011 /* brainmassage_celeste.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_celeste.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000012 /* brainmassage_deep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_deep.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000013 /* brainmassage_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_drone.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000014 /* brainmassage_full.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_full.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000015 /* brainmassage_glow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_glow.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000016 /* brainmassage_midnight.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_midnight.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000017 /* brainmassage_warm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_warm.mp3; sourceTree = "<group>"; };
 		58F3CDF42EF195C30059A247 /* ambient_10min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ambient_10min.mp3; sourceTree = "<group>"; };
 		58F3CDF52EF195C30059A247 /* guitar_10min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_10min.mp3; sourceTree = "<group>"; };
 		58F3CDF62EF195C30059A247 /* lofi_10min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lofi_10min.mp3; sourceTree = "<group>"; };
@@ -369,10 +405,36 @@
 			path = background;
 			sourceTree = "<group>";
 		};
+		BM85C0000000000000000001 /* Cyndy */ = {
+			isa = PBXGroup;
+			children = (
+				BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */,
+				BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */,
+				BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */,
+				BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */,
+				BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */,
+				BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */,
+				BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */,
+				BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */,
+				BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */,
+				BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */,
+				BM85F0000000000000000010 /* brainmassage_bright.mp3 */,
+				BM85F0000000000000000011 /* brainmassage_celeste.mp3 */,
+				BM85F0000000000000000012 /* brainmassage_deep.mp3 */,
+				BM85F0000000000000000013 /* brainmassage_drone.mp3 */,
+				BM85F0000000000000000014 /* brainmassage_full.mp3 */,
+				BM85F0000000000000000015 /* brainmassage_glow.mp3 */,
+				BM85F0000000000000000016 /* brainmassage_midnight.mp3 */,
+				BM85F0000000000000000017 /* brainmassage_warm.mp3 */,
+			);
+			path = Cyndy;
+			sourceTree = "<group>";
+		};
 		594012552A17DAFE00221DE7 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
 				58F3CDF32EF195B50059A247 /* music */,
+				BM85C0000000000000000001 /* Cyndy */,
 				58FBB9032ED8870C004231BE /* background */,
 				5940126E2A17DD6B00221DE7 /* Bird */,
 				594012632A17DD1400221DE7 /* SingingBowl */,
@@ -780,6 +842,24 @@
 				BD5DD63A6A387694BDBA80EC /* ForestBird.mp3 in Resources */,
 				B2574EF779062CB43FCF1653 /* SpringForest.mp3 in Resources */,
 				58EB682F2FE81574006D84DF /* space_1min.mp3 in Resources */,
+				BM85B0000000000000000000 /* brain_massage_01_sub_drone.mp3 in Resources */,
+				BM85B0000000000000000001 /* brain_massage_02_bass_root.mp3 in Resources */,
+				BM85B0000000000000000002 /* brain_massage_03_low_fifth.mp3 in Resources */,
+				BM85B0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 in Resources */,
+				BM85B0000000000000000004 /* brain_massage_05_color_tone.mp3 in Resources */,
+				BM85B0000000000000000005 /* brain_massage_06_ninth_layer.mp3 in Resources */,
+				BM85B0000000000000000006 /* brain_massage_07_mid_harmony.mp3 in Resources */,
+				BM85B0000000000000000007 /* brain_massage_08_high_extension.mp3 in Resources */,
+				BM85B0000000000000000008 /* brain_massage_09_air_shimmer.mp3 in Resources */,
+				BM85B0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 in Resources */,
+				BM85B0000000000000000010 /* brainmassage_bright.mp3 in Resources */,
+				BM85B0000000000000000011 /* brainmassage_celeste.mp3 in Resources */,
+				BM85B0000000000000000012 /* brainmassage_deep.mp3 in Resources */,
+				BM85B0000000000000000013 /* brainmassage_drone.mp3 in Resources */,
+				BM85B0000000000000000014 /* brainmassage_full.mp3 in Resources */,
+				BM85B0000000000000000015 /* brainmassage_glow.mp3 in Resources */,
+				BM85B0000000000000000016 /* brainmassage_midnight.mp3 in Resources */,
+				BM85B0000000000000000017 /* brainmassage_warm.mp3 in Resources */,
 				68D504FD5581CF0ED5A04FC3 /* TibetanBowl.mp3 in Resources */,
 				AF157A5052C0E1B7696712E2 /* Bell.mp3 in Resources */,
 				438AE9E9D7E551CAF938FAD1 /* BowlLoud.mp3 in Resources */,

@@ -15,5 +15,6 @@ extension UserDefaults {
         static let customSound = "CUSTOM_SOUND_KEY"
         static let isFirstVisit = "IS_FIRST"
         static let lastPlayedSoundKey = "LAST_SOUND_KEY"
+        static let presetSeedVersion = "PRESET_SEED_VERSION"
     }
 }

@@ -236,14 +236,16 @@ struct ListenListView: View {
             }
 
             // 앱 시작 시 1회: 우주 앰비언트(space_1min) 자동 재생 (무한 루프)
+            // Space는 좌우 굴리기 리스트의 첫 프리셋이기도 하므로 그 항목을 그대로 재생해 리스트와 정합시킨다.
             if !didAutoPlay {
                 didAutoPlay = true
-                let space = CustomSound(title: "Space",
-                                        backgroundSound: BackgroundSound.space.rawValue,
-                                        backgroundVolume: 0.5)
-                viewModel.selectedSound = space
-                viewModel.lastSound = space
-                viewModel.play(with: space)
+                let startup = viewModel.presetSounds.first
+                    ?? CustomSound(title: "우주",
+                                   backgroundSound: BackgroundSound.space.rawValue,
+                                   backgroundVolume: 0.5)
+                viewModel.selectedSound = startup
+                viewModel.lastSound = startup
+                viewModel.play(with: startup)
             }
 
             // 처음 한 번: 옆으로 넘기면 소리가 바뀐다는 힌트

@@ -1065,6 +1065,16 @@ enum BackgroundSound: String, CaseIterable {
     case meditation = "meditation"
     case space = "space"   // 우주 앰비언트 (앱 시작 시 자동 재생)
 
+    // 브레인 마사지 (미디 조합 배경음악 · 좌우 굴리기 리스트) — 베이스 트랙 믹스
+    case brainmassageFull = "brainmassageFull"
+    case brainmassageDeep = "brainmassageDeep"
+    case brainmassageWarm = "brainmassageWarm"
+    case brainmassageBright = "brainmassageBright"
+    case brainmassageDrone = "brainmassageDrone"
+    case brainmassageGlow = "brainmassageGlow"
+    case brainmassageMidnight = "brainmassageMidnight"
+    case brainmassageCeleste = "brainmassageCeleste"
+
     /// 기존 한국어 rawValue로 저장된 데이터 호환을 위한 매핑
     private static let legacyMapping: [String: BackgroundSound] = [
         "파도": .wave,
@@ -1093,6 +1103,14 @@ enum BackgroundSound: String, CaseIterable {
         case .lofi: return L.Background.lofi.localized
         case .meditation: return L.Background.meditation.localized
         case .space: return "우주"
+        case .brainmassageFull: return "브레인 마사지"
+        case .brainmassageDeep: return "딥 슬립"
+        case .brainmassageWarm: return "웜 하모니"
+        case .brainmassageBright: return "브라이트"
+        case .brainmassageDrone: return "미니멀 드론"
+        case .brainmassageGlow: return "글로우"
+        case .brainmassageMidnight: return "미드나잇"
+        case .brainmassageCeleste: return "셀레스트"
         }
     }
 
@@ -1107,6 +1125,14 @@ enum BackgroundSound: String, CaseIterable {
         case .lofi: return "lofi_10min"
         case .meditation: return "meditation_10min"
         case .space: return "space_1min"
+        case .brainmassageFull: return "brainmassage_full"
+        case .brainmassageDeep: return "brainmassage_deep"
+        case .brainmassageWarm: return "brainmassage_warm"
+        case .brainmassageBright: return "brainmassage_bright"
+        case .brainmassageDrone: return "brainmassage_drone"
+        case .brainmassageGlow: return "brainmassage_glow"
+        case .brainmassageMidnight: return "brainmassage_midnight"
+        case .brainmassageCeleste: return "brainmassage_celeste"
         }
     }
 
@@ -1121,6 +1147,14 @@ enum BackgroundSound: String, CaseIterable {
         case .lofi: return "music.note.list"
         case .meditation: return "sparkles"
         case .space: return "moon.stars.fill"
+        case .brainmassageFull: return "brain.head.profile"
+        case .brainmassageDeep: return "moon.zzz.fill"
+        case .brainmassageWarm: return "flame.fill"
+        case .brainmassageBright: return "sun.max.fill"
+        case .brainmassageDrone: return "waveform.path"
+        case .brainmassageGlow: return "sparkle"
+        case .brainmassageMidnight: return "moon.stars.fill"
+        case .brainmassageCeleste: return "star.fill"
         }
     }
 
@@ -1171,6 +1205,12 @@ enum BackgroundSound: String, CaseIterable {
                 Color(red: 0.45, green: 0.45, blue: 0.85).opacity(0.15),
                 Color(red: 0.30, green: 0.30, blue: 0.60).opacity(0.1)
             ]
+        case .brainmassageFull, .brainmassageDeep, .brainmassageWarm, .brainmassageBright,
+             .brainmassageDrone, .brainmassageGlow, .brainmassageMidnight, .brainmassageCeleste:
+            return [
+                Color(red: 0.50, green: 0.42, blue: 0.80).opacity(0.15),
+                Color(red: 0.32, green: 0.28, blue: 0.58).opacity(0.10)
+            ]
         }
     }
 
@@ -1178,7 +1218,9 @@ enum BackgroundSound: String, CaseIterable {
         switch self {
         case .wave, .rain, .tv:
             return false
-        case .piano, .guitar, .ambient, .lofi, .meditation, .space:
+        case .piano, .guitar, .ambient, .lofi, .meditation, .space,
+             .brainmassageFull, .brainmassageDeep, .brainmassageWarm, .brainmassageBright,
+             .brainmassageDrone, .brainmassageGlow, .brainmassageMidnight, .brainmassageCeleste:
             return true
         }
     }

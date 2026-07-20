@@ -374,23 +374,29 @@ extension CustomSoundViewModel {
 
     /// 프리셋 사운드 로드 (앱 최초 실행 시)
     func loadPresetSounds() {
+        // 프리셋 세트를 바꿀 때마다 올린다. 이 값이 저장된 값보다 크면 기존 설치에서도 프리셋을 다시 시드한다.
+        // v2: 프리셋 목록을 brain_massage 미디 조합(+Space)으로 교체
+        let currentPresetVersion = 2
         var customSounds = userDefaults.customSounds
 
-        // 이미 프리셋이 로드되어 있는지 확인
-        if customSounds.contains(where: { $0.isPreset }) {
+        let hasPresets = customSounds.contains(where: { $0.isPreset })
+        // 최신 프리셋이 이미 시드되어 있으면 스킵
+        if hasPresets && userDefaults.presetSeedVersion >= currentPresetVersion {
             return
         }
 
-        // 프리셋 사운드를 CustomSound로 변환하여 추가
+        // 오래된 프리셋 제거 (사용자가 직접 만든 사운드는 보존)
+        customSounds.removeAll { $0.isPreset }
+
+        // 최신 프리셋 시드 (파일 저장은 하지 않음 · 메모리에만 존재)
         for preset in PresetSound.allPresets {
             var customSound = preset.toCustomSound()
             customSound.isPreset = true
-
-            // 파일 저장은 하지 않음 (프리셋은 메모리에만 존재)
             customSounds.append(customSound)
         }
 
         userDefaults.customSounds = customSounds
+        userDefaults.presetSeedVersion = currentPresetVersion
         loadSound()
     }
 

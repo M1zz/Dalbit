@@ -50,6 +50,12 @@ extension UserDefaultsManager {
         }
     }
     
+    /// 번들에 내장된 프리셋 세트의 버전. 이 값이 올라가면 기존 설치에서도 프리셋을 다시 시드한다.
+    var presetSeedVersion: Int {
+        get { standard.integer(forKey: UserDefaults.Keys.presetSeedVersion) }
+        set { standard.set(newValue, forKey: UserDefaults.Keys.presetSeedVersion) }
+    }
+
     var isFirstVisit: Bool {
         get {
             if standard.object(forKey: IS_FIRST_VISIT) == nil {

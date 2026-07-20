@@ -145,698 +145,133 @@ enum PresetCategory: String, CaseIterable, Codable {
 
 extension PresetSound {
     static let allPresets: [PresetSound] = [
-        // MARK: - 순수 미디 음원 (첫 실행 시 무료 제공 · 효과음 없는 배경음악)
-
+        // MARK: - Space(첫 실행 자동재생·유지) + 브레인 마사지 미디 조합 (좌우 굴리기 리스트)
         PresetSound(
-            id: "midi-piano",
-            name: "달빛 피아노",
-            category: .sleep,
-            description: "잔잔한 피아노 선율로 마음을 편안하게",
-            icon: "pianokeys",
-            color: "#B39DDB",
-            layers: [],
-            backgroundSound: BackgroundSound.piano.rawValue,
-            backgroundVolume: 0.6
-        ),
-
-        PresetSound(
-            id: "midi-lofi",
-            name: "포근한 로파이",
-            category: .focus,
-            description: "따뜻한 로파이 비트로 집중과 휴식을",
-            icon: "music.note",
-            color: "#F48FB1",
-            layers: [],
-            backgroundSound: BackgroundSound.lofi.rawValue,
-            backgroundVolume: 0.6
-        ),
-
-        PresetSound(
-            id: "midi-meditation",
-            name: "고요한 명상",
+            id: "space",
+            name: "우주",
             category: .meditation,
-            description: "부드러운 명상 음악으로 깊은 이완을",
-            icon: "sparkles",
-            color: "#80CBC4",
+            description: "앱을 열면 흐르는 잔잔한 우주 앰비언트",
+            icon: "moon.stars.fill",
+            color: "#7C7CD8",
             layers: [],
-            backgroundSound: BackgroundSound.meditation.rawValue,
-            backgroundVolume: 0.6
-        ),
-
-        // MARK: - 수면 카테고리
-
-        PresetSound(
-            id: "deep-sleep",
-            name: "깊은 숙면",
-            category: .sleep,
-            description: "동굴의 잔잔한 울림과 물방울 소리로 깊은 수면을 유도합니다",
-            icon: "moon.zzz.fill",
-            color: "#8B7DC8",
-            layers: [
-                PresetLayer(
-                    filter: .Cave,
-                    category: .WaterDrop,
-                    volume: 0.8,
-                    pitch: -200,
-                    interval: 1.5,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .WaterDrop,
-                    category: .WaterDrop,
-                    volume: 0.6,
-                    pitch: 0,
-                    interval: 2.0,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.piano.rawValue,
-            backgroundVolume: 0.3
-        ),
-
-        PresetSound(
-            id: "rain-sleep",
-            name: "빗소리 수면",
-            category: .sleep,
-            description: "빗소리처럼 들리는 싱크대 소리와 반향음으로 편안한 휴식",
-            icon: "cloud.drizzle.fill",
-            color: "#5B9BD5",
-            layers: [
-                PresetLayer(
-                    filter: .Sink,
-                    category: .WaterDrop,
-                    volume: 1.0,
-                    pitch: 0,
-                    interval: 0.5,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.2,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .Basement,
-                    category: .WaterDrop,
-                    volume: 0.7,
-                    pitch: -100,
-                    interval: 1.5,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.piano.rawValue,
-            backgroundVolume: 0.25
-        ),
-
-        PresetSound(
-            id: "white-noise-sleep",
-            name: "화이트노이즈 수면",
-            category: .sleep,
-            description: "깊고 균일한 백색소음으로 방해받지 않는 수면",
-            icon: "waveform",
-            color: "#A9A9A9",
-            layers: [
-                PresetLayer(
-                    filter: .Pipe,
-                    category: .WaterDrop,
-                    volume: 1.0,
-                    pitch: 0,
-                    interval: 1.5,
-                    intervalVariation: 0.1,
-                    volumeVariation: 0.05,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .Cave,
-                    category: .WaterDrop,
-                    volume: 0.6,
-                    pitch: -300,
-                    interval: 1.5,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
-        ),
-
-        // MARK: - 집중 카테고리
-
-        PresetSound(
-            id: "cafe-focus",
-            name: "카페 집중",
-            category: .focus,
-            description: "카페 분위기 속에서 편안하게 집중하세요",
-            icon: "cup.and.saucer.fill",
-            color: "#D4A574",
-            layers: [
-                PresetLayer(
-                    filter: .Bird,
-                    category: .Bird,
-                    volume: 0.4,
-                    pitch: -500,
-                    interval: 3.0,
-                    intervalVariation: 1.0,
-                    volumeVariation: 0.2,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.lofi.rawValue,
+            backgroundSound: BackgroundSound.space.rawValue,
             backgroundVolume: 0.5
         ),
 
         PresetSound(
-            id: "deep-focus",
-            name: "깊은 집중",
-            category: .focus,
-            description: "부드러운 백색소음과 앰비언트로 몰입도를 높입니다",
+            id: "bm-full",
+            name: "브레인 마사지",
+            category: .meditation,
+            description: "여덟 겹의 미디 패드가 겹친 가장 풍성한 기본 조합",
             icon: "brain.head.profile",
-            color: "#FF8C42",
+            color: "#8B7DC8",
             layers: [
-                PresetLayer(
-                    filter: .Pipe,
-                    category: .WaterDrop,
-                    volume: 0.7,
-                    pitch: 0,
-                    interval: 1.5,
-                    intervalVariation: 0.1,
-                    volumeVariation: 0.05,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.ambient.rawValue,
-            backgroundVolume: 0.4
-        ),
-
-        PresetSound(
-            id: "study-time",
-            name: "공부 타임",
-            category: .focus,
-            description: "로파이 음악과 함께 공부하기 좋은 환경",
-            icon: "book.fill",
-            color: "#FFA07A",
-            layers: [
-                PresetLayer(
-                    filter: .Cave,
-                    category: .WaterDrop,
-                    volume: 0.6,
-                    pitch: -200,
-                    interval: 1.5,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.lofi.rawValue,
+            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
+            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageFull.rawValue,
             backgroundVolume: 0.6
         ),
 
-        // MARK: - 명상 카테고리
-
         PresetSound(
-            id: "meditation",
-            name: "명상 시간",
-            category: .meditation,
-            description: "싱잉볼의 맑은 소리로 마음을 정화합니다",
-            icon: "leaf.fill",
-            color: "#90C695",
-            layers: [
-                PresetLayer(
-                    filter: .SingingBowl,
-                    category: .SingingBowl,
-                    volume: 0.8,
-                    pitch: 0,
-                    interval: 4.0,
-                    intervalVariation: 0.5,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.meditation.rawValue,
-            backgroundVolume: 0.4
-        ),
-
-        PresetSound(
-            id: "yoga-stretch",
-            name: "요가 & 스트레칭",
-            category: .meditation,
-            description: "물방울과 싱잉볼의 조화로 몸과 마음을 이완합니다",
-            icon: "figure.yoga",
-            color: "#7FBC8C",
-            layers: [
-                PresetLayer(
-                    filter: .WaterDrop,
-                    category: .WaterDrop,
-                    volume: 0.5,
-                    pitch: 0,
-                    interval: 2.5,
-                    intervalVariation: 0.5,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .SingingBowl,
-                    category: .SingingBowl,
-                    volume: 0.6,
-                    pitch: 0,
-                    interval: 5.0,
-                    intervalVariation: 1.0,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.ambient.rawValue,
-            backgroundVolume: 0.35
-        ),
-
-        // MARK: - 자연 카테고리
-
-        PresetSound(
-            id: "forest-walk",
-            name: "숲속 산책",
-            category: .nature,
-            description: "새소리와 딱따구리 소리가 어우러진 자연의 소리",
-            icon: "tree.fill",
-            color: "#5D8A66",
-            layers: [
-                PresetLayer(
-                    filter: .Bird,
-                    category: .Bird,
-                    volume: 0.7,
-                    pitch: 0,
-                    interval: 2.0,
-                    intervalVariation: 1.0,
-                    volumeVariation: 0.2,
-                    pitchVariation: 100
-                ),
-                PresetLayer(
-                    filter: .Owl,
-                    category: .Bird,
-                    volume: 0.3,
-                    pitch: 0,
-                    interval: 8.0,
-                    intervalVariation: 2.0,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .Woodpecker,
-                    category: .Bird,
-                    volume: 0.4,
-                    pitch: 0,
-                    interval: 4.0,
-                    intervalVariation: 1.5,
-                    volumeVariation: 0.2,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
-        ),
-
-        PresetSound(
-            id: "cave-exploration",
-            name: "동굴 탐험",
-            category: .nature,
-            description: "신비로운 동굴 속 물방울 소리",
-            icon: "mountain.2.fill",
+            id: "bm-deep",
+            name: "딥 슬립",
+            category: .sleep,
+            description: "저음 드론과 베이스로 깊은 수면을 유도",
+            icon: "moon.zzz.fill",
             color: "#6B5B95",
             layers: [
-                PresetLayer(
-                    filter: .Cave,
-                    category: .WaterDrop,
-                    volume: 0.9,
-                    pitch: 0,
-                    interval: 1.5,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .WaterDrop,
-                    category: .WaterDrop,
-                    volume: 0.7,
-                    pitch: 200,
-                    interval: 3.0,
-                    intervalVariation: 0.8,
-                    volumeVariation: 0.15,
-                    pitchVariation: 100
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
+            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.45, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageDeep.rawValue,
+            backgroundVolume: 0.6
         ),
 
         PresetSound(
-            id: "campfire",
-            name: "캠프파이어",
-            category: .nature,
-            description: "모닥불과 부엉이 소리가 있는 야영의 밤",
+            id: "bm-warm",
+            name: "웜 하모니",
+            category: .meditation,
+            description: "따뜻한 중음 하모니의 포근한 울림",
             icon: "flame.fill",
-            color: "#FF6F3C",
+            color: "#C99DA3",
             layers: [
-                PresetLayer(
-                    filter: .Basement,
-                    category: .WaterDrop,
-                    volume: 0.6,
-                    pitch: -400,
-                    interval: 0.8,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.2,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .Owl,
-                    category: .Bird,
-                    volume: 0.4,
-                    pitch: 0,
-                    interval: 10.0,
-                    intervalVariation: 3.0,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.guitar.rawValue,
-            backgroundVolume: 0.35
-        ),
-
-        // MARK: - 비/물 카테고리
-
-        PresetSound(
-            id: "rain",
-            name: "빗소리",
-            category: .rain,
-            description: "편안한 빗소리로 마음을 진정시킵니다",
-            icon: "cloud.rain.fill",
-            color: "#4A90E2",
-            layers: [
-                PresetLayer(
-                    filter: .Sink,
-                    category: .WaterDrop,
-                    volume: 1.0,
-                    pitch: 0,
-                    interval: 0.3,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.25,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .Basement,
-                    category: .WaterDrop,
-                    volume: 0.5,
-                    pitch: -200,
-                    interval: 1.5,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
+            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
+            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.45, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageWarm.rawValue,
+            backgroundVolume: 0.6
         ),
 
         PresetSound(
-            id: "heavy-rain",
-            name: "폭우 & 천둥",
-            category: .rain,
-            description: "강한 빗소리와 천둥소리로 몰입감 있는 경험",
-            icon: "cloud.bolt.rain.fill",
-            color: "#2E5A88",
-            layers: [
-                PresetLayer(
-                    filter: .Sink,
-                    category: .WaterDrop,
-                    volume: 1.0,
-                    pitch: 0,
-                    interval: 0.2,
-                    intervalVariation: 0.15,
-                    volumeVariation: 0.3,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .Pipe,
-                    category: .WaterDrop,
-                    volume: 0.8,
-                    pitch: -600,
-                    interval: 1.5,
-                    intervalVariation: 0.5,
-                    volumeVariation: 0.2,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
-        ),
-
-        // MARK: - 새 Rain 카테고리 (실제 빗소리)
-
-        PresetSound(
-            id: "soft-rain",
-            name: "부드러운 빗소리",
-            category: .rain,
-            description: "창밖에 내리는 잔잔한 빗소리로 마음을 편안하게",
-            icon: "cloud.drizzle.fill",
-            color: "#A8D4E6",
-            layers: [
-                PresetLayer(
-                    filter: .SoftRain,
-                    category: .Rain,
-                    volume: 0.7,
-                    pitch: 0,
-                    interval: 1.0,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.piano.rawValue,
-            backgroundVolume: 0.25
-        ),
-
-        PresetSound(
-            id: "city-rain",
-            name: "도시의 비",
-            category: .rain,
-            description: "도심 속 빗소리와 새소리가 어우러진 분위기",
-            icon: "building.2.fill",
-            color: "#8BC4D8",
-            layers: [
-                PresetLayer(
-                    filter: .CityRain,
-                    category: .Rain,
-                    volume: 0.6,
-                    pitch: -50,
-                    interval: 1.2,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
-        ),
-
-        // MARK: - 새 Ambient 카테고리
-
-        PresetSound(
-            id: "underwater-meditation",
-            name: "수중 명상",
-            category: .meditation,
-            description: "물속에서 느끼는 고요한 화이트노이즈",
-            icon: "drop.fill",
-            color: "#B8D8E8",
-            layers: [
-                PresetLayer(
-                    filter: .Underwater,
-                    category: .Ambient,
-                    volume: 0.5,
-                    pitch: -100,
-                    interval: 1.5,
-                    intervalVariation: 0.2,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.meditation.rawValue,
-            backgroundVolume: 0.3
-        ),
-
-        PresetSound(
-            id: "cosmic-atmosphere",
-            name: "우주적 분위기",
-            category: .meditation,
-            description: "광활한 우주를 연상시키는 앰비언트 사운드",
-            icon: "sparkles",
-            color: "#C5B8E8",
-            layers: [
-                PresetLayer(
-                    filter: .Atmosphere,
-                    category: .Ambient,
-                    volume: 0.5,
-                    pitch: -50,
-                    interval: 1.8,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .MeditationPad,
-                    category: .Ambient,
-                    volume: 0.4,
-                    pitch: 0,
-                    interval: 2.5,
-                    intervalVariation: 0.5,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
-        ),
-
-        // MARK: - 새 ASMR 카테고리
-
-        PresetSound(
-            id: "typing-focus",
-            name: "타이핑 집중",
+            id: "bm-bright",
+            name: "브라이트",
             category: .focus,
-            description: "키보드 타이핑 소리로 집중력 향상",
-            icon: "keyboard.fill",
-            color: "#F5D0E0",
+            description: "맑은 중고음과 반짝임으로 산뜻하게",
+            icon: "sun.max.fill",
+            color: "#7FB2D6",
             layers: [
-                PresetLayer(
-                    filter: .Keyboard,
-                    category: .ASMR,
-                    volume: 0.6,
-                    pitch: 0,
-                    interval: 0.8,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.2,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.lofi.rawValue,
-            backgroundVolume: 0.4
+            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.55, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
+            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageBright.rawValue,
+            backgroundVolume: 0.6
         ),
 
         PresetSound(
-            id: "camera-asmr",
-            name: "카메라 ASMR",
-            category: .focus,
-            description: "DSLR 셔터 소리의 리듬감 있는 ASMR",
-            icon: "camera.fill",
-            color: "#E8C8D8",
+            id: "bm-drone",
+            name: "미니멀 드론",
+            category: .sleep,
+            description: "드론과 베이스만 남긴 가장 미니멀한 배경",
+            icon: "waveform.path",
+            color: "#4E5A7A",
             layers: [
-                PresetLayer(
-                    filter: .Camera,
-                    category: .ASMR,
-                    volume: 0.5,
-                    pitch: 50,
-                    interval: 1.0,
-                    intervalVariation: 0.4,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
+            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.4, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageDrone.rawValue,
+            backgroundVolume: 0.6
         ),
 
-        // MARK: - 확장된 SingingBowl
-
         PresetSound(
-            id: "tibetan-meditation",
-            name: "티벳 명상",
+            id: "bm-glow",
+            name: "글로우",
             category: .meditation,
-            description: "티벳 싱잉볼의 깊고 울림있는 소리",
-            icon: "circle.hexagongrid.fill",
-            color: "#FDD0A8",
+            description: "은은한 패드 위로 반짝이는 벨",
+            icon: "sparkle",
+            color: "#D6B87F",
             layers: [
-                PresetLayer(
-                    filter: .TibetanBowl,
-                    category: .SingingBowl,
-                    volume: 0.5,
-                    pitch: 0,
-                    interval: 1.5,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.1,
-                    pitchVariation: 0
-                ),
-                PresetLayer(
-                    filter: .Bell,
-                    category: .SingingBowl,
-                    volume: 0.4,
-                    pitch: 100,
-                    interval: 3.0,
-                    intervalVariation: 0.5,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: BackgroundSound.meditation.rawValue,
-            backgroundVolume: 0.25
-        ),
-
-        // MARK: - 확장된 Bird
-
-        PresetSound(
-            id: "jungle-morning",
-            name: "정글의 아침",
-            category: .nature,
-            description: "열대 정글에서 들려오는 자연의 소리",
-            icon: "leaf.fill",
-            color: "#98D4A0",
-            layers: [
-                PresetLayer(
-                    filter: .Jungle,
-                    category: .Bird,
-                    volume: 0.6,
-                    pitch: 0,
-                    interval: 1.2,
-                    intervalVariation: 0.4,
-                    volumeVariation: 0.2,
-                    pitchVariation: 50
-                ),
-                PresetLayer(
-                    filter: .ForestBird,
-                    category: .Bird,
-                    volume: 0.5,
-                    pitch: 0,
-                    interval: 2.0,
-                    intervalVariation: 0.5,
-                    volumeVariation: 0.15,
-                    pitchVariation: 0
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
+            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageGlow.rawValue,
+            backgroundVolume: 0.6
         ),
 
         PresetSound(
-            id: "spring-forest",
-            name: "봄 숲의 새소리",
-            category: .nature,
-            description: "따뜻한 봄날 숲속의 새들이 지저귀는 소리",
-            icon: "bird.fill",
-            color: "#B5D8A7",
+            id: "bm-midnight",
+            name: "미드나잇",
+            category: .sleep,
+            description: "벨 없이 어둡고 잔잔한 한밤의 결",
+            icon: "moon.stars.fill",
+            color: "#3F4A6B",
             layers: [
-                PresetLayer(
-                    filter: .SpringForest,
-                    category: .Bird,
-                    volume: 0.7,
-                    pitch: 0,
-                    interval: 1.0,
-                    intervalVariation: 0.3,
-                    volumeVariation: 0.2,
-                    pitchVariation: 100
-                )
-            ],
-            backgroundSound: nil,
-            backgroundVolume: nil
+            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.45, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageMidnight.rawValue,
+            backgroundVolume: 0.6
+        ),
+
+        PresetSound(
+            id: "bm-celeste",
+            name: "셀레스트",
+            category: .meditation,
+            description: "고음 하모니와 반짝임의 천상의 조합",
+            icon: "star.fill",
+            color: "#A79BCB",
+            layers: [
+            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
+            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
+        ],
+            backgroundSound: BackgroundSound.brainmassageCeleste.rawValue,
+            backgroundVolume: 0.6
         )
     ]
 

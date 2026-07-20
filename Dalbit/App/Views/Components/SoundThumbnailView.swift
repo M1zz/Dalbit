@@ -190,6 +190,8 @@ struct SoundThumbnailView: View {
         case .IndigoMusic: return "music.note"
         case .Keyboard: return "keyboard.fill"
         case .Camera: return "camera.fill"
+        case .AirShimmer: return "sparkles"
+        case .SparkleBells: return "sparkle"
         case .none: return "questionmark"
         }
     }

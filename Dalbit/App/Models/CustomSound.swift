@@ -98,6 +98,9 @@ enum AudioFilter: String, Codable {
     case AmbientKeys, Underwater, MeditationPad, Atmosphere, IndigoMusic
     // ASMR
     case Keyboard, Camera
+    // 브레인 마사지 효과음 (미디 조합의 장식 레이어 · 효과음 끄기로 제거됨)
+    case AirShimmer = "brain_massage_09_air_shimmer"
+    case SparkleBells = "brain_massage_10_sparkle_bells"
 
     var displayName: String {
         switch self {
@@ -173,6 +176,10 @@ enum AudioFilter: String, Codable {
             return L.Filter.keyboard.localized
         case .Camera:
             return L.Filter.camera.localized
+        case .AirShimmer:
+            return "에어 시머"
+        case .SparkleBells:
+            return "스파클 벨"
         }
     }
 
@@ -256,6 +263,12 @@ enum AudioFilter: String, Codable {
             return 8.0
         case .Camera:
             return 3.0
+
+        // 브레인 마사지 효과음 (미디 루프 길이 ≈ 71초)
+        case .AirShimmer:
+            return 71.0
+        case .SparkleBells:
+            return 71.0
         }
     }
 }

@@ -163,58 +163,6 @@ struct SectionHeader: View {
     }
 }
 
-// MARK: - Chip / Pill
-
-/// 선택 가능한 칩 (필터, 카테고리 등)
-struct DSChip: View {
-    let title: String
-    var isSelected: Bool = false
-
-    var body: some View {
-        Text(title)
-            .font(DS.Font.subhead().weight(.medium))
-            .foregroundColor(isSelected ? DS.Colors.onAccent : DS.Colors.textSecondary)
-            .padding(.horizontal, DS.Spacing.md)
-            .padding(.vertical, DS.Spacing.xs + 2)
-            .background(
-                Capsule().fill(isSelected ? DS.Colors.accent : DS.Colors.surfaceSunken)
-            )
-    }
-}
-
-// MARK: - Glass Icon Button (Liquid Glass)
-
-/// 리퀴드 글래스 원형 아이콘 버튼 (iOS 26+), 이하 버전은 반투명 머티리얼로 폴백.
-struct GlassIconButton: View {
-    let systemName: String
-    var active: Bool = false
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: 22, weight: .semibold))
-                .foregroundColor(active ? DS.Colors.accent : DS.Colors.textPrimary)
-                .frame(width: 60, height: 60)
-                .glassCircle()
-        }
-        .buttonStyle(.plain)
-    }
-}
-
-private extension View {
-    @ViewBuilder
-    func glassCircle() -> some View {
-        if #available(iOS 26.0, *) {
-            self.glassEffect(.regular.interactive(), in: Circle())
-        } else {
-            self
-                .background(.ultraThinMaterial, in: Circle())
-                .overlay(Circle().stroke(Color.white.opacity(0.18), lineWidth: 0.5))
-        }
-    }
-}
-
 // MARK: - Circular Icon Button
 
 /// 헤더 등에 쓰는 원형 아이콘 버튼 (터치 영역 44pt 보장)

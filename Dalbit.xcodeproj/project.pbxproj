@@ -98,7 +98,6 @@
 		8FCB23F42A15F85200188024 /* SoundPlayerBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCB23F32A15F85200188024 /* SoundPlayerBottomView.swift */; };
 		8FFCCCDD29EE45B400079DCC /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFCCCDC29EE45B400079DCC /* UserDefaults+Extension.swift */; };
 		8FFCCCDF29EE55DD00079DCC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFCCCDE29EE55DD00079DCC /* AppState.swift */; };
-		8FFCCCE429EE686B00079DCC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFCCCE329EE686B00079DCC /* Errors.swift */; };
 		8FFF99E52A1F4E0600E2474C /* SingingBowl.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FFF99E42A1F4E0600E2474C /* SingingBowl.mp3 */; };
 		8FFF99E72A1F4E0F00E2474C /* Bird.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FFF99E62A1F4E0F00E2474C /* Bird.mp3 */; };
 		8FFF99E92A1F4E1600E2474C /* WaterDrop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FFF99E82A1F4E1600E2474C /* WaterDrop.mp3 */; };
@@ -269,7 +268,6 @@
 		8FCB23F32A15F85200188024 /* SoundPlayerBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayerBottomView.swift; sourceTree = "<group>"; };
 		8FFCCCDC29EE45B400079DCC /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		8FFCCCDE29EE55DD00079DCC /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		8FFCCCE329EE686B00079DCC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8FFF99E42A1F4E0600E2474C /* SingingBowl.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SingingBowl.mp3; sourceTree = "<group>"; };
 		8FFF99E62A1F4E0F00E2474C /* Bird.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bird.mp3; sourceTree = "<group>"; };
 		8FFF99E82A1F4E1600E2474C /* WaterDrop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WaterDrop.mp3; sourceTree = "<group>"; };
@@ -637,7 +635,6 @@
 		8FFCCCE229EE685D00079DCC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				8FFCCCE329EE686B00079DCC /* Errors.swift */,
 				8F36BFD12A151E4A00514BBE /* Enums.swift */,
 				8F36BFD32A151E6D00514BBE /* Common.swift */,
 			);
@@ -912,7 +909,6 @@
 				8F36BFD22A151E4A00514BBE /* Enums.swift in Sources */,
 				8F5A0EC32A15FD750061F42C /* CircleProgressView.swift in Sources */,
 				99AA00022EF1960000000002 /* SoundThumbnailView.swift in Sources */,
-				8FFCCCE429EE686B00079DCC /* Errors.swift in Sources */,
 				8FCB23EB2A15F71500188024 /* Color+Extension.swift in Sources */,
 				STDO00022F28000000000022 /* SoundStudioView.swift in Sources */,
 				DSTH00022F28000000000012 /* Theme.swift in Sources */,

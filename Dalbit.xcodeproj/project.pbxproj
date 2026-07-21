@@ -20,36 +20,6 @@
 		58DE618A2839C13A00F25769 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DE61892839C13A00F25769 /* Preview Assets.xcassets */; };
 		58DE61C22841C20A00F25769 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58DE61C12841C20A00F25769 /* Launch Screen.storyboard */; };
 		58EB682F2FE81574006D84DF /* space_1min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58EB682E2FE81574006D84DF /* space_1min.mp3 */; };
-		SPCB00000000000000000001 /* space_cinematic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000001 /* space_cinematic.mp3 */; };
-		SPCB00000000000000000002 /* space_ambient_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000002 /* space_ambient_1.mp3 */; };
-		SPCB00000000000000000003 /* space_deep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000003 /* space_deep.mp3 */; };
-		SPCB00000000000000000004 /* space_ambient_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000004 /* space_ambient_2.mp3 */; };
-		SPCB00000000000000000005 /* space_cinematic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000005 /* space_cinematic_2.mp3 */; };
-		SPCB00000000000000000006 /* space_shuttle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000006 /* space_shuttle.mp3 */; };
-		SPCB00000000000000000007 /* space_solar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000007 /* space_solar.mp3 */; };
-		SPCB00000000000000000008 /* space_drift.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000008 /* space_drift.mp3 */; };
-		SPCB00000000000000000009 /* space_cinematic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000009 /* space_cinematic_3.mp3 */; };
-		SPCB00000000000000000010 /* space_ambient_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000010 /* space_ambient_3.mp3 */; };
-		SPCB00000000000000000011 /* space_orbit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000011 /* space_orbit.mp3 */; };
-		SPCB00000000000000000012 /* space_void.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000012 /* space_void.mp3 */; };
-		BM85B0000000000000000000 /* brain_massage_01_sub_drone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */; };
-		BM85B0000000000000000001 /* brain_massage_02_bass_root.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */; };
-		BM85B0000000000000000002 /* brain_massage_03_low_fifth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */; };
-		BM85B0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */; };
-		BM85B0000000000000000004 /* brain_massage_05_color_tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */; };
-		BM85B0000000000000000005 /* brain_massage_06_ninth_layer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */; };
-		BM85B0000000000000000006 /* brain_massage_07_mid_harmony.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */; };
-		BM85B0000000000000000007 /* brain_massage_08_high_extension.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */; };
-		BM85B0000000000000000008 /* brain_massage_09_air_shimmer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */; };
-		BM85B0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */; };
-		BM85B0000000000000000010 /* brainmassage_bright.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000010 /* brainmassage_bright.mp3 */; };
-		BM85B0000000000000000011 /* brainmassage_celeste.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000011 /* brainmassage_celeste.mp3 */; };
-		BM85B0000000000000000012 /* brainmassage_deep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000012 /* brainmassage_deep.mp3 */; };
-		BM85B0000000000000000013 /* brainmassage_drone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000013 /* brainmassage_drone.mp3 */; };
-		BM85B0000000000000000014 /* brainmassage_full.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000014 /* brainmassage_full.mp3 */; };
-		BM85B0000000000000000015 /* brainmassage_glow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000015 /* brainmassage_glow.mp3 */; };
-		BM85B0000000000000000016 /* brainmassage_midnight.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000016 /* brainmassage_midnight.mp3 */; };
-		BM85B0000000000000000017 /* brainmassage_warm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000017 /* brainmassage_warm.mp3 */; };
 		58F3CDF92EF195C30059A247 /* meditation_10min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58F3CDF72EF195C30059A247 /* meditation_10min.mp3 */; };
 		58F3CDFA2EF195C30059A247 /* guitar_10min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58F3CDF52EF195C30059A247 /* guitar_10min.mp3 */; };
 		58F3CDFB2EF195C30059A247 /* lofi_10min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58F3CDF62EF195C30059A247 /* lofi_10min.mp3 */; };
@@ -116,31 +86,62 @@
 		8FFF99EB2A1F4FD700E2474C /* CustomSoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF99EA2A1F4FD700E2474C /* CustomSoundViewModel.swift */; };
 		8FFF99ED2A1F51F100E2474C /* AudioVariation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFF99EC2A1F51F100E2474C /* AudioVariation.swift */; };
 		917BADACE5F74E8766182402 /* Camera.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 890D79F8D71BA19717A96F8F /* Camera.mp3 */; };
+		976503E6FDB5C9B2BAEFEDDF /* DalbitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814ABC0F3CA3E1749821BAC5 /* DalbitSpec.swift */; };
 		99AA00022EF1960000000002 /* SoundThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA00012EF1960000000001 /* SoundThumbnailView.swift */; };
+		9C0AA65F66AC6A43499FEE5B /* LeeoKit in Frameworks */ = {isa = PBXBuildFile; productRef = FA1888EA590F8F2697E31ABC /* LeeoKit */; };
 		9C0D31362FE8E674003F2B57 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C0D31352FE8E674003F2B57 /* GoogleService-Info.plist */; };
 		A81D4B61DC9FC788038A49E4 /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9C11FBB3A19C84918309F6 /* LocalizationKeys.swift */; };
+		AEV000022F28000000000BA /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEV000012F28000000000B9 /* AlarmEditView.swift */; };
 		AF157A5052C0E1B7696712E2 /* Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8D694CBC9BA73FEEE972785 /* Bell.mp3 */; };
+		ALM000022F28000000000B4 /* AlarmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000012F28000000000B3 /* AlarmService.swift */; };
+		ALM000042F28000000000B6 /* AlarmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000032F28000000000B5 /* AlarmItem.swift */; };
+		ALV000022F28000000000B8 /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALV000012F28000000000B7 /* AlarmListView.swift */; };
 		AMS000022F28000000000008 /* AudioMixingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AMS000012F28000000000007 /* AudioMixingService.swift */; };
 		B2574EF779062CB43FCF1653 /* SpringForest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CDCA9FD95D97EBB427D679B1 /* SpringForest.mp3 */; };
 		BD5DD63A6A387694BDBA80EC /* ForestBird.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 63FEB2759AFCECB23E505073 /* ForestBird.mp3 */; };
+		BM85B0000000000000000000 /* brain_massage_01_sub_drone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */; };
+		BM85B0000000000000000001 /* brain_massage_02_bass_root.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */; };
+		BM85B0000000000000000002 /* brain_massage_03_low_fifth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */; };
+		BM85B0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */; };
+		BM85B0000000000000000004 /* brain_massage_05_color_tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */; };
+		BM85B0000000000000000005 /* brain_massage_06_ninth_layer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */; };
+		BM85B0000000000000000006 /* brain_massage_07_mid_harmony.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */; };
+		BM85B0000000000000000007 /* brain_massage_08_high_extension.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */; };
+		BM85B0000000000000000008 /* brain_massage_09_air_shimmer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */; };
+		BM85B0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */; };
+		BM85B0000000000000000010 /* brainmassage_bright.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000010 /* brainmassage_bright.mp3 */; };
+		BM85B0000000000000000011 /* brainmassage_celeste.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000011 /* brainmassage_celeste.mp3 */; };
+		BM85B0000000000000000012 /* brainmassage_deep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000012 /* brainmassage_deep.mp3 */; };
+		BM85B0000000000000000013 /* brainmassage_drone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000013 /* brainmassage_drone.mp3 */; };
+		BM85B0000000000000000014 /* brainmassage_full.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000014 /* brainmassage_full.mp3 */; };
+		BM85B0000000000000000015 /* brainmassage_glow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000015 /* brainmassage_glow.mp3 */; };
+		BM85B0000000000000000016 /* brainmassage_midnight.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000016 /* brainmassage_midnight.mp3 */; };
+		BM85B0000000000000000017 /* brainmassage_warm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000017 /* brainmassage_warm.mp3 */; };
 		CC04E26328BDA3F800509C60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC04E26228BDA3F800509C60 /* AppDelegate.swift */; };
 		CC04E26528BDA45900509C60 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC04E26428BDA45900509C60 /* SceneDelegate.swift */; };
 		CCFF29742C8FC76940F1E802 /* Jungle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 376796FB8C85B14BDDABC649 /* Jungle.mp3 */; };
 		CNSV00022F28000000000002 /* CreateNewSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CNSV00012F28000000000001 /* CreateNewSoundView.swift */; };
 		DSCP00022F28000000000014 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSCP00022F28000000000013 /* Components.swift */; };
+		DSP000022F28000000000BD /* TimerAlarmPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSP000012F28000000000BC /* TimerAlarmPagerView.swift */; };
 		DSTH00022F28000000000012 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSTH00022F28000000000011 /* Theme.swift */; };
 		E60AC831B23D8791A00A6D47 /* RainMaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 39AA5589C6B322081300DF31 /* RainMaker.mp3 */; };
 		FBA0000000000000000000A3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBA0000000000000000000A2 /* FirebaseAnalytics */; };
 		FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0000000000000000000B1 /* AnalyticsManager.swift */; };
-		ALM000022F28000000000B4 /* AlarmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000012F28000000000B3 /* AlarmService.swift */; };
-		FBK000022F2A0000000000C2 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000012F2A0000000000C1 /* FeedbackService.swift */; };
 		FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000032F2A0000000000C3 /* FeedbackView.swift */; };
 		FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */; };
-		ALM000042F28000000000B6 /* AlarmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000032F28000000000B5 /* AlarmItem.swift */; };
-		ALV000022F28000000000B8 /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALV000012F28000000000B7 /* AlarmListView.swift */; };
-		AEV000022F28000000000BA /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEV000012F28000000000B9 /* AlarmEditView.swift */; };
-		DSP000022F28000000000BD /* TimerAlarmPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSP000012F28000000000BC /* TimerAlarmPagerView.swift */; };
 		FIN000022F2800000000000A /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FIN000012F28000000000009 /* FileInfo.swift */; };
+		SPCB00000000000000000001 /* space_cinematic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000001 /* space_cinematic.mp3 */; };
+		SPCB00000000000000000002 /* space_ambient_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000002 /* space_ambient_1.mp3 */; };
+		SPCB00000000000000000003 /* space_deep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000003 /* space_deep.mp3 */; };
+		SPCB00000000000000000004 /* space_ambient_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000004 /* space_ambient_2.mp3 */; };
+		SPCB00000000000000000005 /* space_cinematic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000005 /* space_cinematic_2.mp3 */; };
+		SPCB00000000000000000006 /* space_shuttle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000006 /* space_shuttle.mp3 */; };
+		SPCB00000000000000000007 /* space_solar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000007 /* space_solar.mp3 */; };
+		SPCB00000000000000000008 /* space_drift.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000008 /* space_drift.mp3 */; };
+		SPCB00000000000000000009 /* space_cinematic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000009 /* space_cinematic_3.mp3 */; };
+		SPCB00000000000000000010 /* space_ambient_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000010 /* space_ambient_3.mp3 */; };
+		SPCB00000000000000000011 /* space_orbit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000011 /* space_orbit.mp3 */; };
+		SPCB00000000000000000012 /* space_void.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000012 /* space_void.mp3 */; };
 		STDO00022F28000000000022 /* SoundStudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = STDO00022F28000000000021 /* SoundStudioView.swift */; };
 		STV000022F2800000000000C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = STV000012F2800000000000B /* SettingsView.swift */; };
 		SUB000022F29000000000002 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SUB000012F29000000000001 /* SubscriptionManager.swift */; };
@@ -203,36 +204,6 @@
 		58DE61BE283E77E700F25769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		58DE61C12841C20A00F25769 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		58EB682E2FE81574006D84DF /* space_1min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_1min.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000001 /* space_cinematic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000002 /* space_ambient_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_1.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000003 /* space_deep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_deep.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000004 /* space_ambient_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_2.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000005 /* space_cinematic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic_2.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000006 /* space_shuttle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_shuttle.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000007 /* space_solar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_solar.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000008 /* space_drift.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_drift.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000009 /* space_cinematic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic_3.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000010 /* space_ambient_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_3.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000011 /* space_orbit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_orbit.mp3; sourceTree = "<group>"; };
-		SPCF00000000000000000012 /* space_void.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_void.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_01_sub_drone.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_02_bass_root.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_03_low_fifth.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_04_warm_chord_low.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_05_color_tone.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_06_ninth_layer.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_07_mid_harmony.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_08_high_extension.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_09_air_shimmer.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_10_sparkle_bells.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000010 /* brainmassage_bright.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_bright.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000011 /* brainmassage_celeste.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_celeste.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000012 /* brainmassage_deep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_deep.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000013 /* brainmassage_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_drone.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000014 /* brainmassage_full.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_full.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000015 /* brainmassage_glow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_glow.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000016 /* brainmassage_midnight.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_midnight.mp3; sourceTree = "<group>"; };
-		BM85F0000000000000000017 /* brainmassage_warm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_warm.mp3; sourceTree = "<group>"; };
 		58F3CDF42EF195C30059A247 /* ambient_10min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ambient_10min.mp3; sourceTree = "<group>"; };
 		58F3CDF52EF195C30059A247 /* guitar_10min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar_10min.mp3; sourceTree = "<group>"; };
 		58F3CDF62EF195C30059A247 /* lofi_10min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lofi_10min.mp3; sourceTree = "<group>"; };
@@ -259,6 +230,7 @@
 		63FEB2759AFCECB23E505073 /* ForestBird.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = ForestBird.mp3; sourceTree = "<group>"; };
 		68300BF92C4CBA2DCB1AB6E2 /* AmbientKeys.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = AmbientKeys.mp3; sourceTree = "<group>"; };
 		7D8999CB90199853226247F6 /* MeditationPad.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = MeditationPad.mp3; sourceTree = "<group>"; };
+		814ABC0F3CA3E1749821BAC5 /* DalbitSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DalbitSpec.swift; sourceTree = "<group>"; };
 		890D79F8D71BA19717A96F8F /* Camera.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Camera.mp3; sourceTree = "<group>"; };
 		8F00A2382A2332530062B816 /* TimerSoundSelectModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSoundSelectModalView.swift; sourceTree = "<group>"; };
 		8F00A23A2A2348C20062B816 /* TimerSoundListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSoundListCell.swift; sourceTree = "<group>"; };
@@ -303,10 +275,32 @@
 		A8D694CBC9BA73FEEE972785 /* Bell.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Bell.mp3; sourceTree = "<group>"; };
 		A9FDD1DB550B335455F5A721 /* Keyboard.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Keyboard.mp3; sourceTree = "<group>"; };
 		AD9C11FBB3A19C84918309F6 /* LocalizationKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocalizationKeys.swift; path = App/Resources/Localization/LocalizationKeys.swift; sourceTree = "<group>"; };
+		AEV000012F28000000000B9 /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
+		ALM000012F28000000000B3 /* AlarmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmService.swift; sourceTree = "<group>"; };
+		ALM000032F28000000000B5 /* AlarmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmItem.swift; sourceTree = "<group>"; };
+		ALV000012F28000000000B7 /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
 		AMS000012F28000000000007 /* AudioMixingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMixingService.swift; sourceTree = "<group>"; };
 		B44E72EC850D0D85EA34FB9A /* Atmosphere.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Atmosphere.mp3; sourceTree = "<group>"; };
 		B4FEE92929BD0B763A07376B /* Underwater.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Underwater.mp3; sourceTree = "<group>"; };
 		B53790AB535F668DEE440512 /* SoftRain.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = SoftRain.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_01_sub_drone.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_02_bass_root.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_03_low_fifth.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_04_warm_chord_low.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_05_color_tone.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_06_ninth_layer.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_07_mid_harmony.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_08_high_extension.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_09_air_shimmer.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_10_sparkle_bells.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000010 /* brainmassage_bright.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_bright.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000011 /* brainmassage_celeste.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_celeste.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000012 /* brainmassage_deep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_deep.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000013 /* brainmassage_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_drone.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000014 /* brainmassage_full.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_full.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000015 /* brainmassage_glow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_glow.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000016 /* brainmassage_midnight.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_midnight.mp3; sourceTree = "<group>"; };
+		BM85F0000000000000000017 /* brainmassage_warm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brainmassage_warm.mp3; sourceTree = "<group>"; };
 		CC04E26228BDA3F800509C60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC04E26428BDA45900509C60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CC5AC106289C033C00FE847B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -316,19 +310,26 @@
 		CDCA9FD95D97EBB427D679B1 /* SpringForest.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = SpringForest.mp3; sourceTree = "<group>"; };
 		CNSV00012F28000000000001 /* CreateNewSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewSoundView.swift; sourceTree = "<group>"; };
 		DSCP00022F28000000000013 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		DSP000012F28000000000BC /* TimerAlarmPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlarmPagerView.swift; sourceTree = "<group>"; };
 		DSTH00022F28000000000011 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EC23383B6EB64FEAAC27ACB4 /* AudioLayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLayerManager.swift; sourceTree = "<group>"; };
 		EFDBD9965458E87AF0E53BAD /* TibetanBowl.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = TibetanBowl.mp3; sourceTree = "<group>"; };
 		FBA0000000000000000000B1 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
-		ALM000012F28000000000B3 /* AlarmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmService.swift; sourceTree = "<group>"; };
-		FBK000012F2A0000000000C1 /* FeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackService.swift; sourceTree = "<group>"; };
 		FBK000032F2A0000000000C3 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackInboxView.swift; sourceTree = "<group>"; };
-		ALM000032F28000000000B5 /* AlarmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmItem.swift; sourceTree = "<group>"; };
-		ALV000012F28000000000B7 /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
-		AEV000012F28000000000B9 /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
-		DSP000012F28000000000BC /* TimerAlarmPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlarmPagerView.swift; sourceTree = "<group>"; };
 		FIN000012F28000000000009 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
+		SPCF00000000000000000001 /* space_cinematic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000002 /* space_ambient_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_1.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000003 /* space_deep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_deep.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000004 /* space_ambient_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_2.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000005 /* space_cinematic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic_2.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000006 /* space_shuttle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_shuttle.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000007 /* space_solar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_solar.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000008 /* space_drift.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_drift.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000009 /* space_cinematic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic_3.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000010 /* space_ambient_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_3.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000011 /* space_orbit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_orbit.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000012 /* space_void.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_void.mp3; sourceTree = "<group>"; };
 		STDO00022F28000000000021 /* SoundStudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundStudioView.swift; sourceTree = "<group>"; };
 		STV000012F2800000000000B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		SUB000012F29000000000001 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
@@ -343,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBA0000000000000000000A3 /* FirebaseAnalytics in Frameworks */,
+				9C0AA65F66AC6A43499FEE5B /* LeeoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,31 +439,6 @@
 				58FBB8FE2ED88620004231BE /* wave_10min.mp3 */,
 			);
 			path = background;
-			sourceTree = "<group>";
-		};
-		BM85C0000000000000000001 /* Cyndy */ = {
-			isa = PBXGroup;
-			children = (
-				BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */,
-				BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */,
-				BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */,
-				BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */,
-				BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */,
-				BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */,
-				BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */,
-				BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */,
-				BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */,
-				BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */,
-				BM85F0000000000000000010 /* brainmassage_bright.mp3 */,
-				BM85F0000000000000000011 /* brainmassage_celeste.mp3 */,
-				BM85F0000000000000000012 /* brainmassage_deep.mp3 */,
-				BM85F0000000000000000013 /* brainmassage_drone.mp3 */,
-				BM85F0000000000000000014 /* brainmassage_full.mp3 */,
-				BM85F0000000000000000015 /* brainmassage_glow.mp3 */,
-				BM85F0000000000000000016 /* brainmassage_midnight.mp3 */,
-				BM85F0000000000000000017 /* brainmassage_warm.mp3 */,
-			);
-			path = Cyndy;
 			sourceTree = "<group>";
 		};
 		594012552A17DAFE00221DE7 /* Sound */ = {
@@ -604,16 +581,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		ALG000012F28000000000BB /* Alarm */ = {
-			isa = PBXGroup;
-			children = (
-				ALV000012F28000000000B7 /* AlarmListView.swift */,
-				AEV000012F28000000000B9 /* AlarmEditView.swift */,
-				DSP000012F28000000000BC /* TimerAlarmPagerView.swift */,
-			);
-			path = Alarm;
-			sourceTree = "<group>";
-		};
 		8F7904832A16596700BE2BAC /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,7 +617,6 @@
 				SUB000012F29000000000001 /* SubscriptionManager.swift */,
 				FBA0000000000000000000B1 /* AnalyticsManager.swift */,
 				ALM000012F28000000000B3 /* AlarmService.swift */,
-				FBK000012F2A0000000000C1 /* FeedbackService.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -686,6 +652,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		ALG000012F28000000000BB /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				ALV000012F28000000000B7 /* AlarmListView.swift */,
+				AEV000012F28000000000B9 /* AlarmEditView.swift */,
+				DSP000012F28000000000BC /* TimerAlarmPagerView.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
 		BE38576B575750D83D676FCD /* Rain */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +670,31 @@
 				39AA5589C6B322081300DF31 /* RainMaker.mp3 */,
 			);
 			path = Rain;
+			sourceTree = "<group>";
+		};
+		BM85C0000000000000000001 /* Cyndy */ = {
+			isa = PBXGroup;
+			children = (
+				BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */,
+				BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */,
+				BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */,
+				BM85F0000000000000000003 /* brain_massage_04_warm_chord_low.mp3 */,
+				BM85F0000000000000000004 /* brain_massage_05_color_tone.mp3 */,
+				BM85F0000000000000000005 /* brain_massage_06_ninth_layer.mp3 */,
+				BM85F0000000000000000006 /* brain_massage_07_mid_harmony.mp3 */,
+				BM85F0000000000000000007 /* brain_massage_08_high_extension.mp3 */,
+				BM85F0000000000000000008 /* brain_massage_09_air_shimmer.mp3 */,
+				BM85F0000000000000000009 /* brain_massage_10_sparkle_bells.mp3 */,
+				BM85F0000000000000000010 /* brainmassage_bright.mp3 */,
+				BM85F0000000000000000011 /* brainmassage_celeste.mp3 */,
+				BM85F0000000000000000012 /* brainmassage_deep.mp3 */,
+				BM85F0000000000000000013 /* brainmassage_drone.mp3 */,
+				BM85F0000000000000000014 /* brainmassage_full.mp3 */,
+				BM85F0000000000000000015 /* brainmassage_glow.mp3 */,
+				BM85F0000000000000000016 /* brainmassage_midnight.mp3 */,
+				BM85F0000000000000000017 /* brainmassage_warm.mp3 */,
+			);
+			path = Cyndy;
 			sourceTree = "<group>";
 		};
 		C7C4C25528C239FE0048DCBA /* Assets */ = {
@@ -718,6 +719,7 @@
 				8F4E1B6B29B9BE240013599C /* Models */,
 				8F53BD1C29B77B55009AE6D1 /* Views */,
 				DSGP00022F28000000000010 /* DesignSystem */,
+				814ABC0F3CA3E1749821BAC5 /* DalbitSpec.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -796,6 +798,7 @@
 			name = Dalbit;
 			packageProductDependencies = (
 				FBA0000000000000000000A2 /* FirebaseAnalytics */,
+				FA1888EA590F8F2697E31ABC /* LeeoKit */,
 			);
 			productName = LullabyRecipe;
 			productReference = 58DE617F2839C13900F25769 /* Dalbit.app */;
@@ -828,6 +831,7 @@
 			mainGroup = 58DE61762839C13900F25769;
 			packageReferences = (
 				FBA0000000000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				789EDACBF34B64A81209AB6A /* XCLocalSwiftPackageReference "LeeoKit" */,
 			);
 			productRefGroup = 58DE61802839C13900F25769 /* Products */;
 			projectDirPath = "";
@@ -946,7 +950,6 @@
 				21EC2EDD80814105A172AAC3 /* AudioLayerManager.swift in Sources */,
 				FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */,
 				ALM000022F28000000000B4 /* AlarmService.swift in Sources */,
-				FBK000022F2A0000000000C2 /* FeedbackService.swift in Sources */,
 				FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */,
 				FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */,
 				ALM000042F28000000000B6 /* AlarmItem.swift in Sources */,
@@ -992,6 +995,7 @@
 				STV000022F2800000000000C /* SettingsView.swift in Sources */,
 				SUB000022F29000000000002 /* SubscriptionManager.swift in Sources */,
 				SUB000042F29000000000004 /* SubscriptionView.swift in Sources */,
+				976503E6FDB5C9B2BAEFEDDF /* DalbitSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,7 +1131,7 @@
 				CODE_SIGN_ENTITLEMENTS = Dalbit/Dalbit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalbit/Preview Content\"";
 				DEVELOPMENT_TEAM = QGAQ3AY3R3;
 				ENABLE_PREVIEWS = YES;
@@ -1162,7 +1166,7 @@
 				CODE_SIGN_ENTITLEMENTS = Dalbit/Dalbit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Dalbit/Preview Content\"";
 				DEVELOPMENT_TEAM = QGAQ3AY3R3;
 				ENABLE_PREVIEWS = YES;
@@ -1210,6 +1214,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		789EDACBF34B64A81209AB6A /* XCLocalSwiftPackageReference "LeeoKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../LeeoKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		FBA0000000000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1222,6 +1233,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FA1888EA590F8F2697E31ABC /* LeeoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 789EDACBF34B64A81209AB6A /* XCLocalSwiftPackageReference "LeeoKit" */;
+			productName = LeeoKit;
+		};
 		FBA0000000000000000000A2 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FBA0000000000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

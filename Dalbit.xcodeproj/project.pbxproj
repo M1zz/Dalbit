@@ -89,7 +89,6 @@
 		976503E6FDB5C9B2BAEFEDDF /* DalbitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814ABC0F3CA3E1749821BAC5 /* DalbitSpec.swift */; };
 		99AA00022EF1960000000002 /* SoundThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA00012EF1960000000001 /* SoundThumbnailView.swift */; };
 		9C0AA65F66AC6A43499FEE5B /* LeeoKit in Frameworks */ = {isa = PBXBuildFile; productRef = FA1888EA590F8F2697E31ABC /* LeeoKit */; };
-		9C0D31362FE8E674003F2B57 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C0D31352FE8E674003F2B57 /* GoogleService-Info.plist */; };
 		A81D4B61DC9FC788038A49E4 /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9C11FBB3A19C84918309F6 /* LocalizationKeys.swift */; };
 		AEV000022F28000000000BA /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEV000012F28000000000B9 /* AlarmEditView.swift */; };
 		AF157A5052C0E1B7696712E2 /* Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8D694CBC9BA73FEEE972785 /* Bell.mp3 */; };
@@ -125,7 +124,6 @@
 		DSP000022F28000000000BD /* TimerAlarmPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSP000012F28000000000BC /* TimerAlarmPagerView.swift */; };
 		DSTH00022F28000000000012 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSTH00022F28000000000011 /* Theme.swift */; };
 		E60AC831B23D8791A00A6D47 /* RainMaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 39AA5589C6B322081300DF31 /* RainMaker.mp3 */; };
-		FBA0000000000000000000A3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBA0000000000000000000A2 /* FirebaseAnalytics */; };
 		FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0000000000000000000B1 /* AnalyticsManager.swift */; };
 		FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000032F2A0000000000C3 /* FeedbackView.swift */; };
 		FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */; };
@@ -271,7 +269,6 @@
 		8FFF99EC2A1F51F100E2474C /* AudioVariation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVariation.swift; sourceTree = "<group>"; };
 		93ED06BCF44652CAE8CE3BEE /* CityRain.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = CityRain.mp3; sourceTree = "<group>"; };
 		99AA00012EF1960000000001 /* SoundThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundThumbnailView.swift; sourceTree = "<group>"; };
-		9C0D31352FE8E674003F2B57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A8D694CBC9BA73FEEE972785 /* Bell.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Bell.mp3; sourceTree = "<group>"; };
 		A9FDD1DB550B335455F5A721 /* Keyboard.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Keyboard.mp3; sourceTree = "<group>"; };
 		AD9C11FBB3A19C84918309F6 /* LocalizationKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocalizationKeys.swift; path = App/Resources/Localization/LocalizationKeys.swift; sourceTree = "<group>"; };
@@ -343,7 +340,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBA0000000000000000000A3 /* FirebaseAnalytics in Frameworks */,
 				9C0AA65F66AC6A43499FEE5B /* LeeoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +362,6 @@
 		58DE61762839C13900F25769 = {
 			isa = PBXGroup;
 			children = (
-				9C0D31352FE8E674003F2B57 /* GoogleService-Info.plist */,
 				583CFF872F28E8AA00F05CD0 /* Products.storekit */,
 				4AA37CA928D370E400B0F8FF /* WatchOSLockScreenWidgetExtension.entitlements */,
 				4AA37CA828D3656800B0F8FF /* LockScreenWidgetExtensionExtension.entitlements */,
@@ -797,7 +792,6 @@
 			);
 			name = Dalbit;
 			packageProductDependencies = (
-				FBA0000000000000000000A2 /* FirebaseAnalytics */,
 				FA1888EA590F8F2697E31ABC /* LeeoKit */,
 			);
 			productName = LullabyRecipe;
@@ -830,7 +824,6 @@
 			);
 			mainGroup = 58DE61762839C13900F25769;
 			packageReferences = (
-				FBA0000000000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				789EDACBF34B64A81209AB6A /* XCLocalSwiftPackageReference "LeeoKit" */,
 			);
 			productRefGroup = 58DE61802839C13900F25769 /* Products */;
@@ -866,7 +859,6 @@
 				5940126C2A17DD3B00221DE7 /* Training.mp3 in Resources */,
 				58DE61C22841C20A00F25769 /* Launch Screen.storyboard in Resources */,
 				594012762A17DD7900221DE7 /* Forest.mp3 in Resources */,
-				9C0D31362FE8E674003F2B57 /* GoogleService-Info.plist in Resources */,
 				58FBB9052ED88EE8004231BE /* rain_10min.mp3 in Resources */,
 				58FBB8FF2ED88620004231BE /* tv_10min.mp3 in Resources */,
 				58FBB9002ED88620004231BE /* wave_10min.mp3 in Resources */,
@@ -1222,14 +1214,6 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FBA0000000000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1237,11 +1221,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 789EDACBF34B64A81209AB6A /* XCLocalSwiftPackageReference "LeeoKit" */;
 			productName = LeeoKit;
-		};
-		FBA0000000000000000000A2 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FBA0000000000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

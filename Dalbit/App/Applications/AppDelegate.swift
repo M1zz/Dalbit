@@ -6,15 +6,12 @@
 //
 
 import UIKit
-import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-        // Firebase 초기화 (GoogleService-Info.plist 기반)
-        FirebaseApp.configure()
         return true
     }
     // NOTE: SwiftUI의 WindowGroup이 Scene을 직접 관리하도록 커스텀 SceneConfiguration 오버라이드를 제거했다.

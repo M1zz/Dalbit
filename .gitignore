@@ -1,6 +1,10 @@
 xcuserdata/
 .DS_Store
 
+# 빌드 산출물
+build/
+DerivedData/
+
 # 빌드 로그
 *.log
 build_log.txt

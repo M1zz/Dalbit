@@ -185,6 +185,7 @@ final class AudioEngineManager: ObservableObject {
         setupEngine()
         setupSpatialAudio()
         setupSubscriptions()
+        setupNotifications()
 
         // LayerManager 초기화
         layerManager = AudioLayerManager(
@@ -211,7 +212,95 @@ extension AudioEngineManager {
             print("Audio session setup error: \(error.localizedDescription)")
         }
     }
-    
+
+    /// 엔진 구성 변경·오디오 인터럽션 알림 등록
+    /// - 백그라운드 전환·화면잠금·오디오 라우트 변경 시 하드웨어 포맷이 바뀌면
+    ///   AVAudioEngine이 구성 변경 알림을 발행하며 그래프가 깨진다(→ 크래클/지지직).
+    ///   이를 감지해 세션 재활성화·엔진 재시작·버퍼 재스케줄로 복구한다.
+    private func setupNotifications() {
+        let center = NotificationCenter.default
+
+        center.addObserver(
+            self,
+            selector: #selector(handleEngineConfigurationChange(_:)),
+            name: .AVAudioEngineConfigurationChange,
+            object: engine
+        )
+
+        center.addObserver(
+            self,
+            selector: #selector(handleInterruption(_:)),
+            name: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance()
+        )
+    }
+
+    /// 엔진 구성 변경 처리 — 그래프를 복구하고 재생 중이던 사운드를 이어서 재생한다.
+    @objc private func handleEngineConfigurationChange(_ notification: Notification) {
+        // 알림은 오디오 스레드에서 올 수 있으므로 메인에서 안전하게 복구한다.
+        DispatchQueue.main.async { [weak self] in
+            self?.recoverAudioGraph()
+        }
+    }
+
+    /// 오디오 인터럽션(전화·타 앱 재생 등) 처리
+    @objc private func handleInterruption(_ notification: Notification) {
+        guard let info = notification.userInfo,
+              let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else { return }
+
+        switch type {
+        case .began:
+            // 인터럽션 시작: 시스템이 세션을 비활성화한다. 플레이어를 잠시 멈춘다.
+            player.pause()
+            backgroundPlayer.pause()
+        case .ended:
+            // 인터럽션 종료: 시스템이 재개를 허용하면 세션을 재활성화하고 이어서 재생.
+            let options = (info[AVAudioSessionInterruptionOptionKey] as? UInt).map {
+                AVAudioSession.InterruptionOptions(rawValue: $0)
+            }
+            if options?.contains(.shouldResume) == true {
+                DispatchQueue.main.async { [weak self] in
+                    self?.recoverAudioGraph()
+                }
+            }
+        @unknown default:
+            break
+        }
+    }
+
+    /// 오디오 그래프 복구: 세션 재활성화 → 엔진 재시작 → 배경음·레이어 버퍼 재스케줄 후 재생.
+    /// 엔진이 정지하면 플레이어에 예약된 버퍼가 사라지므로 반드시 다시 스케줄해야 한다.
+    private func recoverAudioGraph() {
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("⚠️ [AudioEngineManager] 세션 재활성화 실패: \(error.localizedDescription)")
+        }
+
+        if !engine.isRunning {
+            do {
+                try engine.start()
+            } catch {
+                print("⚠️ [AudioEngineManager] 구성 변경 후 엔진 재시작 실패: \(error.localizedDescription)")
+                return
+            }
+        }
+
+        // 배경음이 재생 중이었다면 루프 버퍼를 다시 스케줄하고 재생 재개
+        if currentBackgroundSound != nil, backgroundBuffer != nil {
+            scheduleBackgroundLoop()
+            if !backgroundPlayer.isPlaying {
+                backgroundPlayer.play()
+            }
+        }
+
+        // 레이어 사운드 재개
+        layerManager?.rescheduleActiveLayers()
+
+        print("✅ [AudioEngineManager] 오디오 그래프 복구 완료")
+    }
+
     private func setupEngine() {
         engine.attach(player)
         engine.attach(pitchEffect)
@@ -1065,7 +1154,21 @@ enum BackgroundSound: String, CaseIterable {
     case meditation = "meditation"
     case space = "space"   // 우주 앰비언트 (앱 시작 시 자동 재생)
 
-    // 브레인 마사지 (미디 조합 배경음악 · 좌우 굴리기 리스트) — 베이스 트랙 믹스
+    // 우주 앰비언트 베이스 음악 (좌우 굴리기 리스트) — 새 기본 사운드
+    case spaceCinematic = "spaceCinematic"
+    case spaceAmbient1 = "spaceAmbient1"
+    case spaceDeep = "spaceDeep"
+    case spaceAmbient2 = "spaceAmbient2"
+    case spaceCinematic2 = "spaceCinematic2"
+    case spaceShuttle = "spaceShuttle"
+    case spaceSolar = "spaceSolar"
+    case spaceDrift = "spaceDrift"
+    case spaceCinematic3 = "spaceCinematic3"
+    case spaceAmbient3 = "spaceAmbient3"
+    case spaceOrbit = "spaceOrbit"
+    case spaceVoid = "spaceVoid"
+
+    // 브레인 마사지 (미디 조합 배경음악) — 베이스 트랙 믹스 (레거시 · 굴리기 리스트에서 제외)
     case brainmassageFull = "brainmassageFull"
     case brainmassageDeep = "brainmassageDeep"
     case brainmassageWarm = "brainmassageWarm"
@@ -1103,6 +1206,18 @@ enum BackgroundSound: String, CaseIterable {
         case .lofi: return L.Background.lofi.localized
         case .meditation: return L.Background.meditation.localized
         case .space: return "우주"
+        case .spaceCinematic: return "우주 시네마틱"
+        case .spaceAmbient1: return "우주 앰비언트 I"
+        case .spaceDeep: return "딥 스페이스"
+        case .spaceAmbient2: return "우주 앰비언트 II"
+        case .spaceCinematic2: return "우주 시네마틱 II"
+        case .spaceShuttle: return "스페이스 셔틀"
+        case .spaceSolar: return "솔라 윈드"
+        case .spaceDrift: return "우주 표류"
+        case .spaceCinematic3: return "우주 시네마틱 III"
+        case .spaceAmbient3: return "우주 앰비언트 III"
+        case .spaceOrbit: return "오빗"
+        case .spaceVoid: return "보이드"
         case .brainmassageFull: return "브레인 마사지"
         case .brainmassageDeep: return "딥 슬립"
         case .brainmassageWarm: return "웜 하모니"
@@ -1125,6 +1240,18 @@ enum BackgroundSound: String, CaseIterable {
         case .lofi: return "lofi_10min"
         case .meditation: return "meditation_10min"
         case .space: return "space_1min"
+        case .spaceCinematic: return "space_cinematic"
+        case .spaceAmbient1: return "space_ambient_1"
+        case .spaceDeep: return "space_deep"
+        case .spaceAmbient2: return "space_ambient_2"
+        case .spaceCinematic2: return "space_cinematic_2"
+        case .spaceShuttle: return "space_shuttle"
+        case .spaceSolar: return "space_solar"
+        case .spaceDrift: return "space_drift"
+        case .spaceCinematic3: return "space_cinematic_3"
+        case .spaceAmbient3: return "space_ambient_3"
+        case .spaceOrbit: return "space_orbit"
+        case .spaceVoid: return "space_void"
         case .brainmassageFull: return "brainmassage_full"
         case .brainmassageDeep: return "brainmassage_deep"
         case .brainmassageWarm: return "brainmassage_warm"
@@ -1147,6 +1274,14 @@ enum BackgroundSound: String, CaseIterable {
         case .lofi: return "music.note.list"
         case .meditation: return "sparkles"
         case .space: return "moon.stars.fill"
+        case .spaceCinematic, .spaceCinematic2, .spaceCinematic3: return "sparkles"
+        case .spaceAmbient1, .spaceAmbient2, .spaceAmbient3: return "moon.stars.fill"
+        case .spaceDeep: return "moon.zzz.fill"
+        case .spaceShuttle: return "airplane"
+        case .spaceSolar: return "sun.max.fill"
+        case .spaceDrift: return "wind"
+        case .spaceOrbit: return "circle.dashed"
+        case .spaceVoid: return "circle.fill"
         case .brainmassageFull: return "brain.head.profile"
         case .brainmassageDeep: return "moon.zzz.fill"
         case .brainmassageWarm: return "flame.fill"
@@ -1200,7 +1335,9 @@ enum BackgroundSound: String, CaseIterable {
                 Color(red: 0.6, green: 0.8, blue: 0.7).opacity(0.15),
                 Color(red: 0.5, green: 0.7, blue: 0.6).opacity(0.1)
             ]
-        case .space:
+        case .space, .spaceCinematic, .spaceAmbient1, .spaceDeep, .spaceAmbient2,
+             .spaceCinematic2, .spaceShuttle, .spaceSolar, .spaceDrift,
+             .spaceCinematic3, .spaceAmbient3, .spaceOrbit, .spaceVoid:
             return [
                 Color(red: 0.45, green: 0.45, blue: 0.85).opacity(0.15),
                 Color(red: 0.30, green: 0.30, blue: 0.60).opacity(0.1)
@@ -1219,6 +1356,9 @@ enum BackgroundSound: String, CaseIterable {
         case .wave, .rain, .tv:
             return false
         case .piano, .guitar, .ambient, .lofi, .meditation, .space,
+             .spaceCinematic, .spaceAmbient1, .spaceDeep, .spaceAmbient2, .spaceCinematic2,
+             .spaceShuttle, .spaceSolar, .spaceDrift, .spaceCinematic3, .spaceAmbient3,
+             .spaceOrbit, .spaceVoid,
              .brainmassageFull, .brainmassageDeep, .brainmassageWarm, .brainmassageBright,
              .brainmassageDrone, .brainmassageGlow, .brainmassageMidnight, .brainmassageCeleste:
             return true

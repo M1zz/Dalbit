@@ -181,6 +181,17 @@ final class AudioLayerManager {
         }
     }
 
+    /// 엔진 구성 변경(백그라운드 전환·라우트 변경) 후 활성 레이어를 다시 스케줄해 재생을 이어간다.
+    /// 엔진이 정지하면 플레이어의 예약 버퍼가 사라지므로 재스케줄이 필요하다.
+    func rescheduleActiveLayers() {
+        for (layerId, layer) in layers where layer.isScheduling {
+            scheduleNextBuffer(for: layerId)
+            if !layer.player.isPlaying {
+                layer.player.play()
+            }
+        }
+    }
+
     /// 레이어 볼륨 변경
     func setLayerVolume(_ layerId: UUID, volume: Float) {
         guard let layer = layers[layerId] else { return }

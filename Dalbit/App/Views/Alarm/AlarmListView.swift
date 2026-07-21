@@ -20,7 +20,11 @@ struct AlarmListView: View {
 
     var body: some View {
         ZStack {
-            ScreenBackground()
+            // embedded(타이머 페이저 안)에서는 배경을 투명하게 두어 상위의 공유 우주 별 배경이
+            // 비치도록 하고, 독립 화면으로 열릴 때만 자체 배경을 그린다.
+            if !embedded {
+                ScreenBackground()
+            }
 
             ScrollView {
                 VStack(alignment: .leading, spacing: DS.Spacing.lg) {

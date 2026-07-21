@@ -20,6 +20,18 @@
 		58DE618A2839C13A00F25769 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DE61892839C13A00F25769 /* Preview Assets.xcassets */; };
 		58DE61C22841C20A00F25769 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58DE61C12841C20A00F25769 /* Launch Screen.storyboard */; };
 		58EB682F2FE81574006D84DF /* space_1min.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 58EB682E2FE81574006D84DF /* space_1min.mp3 */; };
+		SPCB00000000000000000001 /* space_cinematic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000001 /* space_cinematic.mp3 */; };
+		SPCB00000000000000000002 /* space_ambient_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000002 /* space_ambient_1.mp3 */; };
+		SPCB00000000000000000003 /* space_deep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000003 /* space_deep.mp3 */; };
+		SPCB00000000000000000004 /* space_ambient_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000004 /* space_ambient_2.mp3 */; };
+		SPCB00000000000000000005 /* space_cinematic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000005 /* space_cinematic_2.mp3 */; };
+		SPCB00000000000000000006 /* space_shuttle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000006 /* space_shuttle.mp3 */; };
+		SPCB00000000000000000007 /* space_solar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000007 /* space_solar.mp3 */; };
+		SPCB00000000000000000008 /* space_drift.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000008 /* space_drift.mp3 */; };
+		SPCB00000000000000000009 /* space_cinematic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000009 /* space_cinematic_3.mp3 */; };
+		SPCB00000000000000000010 /* space_ambient_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000010 /* space_ambient_3.mp3 */; };
+		SPCB00000000000000000011 /* space_orbit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000011 /* space_orbit.mp3 */; };
+		SPCB00000000000000000012 /* space_void.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000012 /* space_void.mp3 */; };
 		BM85B0000000000000000000 /* brain_massage_01_sub_drone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */; };
 		BM85B0000000000000000001 /* brain_massage_02_bass_root.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */; };
 		BM85B0000000000000000002 /* brain_massage_03_low_fifth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */; };
@@ -191,6 +203,18 @@
 		58DE61BE283E77E700F25769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		58DE61C12841C20A00F25769 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		58EB682E2FE81574006D84DF /* space_1min.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_1min.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000001 /* space_cinematic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000002 /* space_ambient_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_1.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000003 /* space_deep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_deep.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000004 /* space_ambient_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_2.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000005 /* space_cinematic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic_2.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000006 /* space_shuttle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_shuttle.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000007 /* space_solar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_solar.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000008 /* space_drift.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_drift.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000009 /* space_cinematic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic_3.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000010 /* space_ambient_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_ambient_3.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000011 /* space_orbit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_orbit.mp3; sourceTree = "<group>"; };
+		SPCF00000000000000000012 /* space_void.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_void.mp3; sourceTree = "<group>"; };
 		BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_01_sub_drone.mp3; sourceTree = "<group>"; };
 		BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_02_bass_root.mp3; sourceTree = "<group>"; };
 		BM85F0000000000000000002 /* brain_massage_03_low_fifth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_03_low_fifth.mp3; sourceTree = "<group>"; };
@@ -389,6 +413,18 @@
 				58EB682E2FE81574006D84DF /* space_1min.mp3 */,
 				58F3CDF72EF195C30059A247 /* meditation_10min.mp3 */,
 				58F3CDF82EF195C30059A247 /* piano_10min.mp3 */,
+				SPCF00000000000000000001 /* space_cinematic.mp3 */,
+				SPCF00000000000000000002 /* space_ambient_1.mp3 */,
+				SPCF00000000000000000003 /* space_deep.mp3 */,
+				SPCF00000000000000000004 /* space_ambient_2.mp3 */,
+				SPCF00000000000000000005 /* space_cinematic_2.mp3 */,
+				SPCF00000000000000000006 /* space_shuttle.mp3 */,
+				SPCF00000000000000000007 /* space_solar.mp3 */,
+				SPCF00000000000000000008 /* space_drift.mp3 */,
+				SPCF00000000000000000009 /* space_cinematic_3.mp3 */,
+				SPCF00000000000000000010 /* space_ambient_3.mp3 */,
+				SPCF00000000000000000011 /* space_orbit.mp3 */,
+				SPCF00000000000000000012 /* space_void.mp3 */,
 			);
 			path = music;
 			sourceTree = "<group>";
@@ -839,6 +875,18 @@
 				BD5DD63A6A387694BDBA80EC /* ForestBird.mp3 in Resources */,
 				B2574EF779062CB43FCF1653 /* SpringForest.mp3 in Resources */,
 				58EB682F2FE81574006D84DF /* space_1min.mp3 in Resources */,
+				SPCB00000000000000000001 /* space_cinematic.mp3 in Resources */,
+				SPCB00000000000000000002 /* space_ambient_1.mp3 in Resources */,
+				SPCB00000000000000000003 /* space_deep.mp3 in Resources */,
+				SPCB00000000000000000004 /* space_ambient_2.mp3 in Resources */,
+				SPCB00000000000000000005 /* space_cinematic_2.mp3 in Resources */,
+				SPCB00000000000000000006 /* space_shuttle.mp3 in Resources */,
+				SPCB00000000000000000007 /* space_solar.mp3 in Resources */,
+				SPCB00000000000000000008 /* space_drift.mp3 in Resources */,
+				SPCB00000000000000000009 /* space_cinematic_3.mp3 in Resources */,
+				SPCB00000000000000000010 /* space_ambient_3.mp3 in Resources */,
+				SPCB00000000000000000011 /* space_orbit.mp3 in Resources */,
+				SPCB00000000000000000012 /* space_void.mp3 in Resources */,
 				BM85B0000000000000000000 /* brain_massage_01_sub_drone.mp3 in Resources */,
 				BM85B0000000000000000001 /* brain_massage_02_bass_root.mp3 in Resources */,
 				BM85B0000000000000000002 /* brain_massage_03_low_fifth.mp3 in Resources */,
@@ -1094,7 +1142,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.5;
+				MARKETING_VERSION = 4.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.leeo.LullabyRecipe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1129,7 +1177,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.5;
+				MARKETING_VERSION = 4.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.leeo.LullabyRecipe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -1575,8 +1575,7 @@ struct TimerView: View {
 
     var body: some View {
         ZStack {
-            ScreenBackground()
-
+            // 배경 없음(투명) — 상위의 공유 우주 별 배경(Starfield·CosmicEvents)이 비치도록 한다.
             VStack(spacing: 0) {
                 if isTimerRunning {
                     // 타이머 실행 중
@@ -1798,8 +1797,8 @@ struct SavedSoundsListView: View {
 
     var body: some View {
         ZStack {
-            ScreenBackground()
-
+            // 배경 없음(투명) — 상위 ListenListView의 공유 우주 별 배경(Starfield·CosmicEvents)이
+            // 그대로 비치도록 한다. 홈 페이지와 동일하게 별이 움직이는 배경을 공유한다.
             VStack(spacing: 0) {
                 // 무료 사용자에게 항상 보이는 프리미엄 진입 배지 (페이월 접근성 + 심사자 발견성)
                 if !subscriptionManager.isPremium {

@@ -376,7 +376,8 @@ extension CustomSoundViewModel {
     func loadPresetSounds() {
         // 프리셋 세트를 바꿀 때마다 올린다. 이 값이 저장된 값보다 크면 기존 설치에서도 프리셋을 다시 시드한다.
         // v2: 프리셋 목록을 brain_massage 미디 조합(+Space)으로 교체
-        let currentPresetVersion = 2
+        // v3: 굴리기 리스트를 우주 앰비언트 베이스 음악으로 교체 (brain_massage 제외, Space 유지)
+        let currentPresetVersion = 3
         var customSounds = userDefaults.customSounds
 
         let hasPresets = customSounds.contains(where: { $0.isPreset })

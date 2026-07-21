@@ -33,8 +33,8 @@ struct TimerAlarmPagerView: View {
 
     var body: some View {
         ZStack {
-            ScreenBackground()
-
+            // 배경 없음(투명) — 상위 ListenListView의 공유 우주 별 배경(Starfield·CosmicEvents)이
+            // 그대로 비치도록 한다. 홈 페이지와 동일하게 별이 움직이는 배경을 공유한다.
             VStack(spacing: 0) {
                 topBar
 

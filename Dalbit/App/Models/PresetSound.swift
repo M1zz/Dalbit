@@ -145,7 +145,7 @@ enum PresetCategory: String, CaseIterable, Codable {
 
 extension PresetSound {
     static let allPresets: [PresetSound] = [
-        // MARK: - Space(첫 실행 자동재생·유지) + 브레인 마사지 미디 조합 (좌우 굴리기 리스트)
+        // MARK: - Space(첫 실행 자동재생·유지) + 우주 앰비언트 베이스 음악 (좌우 굴리기 리스트)
         PresetSound(
             id: "space",
             name: "우주",
@@ -159,119 +159,147 @@ extension PresetSound {
         ),
 
         PresetSound(
-            id: "bm-full",
-            name: "브레인 마사지",
+            id: "space-cinematic",
+            name: "우주 시네마틱",
             category: .meditation,
-            description: "여덟 겹의 미디 패드가 겹친 가장 풍성한 기본 조합",
-            icon: "brain.head.profile",
+            description: "웅장하게 펼쳐지는 시네마틱 우주 앰비언트",
+            icon: "sparkles",
             color: "#8B7DC8",
-            layers: [
-            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
-            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageFull.rawValue,
-            backgroundVolume: 0.6
+            layers: [],
+            backgroundSound: BackgroundSound.spaceCinematic.rawValue,
+            backgroundVolume: 0.5
         ),
 
         PresetSound(
-            id: "bm-deep",
-            name: "딥 슬립",
+            id: "space-ambient-1",
+            name: "우주 앰비언트 I",
             category: .sleep,
-            description: "저음 드론과 베이스로 깊은 수면을 유도",
-            icon: "moon.zzz.fill",
+            description: "잔잔하게 떠다니는 우주 앰비언트",
+            icon: "moon.stars.fill",
             color: "#6B5B95",
-            layers: [
-            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.45, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageDeep.rawValue,
-            backgroundVolume: 0.6
+            layers: [],
+            backgroundSound: BackgroundSound.spaceAmbient1.rawValue,
+            backgroundVolume: 0.5
         ),
 
         PresetSound(
-            id: "bm-warm",
-            name: "웜 하모니",
-            category: .meditation,
-            description: "따뜻한 중음 하모니의 포근한 울림",
-            icon: "flame.fill",
-            color: "#C99DA3",
-            layers: [
-            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
-            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.45, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageWarm.rawValue,
-            backgroundVolume: 0.6
-        ),
-
-        PresetSound(
-            id: "bm-bright",
-            name: "브라이트",
-            category: .focus,
-            description: "맑은 중고음과 반짝임으로 산뜻하게",
-            icon: "sun.max.fill",
-            color: "#7FB2D6",
-            layers: [
-            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.55, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
-            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageBright.rawValue,
-            backgroundVolume: 0.6
-        ),
-
-        PresetSound(
-            id: "bm-drone",
-            name: "미니멀 드론",
+            id: "space-deep",
+            name: "딥 스페이스",
             category: .sleep,
-            description: "드론과 베이스만 남긴 가장 미니멀한 배경",
-            icon: "waveform.path",
+            description: "깊고 아득한 심우주의 저음 앰비언트",
+            icon: "moon.zzz.fill",
             color: "#4E5A7A",
-            layers: [
-            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.4, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageDrone.rawValue,
-            backgroundVolume: 0.6
+            layers: [],
+            backgroundSound: BackgroundSound.spaceDeep.rawValue,
+            backgroundVolume: 0.5
         ),
 
         PresetSound(
-            id: "bm-glow",
-            name: "글로우",
+            id: "space-ambient-2",
+            name: "우주 앰비언트 II",
             category: .meditation,
-            description: "은은한 패드 위로 반짝이는 벨",
-            icon: "sparkle",
-            color: "#D6B87F",
-            layers: [
-            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageGlow.rawValue,
-            backgroundVolume: 0.6
+            description: "은은한 별빛처럼 흐르는 우주 앰비언트",
+            icon: "moon.stars.fill",
+            color: "#A79BCB",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceAmbient2.rawValue,
+            backgroundVolume: 0.5
         ),
 
         PresetSound(
-            id: "bm-midnight",
-            name: "미드나잇",
+            id: "space-cinematic-2",
+            name: "우주 시네마틱 II",
+            category: .focus,
+            description: "웅장한 우주를 여행하는 시네마틱 사운드",
+            icon: "sparkles",
+            color: "#7FB2D6",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceCinematic2.rawValue,
+            backgroundVolume: 0.5
+        ),
+
+        PresetSound(
+            id: "space-shuttle",
+            name: "스페이스 셔틀",
+            category: .focus,
+            description: "우주선을 타고 떠나는 몽환적인 항해",
+            icon: "airplane",
+            color: "#7C7CD8",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceShuttle.rawValue,
+            backgroundVolume: 0.5
+        ),
+
+        PresetSound(
+            id: "space-solar",
+            name: "솔라 윈드",
+            category: .meditation,
+            description: "따뜻한 태양풍이 스치는 우주 앰비언트",
+            icon: "sun.max.fill",
+            color: "#D6B87F",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceSolar.rawValue,
+            backgroundVolume: 0.5
+        ),
+
+        PresetSound(
+            id: "space-drift",
+            name: "우주 표류",
             category: .sleep,
-            description: "벨 없이 어둡고 잔잔한 한밤의 결",
+            description: "무중력 속을 천천히 떠도는 앰비언트",
+            icon: "wind",
+            color: "#6B5B95",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceDrift.rawValue,
+            backgroundVolume: 0.5
+        ),
+
+        PresetSound(
+            id: "space-cinematic-3",
+            name: "우주 시네마틱 III",
+            category: .meditation,
+            description: "감성적으로 물드는 시네마틱 우주 사운드",
+            icon: "sparkles",
+            color: "#8B7DC8",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceCinematic3.rawValue,
+            backgroundVolume: 0.5
+        ),
+
+        PresetSound(
+            id: "space-ambient-3",
+            name: "우주 앰비언트 III",
+            category: .sleep,
+            description: "고요한 심연으로 가라앉는 우주 앰비언트",
             icon: "moon.stars.fill",
             color: "#3F4A6B",
-            layers: [
-            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.45, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageMidnight.rawValue,
-            backgroundVolume: 0.6
+            layers: [],
+            backgroundSound: BackgroundSound.spaceAmbient3.rawValue,
+            backgroundVolume: 0.5
         ),
 
         PresetSound(
-            id: "bm-celeste",
-            name: "셀레스트",
-            category: .meditation,
-            description: "고음 하모니와 반짝임의 천상의 조합",
-            icon: "star.fill",
-            color: "#A79BCB",
-            layers: [
-            PresetLayer(filter: .SparkleBells, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0),
-            PresetLayer(filter: .AirShimmer, category: .Ambient, volume: 0.5, pitch: 0, interval: 0, intervalVariation: 0, volumeVariation: 0, pitchVariation: 0)
-        ],
-            backgroundSound: BackgroundSound.brainmassageCeleste.rawValue,
-            backgroundVolume: 0.6
+            id: "space-orbit",
+            name: "오빗",
+            category: .focus,
+            description: "행성 궤도를 도는 듯한 리드미컬한 우주음",
+            icon: "circle.dashed",
+            color: "#7FB2D6",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceOrbit.rawValue,
+            backgroundVolume: 0.5
+        ),
+
+        PresetSound(
+            id: "space-void",
+            name: "보이드",
+            category: .sleep,
+            description: "끝없는 공허를 감싸는 어두운 앰비언트",
+            icon: "circle.fill",
+            color: "#4E5A7A",
+            layers: [],
+            backgroundSound: BackgroundSound.spaceVoid.rawValue,
+            backgroundVolume: 0.5
         )
     ]
 

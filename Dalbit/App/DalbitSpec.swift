@@ -5,8 +5,9 @@
 //  LeeoKit 계약(LeeoAppSpec) 준수 — 이 앱의 공통 기능 설정값 단일 소스.
 //  피드백 시스템 구현은 전부 LeeoKit에 있고, 앱은 이 설정만 제공한다.
 //
-//  ⚠️ feedback의 컨테이너/레코드 타입/구독 ID는 CloudKit Dashboard·기존 사용자
-//  기기와의 계약이다 — 변경 금지 (기존 FeedbackService와 동일한 컨테이너/레코드 타입).
+//  ⚠️ recordType/구독 ID는 CloudKit Dashboard·기존 사용자 기기와의 계약이다 — 변경 금지.
+//  컨테이너는 공용 피드백 허브(FeedbackHub)로 전환됨 — appIdentifier로 앱을 구분한다.
+//  (전환 전 자기 컨테이너 iCloud.com.leeo.LullabyRecipe에 쌓인 기존 피드백은 허브 인박스에 나타나지 않는다.)
 //
 
 import Foundation
@@ -16,9 +17,19 @@ enum DalbitSpec: LeeoAppSpec {
     static let appName = "달빛"
     static let developerEmail = "mizzking75@gmail.com"
 
-    /// Dalbit.entitlements의 iCloud 컨테이너와 동일해야 한다.
-    /// recordType "Feedback" · 단일 앱 스키마(appIdentifier nil) — 기존 배포 스키마와 100% 호환.
+    /// Dalbit.entitlements에 iCloud.com.Ysoup.FeedbackHub 컨테이너가 있어야 한다.
+    /// 공용 피드백 허브(FeedbackHub)로 수집 — appIdentifier로 앱을 구분한다.
     static let feedback = LeeoFeedbackConfig(
-        containerIdentifier: "iCloud.com.leeo.LullabyRecipe"
+        containerIdentifier: "iCloud.com.Ysoup.FeedbackHub",
+        appIdentifier: "com.leeo.LullabyRecipe"
+    )
+
+    /// 인앱 결제(구독). StoreKit 엔진은 LeeoKit(LeeoStore)이 담당하고,
+    /// 앱은 이 구성과 얇은 SubscriptionManager 파사드(무료 게이트·프로모 코드)만 유지한다.
+    /// ⚠️ 상품 ID("month")는 App Store Connect·기존 사용자 기기와의 계약이다 — 변경 금지.
+    static let paywall = LeeoPaywallConfig(
+        productIDs: [SubscriptionManager.productId],
+        termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"),
+        privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html")
     )
 }

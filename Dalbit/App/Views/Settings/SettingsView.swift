@@ -31,7 +31,8 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            ScreenBackground()
+            // 홈(메인)과 동일한 별이 움직이는 우주 배경
+            StarryBackground()
 
             ScrollView {
                 VStack(alignment: .leading, spacing: DS.Spacing.xl) {

@@ -52,6 +52,20 @@ struct ScreenBackground: View {
     }
 }
 
+/// 홈(메인)과 동일한 "별이 움직이는" 우주 배경.
+/// 표준 그라데이션 위에 움직이는 별(Starfield)과 가끔 지나가는 혜성·행성(CosmicEvents)을 얹는다.
+/// 네비게이션으로 밀려 올라와 상위의 공유 배경이 비치지 않는 화면(설정 등)에서 사용한다.
+struct StarryBackground: View {
+    var body: some View {
+        ZStack {
+            ScreenBackground()
+            Starfield().ignoresSafeArea()
+            CosmicEventsView().ignoresSafeArea()
+        }
+        .allowsHitTesting(false)
+    }
+}
+
 // MARK: - Card
 
 /// 큰 둥근 카드 표면. 여백 넉넉, 그림자 부드럽게.

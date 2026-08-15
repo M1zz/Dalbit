@@ -1,6 +1,6 @@
 //
 //  SubscriptionView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Paywall UI for subscription
 //

@@ -1,6 +1,6 @@
 //
 //  PresetSound.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Claude on 2025/01/17.
 //
@@ -64,6 +64,20 @@ struct PresetSound: Identifiable, Codable {
         case "tibetan-meditation": return L.PresetNew.TibetanMeditation.name.localized
         case "jungle-morning": return L.PresetNew.JungleMorning.name.localized
         case "spring-forest": return L.PresetNew.SpringForest.name.localized
+        // 우주 앰비언트 (좌우 굴리기 리스트)
+        case "space": return L.PresetSpace.Space.name.localized
+        case "space-cinematic": return L.PresetSpace.Cinematic.name.localized
+        case "space-ambient-1": return L.PresetSpace.Ambient1.name.localized
+        case "space-deep": return L.PresetSpace.Deep.name.localized
+        case "space-ambient-2": return L.PresetSpace.Ambient2.name.localized
+        case "space-cinematic-2": return L.PresetSpace.Cinematic2.name.localized
+        case "space-shuttle": return L.PresetSpace.Shuttle.name.localized
+        case "space-solar": return L.PresetSpace.Solar.name.localized
+        case "space-drift": return L.PresetSpace.Drift.name.localized
+        case "space-cinematic-3": return L.PresetSpace.Cinematic3.name.localized
+        case "space-ambient-3": return L.PresetSpace.Ambient3.name.localized
+        case "space-orbit": return L.PresetSpace.Orbit.name.localized
+        case "space-void": return L.PresetSpace.Void.name.localized
         default: return name
         }
     }
@@ -98,6 +112,20 @@ struct PresetSound: Identifiable, Codable {
         case "tibetan-meditation": return L.PresetNew.TibetanMeditation.description.localized
         case "jungle-morning": return L.PresetNew.JungleMorning.description.localized
         case "spring-forest": return L.PresetNew.SpringForest.description.localized
+        // 우주 앰비언트 (좌우 굴리기 리스트)
+        case "space": return L.PresetSpace.Space.description.localized
+        case "space-cinematic": return L.PresetSpace.Cinematic.description.localized
+        case "space-ambient-1": return L.PresetSpace.Ambient1.description.localized
+        case "space-deep": return L.PresetSpace.Deep.description.localized
+        case "space-ambient-2": return L.PresetSpace.Ambient2.description.localized
+        case "space-cinematic-2": return L.PresetSpace.Cinematic2.description.localized
+        case "space-shuttle": return L.PresetSpace.Shuttle.description.localized
+        case "space-solar": return L.PresetSpace.Solar.description.localized
+        case "space-drift": return L.PresetSpace.Drift.description.localized
+        case "space-cinematic-3": return L.PresetSpace.Cinematic3.description.localized
+        case "space-ambient-3": return L.PresetSpace.Ambient3.description.localized
+        case "space-orbit": return L.PresetSpace.Orbit.description.localized
+        case "space-void": return L.PresetSpace.Void.description.localized
         default: return description
         }
     }

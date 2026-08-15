@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C776B16D28B2620000A13052"
-               BuildableName = "RelaxOnUITests.xctest"
-               BlueprintName = "RelaxOnUITests"
+               BlueprintIdentifier = "TST000000000000000T01"
+               BuildableName = "DalbitTests.xctest"
+               BlueprintName = "DalbitTests"
                ReferencedContainer = "container:Dalbit.xcodeproj">
             </BuildableReference>
          </TestableReference>

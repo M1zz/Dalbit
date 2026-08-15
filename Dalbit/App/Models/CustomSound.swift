@@ -1,6 +1,6 @@
 //
 //  CustomSound.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/03/10.
 //
@@ -177,9 +177,9 @@ enum AudioFilter: String, Codable {
         case .Camera:
             return L.Filter.camera.localized
         case .AirShimmer:
-            return "에어 시머"
+            return L.Filter.airShimmer.localized
         case .SparkleBells:
-            return "스파클 벨"
+            return L.Filter.sparkleBells.localized
         }
     }
 

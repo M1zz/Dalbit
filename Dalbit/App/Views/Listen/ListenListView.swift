@@ -1,6 +1,6 @@
 //
 //  ListenListView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/03/09.
 //
@@ -240,7 +240,7 @@ struct ListenListView: View {
             if !didAutoPlay {
                 didAutoPlay = true
                 let startup = viewModel.presetSounds.first
-                    ?? CustomSound(title: "우주",
+                    ?? CustomSound(title: L.PresetSpace.Space.name.localized,
                                    backgroundSound: BackgroundSound.space.rawValue,
                                    backgroundVolume: 0.5)
                 viewModel.selectedSound = startup
@@ -1540,7 +1540,7 @@ final class NowPlayingManager {
     func update(title: String, isPlaying: Bool, tint: UIColor) {
         var info: [String: Any] = [:]
         info[MPMediaItemPropertyTitle] = title
-        info[MPMediaItemPropertyArtist] = "달빛"
+        info[MPMediaItemPropertyArtist] = L.App.name.localized
         info[MPNowPlayingInfoPropertyIsLiveStream] = true   // 백색소음 = 무한 재생(스크러버 숨김)
         info[MPNowPlayingInfoPropertyPlaybackRate] = isPlaying ? 1.0 : 0.0
 
@@ -2244,19 +2244,19 @@ struct GestureCoachmark: View {
                 .onTapGesture { onDismiss() }
 
             VStack(spacing: DS.Spacing.lg) {
-                Text("이렇게 사용해요")
+                Text(L.Listen.Coachmark.title.localized)
                     .font(DS.Font.title())
                     .foregroundColor(.white)
 
                 VStack(alignment: .leading, spacing: DS.Spacing.md) {
-                    row("hand.tap.fill", "탭하면 재생 / 일시정지")
-                    row("arrow.left.and.right", "좌우로 밀면 다른 소리")
-                    row("arrow.up", "위로 밀면 수면 타이머")
-                    row("arrow.down", "아래로 밀면 보관함")
+                    row("hand.tap.fill", L.Listen.Coachmark.tap.localized)
+                    row("arrow.left.and.right", L.Listen.Coachmark.swipeSide.localized)
+                    row("arrow.up", L.Listen.Coachmark.swipeUp.localized)
+                    row("arrow.down", L.Listen.Coachmark.swipeDown.localized)
                 }
 
                 Button(action: onDismiss) {
-                    Text("시작하기")
+                    Text(L.Onboarding.start.localized)
                         .font(DS.Font.headline())
                         .foregroundColor(DS.Colors.onAccent)
                         .frame(maxWidth: .infinity)

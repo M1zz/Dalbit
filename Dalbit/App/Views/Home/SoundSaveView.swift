@@ -1,6 +1,6 @@
 //
 //  SoundSaveView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/03/07.
 //
@@ -125,7 +125,7 @@ struct SoundSaveView: View {
                                 .foregroundColor(Color(hex: "1F1F1F"))
                                 .frame(width: 44, height: 44)
                         }
-                        .accessibilityLabel("색상 바꾸기")
+                        .accessibilityLabel(L.A11y.changeColor.localized)
                     }
                     .cornerRadius(DS.Radius.md)
                     .padding(.vertical, DS.Spacing.xxxl)

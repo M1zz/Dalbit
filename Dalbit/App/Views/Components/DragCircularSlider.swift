@@ -1,6 +1,6 @@
 //
 //  CircularSlider.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by 황석현 on 2023/05/25.
 //

@@ -1,6 +1,6 @@
 //
 //  UserDefaultsManager.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/03/27.
 //
@@ -54,6 +54,13 @@ extension UserDefaultsManager {
     var presetSeedVersion: Int {
         get { standard.integer(forKey: UserDefaults.Keys.presetSeedVersion) }
         set { standard.set(newValue, forKey: UserDefaults.Keys.presetSeedVersion) }
+    }
+
+    /// 프리셋을 시드할 때 사용한 언어. 프리셋 제목은 저장 시점의 언어로 굳어지므로,
+    /// 언어가 바뀌면 다시 시드해서 UI 언어와 섞이지 않게 한다.
+    var presetSeedLanguage: String {
+        get { standard.string(forKey: UserDefaults.Keys.presetSeedLanguage) ?? "" }
+        set { standard.set(newValue, forKey: UserDefaults.Keys.presetSeedLanguage) }
     }
 
     var isFirstVisit: Bool {

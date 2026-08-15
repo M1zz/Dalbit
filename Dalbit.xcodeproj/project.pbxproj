@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		TST000000000000000B01 /* ListeningTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST000000000000000F01 /* ListeningTrackerTests.swift */; };
+		TST000000000000000B02 /* UsageInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST000000000000000F02 /* UsageInsightsTests.swift */; };
+		TST000000000000000B03 /* UsageReportingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TST000000000000000F03 /* UsageReportingServiceTests.swift */; };
 		00FBBC03CD1238D45921E028 /* Keyboard.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9FDD1DB550B335455F5A721 /* Keyboard.mp3 */; };
 		0F874E616060AD39A4935B29 /* IndigoMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18F787B9DFE4DC8F447491C3 /* IndigoMusic.mp3 */; };
 		21706CE4C8B7EBA02D7029C1 /* BowlDeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 367F0E20D89EE7F0F06671CC /* BowlDeep.mp3 */; };
@@ -92,6 +95,12 @@
 		A81D4B61DC9FC788038A49E4 /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9C11FBB3A19C84918309F6 /* LocalizationKeys.swift */; };
 		AEV000022F28000000000BA /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEV000012F28000000000B9 /* AlarmEditView.swift */; };
 		AF157A5052C0E1B7696712E2 /* Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8D694CBC9BA73FEEE972785 /* Bell.mp3 */; };
+		USG000022F2C0000000000D2 /* ListeningTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = USG000012F2C0000000000D1 /* ListeningTracker.swift */; };
+		USG000042F2C0000000000D4 /* UsageReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = USG000032F2C0000000000D3 /* UsageReportingService.swift */; };
+		USG000062F2C0000000000D6 /* UsageInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = USG000052F2C0000000000D5 /* UsageInsights.swift */; };
+		USG000082F2C0000000000D8 /* UsageStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = USG000072F2C0000000000D7 /* UsageStatsView.swift */; };
+		RCP000022F2C0000000000E2 /* ListeningRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = RCP000012F2C0000000000E1 /* ListeningRecapView.swift */; };
+		CRS000022F2C0000000000E6 /* CrashReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CRS000012F2C0000000000E5 /* CrashReportsView.swift */; };
 		ALM000022F28000000000B4 /* AlarmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000012F28000000000B3 /* AlarmService.swift */; };
 		ALM000042F28000000000B6 /* AlarmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALM000032F28000000000B5 /* AlarmItem.swift */; };
 		ALV000022F28000000000B8 /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ALV000012F28000000000B7 /* AlarmListView.swift */; };
@@ -186,6 +195,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		TST000000000000000F01 /* ListeningTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTrackerTests.swift; sourceTree = "<group>"; };
+		TST000000000000000F02 /* UsageInsightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageInsightsTests.swift; sourceTree = "<group>"; };
+		TST000000000000000F03 /* UsageReportingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReportingServiceTests.swift; sourceTree = "<group>"; };
+		TST000000000000000T02 /* DalbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DalbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C047869B83EAF5E36D4BC3 /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = App/Resources/Localizable.xcstrings; sourceTree = "<group>"; };
 		0B8A77712079DB40B0C16ED8 /* BowlLoud.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = BowlLoud.mp3; sourceTree = "<group>"; };
 		18E999CF36B64FB99C403643 /* PresetSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetSound.swift; sourceTree = "<group>"; };
@@ -273,6 +286,12 @@
 		A9FDD1DB550B335455F5A721 /* Keyboard.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Keyboard.mp3; sourceTree = "<group>"; };
 		AD9C11FBB3A19C84918309F6 /* LocalizationKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocalizationKeys.swift; path = App/Resources/Localization/LocalizationKeys.swift; sourceTree = "<group>"; };
 		AEV000012F28000000000B9 /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
+		USG000012F2C0000000000D1 /* ListeningTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTracker.swift; sourceTree = "<group>"; };
+		USG000032F2C0000000000D3 /* UsageReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReportingService.swift; sourceTree = "<group>"; };
+		USG000052F2C0000000000D5 /* UsageInsights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageInsights.swift; sourceTree = "<group>"; };
+		USG000072F2C0000000000D7 /* UsageStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageStatsView.swift; sourceTree = "<group>"; };
+		RCP000012F2C0000000000E1 /* ListeningRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningRecapView.swift; sourceTree = "<group>"; };
+		CRS000012F2C0000000000E5 /* CrashReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReportsView.swift; sourceTree = "<group>"; };
 		ALM000012F28000000000B3 /* AlarmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmService.swift; sourceTree = "<group>"; };
 		ALM000032F28000000000B5 /* AlarmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmItem.swift; sourceTree = "<group>"; };
 		ALV000012F28000000000B7 /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
@@ -336,6 +355,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		TST000000000000000T05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58DE617C2839C13900F25769 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +373,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		TST000000000000000T03 /* DalbitTests */ = {
+			isa = PBXGroup;
+			children = (
+				TST000000000000000F01 /* ListeningTrackerTests.swift */,
+				TST000000000000000F02 /* UsageInsightsTests.swift */,
+				TST000000000000000F03 /* UsageReportingServiceTests.swift */,
+			);
+			path = DalbitTests;
+			sourceTree = "<group>";
+		};
 		4305EB9BC117E8533A571E15 /* Ambient */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +404,7 @@
 				CC5AC18F289D573A00FE847B /* RelaxOnWidgetExtension.entitlements */,
 				58DE61812839C13900F25769 /* Dalbit */,
 				CC5AC105289C033C00FE847B /* Frameworks */,
+				TST000000000000000T03 /* DalbitTests */,
 				58DE61802839C13900F25769 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -376,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				58DE617F2839C13900F25769 /* Dalbit.app */,
+				TST000000000000000T02 /* DalbitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -612,6 +650,9 @@
 				SUB000012F29000000000001 /* SubscriptionManager.swift */,
 				FBA0000000000000000000B1 /* AnalyticsManager.swift */,
 				ALM000012F28000000000B3 /* AlarmService.swift */,
+				USG000012F2C0000000000D1 /* ListeningTracker.swift */,
+				USG000032F2C0000000000D3 /* UsageReportingService.swift */,
+				USG000052F2C0000000000D5 /* UsageInsights.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -760,6 +801,9 @@
 				STV000012F2800000000000B /* SettingsView.swift */,
 				FBK000032F2A0000000000C3 /* FeedbackView.swift */,
 				FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */,
+				USG000072F2C0000000000D7 /* UsageStatsView.swift */,
+				RCP000012F2C0000000000E1 /* ListeningRecapView.swift */,
+				CRS000012F2C0000000000E5 /* CrashReportsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -775,6 +819,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		TST000000000000000T01 /* DalbitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = TST000000000000000T07 /* Build configuration list for PBXNativeTarget "DalbitTests" */;
+			buildPhases = (
+				TST000000000000000T04 /* Sources */,
+				TST000000000000000T05 /* Frameworks */,
+				TST000000000000000T06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				TST000000000000000T10 /* PBXTargetDependency */,
+			);
+			name = DalbitTests;
+			productName = DalbitTests;
+			productReference = TST000000000000000T02 /* DalbitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		58DE617E2839C13900F25769 /* Dalbit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58DE61A32839C13B00F25769 /* Build configuration list for PBXNativeTarget "Dalbit" */;
@@ -800,6 +862,24 @@
 		};
 /* End PBXNativeTarget section */
 
+/* Begin PBXContainerItemProxy section */
+		TST000000000000000T11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58DE61772839C13900F25769 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58DE617E2839C13900F25769;
+			remoteInfo = Dalbit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		TST000000000000000T10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58DE617E2839C13900F25769 /* Dalbit */;
+			targetProxy = TST000000000000000T11 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXProject section */
 		58DE61772839C13900F25769 /* Project object */ = {
 			isa = PBXProject;
@@ -810,6 +890,10 @@
 				TargetAttributes = {
 					58DE617E2839C13900F25769 = {
 						CreatedOnToolsVersion = 13.4;
+					};
+					TST000000000000000T01 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 58DE617E2839C13900F25769;
 					};
 				};
 			};
@@ -831,11 +915,19 @@
 			projectRoot = "";
 			targets = (
 				58DE617E2839C13900F25769 /* Dalbit */,
+				TST000000000000000T01 /* DalbitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		TST000000000000000T06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58DE617D2839C13900F25769 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -921,6 +1013,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		TST000000000000000T04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				TST000000000000000B01 /* ListeningTrackerTests.swift in Sources */,
+				TST000000000000000B02 /* UsageInsightsTests.swift in Sources */,
+				TST000000000000000B03 /* UsageReportingServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58DE617B2839C13900F25769 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -941,6 +1043,12 @@
 				8F5A0EC52A160B3A0061F42C /* AudioEngineManager.swift in Sources */,
 				21EC2EDD80814105A172AAC3 /* AudioLayerManager.swift in Sources */,
 				FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */,
+				USG000022F2C0000000000D2 /* ListeningTracker.swift in Sources */,
+				USG000042F2C0000000000D4 /* UsageReportingService.swift in Sources */,
+				USG000062F2C0000000000D6 /* UsageInsights.swift in Sources */,
+				USG000082F2C0000000000D8 /* UsageStatsView.swift in Sources */,
+				RCP000022F2C0000000000E2 /* ListeningRecapView.swift in Sources */,
+				CRS000022F2C0000000000E6 /* CrashReportsView.swift in Sources */,
 				ALM000022F28000000000B4 /* AlarmService.swift in Sources */,
 				FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */,
 				FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */,
@@ -994,6 +1102,46 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		TST000000000000000T08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QGAQ3AY3R3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leeo.LullabyRecipe.DalbitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dalbit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dalbit";
+			};
+			name = Debug;
+		};
+		TST000000000000000T09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QGAQ3AY3R3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leeo.LullabyRecipe.DalbitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dalbit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dalbit";
+			};
+			name = Release;
+		};
 		58DE61A12839C13B00F25769 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1186,6 +1334,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		TST000000000000000T07 /* Build configuration list for PBXNativeTarget "DalbitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				TST000000000000000T08 /* Debug */,
+				TST000000000000000T09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		58DE617A2839C13900F25769 /* Build configuration list for PBXProject "Dalbit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1212,7 +1369,7 @@
 			repositoryURL = "https://github.com/M1zz/LeeoKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.6.0;
+				minimumVersion = 2.7.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

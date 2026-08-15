@@ -1,6 +1,6 @@
 //
 //  SoundPlayerFullModalView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/05/18.
 //
@@ -129,7 +129,7 @@ struct SoundPlayerFullModalView: View {
                 }
 
                 if audioManager.isSpatialAudioEnabled {
-                    Text("3D 입체 음향이 활성화되어 있습니다")
+                    Text(L.Player.spatialAudioEnabled.localized)
                         .font(DS.Font.caption())
                         .foregroundColor(DS.Colors.textSecondary)
 

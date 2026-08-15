@@ -1,6 +1,6 @@
 //
 //  ListenListCell.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/05/18.
 //
@@ -40,7 +40,7 @@ struct ListenListCell: View {
                         HStack(spacing: 4) {
                             Image(systemName: "square.3.layers.3d")
                                 .font(.system(size: 10))
-                            Text("\(layers.count)개 레이어")
+                            Text(String(format: L.Listen.layerCount.localized, layers.count))
                                 .font(.system(size: 12))
                         }
                         .foregroundColor(Color(.PrimaryPurple).opacity(0.8))

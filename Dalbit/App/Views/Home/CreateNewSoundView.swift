@@ -1,6 +1,6 @@
 //
 //  CreateNewSoundView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Claude on 2025/01/26.
 //
@@ -239,7 +239,7 @@ struct CreateNewSoundView: View {
                             .clipShape(Circle())
                             .shadow(color: DS.Shadow.card.color, radius: DS.Shadow.card.radius, x: 0, y: DS.Shadow.card.y)
                     }
-                    .accessibilityLabel("초기화")
+                    .accessibilityLabel(L.Common.reset.localized)
                 }
                 .padding(.horizontal, DS.Spacing.md)
                 .padding(.vertical, DS.Spacing.sm)
@@ -288,7 +288,7 @@ struct CreateNewSoundView: View {
                         .clipShape(Circle())
                         .contentShape(Circle())
                 }
-                .accessibilityLabel("삭제")
+                .accessibilityLabel(L.Common.delete.localized)
             }
             .padding(.horizontal, DS.Spacing.xs)
             .padding(.vertical, DS.Spacing.xxs)

@@ -1,6 +1,6 @@
 //
 //  CustomSoundViewModel.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/05/25.
 //
@@ -178,6 +178,9 @@ extension CustomSoundViewModel {
         }
         audioEngineManager.play(with: sound)
 
+        // 청취 세션 시작 — 곡을 넘긴 것이면 직전 세션을 확정하고 새로 연다.
+        ListeningTracker.shared.begin()
+
         // CustomSound인 경우 재생 통계 업데이트
         if let customSound = sound as? CustomSound {
             updatePlayStatistics(customSound)
@@ -185,11 +188,16 @@ extension CustomSoundViewModel {
         }
     }
 
-    func stopSound() {
+    /// 재생 정지.
+    /// - Parameter reason: 왜 멈췄는지. **효용 집계가 이 값 하나로 갈린다** — 직접 껐다면
+    ///   깨어 있었다는 뜻이고, 타이머가 끝까지 갔다면 잠들었을 가능성이 높다.
+    ///   기본값이 `.userStopped` 이므로 타이머 경로는 반드시 이유를 넘겨야 한다.
+    func stopSound(reason: ListeningEndReason = .userStopped) {
         if isPlaying {
             isPlaying = false
             AnalyticsManager.shared.log(.soundStop)
         }
+        ListeningTracker.shared.end(reason: reason)
         // 뚝 끊기지 않도록 페이드 아웃 후 정지
         audioEngineManager.masterFadeOutAndStop(duration: 1.0)
     }
@@ -369,6 +377,7 @@ extension CustomSoundViewModel {
 
         customSounds[index].isFavorite.toggle()
         userDefaults.customSounds = customSounds
+        AnalyticsManager.shared.log(.favoriteToggle(isOn: customSounds[index].isFavorite))
         loadSound()
     }
 
@@ -380,9 +389,15 @@ extension CustomSoundViewModel {
         let currentPresetVersion = 3
         var customSounds = userDefaults.customSounds
 
+        // 프리셋 제목·설명은 시드 시점의 언어로 굳어져 저장된다.
+        // 언어가 바뀌면 그대로 두었을 때 UI만 새 언어가 되어 한/영이 섞이므로 다시 시드한다.
+        let currentLanguage = Bundle.main.preferredLocalizations.first ?? "ko"
+
         let hasPresets = customSounds.contains(where: { $0.isPreset })
-        // 최신 프리셋이 이미 시드되어 있으면 스킵
-        if hasPresets && userDefaults.presetSeedVersion >= currentPresetVersion {
+        // 최신 프리셋이 같은 언어로 이미 시드되어 있으면 스킵
+        if hasPresets
+            && userDefaults.presetSeedVersion >= currentPresetVersion
+            && userDefaults.presetSeedLanguage == currentLanguage {
             return
         }
 
@@ -398,6 +413,7 @@ extension CustomSoundViewModel {
 
         userDefaults.customSounds = customSounds
         userDefaults.presetSeedVersion = currentPresetVersion
+        userDefaults.presetSeedLanguage = currentLanguage
         loadSound()
     }
 

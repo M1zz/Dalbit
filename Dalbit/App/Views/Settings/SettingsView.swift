@@ -18,8 +18,12 @@ struct SettingsView: View {
     @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
 
     @State private var showFeedback = false
+    @State private var showRecap = false
     @State private var showInbox = false
-    // 히든 모드: 앱 버전을 7번 탭하면 개발자 인박스
+    @State private var showUsageStats = false
+    @State private var showStability = false
+    // 히든 모드: 앱 버전을 7번 탭하면 개발자 도구(피드백 인박스·사용 통계)가 드러난다
+    @State private var developerMode = false
     @State private var versionTapCount = 0
     @State private var versionTapResetWork: DispatchWorkItem?
 
@@ -39,6 +43,7 @@ struct SettingsView: View {
                     soundSection()
                     supportSection()
                     aboutSection()
+                    if developerMode { developerSection() }
                 }
                 .padding(.horizontal, DS.Spacing.screen)
                 .padding(.top, DS.Spacing.md)
@@ -50,8 +55,17 @@ struct SettingsView: View {
         .navigationDestination(isPresented: $showFeedback) {
             FeedbackView()
         }
+        .navigationDestination(isPresented: $showRecap) {
+            ListeningRecapView()
+        }
         .navigationDestination(isPresented: $showInbox) {
             FeedbackInboxView()
+        }
+        .navigationDestination(isPresented: $showUsageStats) {
+            UsageStatsView()
+        }
+        .navigationDestination(isPresented: $showStability) {
+            CrashReportsView()
         }
     }
 
@@ -119,22 +133,40 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: DS.Spacing.sm) {
             sectionTitle(L.Settings.sectionSupport.localized)
 
-            Button { showFeedback = true } label: {
-                settingRow(icon: "envelope",
-                           iconColor: DS.Colors.accent,
-                           title: L.Feedback.entry.localized,
-                           subtitle: L.Feedback.entryHint.localized) {
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundColor(DS.Colors.textSecondary)
+            VStack(spacing: 0) {
+                // 자기 기록을 본 직후가 의견을 남기기 가장 쉬운 순간이라 피드백 바로 위에 둔다.
+                Button { showRecap = true } label: {
+                    settingRow(icon: "moon.stars.fill",
+                               iconColor: DS.Colors.accent,
+                               title: L.Recap.entry.localized,
+                               subtitle: L.Recap.entryHint.localized) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
                 }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L.Recap.entry.localized)
+
+                divider()
+
+                Button { showFeedback = true } label: {
+                    settingRow(icon: "envelope",
+                               iconColor: DS.Colors.accent,
+                               title: L.Feedback.entry.localized,
+                               subtitle: L.Feedback.entryHint.localized) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L.Feedback.entry.localized)
             }
-            .buttonStyle(.plain)
             .background(
                 RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
                     .fill(DS.Colors.surfaceSunken)
             )
-            .accessibilityLabel(L.Feedback.entry.localized)
         }
     }
 
@@ -165,14 +197,68 @@ struct SettingsView: View {
         }
     }
 
-    /// 앱 버전 7번 탭 → 히든 개발자 모드(피드백 인박스). 2초 쉬면 카운트 리셋.
+    /// 개발자 전용 — 버전을 7번 탭하면 드러난다.
+    /// 머리말을 두지 않는다. 행마다 "(개발자)"가 붙어 있어 한 번 더 말할 필요가 없다.
+    @ViewBuilder
+    private func developerSection() -> some View {
+        VStack(alignment: .leading, spacing: DS.Spacing.sm) {
+            VStack(spacing: 0) {
+                Button { showUsageStats = true } label: {
+                    settingRow(icon: "chart.bar.xaxis",
+                               iconColor: DS.Colors.accent,
+                               title: L.Stats.entry.localized,
+                               subtitle: L.Stats.entryHint.localized) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+
+                divider()
+
+                Button { showStability = true } label: {
+                    settingRow(icon: "exclamationmark.triangle",
+                               iconColor: DS.Colors.accent,
+                               title: L.Stability.entry.localized,
+                               subtitle: L.Stability.entryHint.localized) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+
+                divider()
+
+                Button { showInbox = true } label: {
+                    settingRow(icon: "tray.full",
+                               iconColor: DS.Colors.accent,
+                               title: L.Stats.inboxEntry.localized,
+                               subtitle: nil) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+            }
+            .background(
+                RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                    .fill(DS.Colors.surfaceSunken)
+            )
+        }
+    }
+
+    /// 앱 버전 7번 탭 → 히든 개발자 모드. 2초 쉬면 카운트 리셋.
     private func versionTapped() {
         versionTapCount += 1
         versionTapResetWork?.cancel()
         if versionTapCount >= 7 {
             versionTapCount = 0
             Haptics.light()
-            showInbox = true
+            // 바로 인박스로 보내지 않고 도구 묶음을 드러낸다 — 통계와 인박스 둘 다 있어서다.
+            withAnimation { developerMode = true }
         } else {
             let work = DispatchWorkItem { versionTapCount = 0 }
             versionTapResetWork = work

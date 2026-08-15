@@ -1,6 +1,6 @@
 //
 //  CircleProgressView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/05/18.
 //

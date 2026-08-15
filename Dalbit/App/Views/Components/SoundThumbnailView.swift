@@ -1,6 +1,6 @@
 //
 //  SoundThumbnailView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Claude on 2025/12/16.
 //

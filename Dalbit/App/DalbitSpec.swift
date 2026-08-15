@@ -37,3 +37,16 @@ enum DalbitSpec: LeeoAppSpec {
         privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html")
     )
 }
+
+/// 심사 없이 원격으로 끌 수 있는 기능.
+///
+/// ⚠️ `rawValue` 는 CloudKit `RemoteFlags` 레코드의 **필드명과 정확히 같아야** 한다.
+///    이름이 어긋나면 대시보드에서 아무리 꺼도 앱은 켠 채로 돈다(조용한 실패).
+/// ⚠️ 필드를 안 만들어도 된다 — 없으면 "켬"으로 동작하는 게 안전 기본값이다.
+enum DalbitFlag: String, LeeoRemoteFlag, CaseIterable {
+    /// 익명 사용 통계 수집. 심사 지적·개인정보 문의를 받으면 이 값을 0 으로 내린다.
+    case usageReportingEnabled
+    /// 크래시·멈춤 진단 수집(MetricKit). 사용 통계와 따로 끌 수 있어야 한다 —
+    /// 둘은 App Privacy 신고 항목이 다르고(Usage Data vs CrashData), 문제가 생기는 이유도 다르다.
+    case diagnosticsEnabled
+}

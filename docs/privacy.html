@@ -33,13 +33,21 @@
 
 <h2>1. 수집하는 정보</h2>
 <p>달빛(Dalbit)은 이름·이메일 등 사용자를 직접 식별할 수 있는 <strong>개인정보를 수집하지 않습니다.</strong> 사용자가 만든 사운드 조합, 설정값 등 모든 데이터는 사용자의 기기 내에만 저장됩니다.</p>
-<p>앱은 <strong>외부 분석 도구를 사용하지 않으며,</strong> 어떤 사용 통계나 데이터도 외부 서버로 전송하지 않습니다.</p>
+<p>앱은 <strong>Google Analytics 등 외부 분석 도구나 광고 SDK를 사용하지 않습니다.</strong> 다만 앱을 개선하기 위해 아래의 <strong>익명 사용 통계</strong>를 개발자의 Apple iCloud(CloudKit)로 보냅니다.</p>
+<ul>
+  <li>소리를 몇 번, 얼마나 오래 들었는지 (분·횟수 단위의 합계)</li>
+  <li>수면 타이머를 사용했는지, 끝까지 두었는지</li>
+  <li>만든 사운드 조합의 <strong>개수</strong>, 즐겨찾기 개수, 재생 횟수</li>
+  <li>앱 버전·OS 버전·언어, 설치 후 경과일, 앱을 연 날짜</li>
+</ul>
+<p>또한 앱이 예기치 않게 종료되거나 멈추면, Apple의 <strong>MetricKit</strong>이 만든 <strong>진단 정보</strong>(오류가 난 위치를 가리키는 기술적 기록, 앱 버전, OS 버전, 기기 종류)가 같은 iCloud로 전송됩니다. 이 진단에는 위 통계의 무작위 번호조차 붙지 않아 어느 설치에서 온 것인지 알 수 없으며, 오직 오류를 고치는 데에만 쓰입니다.</p>
+<p><strong>보내지 않는 것:</strong> 사용자가 만든 사운드 조합의 <strong>이름과 내용</strong>, 이름·이메일·전화번호, 기기 식별자나 광고 식별자, 위치 정보는 전송되지 않습니다. 통계는 기기·계정과 무관한 무작위 번호로만 구분되며, 이 번호는 앱을 지웠다 다시 설치하면 새로 만들어집니다. 이 정보는 특정 개인을 알아볼 수 없고, 이용자 추적(App Tracking)에 사용되지 않으며, 광고 목적으로 쓰이거나 제3자에게 제공되지 않습니다.</p>
 
 <h2>2. 구독 및 결제</h2>
 <p>유료 구독은 Apple의 App Store(인앱 결제, StoreKit)를 통해 처리됩니다. 결제 정보는 Apple이 처리하며, 앱은 사용자의 결제 수단 정보에 접근하지 않습니다. 구독 상태 확인은 Apple이 제공하는 영수증 정보로만 이루어집니다.</p>
 
 <h2>3. 제3자 제공</h2>
-<p>앱은 개인정보를 제3자에게 판매하거나 공유하지 않으며, 어떤 데이터도 외부 제3자에게 전송하지 않습니다.</p>
+<p>앱은 개인정보를 제3자에게 판매하거나 공유하지 않습니다. 문의·피드백과 1항의 익명 사용 통계는 Apple의 iCloud(CloudKit)에 저장되며, 개발자 외에는 접근할 수 없습니다. 그 밖의 외부 업체로는 어떤 데이터도 전송되지 않습니다.</p>
 
 <h2>4. 아동의 개인정보</h2>
 <p>앱은 만 13세 미만 아동으로부터 고의로 개인정보를 수집하지 않습니다.</p>
@@ -59,13 +67,21 @@
 
 <h2>1. Information We Collect</h2>
 <p>Dalbit does <strong>not collect personally identifiable information</strong> such as your name or email. All data — including the sound mixes you create and your settings — is stored only on your device.</p>
-<p>The App <strong>does not use any third-party analytics tools</strong> and does not transmit any usage statistics or data to external servers.</p>
+<p>The App <strong>does not use third-party analytics tools or advertising SDKs.</strong> To improve the App, it does send the following <strong>anonymous usage statistics</strong> to the developer's Apple iCloud (CloudKit):</p>
+<ul>
+  <li>How many times and how long you listened (totals in minutes and counts)</li>
+  <li>Whether you used the sleep timer, and whether you let it run to the end</li>
+  <li>The <strong>number</strong> of sound mixes you created, favorites, and play counts</li>
+  <li>App version, OS version, language, days since install, and the dates you opened the App</li>
+</ul>
+<p>If the App crashes or freezes, <strong>diagnostic information</strong> produced by Apple's <strong>MetricKit</strong> — a technical record pointing to where the error occurred, plus app version, OS version, and device type — is also sent to the same iCloud. These diagnostics carry not even the random number described above, so they cannot be traced to a particular installation, and they are used solely to fix the error.</p>
+<p><strong>What is never sent:</strong> the <strong>names or contents</strong> of your sound mixes, your name, email or phone number, device or advertising identifiers, and location. Statistics are grouped only by a random number unrelated to your device or account, and that number is regenerated if you delete and reinstall the App. This information cannot identify you, is not used for App Tracking, and is never used for advertising or shared with third parties.</p>
 
 <h2>2. Subscriptions &amp; Payments</h2>
 <p>Paid subscriptions are processed through Apple's App Store (In-App Purchase, StoreKit). Payment information is handled by Apple; the App does not access your payment details. Subscription status is verified only via Apple-provided receipt information.</p>
 
 <h2>3. Third Parties</h2>
-<p>The App does not sell or share your personal information with third parties, and does not transmit any data to external third parties.</p>
+<p>The App does not sell or share your personal information with third parties. Feedback you send and the anonymous usage statistics described in section 1 are stored in Apple's iCloud (CloudKit) and are accessible only to the developer. No data is transmitted to any other external party.</p>
 
 <h2>4. Children's Privacy</h2>
 <p>The App does not knowingly collect personal information from children under 13.</p>

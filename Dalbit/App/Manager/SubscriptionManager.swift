@@ -1,6 +1,6 @@
 //
 //  SubscriptionManager.swift
-//  RelaxOn
+//  Dalbit
 //
 //  구독(자동 갱신) 관리자 — 파사드
 //
@@ -45,7 +45,25 @@ class SubscriptionManager: ObservableObject {
         // 공용 스토어의 상태 변화를 그대로 뷰에 전파한다.
         cancellable = store.objectWillChange.sink { [weak self] in
             self?.objectWillChange.send()
+            // ⚠️ `objectWillChange` 는 값이 바뀌기 **전에** 온다 — 다음 턴으로 미뤄야
+            //    갱신된 isPremium 을 읽는다. 여기서 바로 읽으면 항상 한 발 늦은 값이 캐시된다.
+            Task { @MainActor in self?.cachePremiumFlag() }
         }
+        cachePremiumFlag()
+    }
+
+    // MARK: - 통계 지표용 캐시
+
+    /// 사용 통계가 읽는 프리미엄 상태 캐시 키.
+    static let isPremiumCacheKey = "dalbit.flag.isPro"
+
+    /// 프리미엄 여부를 평평한 값으로 남긴다.
+    ///
+    /// 지표 수집(`UsageReportingService.currentMetrics`)은 백그라운드에서 도는데 이 매니저는
+    /// `@MainActor` 이고 싱글톤도 아니라 거기서 직접 읽을 방법이 없다. 상태가 바뀌는 지점마다
+    /// UserDefaults 에 한 줄 남겨 두면 수집 쪽이 액터를 넘지 않고도 정확한 값을 본다.
+    func cachePremiumFlag() {
+        UserDefaults.standard.set(isPremium, forKey: Self.isPremiumCacheKey)
     }
 
     // MARK: - 공개 상태 (기존 API 유지)

@@ -1,6 +1,6 @@
 //
 //  UserDefaults+Extension.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Doyeon on 2023/04/18.
 //
@@ -16,5 +16,6 @@ extension UserDefaults {
         static let isFirstVisit = "IS_FIRST"
         static let lastPlayedSoundKey = "LAST_SOUND_KEY"
         static let presetSeedVersion = "PRESET_SEED_VERSION"
+        static let presetSeedLanguage = "PRESET_SEED_LANGUAGE"
     }
 }

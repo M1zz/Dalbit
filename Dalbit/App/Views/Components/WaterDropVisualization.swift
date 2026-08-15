@@ -1,6 +1,6 @@
 //
 //  WaterDropVisualization.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Claude on 2025/01/26.
 //
@@ -52,7 +52,7 @@ struct WaterDropVisualization: View {
                 }
 
                 // 현재 간격 표시
-                Text(String(format: "%.1f초 간격", viewModel.interval))
+                Text(String(format: L.Player.intervalFormat.localized, viewModel.interval))
                     .font(.system(size: 12))
                     .foregroundColor(Color(.Text).opacity(0.7))
 

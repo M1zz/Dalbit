@@ -1,6 +1,6 @@
 //
 //  SoundStudioView.swift
-//  RelaxOn
+//  Dalbit
 //
 //  소리 생성 과정 개편:
 //  1) "어디서 들리나요?"에서 배경음(분위기)을 먼저 고르고

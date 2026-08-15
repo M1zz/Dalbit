@@ -1,6 +1,6 @@
 //
 //  VariationRangeBar.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by Claude on 2025/01/26.
 //

@@ -1,6 +1,6 @@
 //
 //  TimerManager.swift
-//  RelaxOn
+//  Dalbit
 //
 //  Created by 황석현 on 2023/04/26.
 //
@@ -33,6 +33,9 @@ class TimerManager: ObservableObject {
 
         AnalyticsManager.shared.log(.timerStart(minutes: self.remainingSeconds / 60))
 
+        // 이미 흐르고 있는 청취 세션에 타이머를 붙인다 — 타이머 화면은 소리가 난 뒤에 열린다.
+        ListeningTracker.shared.attachTimer(minutes: self.remainingSeconds / 60)
+
         // 페이드 인 효과 (3초)
         AudioEngineManager.shared.fadeIn(duration: 3.0)
 
@@ -49,7 +52,8 @@ class TimerManager: ObservableObject {
             if self.remainingSeconds <= 0 {
                 timer.invalidate()
                 self.remainingSeconds = 0
-                self.viewModel?.stopSound()
+                // 끝까지 끄지 않았다 — 잠들었다고 볼 가장 믿을 만한 신호다.
+                self.viewModel?.stopSound(reason: .timerCompleted)
                 self.timerDidFinish?()
             }
         }
@@ -71,7 +75,8 @@ class TimerManager: ObservableObject {
         self.remainingSeconds = 0
         self.progress = 1.0
         AudioEngineManager.shared.cancelFade()
-        self.viewModel?.stopSound()
+        // 끝나기 전에 직접 껐다 — 깨어 있었다는 뜻이라 잠든 세션으로 세지 않는다.
+        self.viewModel?.stopSound(reason: .timerCancelled)
         AnalyticsManager.shared.log(.timerCancel)
     }
     
@@ -81,7 +86,8 @@ class TimerManager: ObservableObject {
         self.progressTimer?.invalidate()
         self.progressTimer = nil
         AudioEngineManager.shared.cancelFade()
-        self.viewModel?.stopSound()
+        // 일시정지도 사람이 깨어서 손을 댄 것이다.
+        self.viewModel?.stopSound(reason: .timerCancelled)
     }
     
     // 타이머 재개
@@ -102,7 +108,7 @@ class TimerManager: ObservableObject {
             if self.remainingSeconds <= 0 {
                 timer.invalidate()
                 self.remainingSeconds = 0
-                self.viewModel?.stopSound()
+                self.viewModel?.stopSound(reason: .timerCompleted)
                 self.timerDidFinish?()
             }
         }
@@ -121,7 +127,8 @@ class TimerManager: ObservableObject {
                 timer.invalidate()
                 self.progress = 1.0
                 // 페이드 아웃이 이미 진행 중이므로 여기서는 stopSound만 호출
-                self.viewModel?.stopSound()
+                // (텍스트 타이머가 먼저 닫았으면 여기 호출은 열린 세션이 없어 무시된다)
+                self.viewModel?.stopSound(reason: .timerCompleted)
                 self.timerDidFinish?()
             }
         }

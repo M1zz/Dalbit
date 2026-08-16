@@ -232,6 +232,80 @@ final class UsageInsightsTests: XCTestCase {
         XCTAssertEqual(rows[1].size, 1)
     }
 
+
+    // MARK: - 사용 시간·빈도
+
+    /// 평균의 분모는 **최근에 들은 설치**여야 한다.
+    /// 깔아만 둔 설치까지 분모에 넣으면 평균이 바닥으로 눌려, 실제로 쓰는 사람의 사용 깊이가 안 보인다.
+    func testRhythm_averagesUseActiveInstallsAsDenominator() {
+        let snapshots: [[String: Double]] = [
+            ["activeDays7": 7, "activeDays30": 30, "listenMin7": 700],
+            ["activeDays7": 1, "activeDays30": 4,  "listenMin7": 100],
+            ["activeDays7": 0, "activeDays30": 0,  "listenMin7": 0],   // 최근엔 안 들음
+            [:]                                                        // 깔기만 함
+        ]
+        let r = UsageInsights.rhythm(metrics: snapshots)
+
+        XCTAssertEqual(r.installs, 4)
+        XCTAssertEqual(r.active7, 2)
+        XCTAssertEqual(r.active30, 2)
+        XCTAssertEqual(r.weeklyActiveRate, 0.5, accuracy: 0.001)
+        // 800분 / 활성 2 (전체 4가 아니다)
+        XCTAssertEqual(r.minutesPerActive7, 400, accuracy: 0.001)
+        // (7 + 1) / 활성 2
+        XCTAssertEqual(r.daysPerWeek, 4, accuracy: 0.001)
+    }
+
+    /// 하루에 몇 번 트는가 = 세션 ÷ **들은 날**. 전체 날수로 나누면 안 듣는 날이 값을 희석한다.
+    func testRhythm_sessionsPerActiveDayDividesByListeningDays() {
+        let snapshots: [[String: Double]] = [
+            ["activeDays30": 10, "sessions30": 20],
+            ["activeDays30": 5,  "sessions30": 10]
+        ]
+        XCTAssertEqual(UsageInsights.rhythm(metrics: snapshots).sessionsPerActiveDay, 2, accuracy: 0.001)
+    }
+
+    /// 마지막 청취까지의 간격은 **중앙값**으로 본다 —
+    /// 오래 방치된 설치 몇 개가 평균을 통째로 끌고 가면 이탈 판단이 어긋난다.
+    func testRhythm_daysIdleUsesMedianNotMean() {
+        let snapshots: [[String: Double]] = [
+            ["daysIdle": 0], ["daysIdle": 1], ["daysIdle": 2], ["daysIdle": 300]
+        ]
+        let r = UsageInsights.rhythm(metrics: snapshots)
+        XCTAssertEqual(r.medianDaysIdle, 1.5, accuracy: 0.001)   // 평균이면 75.75 다
+    }
+
+    func testRhythm_emptyInput_isAllZeroWithoutCrashing() {
+        let r = UsageInsights.rhythm(metrics: [])
+        XCTAssertEqual(r.installs, 0)
+        XCTAssertEqual(r.weeklyActiveRate, 0)
+        XCTAssertEqual(r.minutesPerActive7, 0)
+        XCTAssertEqual(r.daysPerWeek, 0)
+        XCTAssertEqual(r.sessionsPerActiveDay, 0)
+        XCTAssertEqual(r.medianDaysIdle, 0)
+    }
+
+    /// 최장 연속일 평균은 기록이 있는 설치만 센다(0이 평균을 눌러 습관 여부를 가리지 않게).
+    func testRhythm_bestStreakIgnoresInstallsWithNoStreak() {
+        let snapshots: [[String: Double]] = [["bestStreak": 10], ["bestStreak": 4], ["bestStreak": 0], [:]]
+        XCTAssertEqual(UsageInsights.rhythm(metrics: snapshots).averageBestStreak, 7, accuracy: 0.001)
+    }
+
+    // MARK: - 시간대 분포
+
+    func testHourDistribution_sumsSixBucketsInOrder() {
+        let snapshots: [[String: Double]] = [
+            ["tod0": 1, "tod1": 2, "tod2": 3, "tod3": 4, "tod4": 5, "tod5": 6],
+            ["tod5": 10]
+        ]
+        let buckets = UsageInsights.hourDistribution(metrics: snapshots)
+
+        XCTAssertEqual(buckets.count, ListeningTracker.hourBucketCount)
+        XCTAssertEqual(buckets.map(\.count), [1, 2, 3, 4, 5, 16])
+        XCTAssertEqual(buckets.first?.label, "0–4")
+        XCTAssertEqual(buckets.last?.label, "20–24")
+    }
+
     // MARK: - 도우미
 
     private func sample(_ name: String, _ install: String, _ date: Date)

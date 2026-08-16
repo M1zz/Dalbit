@@ -6,11 +6,11 @@ CloudKit 공개 DB(`iCloud.com.Ysoup.FeedbackHub`)를 쓰고, `appId`(`com.leeo.
 
 | 파일 | 역할 |
 |---|---|
-| `Manager/ListeningTracker.swift` | 청취 세션 로컬 원장 (길이·시간대·종료 이유) |
-| `Manager/UsageReportingService.swift` | 무엇을 보낼지 정하는 정책. 엔진은 LeeoKit `LeeoUsageReporter` |
-| `Manager/UsageInsights.swift` | 받아온 표본 → 효용·분포·퍼널·리텐션 (순수 함수) |
-| `Views/Settings/UsageStatsView.swift` | 개발자 전용 화면. 설정 → 앱 버전 **7번 탭** |
-| `Views/Settings/ListeningRecapView.swift` | **사용자용** 「나의 기록」. 이 기기 원장만 읽고 네트워크를 타지 않는다 |
+| `Features/Insights/ListeningTracker.swift` | 청취 세션 로컬 원장 (길이·시간대·종료 이유) |
+| `Features/Insights/UsageReportingService.swift` | 무엇을 보낼지 정하는 정책. 엔진은 LeeoKit `LeeoUsageReporter` |
+| `Features/Insights/UsageInsights.swift` | 받아온 표본 → 효용·분포·퍼널·리텐션 (순수 함수) |
+| `Features/Insights/UsageStatsView.swift` | 개발자 전용 화면. 설정 → 앱 버전 **7번 탭** |
+| `Features/Settings/ListeningRecapView.swift` | **사용자용** 「나의 기록」. 이 기기 원장만 읽고 네트워크를 타지 않는다 |
 | `DalbitTests/` | 위 계산들의 유닛 테스트 (`xcodebuild test -scheme Dalbit`) |
 
 ### 두 화면을 헷갈리지 말 것
@@ -20,7 +20,7 @@ CloudKit 공개 DB(`iCloud.com.Ysoup.FeedbackHub`)를 쓰고, `appId`(`com.leeo.
 | 데이터 | 허브의 **모든 설치** 익명 집계 | **이 기기** ListeningTracker 원장 |
 | 네트워크 | CloudKit 조회 필요 | 없음 |
 | 진입 | 설정 → 앱 버전 7번 탭 | 설정 → 나의 기록 |
-| 지역화 | 안 함(한국어 고정) | **함**(ko/en) |
+| 지역화 | **함**(ko/en) | **함**(ko/en) |
 
 ---
 
@@ -64,10 +64,30 @@ CloudKit 공개 DB(`iCloud.com.Ysoup.FeedbackHub`)를 쓰고, `appId`(`com.leeo.
 | `nightSessions` `sleepSessions` | 밤(22~04시) 시작 세션, 잠든 것으로 보이는 세션 |
 | `timerSessions` `timerCompleted` | 타이머를 건 세션과 그중 완주한 세션 |
 | `len0`~`len4` | 세션 길이 분포 (5분 미만 / 5~15 / 15~30 / 30~60 / 60분 이상) |
-| `streakDays` `activeDays` | 연속 청취일, 소리를 들은 날 수 |
+| `streakDays` `activeDays` `bestStreak` | 현재 연속일, 들은 날 수, 역대 최장 연속일 |
+| `listenMin7` `listenMin30` | **최근 7일·30일 청취 분** (사용 시간) |
+| `activeDays7` `activeDays30` | **최근 7일·30일 중 들은 날 수** (사용 빈도) |
+| `sessions7` `sessions30` | 최근 7일·30일 세션 수 |
+| `daysIdle` | 마지막 청취로부터 지난 일수 (이탈 신호). 한 번도 안 들었으면 보내지 않는다 |
+| `tod0`~`tod5` | 세션을 **시작한 시각** 분포 (4시간 6칸) |
 | `mixes` `customMixes` `layeredMixes` `favorites` | 보유·직접 만든·레이어드·즐겨찾기 조합 수 |
 | `plays` `topPlays` `unusedMixes` | 총 재생, 최다 재생, 한 번도 안 들은 조합 |
 | `flag.*` | isPro / madeOwnMix / usedTimer / effectsMuted / favoritesOnly (0·1) |
+
+### 왜 최근 창(7·30일)을 따로 보내나
+
+누적값만으로는 **지금** 쓰이는지 알 수 없다. 한 달 전에 몰아 듣고 떠난 사람과 매일 조금씩
+듣는 사람의 `listenMin` 이 같게 나온다. 앱이 죽어 가는 중에도 누적은 계속 늘어난다.
+
+`ListeningTracker` 가 날짜별 원장(`dailySeconds`/`dailySessions`, 90일 보관)을 들고 있고,
+스냅샷을 올릴 때 최근 창을 계산해 넣는다.
+
+⚠️ 자정을 넘긴 세션은 **시작한 날**에 몰아 준다. 하루를 쪼개 나누면 한 번 잔 것이
+이틀 들은 것으로 잡혀 빈도가 부풀어 오른다.
+
+⚠️ 화면의 평균은 분모가 **최근에 들은 설치**다. 깔아만 둔 설치까지 넣으면 평균이 바닥으로
+눌려 실제로 쓰는 사람의 사용 깊이가 안 보인다. `daysIdle` 은 평균이 아니라 **중앙값**으로
+보는데, 오래 방치된 설치 몇 개가 평균을 통째로 끌고 가기 때문이다.
 
 ### `UsageEvent` — 주요 행동 스트림 (이름만)
 

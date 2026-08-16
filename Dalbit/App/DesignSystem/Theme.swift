@@ -57,6 +57,28 @@ enum DS {
         /// 보조 포인트 (따뜻한 살구)
         static let warm = Color(light: 0xE9A77C, dark: 0xE9A77C)
 
+        /// **채워진 면 위에 흰 글씨를 올릴 때 쓰는 진한 포인트.**
+        ///
+        /// ⚠️ `accent` 를 그대로 채우면 안 된다 — 다크 모드의 accent(0xA8A4F2)는 밝은
+        ///    라벤더라 흰 글씨와의 명도 대비가 2.2:1 밖에 안 나온다(WCAG AA 4.5:1 미달).
+        ///    큰 파스텔 덩어리가 우주 배경 위에 얹히면 값싸 보이기도 한다.
+        ///    아래 두 색은 흰 글씨 기준 4.8:1 이상을 확보한다.
+        static let accentFillTop = Color(light: 0x7B75E4, dark: 0x7B6FF0)
+        static let accentFillBottom = Color(light: 0x5B55C7, dark: 0x5B4FD0)
+
+        /// 채워진 포인트 면. 위→아래로 살짝 어두워져 평평한 판때기로 보이지 않게 한다.
+        static var accentFill: LinearGradient {
+            LinearGradient(colors: [accentFillTop, accentFillBottom],
+                           startPoint: .top, endPoint: .bottom)
+        }
+
+        /// 유리 표면 위에 얹는 머리카락 굵기 테두리.
+        /// 위쪽이 밝고 아래쪽이 사라져 빛을 위에서 받는 것처럼 보인다.
+        static var glassStroke: LinearGradient {
+            LinearGradient(colors: [Color.white.opacity(0.35), Color.white.opacity(0.06)],
+                           startPoint: .top, endPoint: .bottom)
+        }
+
         /// 텍스트
         static let textPrimary = Color(light: 0x1B1A2E, dark: 0xF3F2FA)
         static let textSecondary = Color(light: 0x6A6880, dark: 0xAFADC2)

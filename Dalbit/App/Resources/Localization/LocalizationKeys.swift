@@ -12,39 +12,13 @@ enum L {
 
     // MARK: - Sound List
     enum SoundList {
-        static let title = "sound_list.title"
-        static let createNew = "sound_list.create_new"
-        static let sample = "sound_list.sample"
-        static let recommended = "sound_list.recommended"
-        static let originalSounds = "sound_list.original_sounds"
-        static let searchPlaceholder = "sound_list.search_placeholder"
         static let freeCount = "sound_list.free_count"
     }
 
     // MARK: - Create Sound
     enum CreateSound {
-        static let title = "create_sound.title"
-        static let back = "create_sound.back"
-        static let create = "create_sound.create"
-        static let canvasTitle = "create_sound.canvas_title"
-        static let playing = "create_sound.playing"
-        static let selectOriginal = "create_sound.select_original"
-        static let selectBoth = "create_sound.select_both"
-        static let canPlayNow = "create_sound.can_play_now"
-        static let backgroundSound = "create_sound.background_sound"
-        static let backgroundVolume = "create_sound.background_volume"
-        static let originalSoundSelection = "create_sound.original_sound_selection"
-        static let customizing = "create_sound.customizing"
-        static let combinedFormat = "create_sound.combined_format"
         static let enterSoundName = "create_sound.enter_sound_name"
-        static let selectedLayers = "create_sound.selected_layers"
-        static let selectOriginalSound = "create_sound.select_original_sound"
-        static let combineMultipleSounds = "create_sound.combine_multiple_sounds"
         static let originalSounds = "create_sound.original_sounds"
-        static let tapToSelectMultiple = "create_sound.tap_to_select_multiple"
-        static let backgroundMusic = "create_sound.background_music"
-        static let optionalAmbience = "create_sound.optional_ambience"
-        static let deselect = "create_sound.deselect"
         static let backgroundMusicVolume = "create_sound.background_music_volume"
     }
 
@@ -52,19 +26,11 @@ enum L {
     enum Common {
         static let save = "common.save"
         static let cancel = "common.cancel"
-        static let remove = "common.remove"
         static let edit = "common.edit"
         static let delete = "common.delete"
-        static let reset = "common.reset"
         static let done = "common.done"
         static let close = "common.close"
         static let next = "common.next"
-        static let filter = "common.filter"
-        static let customized = "common.customized"
-        static let variation = "common.variation"
-        static let quiet = "common.quiet"
-        static let loud = "common.loud"
-        static let tapToCustomize = "common.tap_to_customize"
         static let on = "common.on"
         static let off = "common.off"
         static let loading = "common.loading"
@@ -92,7 +58,6 @@ enum L {
     enum Alert {
         static let soundName = "alert.sound_name"
         static let enterName = "alert.enter_name"
-        static let enterDescription = "alert.enter_description"
         static let saveFailed = "alert.save_failed"
     }
 
@@ -163,114 +128,10 @@ enum L {
         static let meditation = "background.meditation"
     }
 
-    // MARK: - Presets
-    enum Preset {
-        enum DeepSleep {
-            static let title = "preset.deep_sleep.title"
-            static let description = "preset.deep_sleep.description"
-        }
-
-        enum QuickSleep {
-            static let title = "preset.quick_sleep.title"
-            static let description = "preset.quick_sleep.description"
-        }
-
-        enum Meditation {
-            static let title = "preset.meditation.title"
-            static let description = "preset.meditation.description"
-        }
-
-        enum Rest {
-            static let title = "preset.rest.title"
-            static let description = "preset.rest.description"
-        }
-
-        enum Focus {
-            static let title = "preset.focus.title"
-            static let description = "preset.focus.description"
-        }
-
-        enum Reading {
-            static let title = "preset.reading.title"
-            static let description = "preset.reading.description"
-        }
-
-        enum Rain {
-            static let title = "preset.rain.title"
-            static let description = "preset.rain.description"
-        }
-
-        enum ForestDawn {
-            static let title = "preset.forest_dawn.title"
-            static let description = "preset.forest_dawn.description"
-        }
-
-        // Rain 카테고리
-        enum SoftRain {
-            static let title = "preset.soft_rain.title"
-            static let description = "preset.soft_rain.description"
-        }
-
-        enum CityRain {
-            static let title = "preset.city_rain.title"
-            static let description = "preset.city_rain.description"
-        }
-
-        // Ambient 카테고리
-        enum Underwater {
-            static let title = "preset.underwater.title"
-            static let description = "preset.underwater.description"
-        }
-
-        enum DeepMeditation {
-            static let title = "preset.deep_meditation.title"
-            static let description = "preset.deep_meditation.description"
-        }
-
-        enum CosmicAtmosphere {
-            static let title = "preset.cosmic_atmosphere.title"
-            static let description = "preset.cosmic_atmosphere.description"
-        }
-
-        // ASMR 카테고리
-        enum TypingFocus {
-            static let title = "preset.typing_focus.title"
-            static let description = "preset.typing_focus.description"
-        }
-
-        enum CameraClick {
-            static let title = "preset.camera_click.title"
-            static let description = "preset.camera_click.description"
-        }
-
-        // 확장 카테고리
-        enum TibetanMeditation {
-            static let title = "preset.tibetan_meditation.title"
-            static let description = "preset.tibetan_meditation.description"
-        }
-
-        enum JungleMorning {
-            static let title = "preset.jungle_morning.title"
-            static let description = "preset.jungle_morning.description"
-        }
-    }
-
     // MARK: - Customization
     enum Customize {
         static let volume = "customize.volume"
-        static let pitch = "customize.pitch"
-        static let interval = "customize.interval"
-        static let variation = "customize.variation"
-        static let min = "customize.min"
-        static let base = "customize.base"
-        static let max = "customize.max"
         static let seconds = "customize.seconds"
-        static let variationDescription = "customize.variation_description"
-        static let variationDescriptionSeconds = "customize.variation_description_seconds"
-        static let variationDescriptionPercent = "customize.variation_description_percent"
-        static let findYourSound = "customize.find_your_sound"
-        static let adjustSlider = "customize.adjust_slider"
-        static let variationRange = "customize.variation_range"
         // 무드 프리셋 개편
         static let shapeSound = "customize.shape_sound"
         static let pickFeel = "customize.pick_feel"
@@ -290,40 +151,78 @@ enum L {
 
     // MARK: - Onboarding
     enum Onboarding {
+        static let start = "onboarding.start"
         static let skip = "onboarding.skip"
         static let next = "onboarding.next"
-        static let start = "onboarding.start"
-        static let title1 = "onboarding.title1"
-        static let title2 = "onboarding.title2"
-        static let title3 = "onboarding.title3"
-        static let title4 = "onboarding.title4"
-        static let desc1 = "onboarding.desc1"
-        static let desc2 = "onboarding.desc2"
-        static let desc3 = "onboarding.desc3"
-        static let desc4 = "onboarding.desc4"
+
+        /// 페이지 한 장 = 제목 + 본문. 순서는 Page.allCases 가 정한다.
+        enum Page1 {
+            static let title = "onboarding.p1.title"
+            static let body = "onboarding.p1.body"
+        }
+        enum Page2 {
+            static let title = "onboarding.p2.title"
+            static let body = "onboarding.p2.body"
+        }
+        enum Page3 {
+            static let title = "onboarding.p3.title"
+            static let body = "onboarding.p3.body"
+        }
+        enum Page4 {
+            static let title = "onboarding.p4.title"
+            static let body = "onboarding.p4.body"
+        }
+    }
+
+    // MARK: - About (달빛 이야기 — 효용과 만든 이의 노트)
+    enum About {
+        static let entry = "about.entry"
+        static let entryHint = "about.entry_hint"
+        static let title = "about.title"
+
+        static let whyTitle = "about.why_title"
+        static let whyBody = "about.why_body"
+        static let valueTitle = "about.value_title"
+        static let valueBody = "about.value_body"
+
+        static let craftTitle = "about.craft_title"
+        enum Craft {
+            static let breathTitle = "about.craft_breath_title"
+            static let breathBody = "about.craft_breath_body"
+            static let fadeTitle = "about.craft_fade_title"
+            static let fadeBody = "about.craft_fade_body"
+            static let sleepTitle = "about.craft_sleep_title"
+            static let sleepBody = "about.craft_sleep_body"
+            static let nightTitle = "about.craft_night_title"
+            static let nightBody = "about.craft_night_body"
+            static let moonTitle = "about.craft_moon_title"
+            static let moonBody = "about.craft_moon_body"
+            static let privacyTitle = "about.craft_privacy_title"
+            static let privacyBody = "about.craft_privacy_body"
+        }
+
+        static let replayTitle = "about.replay_title"
+        static let replayOnboarding = "about.replay_onboarding"
+        static let replayGestures = "about.replay_gestures"
+        static let replayDone = "about.replay_done"
     }
 
     // MARK: - Listen View
     enum Listen {
         static let selectSoundToPlay = "listen.select_sound_to_play"
-        static let relaxWithWhiteNoise = "listen.relax_with_white_noise"
-        static let playSoundForCampfire = "listen.play_sound_for_campfire"
         static let savedSounds = "listen.saved_sounds"
         static let noSavedSounds = "listen.no_saved_sounds"
         static let createFirstSound = "listen.create_first_sound"
         static let newSoundCreate = "listen.new_sound_create"
         static let mySounds = "listen.my_sounds"
         static let searchResults = "listen.search_results"
+        static let searchResultCount = "listen.search_result_count"   // %lld = 찾은 개수
         static let noSearchResults = "listen.no_search_results"
         static let soundSearch = "listen.sound_search"
-        static let presets = "listen.presets"
         static let recommendationMorning = "listen.recommendation_morning"
         static let recommendationFocus = "listen.recommendation_focus"
         static let recommendationEvening = "listen.recommendation_evening"
         static let recommendationSleep = "listen.recommendation_sleep"
-        static let layerCount = "listen.layer_count"
-        static let tapToPlay = "listen.tap_to_play"
-        static let nowPlayingState = "listen.now_playing_state"
         static let swipeHint = "listen.swipe_hint"
         static let campfire = "listen.campfire"
         static let campfireDescription = "listen.campfire_description"
@@ -346,7 +245,6 @@ enum L {
 
     // MARK: - Timer
     enum Timer {
-        static let title = "timer.title"
         static let sleepTimer = "timer.sleep_timer"
         static let forGoodSleep = "timer.for_good_sleep"
         static let autoStopDescription = "timer.auto_stop_description"
@@ -366,15 +264,11 @@ enum L {
     enum Player {
         static let spatialAudio = "player.spatial_audio"
         static let positionAdjust = "player.position_adjust"
-        static let layer = "player.layer"
         static let layerFormat = "player.layer_format"
         static let distance = "player.distance"
         static let angle = "player.angle"
         static let height = "player.height"
-        static let realTimePlaying = "player.real_time_playing"
-        static let hasVariation = "player.has_variation"
         static let spatialAudioEnabled = "player.spatial_audio_enabled"
-        static let intervalFormat = "player.interval_format"          // %.1f = 초 단위 간격
     }
 
     // MARK: - Sample Sounds
@@ -432,14 +326,6 @@ enum L {
         enum CaveExplore {
             static let name = "preset_new.cave_explore.name"
             static let description = "preset_new.cave_explore.description"
-        }
-        enum OceanWave {
-            static let name = "preset_new.ocean_wave.name"
-            static let description = "preset_new.ocean_wave.description"
-        }
-        enum SummerRain {
-            static let name = "preset_new.summer_rain.name"
-            static let description = "preset_new.summer_rain.description"
         }
 
         // 새 Rain 카테고리
@@ -570,7 +456,6 @@ enum L {
         static let enterOneChar = "save_view.enter_one_char"
         static let duplicateName = "save_view.duplicate_name"
         static let defaultSoundName = "save_view.default_sound_name"
-        static let selectYourSound = "save_view.select_your_sound"
     }
 
     // MARK: - Subscription
@@ -585,10 +470,6 @@ enum L {
         static let freeCategoriesLimit = "subscription.free_categories_limit"
         static let unlimitedSounds = "subscription.unlimited_sounds"
         static let allCategories = "subscription.all_categories"
-        static let limitReached = "subscription.limit_reached"
-        static let limitReachedDescription = "subscription.limit_reached_description"
-        static let categoryLocked = "subscription.category_locked"
-        static let categoryLockedDescription = "subscription.category_locked_description"
         static let priceFormat = "subscription.price_format"
         static let error = "subscription.error"
         static let freeTrialWeek = "subscription.free_trial_week"
@@ -618,26 +499,9 @@ enum L {
     enum Studio {
         static let title = "studio.title"
         static let whereHeard = "studio.where_heard"
-        static let fineTune = "studio.fine_tune"
         static let interval = "studio.interval"
         static let intervalHint = "studio.interval_hint"
-        static let irregularity = "studio.irregularity"
-        static let regular = "studio.regular"
-        static let natural = "studio.natural"
         static let space = "studio.space"
-        static let narrow = "studio.narrow"
-        static let wide = "studio.wide"
-    }
-
-    enum Place {
-        static let cave = "place.cave"
-        static let basement = "place.basement"
-        static let sink = "place.sink"
-        static let forest = "place.forest"
-        static let jungle = "place.jungle"
-        static let rain = "place.rain"
-        static let cityRain = "place.city_rain"
-        static let temple = "place.temple"
     }
 
     // MARK: - Alarm (알람 시계)
@@ -690,23 +554,6 @@ enum L {
     enum Feedback {
         static let entry = "feedback.entry"
         static let entryHint = "feedback.entry_hint"
-        static let title = "feedback.title"
-        static let typeLabel = "feedback.type_label"
-        static let typeBug = "feedback.type_bug"
-        static let typeFeature = "feedback.type_feature"
-        static let typeQuestion = "feedback.type_question"
-        static let typeOther = "feedback.type_other"
-        static let messageLabel = "feedback.message_label"
-        static let placeholderBug = "feedback.placeholder_bug"
-        static let placeholderFeature = "feedback.placeholder_feature"
-        static let placeholderQuestion = "feedback.placeholder_question"
-        static let placeholderOther = "feedback.placeholder_other"
-        static let deviceInfo = "feedback.device_info"
-        static let send = "feedback.send"
-        static let sending = "feedback.sending"
-        static let sent = "feedback.sent"
-        static let errorICloud = "feedback.error_icloud"
-        static let errorSend = "feedback.error_send"
     }
 
     // MARK: - Accessibility (VoiceOver)
@@ -716,25 +563,17 @@ enum L {
         static let timerActiveValue = "a11y.timer_active_value"          // %@ = 남은 시간
         static let play = "a11y.play"
         static let pause = "a11y.pause"
-        static let stop = "a11y.stop"
         static let closeButton = "a11y.close_button"
         static let backButton = "a11y.back_button"
-        static let nowPlaying = "a11y.now_playing"                       // %1$@ 제목, %2$@ 카테고리
+        static let clearSearch = "a11y.clear_search"
         static let openFullPlayerHint = "a11y.open_full_player_hint"
         static let playSoundHint = "a11y.play_sound_hint"
         static let favorite = "a11y.favorite"
         static let favoriteOn = "a11y.favorite_on"
-        static let favoriteOff = "a11y.favorite_off"
         static let createNewButton = "a11y.create_new_button"
         static let hoursPicker = "a11y.hours_picker"
         static let minutesPicker = "a11y.minutes_picker"
         static let remainingTimeLabel = "a11y.remaining_time_label"
-        static let volumeSlider = "a11y.volume_slider"
-        static let pitchSlider = "a11y.pitch_slider"
-        static let intervalSlider = "a11y.interval_slider"
-        static let filterPicker = "a11y.filter_picker"
-        static let clearSearch = "a11y.clear_search"
-        static let decorativeAnimation = "a11y.decorative_animation"
         static let previousSound = "a11y.previous_sound"
         static let nextSound = "a11y.next_sound"
         static let removeLayer = "a11y.remove_layer"
@@ -807,6 +646,27 @@ enum L {
         static let bounce = "stats.bounce"
         static let bounceHint = "stats.bounce_hint"
         static let evidenceFootnote = "stats.evidence_footnote"
+        static let rhythmTitle = "stats.rhythm_title"
+        static let rhythmNote = "stats.rhythm_note"
+        static let weeklyActive = "stats.weekly_active"
+        static let weeklyActiveHint = "stats.weekly_active_hint"
+        static let monthlyActive = "stats.monthly_active"
+        static let minutesPerActive = "stats.minutes_per_active"
+        static let minutesPerActiveHint = "stats.minutes_per_active_hint"
+        static let daysPerWeek = "stats.days_per_week"
+        static let daysPerWeekHint = "stats.days_per_week_hint"
+        static let sessionsPerDay = "stats.sessions_per_day"
+        static let sessionsPerDayHint = "stats.sessions_per_day_hint"
+        static let daysIdle = "stats.days_idle"
+        static let daysIdleHint = "stats.days_idle_hint"
+        static let bestStreak = "stats.best_streak"
+        static let bestStreakHint = "stats.best_streak_hint"
+        static let rhythmFootnote = "stats.rhythm_footnote"
+        static let hourTitle = "stats.hour_title"
+        static let hourNote = "stats.hour_note"
+        static let axisHour = "stats.axis_hour"
+        static let daysFormat = "stats.days_format"          // %.1f = 일수
+        static let timesFormat = "stats.times_format"        // %.1f = 횟수
 
         static let lengthTitle = "stats.length_title"
         static let lengthNote = "stats.length_note"

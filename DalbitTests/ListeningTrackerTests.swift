@@ -180,6 +180,93 @@ final class ListeningTrackerTests: XCTestCase {
         XCTAssertEqual(tracker.sleepLikelyCount, 0)
     }
 
+
+    // MARK: - 일자별 원장 (사용 시간·빈도)
+
+    /// 세션이 끝나면 그날 칸에 시간과 횟수가 함께 쌓여야 한다.
+    func testDailyLedger_accumulatesSecondsAndSessions() {
+        let tracker = makeTracker()
+        let today = ListeningTracker.dayKey(for: Date())
+
+        for _ in 0..<2 {
+            seedOpenSession(start: Date().addingTimeInterval(-10 * 60), heartbeat: Date())
+            tracker.end(reason: .userStopped)
+        }
+
+        XCTAssertEqual(tracker.dailySessions[today], 2)
+        XCTAssertEqual(tracker.dailySeconds[today] ?? 0, 20 * 60, accuracy: 5)
+        XCTAssertEqual(tracker.recentSessions(days: 7), 2)
+        XCTAssertEqual(tracker.recentMinutes(days: 7), 20, accuracy: 0.5)
+        XCTAssertEqual(tracker.recentActiveDays(days: 7), 1)
+    }
+
+    /// 최근 창은 **창 밖의 기록을 세면 안 된다** — 그러면 누적값과 다를 게 없어진다.
+    func testRecentWindow_excludesOlderDays() {
+        let calendar = Calendar.current
+        let now = Date()
+        let old = ListeningTracker.dayKey(for: calendar.date(byAdding: .day, value: -20, to: now)!)
+        let recent = ListeningTracker.dayKey(for: calendar.date(byAdding: .day, value: -2, to: now)!)
+        defaults.set([old: 600.0, recent: 300.0], forKey: "dalbit.listen.dailySeconds")
+        defaults.set([old: 3, recent: 1], forKey: "dalbit.listen.dailySessions")
+        defaults.set([old, recent].sorted(), forKey: "dalbit.listen.activeDays")
+
+        let tracker = makeTracker()
+        XCTAssertEqual(tracker.recentMinutes(days: 7, now: now), 5, accuracy: 0.01)
+        XCTAssertEqual(tracker.recentMinutes(days: 30, now: now), 15, accuracy: 0.01)
+        XCTAssertEqual(tracker.recentActiveDays(days: 7, now: now), 1)
+        XCTAssertEqual(tracker.recentActiveDays(days: 30, now: now), 2)
+        XCTAssertEqual(tracker.recentSessions(days: 7, now: now), 1)
+    }
+
+    /// 자정을 넘긴 세션은 **시작한 날**에 몰아 준다.
+    /// 하루를 쪼개 나누면 한 번 잔 것이 이틀 들은 것으로 잡혀 빈도가 부풀어 오른다.
+    func testOvernightSession_countsOnStartDayOnly() {
+        let calendar = Calendar.current
+        // 어제 23:30 시작 → 오늘 새벽까지
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
+        let start = calendar.date(bySettingHour: 23, minute: 30, second: 0, of: yesterday)!
+        let tracker = makeTracker()
+        seedOpenSession(start: start, heartbeat: start.addingTimeInterval(3 * 3600))
+        tracker.end(reason: .orphaned)
+
+        XCTAssertEqual(tracker.dailySessions.count, 1)
+        XCTAssertEqual(tracker.dailySessions[ListeningTracker.dayKey(for: start)], 1)
+    }
+
+    /// 시간대 칸은 4시간씩 6칸이고, 세션이 **시작한** 시각으로 들어간다.
+    func testHourBuckets_useSessionStartHour() {
+        let calendar = Calendar.current
+        let start = calendar.date(bySettingHour: 23, minute: 0, second: 0, of: Date())!
+        let tracker = makeTracker()
+        seedOpenSession(start: start, heartbeat: start.addingTimeInterval(600))
+        tracker.end(reason: .orphaned)
+
+        XCTAssertEqual(tracker.hourBuckets.count, ListeningTracker.hourBucketCount)
+        XCTAssertEqual(tracker.hourBuckets[5], 1, "23시는 20~24 칸")
+        XCTAssertEqual(tracker.hourBuckets.reduce(0, +), 1)
+    }
+
+    /// 현재 줄이 끊겨도 최장 기록은 남아야 한다 — "한때 습관이었나"는 다른 질문이다.
+    func testBestStreak_survivesBrokenCurrentStreak() {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        // 20~18일 전 3일 연속으로 들었고, 그 뒤로는 안 들었다
+        let days = [20, 19, 18].map {
+            ListeningTracker.dayKey(for: calendar.date(byAdding: .day, value: -$0, to: today)!)
+        }
+        defaults.set(days.sorted(), forKey: "dalbit.listen.activeDays")
+        defaults.set(3, forKey: "dalbit.listen.bestStreak")
+
+        let tracker = makeTracker()
+        XCTAssertEqual(tracker.currentStreak, 0)
+        XCTAssertEqual(tracker.bestStreak, 3)
+        XCTAssertEqual(tracker.daysSinceLastListen, 18)
+    }
+
+    func testDaysSinceLastListen_isNilWithNoHistory() {
+        XCTAssertNil(makeTracker().daysSinceLastListen)
+    }
+
     // MARK: - 연속일
 
     /// 자정을 넘긴 직후에 줄이 끊긴 것처럼 보이면 안 된다 — 오늘 밤은 아직 오지 않았다.

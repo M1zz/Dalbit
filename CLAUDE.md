@@ -45,51 +45,42 @@
 
 ## 📂 프로젝트 구조
 
+**기능별(feature-first) 배치.** 한 화면을 고칠 때 그 화면의 View·ViewModel·서비스가
+한 폴더에 모여 있도록 한다. 계층별(Views/Managers/Models) 배치는 2026-08-16 에 걷어냈다 —
+화면 하나 손보려고 네 폴더를 오가야 했다.
+
 ```
-Dalbit/
-├── App/
-│   ├── Manager/
-│   │   ├── AudioEngineManager.swift      # 메인 오디오 엔진 (싱글톤)
-│   │   ├── AudioLayerManager.swift       # 멀티 레이어 오디오 관리 (최적화)
-│   │   ├── AudioMixingService.swift      # 오디오 믹싱 서비스
-│   │   └── TimerManager.swift            # 수면 타이머 관리
-│   │
-│   ├── Models/
-│   │   ├── CustomSound.swift             # 커스텀 사운드 모델
-│   │   ├── AudioVariation.swift          # 오디오 파라미터 (볼륨, 피치 등)
-│   │   ├── BackgroundSound.swift         # 배경 음악 enum
-│   │   └── OnboardItem.swift             # 온보딩 데이터
-│   │
-│   ├── ViewModels/
-│   │   └── CustomSoundViewModel.swift    # 메인 사운드 관리 ViewModel
-│   │
-│   ├── Views/
-│   │   ├── Listen/
-│   │   │   ├── ListenListView.swift      # 메인 화면 (캠프파이어)
-│   │   │   └── ListenListCell.swift
-│   │   │
-│   │   ├── Home/
-│   │   │   ├── CreateNewSoundView.swift  # 새 사운드 만들기
-│   │   │   ├── SoundListView.swift       # 사운드 제작 화면
-│   │   │   └── SoundDetailView.swift     # 사운드 상세/편집
-│   │   │
-│   │   ├── Components/
-│   │   │   ├── SoundPlayerFullModalView.swift  # 전체 플레이어
-│   │   │   └── SoundThumbnailView.swift        # 레이어 썸네일
-│   │   │
-│   │   ├── Timer/
-│   │   │   └── TimerMainView.swift       # (레거시)
-│   │   │
-│   │   └── Onboarding/
-│   │       └── OnboardingView.swift      # 온보딩 화면
-│   │
-│   └── Utils/
-│       ├── Enums.swift                   # 전역 Enum 정의
-│       └── Extensions/                   # Swift 확장
+Dalbit/App/
+├── Bootstrap/          # 앱 진입점 (DalbitApp, DalbitSpec, AppDelegate, SceneDelegate, MainTabView)
 │
-└── Assets/
-    └── Sound/                            # 오디오 파일 (mp3)
+├── DesignSystem/       # Theme(색·타이포·간격) · Components(버튼·카드·유리) · CosmicBackground(별·혜성)
+│
+├── Core/               # 기능에 종속되지 않는 토대
+│   ├── Audio/          # AudioEngineManager(단일 재생) · AudioLayerManager(레이어) · BackgroundSound
+│   ├── Models/         # CustomSound · AudioVariation · PresetSound · OriginalSound · AlarmItem
+│   ├── Storage/        # UserDefaultsManager · UserFileManager · Foundation 확장들
+│   └── Utils/          # Enums · Common · Haptics
+│
+├── Features/
+│   ├── Player/         # 홈(달) — ListenListView · MoonView · SavedSoundsListView · 재생 ViewModel
+│   ├── Studio/         # 소리 만들기 — SoundStudioView · SoundSaveView · SoundDetailView
+│   ├── Timer/          # 수면 타이머 — TimerView · TimePickerView · TimerManager
+│   ├── Alarm/          # 알람 — AlarmListView · AlarmEditView · AlarmService
+│   ├── Subscription/   # 결제 — SubscriptionView · SubscriptionManager
+│   ├── Onboarding/     # 첫 실행 안내(OnboardingView) · 달빛 이야기(AboutDalbitView)
+│   ├── Settings/       # 설정 · 나의 기록 · 피드백(LeeoKit 래퍼)
+│   └── Insights/       # 개발자 대시보드 — 사용 통계 · 안정성 · 수집(UsageReportingService)
+│
+├── Resources/          # Localizable.xcstrings · LocalizationKeys
+└── Assets/             # 이미지 · 오디오(mp3)
 ```
+
+### 어디에 둘지 고를 때
+
+- 화면 하나에서만 쓰는 것 → 그 `Features/<기능>/` 안에. **미리 공용으로 빼지 말 것.**
+- 두 기능 이상이 쓰면 → `Core/` 또는 `DesignSystem/`.
+- 개발자만 보는 화면은 `Features/Insights/` 에 모은다. 사용자 화면과 섞지 않는다
+  (공용 조각도 `InsightComponents.swift` 로 따로 둔다).
 
 ## 🎵 핵심 기능
 
@@ -120,7 +111,7 @@ audioLayerManager.startAllLayers()
 ### 2. 사운드 제작 워크플로우
 
 ```
-1. CreateNewSoundView - 사운드 선택
+1. SoundStudioView - 사운드 선택
    ↓
 2. 원본 사운드 선택 (여러 개 토글 가능)
    ↓
@@ -273,7 +264,7 @@ LinearGradient(
 - 페이드 인/아웃 효과
 
 ### 4. UI/UX 개선
-- CreateNewSoundView 전면 재설계
+- 사운드 제작 화면 전면 재설계 (현재는 SoundStudioView)
 - 섹션별 카드 레이아웃
 - FlowLayout으로 레이어 칩 표시
 - 사운드 선택 토글 기능
@@ -293,8 +284,8 @@ LinearGradient(
   - 해결: iOS 17+ 전용으로 마이그레이션 필요
 
 ### 잠재적 개선사항
-- SettingsView 타이머 섹션 중복 (ListenListView에 통합됨)
-- 레거시 TimerMainView.swift 정리 필요
+- `AudioEngineManager` 가 여전히 1,100줄대다. MARK 로 구획은 나뉘어 있으나,
+  Setup/Play/Fade/Buffer 를 파일로 쪼갤 여지가 있다(오디오 코어라 조심스럽게).
 
 ## 🔧 개발 가이드
 
@@ -420,9 +411,10 @@ struct MyView_Previews: PreviewProvider { }
 ## 🎯 향후 계획
 
 ### 단기 목표
-- [ ] SettingsView 정리 (타이머 중복 제거)
 - [ ] onChange deprecated 경고 해결
-- [ ] 레거시 코드 정리 (TimerMainView.swift)
+- [x] 첫 실행 안내와 「달빛 이야기」 복원 (2026-08-16)
+- [x] 레거시 화면 정리 — 구 타이머·구 사운드 목록·구 제작 화면 삭제 (2026-08-16)
+- [x] 기능별 폴더 재편 (2026-08-16)
 
 ### 중기 목표
 - [ ] 사운드 믹스 저장/불러오기 개선
@@ -458,11 +450,13 @@ refactor: 네비게이션 구조 전면 리팩토링
 - [SwiftUI Navigation](https://developer.apple.com/documentation/swiftui/navigationstack)
 
 ### 프로젝트 문서
-- [AudioLayerManager 설계](Dalbit/App/Manager/AudioLayerManager.swift)
-- [CustomSound 모델](Dalbit/App/Models/CustomSound.swift)
+- [AudioLayerManager 설계](Dalbit/App/Core/Audio/AudioLayerManager.swift)
+- [CustomSound 모델](Dalbit/App/Core/Models/CustomSound.swift)
+- [사용 통계 수집·조회](docs/USAGE_STATS_HUB.md)
+- [4.1.0 릴리즈 노트](docs/RELEASE_NOTES_4.1.0.md)
 
 ---
 
-**Last Updated**: 2025-01-17
-**Current Version**: 4.0.1
+**Last Updated**: 2026-08-16
+**Current Version**: 4.1.0
 **Maintained by**: 달빛(Dalbit) Team

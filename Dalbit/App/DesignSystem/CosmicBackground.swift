@@ -205,11 +205,14 @@ struct Starfield: View {
     private let count = 64
     private func frac(_ v: Double) -> Double { v - floor(v) }
 
-    /// 뒤로 물러나는 속도. 별이 화면 가장자리에서 중심으로 모이며 작아진다 = 멀어진다.
+    /// 앞으로 나아가는 속도. 별이 중심에서 태어나 바깥으로 흘러가며 커진다 = 내가 다가간다.
     ///
-    /// 예전에는 세로로 흐르는 레이어와 앞으로 나아가는 레이어를 5분마다 번갈아 썼는데,
-    /// 별이 위에서 아래로 떨어지면 "내가 위로 올라가는" 느낌이 나서 우주를 떠가는 감각과 어긋났다.
-    /// 이제는 멀어지는 방향 한 가지만 쓴다.
+    /// ⚠️ 방향을 뒤집지 말 것. 별이 가장자리에서 중심으로 모이면 **뒤로 물러나는** 느낌이 된다.
+    ///    홈의 천체는 정면에서 다가와 옆으로 빠져나가는데(MoonJourney), 별이 반대로 흐르면
+    ///    두 레이어가 서로 다른 말을 해서 "앞으로 간다"가 무너진다.
+    ///
+    /// 예전에는 세로로 흐르는 레이어도 있었는데, 별이 위에서 아래로 떨어지면
+    /// "내가 위로 올라가는" 느낌이 나서 걷어냈다. 이제는 나아가는 방향 한 가지만 쓴다.
     private let zSpeed = 0.05
 
     var body: some View {
@@ -227,17 +230,17 @@ struct Starfield: View {
 
                     let ang = frac(sin(fi * 2.17) * 733.7) * 2 * Double.pi
                     let fspd = 0.5 + frac(sin(fi * 7.13) * 421.9)      // 0.5~1.5 (깊이감)
-                    // 위상을 '빼면' 별이 바깥 → 중심으로 흐른다. 즉 내가 뒤로 물러나는 것.
-                    let rad = frac(frac(sin(fi * 4.51) * 611.3) - t * zSpeed * fspd)
-                    let radius = rad * rad * maxR                       // 중심에 가까울수록 느려짐
+                    // 위상을 '더하면' 별이 중심 → 바깥으로 흐른다. 즉 내가 앞으로 나아가는 것.
+                    let rad = frac(frac(sin(fi * 4.51) * 611.3) + t * zSpeed * fspd)
+                    let radius = rad * rad * maxR                       // 정면(중심)에선 느리고 스쳐 갈수록 빨라짐
                     let x = cx + cos(ang) * radius
                     let y = cy + sin(ang) * radius
-                    let psz = sz * (0.3 + rad * 1.6)                    // 멀어질수록(중심) 작아짐
+                    let psz = sz * (0.3 + rad * 1.6)                    // 다가올수록(가장자리) 커짐
 
-                    // 가장자리에서 나타나 중심으로 사라진다
-                    let appear = 1 - max(0, (rad - 0.8) / 0.2)
-                    let vanish = min(1, rad / 0.2)
-                    let op = baseOp * tw * max(0, appear) * vanish
+                    // 저 멀리 정면에서 떠올라 가장자리로 스쳐 지나간다
+                    let born = min(1, rad / 0.2)                        // 중심에서 서서히 나타남
+                    let gone = 1 - max(0, (rad - 0.8) / 0.2)            // 가장자리에서 사라짐
+                    let op = baseOp * tw * born * max(0, gone)
                     if op > 0.003 {
                         ctx.fill(Path(ellipseIn: CGRect(x: x, y: y, width: psz, height: psz)),
                                  with: .color(.white.opacity(op)))

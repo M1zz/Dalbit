@@ -32,6 +32,7 @@ struct ListenListView: View {
     @State private var page: Int = 1
     @State private var dragY: CGFloat = 0
     @State private var vLock: Bool? = nil   // nil=미결정, true=세로, false=가로
+    @State private var rollArmed = false     // 가로 굴림이 전환 임계를 넘었는지(촉각 예고용)
     // 구체 세로 회전(전환 시 위/아래로 굴러가는 모습)
     @State private var orbCommittedV: Double = 0
     @State private var orbDragV: Double = 0
@@ -530,6 +531,14 @@ struct ListenListView: View {
     }
 
     // MARK: - Orb Gesture (탭 / 좌우 소리 전환 / 상하 모드 전환)
+
+    /// 다음 소리로 넘어가는 데 필요한 가로 굴림 거리(pt).
+    /// 0.55 배로 각도에 대응하니 130pt ≈ 72° — 달을 눈에 띄게 한참 굴려야 하는 양이다.
+    private static let rollCommitDistance: CGFloat = 130
+    /// 빠르게 튕겼을 때의 완화 조건 — 그래도 이만큼은 실제로 굴려야 한다.
+    private static let rollFlickDistance: CGFloat = 80
+    private static let rollFlickPredicted: CGFloat = 300
+
     private func orbGesture() -> some Gesture {
         // global 좌표: 달 길게 누르기(즐겨찾기)의 위치 판정에 사용 (translation 로직은 영향 없음)
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
@@ -562,6 +571,13 @@ struct ListenListView: View {
                 } else if vLock == false {
                     orbPressed = true
                     orbDragAngle = max(-85, min(85, Double(value.translation.width) * 0.55))
+                    // 넘어갈 만큼 굴렸는지 손끝으로 알려 준다 — 어디까지 굴려야 하는지
+                    // 눈으로는 알 수 없으므로, 임계를 넘는 순간 한 번 톡.
+                    let armed = abs(value.translation.width) >= Self.rollCommitDistance
+                    if armed != rollArmed {
+                        rollArmed = armed
+                        if armed { Haptics.light() }
+                    }
                 }
             }
             .onEnded { value in
@@ -576,6 +592,7 @@ struct ListenListView: View {
                         orbPressed = false
                     }
                     vLock = nil
+                    rollArmed = false
                     return
                 }
                 let dx = value.translation.width
@@ -593,9 +610,13 @@ struct ListenListView: View {
                         }
                     }
                 } else if vLock == false {
-                    // 가로 굴림 → 다음 소리
+                    // 가로 굴림 → 다음 소리.
+                    // ⚠️ 임계를 낮게 두지 말 것. 24pt 였을 땐 화면을 스치기만 해도 곡이 넘어갔다.
+                    //    홈 전체가 제스처 영역이라 무심코 닿은 손가락까지 전부 "다음 곡"이 된다.
+                    //    달을 실제로 한참 굴려야(절반 이상 회전) 넘어가게 한다.
                     let predicted = value.predictedEndTranslation.width
-                    if abs(dx) > 24 || abs(predicted) > 60 {
+                    let flung = abs(dx) > Self.rollFlickDistance && abs(predicted) > Self.rollFlickPredicted
+                    if abs(dx) > Self.rollCommitDistance || flung {
                         let dec = abs(dx) > abs(predicted) ? dx : predicted
                         let dir: Double = dec < 0 ? -1 : 1
                         withAnimation(.easeOut(duration: 0.6)) {
@@ -623,6 +644,7 @@ struct ListenListView: View {
                     }
                 }
                 vLock = nil
+                rollArmed = false
             }
     }
 

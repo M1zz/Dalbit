@@ -4,9 +4,10 @@
 //
 //  홈 화면의 천체를 RealityKit 3D 구체로 그린다.
 //
-//  천체는 한자리에 머물지 않는다. 멀리서 다가와 스쳐 지나가고 다시 멀어진다 —
-//  내가 우주를 떠가고 있기 때문이다. 궤적은 MoonJourney 가 정한다.
-//  슬롯 두 개가 반 주기씩 어긋나 있어서, 하나가 멀어질 때 다른 하나가 다가온다.
+//  천체는 한자리에 머물지 않는다. 저 멀리 정면에서 떠올라 커지고, 눈앞을 지나면
+//  옆으로 밀려나며 작아진다 — 내가 그쪽으로 나아가고 있기 때문이다.
+//  궤적은 MoonJourney 가 정한다. 슬롯 두 개가 반 주기씩 어긋나 있어서,
+//  하나를 지나쳐 보낼 때 다음 천체가 저 멀리서 떠오른다.
 //
 //  ⚠️ 이 뷰는 그림만 그린다. 탭·좌우 굴리기·길게 누르기는 원래부터 달이 아니라
 //  홈 화면 전체(orbGesture)에 붙어 있다.
@@ -38,9 +39,14 @@ struct MoonJourneySystem: System {
 
     func update(context: SceneUpdateContext) {
         let t = Date().timeIntervalSinceReferenceDate
+        // 여행의 심장박동. 오래 안 그려졌다면(백그라운드에 다녀왔다면) 여기서
+        // 여행이 처음으로 되감긴다 — 다시 열었을 때 달이 눈앞에 있도록.
+        MoonJourney.tick(at: t)
         for e in context.entities(matching: Self.travel, updatingSystemWhen: .rendering) {
             guard let c = e.components[MoonJourneyComponent.self] else { continue }
             e.position = MoonJourney.position(slot: c.slot, at: t)
+            // 저 멀리서 떠오르고 저 멀리로 잠긴다 — 궤적이 이어지는 이음매를 가린다
+            e.components.set(OpacityComponent(opacity: MoonJourney.opacity(slot: c.slot, at: t)))
         }
         for e in context.entities(matching: Self.spins, updatingSystemWhen: .rendering) {
             guard let s = e.components[MoonAutoSpinComponent.self] else { continue }
@@ -75,7 +81,8 @@ struct Moon3DView: View {
     /// 천체가 옆으로 지나가려면 뷰가 달보다 넓어야 한다.
     /// 프레임과 카메라 거리를 같은 배율로 키우면 화면상 크기는 그대로 유지된다.
     private static let frameScale: CGFloat = 2.1
-    private static let baseDistance: Float = 2.1
+    /// (카메라 거리 MoonJourney.cameraDistance 는 궤적 쪽과 공유한다 —
+    ///  거기서도 같은 원근 축소율로 "지금 눈앞인지"를 계산하기 때문)
     /// 표면 텍스처 — 앞면(절반)이 화면 픽셀 수와 얼추 맞는 지점
     private static let textureWidth = 1280
     private static let previewWidth = 384
@@ -98,7 +105,7 @@ struct Moon3DView: View {
 
             let camera = PerspectiveCamera()
             camera.camera.fieldOfViewInDegrees = 30
-            camera.position = SIMD3<Float>(0, 0, Self.baseDistance * Float(Self.frameScale))
+            camera.position = SIMD3<Float>(0, 0, MoonJourney.cameraDistance)
             content.add(camera)
             self.camera = camera
 
@@ -118,7 +125,10 @@ struct Moon3DView: View {
             content.add(light)
             sun = light
 
+            // 씬을 세우기 전에 여행 시계부터 맞춘다. 첫 프레임이 엉뚱한 자리에서
+            // 시작하면 그 한 프레임이 깜빡임으로 보인다.
             let now = Date().timeIntervalSinceReferenceDate
+            MoonJourney.tick(at: now)
             for slot in 0..<2 {
                 let rig = Entity()
                 rig.components.set(MoonJourneyComponent(slot: slot))
@@ -141,7 +151,7 @@ struct Moon3DView: View {
             // 내가 흔들리면 카메라가 옆으로 움직인다. 천체를 계속 바라보므로
             // 화면상 위치는 그대로인데 보이는 각도만 바뀐다 = 진짜 시차.
             if let cam = camera {
-                let d = Self.baseDistance * Float(Self.frameScale)
+                let d = MoonJourney.cameraDistance
                 let sx = Float(sway.width) * Self.swayRange
                 let sy = Float(sway.height) * Self.swayRange
                 cam.look(at: SIMD3<Float>(0, 0, 0),

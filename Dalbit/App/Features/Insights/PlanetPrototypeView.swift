@@ -67,6 +67,18 @@ struct SolarSystemSystem: System {
     }
 }
 
+/// 컴포넌트·시스템 등록은 씬을 만들기 **전에** 끝나 있어야 한다.
+/// .task 에서 등록하면 RealityView 의 make 가 먼저 돌 수 있고, 그러면 시스템이
+/// 행성을 못 잡아 8개가 전부 원점에 겹쳐 버린다(커다란 행성 하나처럼 보인다).
+private enum SolarSceneRegistry {
+    static let registerOnce: Void = {
+        OrbitComponent.registerComponent()
+        PlanetSpinComponent.registerComponent()
+        ShipComponent.registerComponent()
+        SolarSystemSystem.registerSystem()
+    }()
+}
+
 // MARK: - 화면
 
 struct PlanetPrototypeView: View {
@@ -76,7 +88,6 @@ struct PlanetPrototypeView: View {
     @State private var showStars = true
     @State private var status = "태양계 생성 중…"
     @State private var planets: [Int: ModelEntity] = [:]
-    @State private var didRegister = false
     @State private var nearestText = ""
 
     private let hudTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -87,6 +98,7 @@ struct PlanetPrototypeView: View {
             if showStars { Starfield().ignoresSafeArea() }
 
             RealityView { content in
+                _ = SolarSceneRegistry.registerOnce
                 content.camera = .virtual
 
                 // 기본 환경광(IBL)이 밝아서 그냥 두면 구가 고르게 밝고 명암 경계가 사라진다
@@ -94,9 +106,14 @@ struct PlanetPrototypeView: View {
                     content.environment = .skybox(space)
                 }
 
+                let now = Date().timeIntervalSinceReferenceDate
+
                 let camera = PerspectiveCamera()
                 camera.camera.fieldOfViewInDegrees = 42
                 camera.components.set(ShipComponent())
+                camera.look(at: SolarSystem.shipPosition(at: now + 12) * 0.35,
+                            from: SolarSystem.shipPosition(at: now),
+                            relativeTo: nil)
                 content.add(camera)
 
                 // 태양 — 실제로 빛을 내는 점광원 + 눈에 보이는 발광체
@@ -114,6 +131,7 @@ struct PlanetPrototypeView: View {
                 for body in SolarBody.allCases {
                     let e = ModelEntity(mesh: .generateSphere(radius: body.bodyRadius),
                                         materials: [UnlitMaterial(color: .darkGray)])
+                    e.position = SolarSystem.position(body, at: now)
                     e.components.set(OrbitComponent(bodyIndex: body.rawValue))
                     e.components.set(PlanetSpinComponent(radiansPerSecond: body.spinSpeed))
                     content.add(e)
@@ -179,14 +197,6 @@ struct PlanetPrototypeView: View {
     // MARK: - 텍스처
 
     private func rebuild() async {
-        if !didRegister {
-            didRegister = true
-            OrbitComponent.registerComponent()
-            PlanetSpinComponent.registerComponent()
-            ShipComponent.registerComponent()
-            SolarSystemSystem.registerSystem()
-        }
-
         let width = textureWidth
         status = "표면 생성 중… (\(width)×\(width / 2) × 8행성)"
         let began = Date()

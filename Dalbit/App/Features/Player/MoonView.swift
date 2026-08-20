@@ -169,6 +169,11 @@ struct CampfireView: View {
 
     private let moonSize: CGFloat = 220
 
+    /// 달을 RealityKit 3D 구체로 그릴지. 끄면 예전 2D 달로 돌아간다.
+    /// (수면 앱이라 실기기 배터리·발열을 재보고 판단할 수 있게 되돌릴 길을 남겨 둔다 —
+    ///  설정 > 개발자 모드에서 끌 수 있다)
+    @AppStorage("use3DMoon") private var use3DMoon = true
+
     var body: some View {
         ZStack {
             // 달무리(외곽 글로우)
@@ -191,8 +196,8 @@ struct CampfireView: View {
                     .transition(.opacity)
             }
 
-            // 본체 — 소리마다 바뀌는 색(틴트)의 매끈한 구체
-            moonView
+            // 본체 — 소리마다 바뀌는 색(틴트)의 구체
+            if use3DMoon { moon3DView } else { moonView }
 
             // 위성 — 궤도 앞쪽 반(달 앞으로 지나감)
             if satelliteVisible {
@@ -333,6 +338,25 @@ struct CampfireView: View {
             )
             .clipShape(Circle())
             // 호흡 진폭 ±1.5% — 눈에 띄지 않고 무의식적으로 따라 쉬게 되는 미묘한 크기 변화
+            .scaleEffect(breathe ? 1.015 : 0.985)
+            .shadow(color: tint.opacity(0.35), radius: 36, x: 0, y: 12)
+    }
+
+    /// RealityKit 구체 본체. 위상 그림자는 실제 조명이 만드는 명암 경계가 대신하므로
+    /// 따로 그리지 않는다. 재생/일시정지 심볼과 호흡·그림자는 2D와 동일하게 얹는다.
+    private var moon3DView: some View {
+        Moon3DView(tint: tint, roll: roll, rollY: rollY, isPlaying: isPlaying, size: moonSize)
+            .overlay(
+                RollingSphereSurface(
+                    roll: roll, rollY: rollY, isPlaying: isPlaying,
+                    showIcon: true, showSpots: false,
+                    iconColor: .white
+                )
+                .frame(width: moonSize, height: moonSize)
+                .opacity(iconShown ? 1 : 0)
+                .animation(.easeInOut(duration: 0.9), value: iconShown)
+                .allowsHitTesting(false)
+            )
             .scaleEffect(breathe ? 1.015 : 0.985)
             .shadow(color: tint.opacity(0.35), radius: 36, x: 0, y: 12)
     }

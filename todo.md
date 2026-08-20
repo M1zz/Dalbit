@@ -262,3 +262,22 @@
 - [ ] App Store Connect: Privacy Policy 필드에 https://m1zz.github.io/Dalbit/privacy.html 입력 (저장소 리네임으로 URL 변경됨)
 - [ ] Guideline 2.3.3: 6.5"/5.5" iPhone 스크린샷을 최신 UI로 교체 (수동)
 - [ ] Apple에 회신
+
+## 메인 화면의 달을 RealityKit 3D 구체로 교체 - 완료 (2026-08-20)
+
+- [x] Moon3DView(Features/Player) 신규: 구 메시 + PBR + 방향광
+  - 표면 텍스처·노멀맵은 PlanetTextureFactory.moonMaps 로 코드 생성 (외부 에셋 0바이트)
+  - 위상 그림자를 따로 그리지 않는다 — 한쪽에서 들어오는 빛의 명암 경계가 그 역할
+  - 소리별 틴트는 표면을 다시 굽지 않고 **빛 색**으로 입힌다.
+    단, 틴트를 그대로 쓰면 보라색 램프처럼 쨍해서 흰색 쪽으로 끌어당김(moonlight, strength 0.30)
+  - 배경 투명 유지가 핵심: 환경광을 스카이박스로 주면 검은 사각형이 별을 가린다
+    → 엔티티에만 붙는 ImageBasedLightComponent 사용
+  - 완전 검은 환경은 그림자가 새까맣게 죽어 2D보다 딱딱해 보임 → 옅은 푸른 채움광(20,20,34)
+- [x] CampfireView 는 구조 유지하고 **구체만** 교체. 달무리·위성·재생심볼·호흡·그림자는 그대로
+- [x] 제스처 무영향: 탭·좌우굴리기·길게누르기는 원래부터 달이 아니라 홈 전체(orbGesture)에
+      붙어 있었다. Moon3DView 는 allowsHitTesting(false) 로 그림만 그린다
+- [x] 되돌릴 길: @AppStorage("use3DMoon") — 설정 > 개발자 모드에서 끄면 예전 2D 달
+- [x] 시뮬레이터 검증: 명암 경계·분화구 굴곡·배경 투명(별 비침)·재생심볼 렌더 확인,
+      탭하면 재생/일시정지 전환되는 것까지 확인
+- [ ] (미측정) 실기기 배터리·발열 — 수면 앱이라 몇 시간 켜두고 확인 필요.
+      문제가 있으면 개발자 모드에서 3D 달을 끄면 즉시 예전 동작으로 돌아간다

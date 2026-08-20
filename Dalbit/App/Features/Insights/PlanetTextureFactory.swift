@@ -26,15 +26,28 @@ enum PlanetTextureFactory {
     ///   - width: 등장방형 텍스처 가로. 세로는 그 절반.
     ///   - body: 행성별 색·줄무늬·주파수를 여기서 가져온다.
     static func make(width: Int, body: SolarBody, octaves: Int = 6) -> Maps? {
+        build(width: width, octaves: octaves,
+              // 행성마다 노이즈 공간의 다른 자리를 쓰게 해서 표면이 겹치지 않게
+              seed: Float(body.rawValue) * 37.4,
+              low: body.palette.low, high: body.palette.high,
+              banding: body.banding, snowline: body.snowline, frequency: body.frequency)
+    }
+
+    /// 홈 화면의 달. 색은 조명(소리별 틴트)으로 입히므로 표면은 중립 회백색으로 둔다.
+    static func moonMaps(width: Int, octaves: Int = 6) -> Maps? {
+        build(width: width, octaves: octaves,
+              seed: 311.7,
+              low: SIMD3<Float>(0.42, 0.41, 0.47),
+              high: SIMD3<Float>(0.93, 0.93, 0.96),
+              banding: 0, snowline: nil, frequency: 4.2)
+    }
+
+    private static func build(width: Int, octaves: Int, seed: Float,
+                              low: SIMD3<Float>, high: SIMD3<Float>,
+                              banding: Float, snowline: Float?, frequency freq: Float) -> Maps? {
         let start = Date()
         let w = max(64, width)
         let h = w / 2
-        let (low, high) = body.palette
-        let banding = body.banding
-        let snowline = body.snowline
-        let freq = body.frequency
-        // 행성마다 노이즈 공간의 다른 자리를 쓰게 해서 표면이 겹치지 않게
-        let seed = Float(body.rawValue) * 37.4
 
         // 1) 높이맵
         var height = [Float](repeating: 0, count: w * h)

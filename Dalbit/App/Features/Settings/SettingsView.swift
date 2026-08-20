@@ -31,6 +31,8 @@ struct SettingsView: View {
     @State private var showGalaxyMap = false
     // 자동 화면 어둡게 (앱 전체에 적용 — MainTabView의 .idleDimming()이 읽는다)
     @AppStorage("idleDimmingEnabled") private var idleDimmingEnabled = true
+    // 홈의 달을 3D로 그릴지 (되돌릴 길)
+    @AppStorage("use3DMoon") private var use3DMoon = true
     // 히든 모드: 앱 버전을 7번 탭하면 개발자 도구(피드백 인박스·사용 통계)가 드러난다
     @State private var developerMode = false
     @State private var versionTapCount = 0
@@ -296,6 +298,17 @@ struct SettingsView: View {
                     }
                 }
                 .buttonStyle(.plain)
+
+                divider()
+
+                settingRow(icon: "circle.circle",
+                           iconColor: DS.Colors.accent,
+                           title: "3D 달 (개발자)",
+                           subtitle: "끄면 예전 2D 달로 돌아간다") {
+                    Toggle("", isOn: $use3DMoon)
+                        .labelsHidden()
+                        .tint(DS.Colors.accent)
+                }
 
                 divider()
 

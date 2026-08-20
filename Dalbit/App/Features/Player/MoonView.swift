@@ -357,8 +357,9 @@ struct CampfireView: View {
                     iconColor: .white
                 )
                 .frame(width: moonSize, height: moonSize)
-                .opacity(iconShown ? 1 : 0)
-                .animation(.easeInOut(duration: 0.9), value: iconShown)
+                // 천체가 지나가는 중이라 중앙이 비었을 땐 심볼도 같이 사라진다
+                // (허공에 재생 표시만 떠 있으면 이상하다)
+                .modifier(CentralOnly(shown: iconShown))
                 .allowsHitTesting(false)
             )
             .scaleEffect(breathe ? 1.015 : 0.985)
@@ -426,6 +427,19 @@ struct CampfireView: View {
         }
         withAnimation(.easeInOut(duration: duration * 1.3).repeatForever(autoreverses: true)) {
             glow = true
+        }
+    }
+}
+
+/// 여행 중 중앙에 천체가 있을 때만 보이게 한다.
+private struct CentralOnly: ViewModifier {
+    let shown: Bool
+    func body(content: Content) -> some View {
+        TimelineView(.periodic(from: .now, by: 0.5)) { tl in
+            let c = MoonJourney.centrality(at: tl.date.timeIntervalSinceReferenceDate)
+            content
+                .opacity(shown ? c : 0)
+                .animation(.easeInOut(duration: 0.9), value: shown)
         }
     }
 }

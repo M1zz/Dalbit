@@ -63,6 +63,7 @@
 		8F4E1B6129B9A48F0013599C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4E1B6029B9A48F0013599C /* MainTabView.swift */; };
 		8F4E1B6329B9A5AE0013599C /* ListenListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4E1B6229B9A5AE0013599C /* ListenListView.swift */; };
 		SPL991271062100B /* ListenTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = SPL991271062100F /* ListenTips.swift */; };
+		MJ0000022FB000000000E /* MoonJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = MJ0000012FB000000000D /* MoonJourney.swift */; };
 		MN3000022FB000000000C /* Moon3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MN3000012FB000000000B /* Moon3DView.swift */; };
 		SPL530412011000B /* MoonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SPL530412011000F /* MoonView.swift */; };
 		SPL237534525200B /* SavedSoundsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SPL237534525200F /* SavedSoundsListView.swift */; };
@@ -256,6 +257,7 @@
 		8F4E1B6029B9A48F0013599C /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		8F4E1B6229B9A5AE0013599C /* ListenListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenListView.swift; sourceTree = "<group>"; };
 		SPL991271062100F /* ListenTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenTips.swift; sourceTree = "<group>"; };
+		MJ0000012FB000000000D /* MoonJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonJourney.swift; sourceTree = "<group>"; };
 		MN3000012FB000000000B /* Moon3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moon3DView.swift; sourceTree = "<group>"; };
 		SPL530412011000F /* MoonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonView.swift; sourceTree = "<group>"; };
 		SPL237534525200F /* SavedSoundsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSoundsListView.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				SPL359627028900F /* GestureCoachmark.swift */,
 				8F4E1B6229B9A5AE0013599C /* ListenListView.swift */,
 				SPL991271062100F /* ListenTips.swift */,
+				MJ0000012FB000000000D /* MoonJourney.swift */,
 				MN3000012FB000000000B /* Moon3DView.swift */,
 				SPL530412011000F /* MoonView.swift */,
 				SPL791298438500F /* NowPlayingManager.swift */,
@@ -1034,6 +1037,7 @@
 				ONB606431003400B /* OnboardingView.swift in Sources */,
 				8F4E1B6329B9A5AE0013599C /* ListenListView.swift in Sources */,
 				SPL991271062100B /* ListenTips.swift in Sources */,
+				MJ0000022FB000000000E /* MoonJourney.swift in Sources */,
 				MN3000022FB000000000C /* Moon3DView.swift in Sources */,
 				SPL530412011000B /* MoonView.swift in Sources */,
 				SPL237534525200B /* SavedSoundsListView.swift in Sources */,

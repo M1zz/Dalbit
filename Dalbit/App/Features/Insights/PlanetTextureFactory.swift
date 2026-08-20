@@ -40,7 +40,8 @@ enum PlanetTextureFactory {
     /// 그리고 큰 분화구에서 뻗는 **광조(ray)** 때문이다. 셋을 직접 그린다.
     ///
     /// 색은 조명(소리별 틴트)으로 입히므로 표면은 중립 회백색으로 둔다.
-    static func moonMaps(width: Int, craters: Int = 110) -> Maps? {
+    static func moonMaps(width: Int, craters: Int = 110, seed: Float = 0,
+                         warmth: Float = 0) -> Maps? {
         let start = Date()
         let w = max(64, width)
         let h = w / 2
@@ -59,12 +60,12 @@ enum PlanetTextureFactory {
         for i in 0..<craters {
             let fi = Float(i)
             // 구면 균등 분포 (z를 균등하게 뽑아야 극에 몰리지 않는다)
-            let z = hashf(fi, 11.3) * 2 - 1
-            let phi = hashf(fi, 27.7) * 2 * .pi
+            let z = hashf(fi + seed, 11.3) * 2 - 1
+            let phi = hashf(fi + seed, 27.7) * 2 * .pi
             let r = (1 - z * z).squareRoot()
             let c = SIMD3<Float>(r * cos(phi), z, r * sin(phi))
             // 크기: 대부분 작고 가끔 큼
-            let u = hashf(fi, 41.1)
+            let u = hashf(fi + seed, 41.1)
             let rad: Float = 0.022 + powf(u, 3.2) * 0.30
             let up: SIMD3<Float> = abs(c.y) < 0.9 ? SIMD3<Float>(0, 1, 0) : SIMD3<Float>(1, 0, 0)
             let tu = unitVector(cross3(c, up))
@@ -100,7 +101,8 @@ enum PlanetTextureFactory {
                 let p = SIMD3<Float>(sinT * cos(phi), cosT, sinT * sin(phi))
 
                 // 1) 바다(마리아) — 아주 낮은 주파수. 넓고 매끄럽고 어둡다.
-                let mare = smoothstep(0.52, 0.62, fbm(p * 1.15 + SIMD3<Float>(9, 9, 9), octaves: 3))
+                let mare = smoothstep(0.52, 0.62,
+                                     fbm(p * 1.15 + SIMD3<Float>(9 + seed, 9, 9 - seed), octaves: 3))
                 // 2) 고지대의 잔주름 + 더 잔 미세 요철(고해상도에서 표면이 매끈해 보이지 않게)
                 let grain = fbm(p * 9.0, octaves: 4) - 0.5
                 let micro = fbm(p * 46.0, octaves: 2) - 0.5
@@ -125,8 +127,11 @@ enum PlanetTextureFactory {
                         // 바다 위에는 분화구가 덜 남아 있다(용암이 덮었으므로)
                         let keep: Float = 1 - mare * 0.6
                         hgt += (bowl + rim) * 0.16 * keep
-                        // 바닥은 살짝 어둡고 턱은 살짝 밝다
-                        alb += (t < 0.9 ? -0.05 : 0.07) * keep
+                        // 바닥은 살짝 어둡고 턱은 살짝 밝다.
+                        // 계단식으로 바꾸면 경계에 또렷한 원 테두리가 생겨 그려 넣은 것처럼 보인다.
+                        let floorDark: Float = 1 - smoothstep(0.70, 0.98, t)
+                        let rimBright: Float = smoothstep(0.78, 1.02, t) * (1 - smoothstep(1.05, 1.35, t))
+                        alb += (-0.05 * floorDark + 0.07 * rimBright) * keep
                     }
 
                     // 4) 광조(ray) — 큰 분화구에서만 방사형 줄무늬로 길게 뻗는다
@@ -151,10 +156,10 @@ enum PlanetTextureFactory {
         for i in 0..<(w * h) {
             let a = albedo[i]
             // 살짝 푸른 기가 도는 회백색(순회색이면 죽어 보인다)
-            let v = UInt8(clamping: Int(a * 255))
-            colorPx[i * 4 + 0] = v
-            colorPx[i * 4 + 1] = v
-            colorPx[i * 4 + 2] = UInt8(clamping: Int(min(255, Float(v) * 1.04)))
+            let v = a * 255
+            colorPx[i * 4 + 0] = UInt8(clamping: Int(min(255, v * (1 + warmth * 0.10))))
+            colorPx[i * 4 + 1] = UInt8(clamping: Int(min(255, v * (1 + warmth * 0.02))))
+            colorPx[i * 4 + 2] = UInt8(clamping: Int(min(255, v * (1.04 - warmth * 0.12))))
             colorPx[i * 4 + 3] = 255
         }
 
@@ -325,7 +330,12 @@ enum PlanetTextureFactory {
     }
 
     private static func valueNoise(_ p: SIMD3<Float>) -> Float {
-        let i = SIMD3<Float>(p.x.rounded(.down), p.y.rounded(.down), p.z.rounded(.down))
+        // 좌표가 너무 크면 Int32 변환에서 트랩이 난다. 격자 해시라 잘라도 무해하다.
+        @inline(__always) func lattice(_ v: Float) -> Float {
+            let f = v.rounded(.down)
+            return f.isFinite ? min(max(f, -1_000_000), 1_000_000) : 0
+        }
+        let i = SIMD3<Float>(lattice(p.x), lattice(p.y), lattice(p.z))
         let f = p - i
         let u = f * f * (3 - 2 * f)   // smoothstep
         let ix = Int32(i.x), iy = Int32(i.y), iz = Int32(i.z)

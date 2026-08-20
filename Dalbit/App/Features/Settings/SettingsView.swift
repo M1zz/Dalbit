@@ -27,6 +27,10 @@ struct SettingsView: View {
     @State private var showInbox = false
     @State private var showUsageStats = false
     @State private var showStability = false
+    @State private var showSolarSystem = false
+    @State private var showGalaxyMap = false
+    // 자동 화면 어둡게 (앱 전체에 적용 — MainTabView의 .idleDimming()이 읽는다)
+    @AppStorage("idleDimmingEnabled") private var idleDimmingEnabled = true
     // 히든 모드: 앱 버전을 7번 탭하면 개발자 도구(피드백 인박스·사용 통계)가 드러난다
     @State private var developerMode = false
     @State private var versionTapCount = 0
@@ -46,6 +50,7 @@ struct SettingsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: DS.Spacing.xl) {
                     soundSection()
+                    displaySection()
                     supportSection()
                     aboutSection()
                     if developerMode { developerSection() }
@@ -78,6 +83,12 @@ struct SettingsView: View {
         }
         .navigationDestination(isPresented: $showUsageStats) {
             UsageStatsView()
+        }
+        .navigationDestination(isPresented: $showSolarSystem) {
+            PlanetPrototypeView()
+        }
+        .navigationDestination(isPresented: $showGalaxyMap) {
+            GalaxyMapView()
         }
         .navigationDestination(isPresented: $showStability) {
             CrashReportsView()
@@ -139,6 +150,27 @@ struct SettingsView: View {
     }
 
     // MARK: - Support Section (피드백)
+
+    @ViewBuilder
+    private func displaySection() -> some View {
+        VStack(alignment: .leading, spacing: DS.Spacing.sm) {
+            sectionTitle(L.Settings.sectionDisplay.localized)
+
+            // 잠시 안 쓰면 화면이 서서히 어두워짐 — 자는 동안 눈부시지 않게
+            settingRow(icon: idleDimmingEnabled ? "moon.zzz.fill" : "sun.max",
+                       iconColor: idleDimmingEnabled ? DS.Colors.accent : DS.Colors.textSecondary,
+                       title: L.Settings.idleDim.localized,
+                       subtitle: L.Settings.idleDimHint.localized) {
+                Toggle("", isOn: $idleDimmingEnabled)
+                    .labelsHidden()
+                    .tint(DS.Colors.accent)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(L.Settings.idleDim.localized)
+            .accessibilityValue(idleDimmingEnabled ? L.Common.on.localized : L.Common.off.localized)
+            .dsGlassPanel(radius: DS.Radius.md)
+        }
+    }
 
     @ViewBuilder
     private func supportSection() -> some View {
@@ -258,6 +290,34 @@ struct SettingsView: View {
                                iconColor: DS.Colors.accent,
                                title: L.Stats.inboxEntry.localized,
                                subtitle: nil) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+
+                divider()
+
+                Button { showSolarSystem = true } label: {
+                    settingRow(icon: "globe.americas",
+                               iconColor: DS.Colors.accent,
+                               title: "태양계 프로토타입 (개발자)",
+                               subtitle: "수·금·지·화·목·토·천·해를 배회한다") {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+
+                divider()
+
+                Button { showGalaxyMap = true } label: {
+                    settingRow(icon: "map",
+                               iconColor: DS.Colors.accent,
+                               title: "은하 지도 (개발자)",
+                               subtitle: "내 위치·항로와 은하계에서의 자리") {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(DS.Colors.textSecondary)

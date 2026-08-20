@@ -205,101 +205,47 @@ struct Starfield: View {
     private let count = 64
     private func frac(_ v: Double) -> Double { v - floor(v) }
 
-    // 방향 전환 주기(초). "최소 5분에 한 번 정도"만 바뀌도록.
-    private let segmentDur: Double = 300
-    // 방향 순환: 위 → 앞 → 아래 → 앞 → … (세로 반전 사이에는 항상 '앞으로'가 끼어 부드럽게 전환)
-    private let modes: [Int] = [0, 2, 1, 2]   // 0=위, 1=아래, 2=앞으로
-    @State private var segIndex = 0
-    @State private var segStart: Double = 0       // 현재 구간 시작 시각
-    @State private var phaseYBase: Double = 0     // 구간 시작 시점까지 누적된 세로 위상
-    @State private var phaseZBase: Double = 0     // 구간 시작 시점까지 누적된 전방 위상
-    @State private var vDir: Double = 1           // 세로 속도(+면 위로 올라가는 느낌, -면 내려감)
-    @State private var wForward: Double = 0       // 전방 레이어 가중치(0=세로, 1=앞으로) — 애니메이션으로 전환
-    @State private var started = false
-
-    private let vSpeed = 1.0      // 세로 흐름 속도 배율
-    private let zSpeed = 0.05     // 전방 흐름 속도
+    /// 뒤로 물러나는 속도. 별이 화면 가장자리에서 중심으로 모이며 작아진다 = 멀어진다.
+    ///
+    /// 예전에는 세로로 흐르는 레이어와 앞으로 나아가는 레이어를 5분마다 번갈아 썼는데,
+    /// 별이 위에서 아래로 떨어지면 "내가 위로 올라가는" 느낌이 나서 우주를 떠가는 감각과 어긋났다.
+    /// 이제는 멀어지는 방향 한 가지만 쓴다.
+    private let zSpeed = 0.05
 
     var body: some View {
         TimelineView(.animation) { tl in
             let t = tl.date.timeIntervalSinceReferenceDate
-            // 누적 위상 = 구간 시작까지의 누적 + 이번 구간 경과분 (방향이 바뀌어도 위치는 연속)
-            let phaseY = phaseYBase + vDir * vSpeed * (t - segStart)
-            let phaseZ = phaseZBase + zSpeed * (t - segStart)
-            let wF = wForward
             Canvas { ctx, size in
                 let cx = size.width / 2, cy = size.height / 2
                 let maxR = (size.width * size.width + size.height * size.height).squareRoot() / 2 * 1.05
+
                 for i in 0..<count {
                     let fi = Double(i)
                     let sz = 0.7 + frac(sin(fi * 3.71) * 991.7) * 2.3
                     let baseOp = 0.12 + frac(sin(fi * 5.13) * 311.1) * 0.5
                     let tw = 0.7 + 0.3 * sin(t * 1.4 + fi)   // 은은한 반짝임
 
-                    // ── 세로 레이어(위/아래) ── 좌우 이동 없음, 깊이감(시차)으로 속도 차이
-                    if wF < 0.999 {
-                        let bx = frac(sin(fi * 12.9898) * 43758.5453)
-                        let by = frac(sin(fi * 78.233) * 12543.1234)
-                        let speed = 0.006 + frac(sin(fi * 9.17) * 517.3) * 0.030
-                        let y = frac(by + phaseY * speed) * size.height
-                        let x = bx * size.width
-                        let rect = CGRect(x: x, y: y, width: sz, height: sz)
-                        ctx.fill(Path(ellipseIn: rect), with: .color(.white.opacity(baseOp * tw * (1 - wF))))
-                    }
+                    let ang = frac(sin(fi * 2.17) * 733.7) * 2 * Double.pi
+                    let fspd = 0.5 + frac(sin(fi * 7.13) * 421.9)      // 0.5~1.5 (깊이감)
+                    // 위상을 '빼면' 별이 바깥 → 중심으로 흐른다. 즉 내가 뒤로 물러나는 것.
+                    let rad = frac(frac(sin(fi * 4.51) * 611.3) - t * zSpeed * fspd)
+                    let radius = rad * rad * maxR                       // 중심에 가까울수록 느려짐
+                    let x = cx + cos(ang) * radius
+                    let y = cy + sin(ang) * radius
+                    let psz = sz * (0.3 + rad * 1.6)                    // 멀어질수록(중심) 작아짐
 
-                    // ── 전방 레이어(앞으로 나아감) ── 중심에서 사방으로 퍼지며 커짐(순 좌우 이동 없음, 대칭)
-                    if wF > 0.001 {
-                        let ang = frac(sin(fi * 2.17) * 733.7) * 2 * Double.pi
-                        let fspd = 0.5 + frac(sin(fi * 7.13) * 421.9)   // 0.5~1.5
-                        let rad = frac(frac(sin(fi * 4.51) * 611.3) + phaseZ * fspd)
-                        let radius = rad * rad * maxR                   // 가속하며 바깥으로
-                        let x = cx + cos(ang) * radius
-                        let y = cy + sin(ang) * radius
-                        let psz = sz * (0.3 + rad * 1.6)                // 가까워질수록(바깥) 커짐
-                        let fadeIn = min(1, rad / 0.2)                  // 중심에서 서서히 등장
-                        let fadeOut = 1 - max(0, (rad - 0.8) / 0.2)     // 가장자리에서 사라짐
-                        let op = baseOp * tw * wF * fadeIn * max(0, fadeOut)
-                        if op > 0.003 {
-                            let rect = CGRect(x: x, y: y, width: psz, height: psz)
-                            ctx.fill(Path(ellipseIn: rect), with: .color(.white.opacity(op)))
-                        }
+                    // 가장자리에서 나타나 중심으로 사라진다
+                    let appear = 1 - max(0, (rad - 0.8) / 0.2)
+                    let vanish = min(1, rad / 0.2)
+                    let op = baseOp * tw * max(0, appear) * vanish
+                    if op > 0.003 {
+                        ctx.fill(Path(ellipseIn: CGRect(x: x, y: y, width: psz, height: psz)),
+                                 with: .color(.white.opacity(op)))
                     }
                 }
             }
         }
         .allowsHitTesting(false)
-        .onAppear {
-            if !started {
-                started = true
-                segStart = Date().timeIntervalSinceReferenceDate
-                applyMode(modes[segIndex], animated: false)
-            }
-        }
-        // 약 5분마다 다음 방향으로 전환
-        .onReceive(Timer.publish(every: segmentDur, on: .main, in: .common).autoconnect()) { _ in
-            let now = Date().timeIntervalSinceReferenceDate
-            // 이번 구간 경과분을 base에 접어 넣어 위치 연속성 유지
-            phaseYBase += vDir * vSpeed * (now - segStart)
-            phaseZBase += zSpeed * (now - segStart)
-            segStart = now
-            segIndex = (segIndex + 1) % modes.count
-            applyMode(modes[segIndex], animated: true)
-        }
-    }
-
-    /// 방향 적용: 위(0)/아래(1)는 전방 레이어를 숨기고 세로 속도 부호를, 앞으로(2)는 전방 레이어를 띄운다.
-    private func applyMode(_ mode: Int, animated: Bool) {
-        switch mode {
-        case 0: vDir = 1                                 // 위로 올라가는 느낌(별이 아래로 흐름)
-        case 1: vDir = -1                                // 아래로 내려가는 느낌(별이 위로 흐름)
-        default: break                                   // 앞으로 — vDir 유지(어차피 가려짐)
-        }
-        let target: Double = (mode == 2) ? 1 : 0
-        if animated {
-            withAnimation(.easeInOut(duration: 6)) { wForward = target }
-        } else {
-            wForward = target
-        }
     }
 }
 

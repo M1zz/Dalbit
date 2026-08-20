@@ -61,6 +61,15 @@ struct ListenListView: View {
     @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
     // 달 중심의 화면(global) 좌표 — 달 길게 누르기(즐겨찾기) 판정용
     @State private var orbCenter: CGPoint = .zero
+    // 달이 우주를 떠다니는 느낌 — 0~1을 아주 느리게 왕복한다.
+    // 가로·세로 주기를 서로 다르게(47초 / 31초) 줘야 같은 길을 오가는 게 아니라
+    // 천천히 배회하는 궤적이 된다.
+    @State private var floatX: CGFloat = 0
+    @State private var floatY: CGFloat = 0
+    @State private var isFloating = false
+    /// 떠다니는 폭 (달 크기 240pt 기준으로 과하지 않게)
+    private static let floatRangeX: CGFloat = 40
+    private static let floatRangeY: CGFloat = 24
     // 모드 전환 안내 칩(타이머/보관함): 뉴비에게만 노출 — 써봤거나 몇 번 열면 숨김
     @AppStorage("homeAppearCount") private var homeAppearCount = 0
     @AppStorage("didUseModeSwitch") private var didUseModeSwitch = false
@@ -174,6 +183,7 @@ struct ListenListView: View {
                 countedThisSession = true
                 homeAppearCount += 1
             }
+            startFloating()
             viewModel.loadSound()
             viewModel.loadPresetSounds() // 첫 설치 시 기본 소리(프리셋) 제공
             // 선택된 소리가 없으면 기본 프리셋을 재생 대상으로 지정 → 큰 재생 버튼이 바로 재생 가능
@@ -277,6 +287,23 @@ struct ListenListView: View {
         }
     }
 
+    /// 달이 우주를 떠다니듯 아주 느리게 흘러가게 한다.
+    /// 가로·세로 주기가 달라(47초 / 31초) 왕복이 아니라 천천히 배회하는 궤적이 된다.
+    private func startFloating() {
+        guard !isFloating else { return }
+        isFloating = true
+        // repeatForever는 반드시 다음 런루프에서 건다.
+        // 같은 트랜잭션에서 걸면 그 프레임에 함께 바뀐 다른 상태까지 이 애니메이션에 끌려간다.
+        DispatchQueue.main.async {
+            withAnimation(.easeInOut(duration: 47).repeatForever(autoreverses: true)) {
+                floatX = 1
+            }
+            withAnimation(.easeInOut(duration: 31).repeatForever(autoreverses: true)) {
+                floatY = 1
+            }
+        }
+    }
+
     private func dismissCoach() {
         didShowGestureCoach = true
         withAnimation(.easeInOut(duration: 0.3)) { showCoach = false }
@@ -337,6 +364,16 @@ struct ListenListView: View {
             // 메인 오브
             VStack(spacing: DS.Spacing.md) {
                 ZStack {
+                    // 길게 누르기(즐겨찾기) 판정 기준점 — 달의 '정지 위치'.
+                    // 달에 직접 붙이면 부유 오프셋까지 따라가서 판정이 어긋난다.
+                    Color.clear
+                        .frame(width: 240, height: 240)
+                        .onGeometryChange(for: CGPoint.self) { proxy in
+                            let f = proxy.frame(in: .global)
+                            return CGPoint(x: f.midX, y: f.midY)
+                        } action: { orbCenter = $0 }
+                        .allowsHitTesting(false)
+
                     CampfireView(isPlaying: viewModel.isPlaying,
                                  tint: orbTint,
                                  roll: orbCommitted + orbDragAngle + orbAppearRoll,
@@ -346,13 +383,11 @@ struct ListenListView: View {
                                  satelliteStartAngle: satelliteStartAngle,
                                  satelliteHue: satelliteHue,
                                  satelliteScale: satelliteScale)
-                    // 달 길게 누르기(즐겨찾기) 판정용 — 달 중심의 화면(global) 좌표를 기록
-                    .onGeometryChange(for: CGPoint.self) { proxy in
-                        let f = proxy.frame(in: .global)
-                        return CGPoint(x: f.midX, y: f.midY)
-                    } action: { orbCenter = $0 }
                     .scaleEffect(orbPressed ? 0.97 : 1.0)
                     .scaleEffect(orbTapPress ? 0.92 : 1.0)              // 탭 시 옴폭
+                    // 우주를 떠다니는 느낌 — 아주 느리게 배회한다
+                    .offset(x: (floatX - 0.5) * Self.floatRangeX,
+                            y: (floatY - 0.5) * Self.floatRangeY)
                     .offset(x: orbAppearOffsetX, y: orbAppearOffsetY)   // 등장 시 기울어진 방향에서 굴러옴
                     .opacity(orbEntranceReady ? 1 : 0)                  // 시작 위치 잡기 전 숨김
                     .animation(.easeInOut(duration: 0.6), value: orbTint)

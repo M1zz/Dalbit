@@ -545,6 +545,9 @@ enum L {
     enum Settings {
         static let title = "settings.title"
         static let sectionSound = "settings.section_sound"
+        static let sectionDisplay = "settings.section_display"
+        static let idleDim = "settings.idle_dim"
+        static let idleDimHint = "settings.idle_dim_hint"
         static let sectionSupport = "settings.section_support"
         static let sectionAbout = "settings.section_about"
         static let version = "settings.version"

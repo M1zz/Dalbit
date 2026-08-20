@@ -94,6 +94,10 @@
 		SPL791298438500B /* NowPlayingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SPL791298438500F /* NowPlayingManager.swift */; };
 		USG000042F2C0000000000D4 /* UsageReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = USG000032F2C0000000000D3 /* UsageReportingService.swift */; };
 		USG000062F2C0000000000D6 /* UsageInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = USG000052F2C0000000000D5 /* UsageInsights.swift */; };
+		SOL000022FB0000000004 /* SolarSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = SOL000012FB0000000003 /* SolarSystem.swift */; };
+		SOL000022FB0000000006 /* PlanetTextureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = SOL000012FB0000000005 /* PlanetTextureFactory.swift */; };
+		SOL000022FB0000000008 /* PlanetPrototypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SOL000012FB0000000007 /* PlanetPrototypeView.swift */; };
+		SOL000022FB000000000A /* GalaxyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SOL000012FB0000000009 /* GalaxyMapView.swift */; };
 		USG000082F2C0000000000D8 /* UsageStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = USG000072F2C0000000000D7 /* UsageStatsView.swift */; };
 		RCP000022F2C0000000000E2 /* ListeningRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = RCP000012F2C0000000000E1 /* ListeningRecapView.swift */; };
 		CRS000022F2C0000000000E6 /* CrashReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CRS000012F2C0000000000E5 /* CrashReportsView.swift */; };
@@ -128,6 +132,7 @@
 		DSCP00022F28000000000014 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSCP00022F28000000000013 /* Components.swift */; };
 		SPL110965346300B /* CosmicBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = SPL110965346300F /* CosmicBackground.swift */; };
 		DSP000022F28000000000BD /* TimerAlarmPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSP000012F28000000000BC /* TimerAlarmPagerView.swift */; };
+		IDM000022FB0000000002 /* IdleDimming.swift in Sources */ = {isa = PBXBuildFile; fileRef = IDM000012FB0000000001 /* IdleDimming.swift */; };
 		DSTH00022F28000000000012 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DSTH00022F28000000000011 /* Theme.swift */; };
 		E60AC831B23D8791A00A6D47 /* RainMaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 39AA5589C6B322081300DF31 /* RainMaker.mp3 */; };
 		FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0000000000000000000B1 /* AnalyticsManager.swift */; };
@@ -280,6 +285,10 @@
 		SPL791298438500F /* NowPlayingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingManager.swift; sourceTree = "<group>"; };
 		USG000032F2C0000000000D3 /* UsageReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReportingService.swift; sourceTree = "<group>"; };
 		USG000052F2C0000000000D5 /* UsageInsights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageInsights.swift; sourceTree = "<group>"; };
+		SOL000012FB0000000003 /* SolarSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystem.swift; sourceTree = "<group>"; };
+		SOL000012FB0000000005 /* PlanetTextureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTextureFactory.swift; sourceTree = "<group>"; };
+		SOL000012FB0000000007 /* PlanetPrototypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetPrototypeView.swift; sourceTree = "<group>"; };
+		SOL000012FB0000000009 /* GalaxyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyMapView.swift; sourceTree = "<group>"; };
 		USG000072F2C0000000000D7 /* UsageStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageStatsView.swift; sourceTree = "<group>"; };
 		RCP000012F2C0000000000E1 /* ListeningRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningRecapView.swift; sourceTree = "<group>"; };
 		CRS000012F2C0000000000E5 /* CrashReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReportsView.swift; sourceTree = "<group>"; };
@@ -319,6 +328,7 @@
 		DSCP00022F28000000000013 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		SPL110965346300F /* CosmicBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmicBackground.swift; sourceTree = "<group>"; };
 		DSP000012F28000000000BC /* TimerAlarmPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAlarmPagerView.swift; sourceTree = "<group>"; };
+		IDM000012FB0000000001 /* IdleDimming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleDimming.swift; sourceTree = "<group>"; };
 		DSTH00022F28000000000011 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EC23383B6EB64FEAAC27ACB4 /* AudioLayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLayerManager.swift; sourceTree = "<group>"; };
 		EFDBD9965458E87AF0E53BAD /* TibetanBowl.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = TibetanBowl.mp3; sourceTree = "<group>"; };
@@ -452,6 +462,10 @@
 				USG000012F2C0000000000D1 /* ListeningTracker.swift */,
 				USG000052F2C0000000000D5 /* UsageInsights.swift */,
 				USG000032F2C0000000000D3 /* UsageReportingService.swift */,
+				SOL000012FB0000000003 /* SolarSystem.swift */,
+				SOL000012FB0000000005 /* PlanetTextureFactory.swift */,
+				SOL000012FB0000000007 /* PlanetPrototypeView.swift */,
+				SOL000012FB0000000009 /* GalaxyMapView.swift */,
 				USG000072F2C0000000000D7 /* UsageStatsView.swift */,
 			);
 			path = Insights;
@@ -785,6 +799,7 @@
 		DSGP00022F28000000000010 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				IDM000012FB0000000001 /* IdleDimming.swift */,
 				DSTH00022F28000000000011 /* Theme.swift */,
 				DSCP00022F28000000000013 /* Components.swift */,
 				SPL110965346300F /* CosmicBackground.swift */,
@@ -1036,6 +1051,10 @@
 				SPL791298438500B /* NowPlayingManager.swift in Sources */,
 				USG000042F2C0000000000D4 /* UsageReportingService.swift in Sources */,
 				USG000062F2C0000000000D6 /* UsageInsights.swift in Sources */,
+				SOL000022FB0000000004 /* SolarSystem.swift in Sources */,
+				SOL000022FB0000000006 /* PlanetTextureFactory.swift in Sources */,
+				SOL000022FB0000000008 /* PlanetPrototypeView.swift in Sources */,
+				SOL000022FB000000000A /* GalaxyMapView.swift in Sources */,
 				USG000082F2C0000000000D8 /* UsageStatsView.swift in Sources */,
 				RCP000022F2C0000000000E2 /* ListeningRecapView.swift in Sources */,
 				CRS000022F2C0000000000E6 /* CrashReportsView.swift in Sources */,
@@ -1052,6 +1071,7 @@
 				99AA00022EF1960000000002 /* SoundThumbnailView.swift in Sources */,
 				8FCB23EB2A15F71500188024 /* Color+Extension.swift in Sources */,
 				STDO00022F28000000000022 /* SoundStudioView.swift in Sources */,
+				IDM000022FB0000000002 /* IdleDimming.swift in Sources */,
 				DSTH00022F28000000000012 /* Theme.swift in Sources */,
 				DSCP00022F28000000000014 /* Components.swift in Sources */,
 				SPL110965346300B /* CosmicBackground.swift in Sources */,

@@ -159,6 +159,9 @@ struct CampfireView: View {
     var satelliteStartAngle: Double = 0.62   // 등장 시작각(좌/우 뒤 랜덤)
     var satelliteHue: Double = 0             // 위성 색상(랜덤)
     var satelliteScale: Double = 1.0         // 위성 크기 배리에이션(랜덤)
+    /// 내가 흔들리는 정도(-0.5~0.5). 3D 달의 카메라를 조금 옆으로 옮겨
+    /// 시점이 실제로 바뀌게 한다 — 평면 이동만으로는 '달이 움직인다'로 읽힌다.
+    var sway: CGSize = .zero
 
     @State private var breathe = false
     @State private var glow = false
@@ -345,7 +348,8 @@ struct CampfireView: View {
     /// RealityKit 구체 본체. 위상 그림자는 실제 조명이 만드는 명암 경계가 대신하므로
     /// 따로 그리지 않는다. 재생/일시정지 심볼과 호흡·그림자는 2D와 동일하게 얹는다.
     private var moon3DView: some View {
-        Moon3DView(tint: tint, roll: roll, rollY: rollY, isPlaying: isPlaying, size: moonSize)
+        Moon3DView(tint: tint, roll: roll, rollY: rollY, isPlaying: isPlaying,
+                   sway: sway, size: moonSize)
             .overlay(
                 RollingSphereSurface(
                     roll: roll, rollY: rollY, isPlaying: isPlaying,

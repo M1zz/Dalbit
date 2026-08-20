@@ -52,6 +52,8 @@ struct Moon3DView: View {
     var roll: Double        // 가로 회전(도) — 좌우 굴림
     var rollY: Double       // 세로 회전(도) — 위아래 굴림
     var isPlaying: Bool
+    /// 내가 흔들리는 정도(-0.5~0.5). 카메라를 옆으로 조금 옮겨 시점이 실제로 바뀌게 한다.
+    var sway: CGSize = .zero
     /// 화면에 보일 지름(pt)
     var size: CGFloat
 
@@ -65,6 +67,9 @@ struct Moon3DView: View {
     /// 표면(자전은 여기 걸린다)
     @State private var moon: ModelEntity?
     @State private var sun: DirectionalLight?
+    @State private var camera: PerspectiveCamera?
+    /// 카메라가 옆으로 움직이는 폭(씬 단위). 크게 주면 멀미가 난다.
+    private static let swayRange: Float = 0.16
 
     var body: some View {
         RealityView { content in
@@ -77,6 +82,7 @@ struct Moon3DView: View {
             camera.camera.fieldOfViewInDegrees = 30
             camera.position = SIMD3<Float>(0, 0, 2.1)
             content.add(camera)
+            self.camera = camera
 
             // 엔티티 전용 환경광 — 배경을 칠하지 않으므로 뒤의 별밭이 그대로 보인다
             let iblHolder = Entity()
@@ -109,6 +115,16 @@ struct Moon3DView: View {
             moon = sphere
 
         } update: { _ in
+            // 내가 흔들리면 카메라가 옆으로 움직인다. 달을 계속 바라보므로
+            // 화면상 위치는 그대로인데 보이는 각도만 바뀐다 = 진짜 시차.
+            if let cam = camera {
+                let sx = Float(sway.width) * Self.swayRange
+                let sy = Float(sway.height) * Self.swayRange
+                cam.look(at: SIMD3<Float>(0, 0, 0),
+                         from: SIMD3<Float>(sx, -sy, 2.1),
+                         relativeTo: nil)
+            }
+
             // 손가락 따라 굴러가는 회전은 rig 에 건다(자전은 자식이 따로 돈다)
             rig?.orientation =
                 simd_quatf(angle: Float(-roll * .pi / 180), axis: SIMD3<Float>(0, 1, 0))

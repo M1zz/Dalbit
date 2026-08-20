@@ -67,9 +67,19 @@ struct ListenListView: View {
     @State private var floatX: CGFloat = 0
     @State private var floatY: CGFloat = 0
     @State private var isFloating = false
-    /// 떠다니는 폭 (달 크기 240pt 기준으로 과하지 않게)
+    /// 내가 흔들리는 폭. 가장 가까운 것(달)이 이만큼 움직이고,
+    /// 먼 것일수록 조금만 움직인다 — 이 차이(시차)가 "내가 움직인다"로 읽히게 한다.
     private static let floatRangeX: CGFloat = 56
     private static let floatRangeY: CGFloat = 34
+    /// 시차 계수 — 별(가장 멀다) < 앰비언트 천체 < 달(가장 가깝다)
+    private static let parallaxStars: CGFloat = 0.10
+    private static let parallaxCosmic: CGFloat = 0.34
+
+    /// 내 흔들림(-0.5~0.5). 모든 레이어가 이 하나를 공유한다.
+    private var swayX: CGFloat { floatX - 0.5 }
+    private var swayY: CGFloat { floatY - 0.5 }
+    /// 아주 느린 기울어짐 — 우주에서는 몸이 조금씩 돌아간다
+    private var swayRoll: Double { Double(swayX) * 2.6 }
     // 모드 전환 안내 칩(타이머/보관함): 뉴비에게만 노출 — 써봤거나 몇 번 열면 숨김
     @AppStorage("homeAppearCount") private var homeAppearCount = 0
     @AppStorage("didUseModeSwitch") private var didUseModeSwitch = false
@@ -103,9 +113,19 @@ struct ListenListView: View {
             // 중첩 NavigationStack(타이머/보관함)의 상단 바가 상태바에 가리지 않게 한다.
             ScreenBackground().ignoresSafeArea()
             // 우주 느낌의 은은한 별 (홈 배경)
-            Starfield().ignoresSafeArea()
+            // 가장 먼 레이어라 내가 흔들려도 아주 조금만 따라 움직인다.
+            Starfield()
+                .ignoresSafeArea()
+                .offset(x: swayX * Self.floatRangeX * Self.parallaxStars,
+                        y: swayY * Self.floatRangeY * Self.parallaxStars)
+                .rotationEffect(.degrees(swayRoll * 0.35))
             // 우주 여행 앰비언트 — 가끔 혜성·먼 행성·우주선이 지나간다 (달 뒤로)
-            CosmicEventsView().ignoresSafeArea()
+            // 별보다 가깝고 달보다 멀다.
+            CosmicEventsView()
+                .ignoresSafeArea()
+                .offset(x: swayX * Self.floatRangeX * Self.parallaxCosmic,
+                        y: swayY * Self.floatRangeY * Self.parallaxCosmic)
+                .rotationEffect(.degrees(swayRoll * 0.7))
 
             GeometryReader { geo in
                 let H = geo.size.height
@@ -382,12 +402,14 @@ struct ListenListView: View {
                                  satelliteStart: satelliteStartTime,
                                  satelliteStartAngle: satelliteStartAngle,
                                  satelliteHue: satelliteHue,
-                                 satelliteScale: satelliteScale)
+                                 satelliteScale: satelliteScale,
+                                 sway: CGSize(width: swayX, height: swayY))
                     .scaleEffect(orbPressed ? 0.97 : 1.0)
                     .scaleEffect(orbTapPress ? 0.92 : 1.0)              // 탭 시 옴폭
-                    // 우주를 떠다니는 느낌 — 아주 느리게 배회한다
-                    .offset(x: (floatX - 0.5) * Self.floatRangeX,
-                            y: (floatY - 0.5) * Self.floatRangeY)
+                    // 가장 가까운 레이어 — 내가 흔들리는 만큼 그대로 반대로 밀린다
+                    .offset(x: swayX * Self.floatRangeX,
+                            y: swayY * Self.floatRangeY)
+                    .rotationEffect(.degrees(swayRoll))
                     .offset(x: orbAppearOffsetX, y: orbAppearOffsetY)   // 등장 시 기울어진 방향에서 굴러옴
                     .opacity(orbEntranceReady ? 1 : 0)                  // 시작 위치 잡기 전 숨김
                     .animation(.easeInOut(duration: 0.6), value: orbTint)

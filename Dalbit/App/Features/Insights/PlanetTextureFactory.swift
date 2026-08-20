@@ -76,27 +76,42 @@ enum PlanetTextureFactory {
         // 큰 것부터 그려야 작은 분화구가 위에 얹힌다(실제 생성 순서와 같은 인상)
         list.sort { $0.radius > $1.radius }
 
+        // 위도 밴드별로 미리 나눠 둔다. 이게 없으면 텍셀 하나마다 분화구 110개를
+        // 전부 검사해야 해서 해상도를 올릴 수가 없다(2048이면 2억 회가 넘는다).
+        let bandCount = 96
+        var bands = [[Int]](repeating: [], count: bandCount)
+        for (i, c) in list.enumerated() {
+            let lat = acos(max(-1, min(1, c.center.y)))          // 0(북극) ~ π(남극)
+            let reach = min(c.radius * 6.0, Float.pi)
+            let lo = Int(max(0, (lat - reach)) / .pi * Float(bandCount - 1))
+            let hi = Int(min(.pi, (lat + reach)) / .pi * Float(bandCount - 1))
+            for b in lo...max(lo, hi) { bands[b].append(i) }
+        }
+
         var height = [Float](repeating: 0, count: w * h)
         var albedo = [Float](repeating: 0, count: w * h)
 
         for y in 0..<h {
             let theta = (Float(y) + 0.5) / Float(h) * .pi
             let sinT = sin(theta), cosT = cos(theta)
+            let nearby = bands[min(bandCount - 1, Int(theta / .pi * Float(bandCount - 1)))]
             for x in 0..<w {
                 let phi = (Float(x) + 0.5) / Float(w) * 2 * .pi
                 let p = SIMD3<Float>(sinT * cos(phi), cosT, sinT * sin(phi))
 
                 // 1) 바다(마리아) — 아주 낮은 주파수. 넓고 매끄럽고 어둡다.
                 let mare = smoothstep(0.52, 0.62, fbm(p * 1.15 + SIMD3<Float>(9, 9, 9), octaves: 3))
-                // 2) 고지대의 잔주름
+                // 2) 고지대의 잔주름 + 더 잔 미세 요철(고해상도에서 표면이 매끈해 보이지 않게)
                 let grain = fbm(p * 9.0, octaves: 4) - 0.5
+                let micro = fbm(p * 46.0, octaves: 2) - 0.5
 
-                var hgt = grain * 0.10 * (1 - mare * 0.75) - mare * 0.06
+                var hgt = grain * 0.10 * (1 - mare * 0.75) - mare * 0.06 + micro * 0.022
                 var alb = mix(0.78, 0.38, mare)          // 고지대 밝고, 바다 어둡다
                 var rays: Float = 0
 
-                // 3) 분화구
-                for c in list {
+                // 3) 분화구 — 이 위도에 닿을 수 있는 것만
+                for idx in nearby {
+                    let c = list[idx]
                     let cosD = dot3(p, c.center)
                     if cosD < c.cutoff { continue }          // 멀면 즉시 기각
                     let d = acos(max(-1.0, min(1.0, cosD)))
@@ -116,10 +131,12 @@ enum PlanetTextureFactory {
 
                     // 4) 광조(ray) — 큰 분화구에서만 방사형 줄무늬로 길게 뻗는다
                     if c.radius > 0.15 && t > 1.0 && t < 6 {
+                        // 줄무늬가 너무 또렷하면 긁힌 자국처럼 보인다 — 개수를 줄이고
+                        // 세기를 낮춰 '희미하게 번진 자국' 정도로만 남긴다
                         let az = atan2f(dot3(p, c.tanV), dot3(p, c.tanU))
-                        let streak: Float = 0.5 + 0.5 * sin(az * 11 + c.radius * 40)
-                        let fade: Float = expf(-(t - 1) * 0.5)
-                        rays += fade * streak * streak * 0.20 * (1 - mare * 0.7)
+                        let streak: Float = 0.5 + 0.5 * sin(az * 6 + c.radius * 40)
+                        let fade: Float = expf(-(t - 1) * 0.85)
+                        rays += fade * streak * streak * 0.075 * (1 - mare * 0.7)
                     }
                 }
 

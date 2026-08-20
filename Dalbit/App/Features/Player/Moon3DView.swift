@@ -18,6 +18,7 @@
 
 import SwiftUI
 import RealityKit
+import Metal
 import simd
 
 /// 아주 느린 자전. 손가락으로 굴리는 회전(제스처)과 겹치면 안 되므로
@@ -57,8 +58,12 @@ struct Moon3DView: View {
     /// 화면에 보일 지름(pt)
     var size: CGFloat
 
-    /// 표면 텍스처 해상도. 홈의 주인공이라 조금 넉넉하게 준다.
-    private static let textureWidth = 768
+    /// 표면 텍스처 해상도.
+    /// 화면에는 220pt(=660px @3x)로 보이는데, 등장방형 텍스처는 절반만 앞면에 쓰인다.
+    /// 768이면 앞면에 384텍셀뿐이라 660px을 못 채워 뿌옇다 → 1536으로 올려 1.16배 오버샘플.
+    private static let textureWidth = 1536
+    /// 먼저 띄울 저해상도 — 고해상도는 굽는 데 시간이 걸리므로 회색 구가 오래 보이지 않게 한다
+    private static let previewWidth = 384
     /// 자전 속도 — 한 바퀴에 약 9분. 눈치채기 어렵되 멈춰 있지 않다는 건 느껴진다.
     private static let autoSpin: Float = 0.0118
 
@@ -126,8 +131,13 @@ struct Moon3DView: View {
             }
 
             // 손가락 따라 굴러가는 회전은 rig 에 건다(자전은 자식이 따로 돈다)
+            //
+            // ⚠️ 부호 주의. RealityKit 은 +Y 축 오른손 법칙이라 각도가 **양수**일 때
+            // 앞면이 +X(화면 오른쪽)로 간다. 2D 시절 RollingSphereSurface 도
+            // markX = sin(roll) 이라 roll 이 커지면 오른쪽으로 갔다.
+            // 여기에 -roll 을 넣는 바람에 손가락 반대로 굴렀다.
             rig?.orientation =
-                simd_quatf(angle: Float(-roll * .pi / 180), axis: SIMD3<Float>(0, 1, 0))
+                simd_quatf(angle: Float(roll * .pi / 180), axis: SIMD3<Float>(0, 1, 0))
                 * simd_quatf(angle: Float(rollY * .pi / 180), axis: SIMD3<Float>(1, 0, 0))
 
             // 소리 색을 빛에 실어 보낸다 — 표면을 다시 굽지 않아도 색이 바뀐다.
@@ -144,8 +154,14 @@ struct Moon3DView: View {
     // MARK: - 표면
 
     private func applySurface() async {
+        // 저해상도를 먼저 입히고(빠르다), 고해상도가 구워지면 바꿔 낀다
+        await bake(width: Self.previewWidth)
+        await bake(width: Self.textureWidth)
+    }
+
+    private func bake(width: Int) async {
         let maps = await Task.detached(priority: .userInitiated) {
-            PlanetTextureFactory.moonMaps(width: Self.textureWidth)
+            PlanetTextureFactory.moonMaps(width: width)
         }.value
         guard let maps, let moon else { return }
         guard
@@ -156,12 +172,29 @@ struct Moon3DView: View {
         else { return }
 
         var material = PhysicallyBasedMaterial()
-        material.baseColor = .init(texture: .init(colorTex))
-        material.normal = .init(texture: .init(normalTex))
+        material.baseColor = .init(texture: .init(colorTex, sampler: Self.crispSampler))
+        material.normal = .init(texture: .init(normalTex, sampler: Self.crispSampler))
         material.roughness = 0.94     // 바위 — 반짝이면 안 된다
         material.metallic = 0.0
         moon.model?.materials = [material]
+
+#if DEBUG
+        print("[Moon3D] \(width)×\(width / 2) 표면 생성 \(String(format: "%.2f", maps.duration))초")
+#endif
     }
+
+    /// 구의 가장자리는 텍스처를 비스듬히 훑는다. 이방성 필터링이 없으면
+    /// 림 쪽 분화구가 뭉개진다 — 선명도 차이가 가장 크게 나는 지점.
+    private static let crispSampler: MaterialParameters.Texture.Sampler = {
+        let d = MTLSamplerDescriptor()
+        d.minFilter = .linear
+        d.magFilter = .linear
+        d.mipFilter = .linear
+        d.maxAnisotropy = 16
+        d.sAddressMode = .repeat      // 경도 방향은 순환
+        d.tAddressMode = .clampToEdge
+        return .init(d)
+    }()
 
     /// 틴트를 흰색 쪽으로 끌어당긴 '달빛' 색.
     /// strength 가 작을수록 흰색에 가깝다(0 = 순백, 1 = 틴트 그대로).

@@ -33,13 +33,156 @@ enum PlanetTextureFactory {
               banding: body.banding, snowline: body.snowline, frequency: body.frequency)
     }
 
-    /// 홈 화면의 달. 색은 조명(소리별 틴트)으로 입히므로 표면은 중립 회백색으로 둔다.
-    static func moonMaps(width: Int, octaves: Int = 6) -> Maps? {
-        build(width: width, octaves: octaves,
-              seed: 311.7,
-              low: SIMD3<Float>(0.42, 0.41, 0.47),
-              high: SIMD3<Float>(0.93, 0.93, 0.96),
-              banding: 0, snowline: nil, frequency: 4.2)
+    /// 홈 화면의 달.
+    ///
+    /// fBm 노이즈만 쓰면 구름 얼룩처럼 보인다. 달 표면이 달처럼 보이는 건
+    /// **원형 분화구**(둘레 턱 + 파인 바닥)와 **바다(마리아, 매끄럽고 어두운 평원)**,
+    /// 그리고 큰 분화구에서 뻗는 **광조(ray)** 때문이다. 셋을 직접 그린다.
+    ///
+    /// 색은 조명(소리별 틴트)으로 입히므로 표면은 중립 회백색으로 둔다.
+    static func moonMaps(width: Int, craters: Int = 110) -> Maps? {
+        let start = Date()
+        let w = max(64, width)
+        let h = w / 2
+
+        // 분화구: 구면에 고르게 흩되, 큰 것은 드물게(지수 분포처럼)
+        struct Crater {
+            let center: SIMD3<Float>   // 단위벡터
+            let radius: Float          // 각반지름(라디안)
+            let depth: Float
+            let cutoff: Float          // 이 코사인보다 작으면 영향 없음(빠른 기각)
+            let tanU: SIMD3<Float>     // 광조 방향 계산용 접선 기저
+            let tanV: SIMD3<Float>
+        }
+        var list: [Crater] = []
+        list.reserveCapacity(craters)
+        for i in 0..<craters {
+            let fi = Float(i)
+            // 구면 균등 분포 (z를 균등하게 뽑아야 극에 몰리지 않는다)
+            let z = hashf(fi, 11.3) * 2 - 1
+            let phi = hashf(fi, 27.7) * 2 * .pi
+            let r = (1 - z * z).squareRoot()
+            let c = SIMD3<Float>(r * cos(phi), z, r * sin(phi))
+            // 크기: 대부분 작고 가끔 큼
+            let u = hashf(fi, 41.1)
+            let rad: Float = 0.022 + powf(u, 3.2) * 0.30
+            let up: SIMD3<Float> = abs(c.y) < 0.9 ? SIMD3<Float>(0, 1, 0) : SIMD3<Float>(1, 0, 0)
+            let tu = unitVector(cross3(c, up))
+            let tv = cross3(c, tu)
+            list.append(Crater(center: c, radius: rad, depth: 0.55 + u * 0.5,
+                               cutoff: cos(min(rad * 6.0, Float.pi)),
+                               tanU: tu, tanV: tv))
+        }
+        // 큰 것부터 그려야 작은 분화구가 위에 얹힌다(실제 생성 순서와 같은 인상)
+        list.sort { $0.radius > $1.radius }
+
+        var height = [Float](repeating: 0, count: w * h)
+        var albedo = [Float](repeating: 0, count: w * h)
+
+        for y in 0..<h {
+            let theta = (Float(y) + 0.5) / Float(h) * .pi
+            let sinT = sin(theta), cosT = cos(theta)
+            for x in 0..<w {
+                let phi = (Float(x) + 0.5) / Float(w) * 2 * .pi
+                let p = SIMD3<Float>(sinT * cos(phi), cosT, sinT * sin(phi))
+
+                // 1) 바다(마리아) — 아주 낮은 주파수. 넓고 매끄럽고 어둡다.
+                let mare = smoothstep(0.52, 0.62, fbm(p * 1.15 + SIMD3<Float>(9, 9, 9), octaves: 3))
+                // 2) 고지대의 잔주름
+                let grain = fbm(p * 9.0, octaves: 4) - 0.5
+
+                var hgt = grain * 0.10 * (1 - mare * 0.75) - mare * 0.06
+                var alb = mix(0.78, 0.38, mare)          // 고지대 밝고, 바다 어둡다
+                var rays: Float = 0
+
+                // 3) 분화구
+                for c in list {
+                    let cosD = dot3(p, c.center)
+                    if cosD < c.cutoff { continue }          // 멀면 즉시 기각
+                    let d = acos(max(-1.0, min(1.0, cosD)))
+                    let t = d / c.radius
+
+                    if t < 1.25 {
+                        // 파인 바닥(사발) + 둘레에 솟은 턱
+                        let bowl: Float = t < 1 ? -(1 - t * t) * c.depth : 0
+                        let rimT: Float = (t - 1.0) / 0.28
+                        let rim: Float = expf(-rimT * rimT) * c.depth * 0.55
+                        // 바다 위에는 분화구가 덜 남아 있다(용암이 덮었으므로)
+                        let keep: Float = 1 - mare * 0.6
+                        hgt += (bowl + rim) * 0.16 * keep
+                        // 바닥은 살짝 어둡고 턱은 살짝 밝다
+                        alb += (t < 0.9 ? -0.05 : 0.07) * keep
+                    }
+
+                    // 4) 광조(ray) — 큰 분화구에서만 방사형 줄무늬로 길게 뻗는다
+                    if c.radius > 0.15 && t > 1.0 && t < 6 {
+                        let az = atan2f(dot3(p, c.tanV), dot3(p, c.tanU))
+                        let streak: Float = 0.5 + 0.5 * sin(az * 11 + c.radius * 40)
+                        let fade: Float = expf(-(t - 1) * 0.5)
+                        rays += fade * streak * streak * 0.20 * (1 - mare * 0.7)
+                    }
+                }
+
+                let i = y * w + x
+                height[i] = hgt
+                albedo[i] = min(1, max(0, alb + rays))
+            }
+        }
+
+        // 컬러맵 — 중립 회백색
+        var colorPx = [UInt8](repeating: 0, count: w * h * 4)
+        for i in 0..<(w * h) {
+            let a = albedo[i]
+            // 살짝 푸른 기가 도는 회백색(순회색이면 죽어 보인다)
+            let v = UInt8(clamping: Int(a * 255))
+            colorPx[i * 4 + 0] = v
+            colorPx[i * 4 + 1] = v
+            colorPx[i * 4 + 2] = UInt8(clamping: Int(min(255, Float(v) * 1.04)))
+            colorPx[i * 4 + 3] = 255
+        }
+
+        // 노멀맵 — 분화구 요철이 빛을 받아야 달처럼 보인다
+        var normalPx = [UInt8](repeating: 0, count: w * h * 4)
+        let strength: Float = 9.0
+        for y in 0..<h {
+            let yUp = max(0, y - 1), yDn = min(h - 1, y + 1)
+            // 극 근처는 가로 텍셀이 촘촘해 기울기가 과장된다 → 위도로 보정
+            let lat = (Float(y) + 0.5) / Float(h) * .pi
+            let xScale = max(0.15, sin(lat))
+            for x in 0..<w {
+                let xL = (x - 1 + w) % w, xR = (x + 1) % w
+                let dx = (height[y * w + xR] - height[y * w + xL]) * strength * xScale
+                let dy = (height[yDn * w + x] - height[yUp * w + x]) * strength
+                let n = unitVector(SIMD3<Float>(-dx, -dy, 1))
+                let i = y * w + x
+                normalPx[i * 4 + 0] = UInt8(clamping: Int((n.x * 0.5 + 0.5) * 255))
+                normalPx[i * 4 + 1] = UInt8(clamping: Int((n.y * 0.5 + 0.5) * 255))
+                normalPx[i * 4 + 2] = UInt8(clamping: Int((n.z * 0.5 + 0.5) * 255))
+                normalPx[i * 4 + 3] = 255
+            }
+        }
+
+        guard let color = image(from: colorPx, width: w, height: h),
+              let normal = image(from: normalPx, width: w, height: h) else { return nil }
+        return Maps(color: color, normal: normal, duration: Date().timeIntervalSince(start))
+    }
+
+    @inline(__always)
+    private static func dot3(_ a: SIMD3<Float>, _ b: SIMD3<Float>) -> Float {
+        a.x * b.x + a.y * b.y + a.z * b.z
+    }
+
+    @inline(__always)
+    private static func cross3(_ a: SIMD3<Float>, _ b: SIMD3<Float>) -> SIMD3<Float> {
+        SIMD3<Float>(a.y * b.z - a.z * b.y,
+                     a.z * b.x - a.x * b.z,
+                     a.x * b.y - a.y * b.x)
+    }
+
+    @inline(__always)
+    private static func hashf(_ a: Float, _ b: Float) -> Float {
+        let v = sin(a * 12.9898 + b * 78.233) * 43758.5453
+        return v - v.rounded(.down)
     }
 
     private static func build(width: Int, octaves: Int, seed: Float,

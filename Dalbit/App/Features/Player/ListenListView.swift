@@ -68,8 +68,8 @@ struct ListenListView: View {
     @State private var floatY: CGFloat = 0
     @State private var isFloating = false
     /// 떠다니는 폭 (달 크기 240pt 기준으로 과하지 않게)
-    private static let floatRangeX: CGFloat = 40
-    private static let floatRangeY: CGFloat = 24
+    private static let floatRangeX: CGFloat = 56
+    private static let floatRangeY: CGFloat = 34
     // 모드 전환 안내 칩(타이머/보관함): 뉴비에게만 노출 — 써봤거나 몇 번 열면 숨김
     @AppStorage("homeAppearCount") private var homeAppearCount = 0
     @AppStorage("didUseModeSwitch") private var didUseModeSwitch = false

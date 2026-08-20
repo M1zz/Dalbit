@@ -20,6 +20,32 @@ import SwiftUI
 import RealityKit
 import simd
 
+/// 아주 느린 자전. 손가락으로 굴리는 회전(제스처)과 겹치면 안 되므로
+/// 제스처는 부모(rig)에, 자전은 자식(구체)에 걸어 서로 섞이지 않게 한다.
+struct MoonAutoSpinComponent: Component {
+    var radiansPerSecond: Float
+}
+
+struct MoonAutoSpinSystem: System {
+    private static let query = EntityQuery(where: .has(MoonAutoSpinComponent.self))
+    init(scene: RealityKit.Scene) {}
+    func update(context: SceneUpdateContext) {
+        for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
+            guard let spin = entity.components[MoonAutoSpinComponent.self] else { continue }
+            entity.orientation *= simd_quatf(angle: spin.radiansPerSecond * Float(context.deltaTime),
+                                             axis: SIMD3<Float>(0, 1, 0))
+        }
+    }
+}
+
+/// 등록은 씬을 만들기 전에 단 한 번. (.task 에서 하면 make 가 먼저 돌 수 있다)
+private enum MoonSceneRegistry {
+    static let registerOnce: Void = {
+        MoonAutoSpinComponent.registerComponent()
+        MoonAutoSpinSystem.registerSystem()
+    }()
+}
+
 struct Moon3DView: View {
 
     var tint: Color
@@ -29,14 +55,20 @@ struct Moon3DView: View {
     /// 화면에 보일 지름(pt)
     var size: CGFloat
 
-    /// 표면 텍스처 해상도. 달 하나뿐이라 512면 충분하다.
-    private static let textureWidth = 512
+    /// 표면 텍스처 해상도. 홈의 주인공이라 조금 넉넉하게 준다.
+    private static let textureWidth = 768
+    /// 자전 속도 — 한 바퀴에 약 9분. 눈치채기 어렵되 멈춰 있지 않다는 건 느껴진다.
+    private static let autoSpin: Float = 0.0118
 
+    /// 제스처 회전을 받는 부모
+    @State private var rig: Entity?
+    /// 표면(자전은 여기 걸린다)
     @State private var moon: ModelEntity?
     @State private var sun: DirectionalLight?
 
     var body: some View {
         RealityView { content in
+            _ = MoonSceneRegistry.registerOnce
             content.camera = .virtual
 
             // 구의 반지름 0.5가 뷰의 약 92%를 채우도록 거리를 잡는다
@@ -57,22 +89,28 @@ struct Moon3DView: View {
 
             // 한쪽에서 들어오는 빛 → 명암 경계(터미네이터)가 위상 그림자 역할을 한다
             let light = DirectionalLight()
-            light.light.intensity = 5_500
+            light.light.intensity = 3_900
             light.look(at: .zero,
                        from: SIMD3<Float>(1.0, 0.35, 0.85),
                        relativeTo: nil)
             content.add(light)
             sun = light
 
+            // rig(제스처 회전) → sphere(자전). 두 회전이 서로를 덮어쓰지 않게 부모/자식으로 나눈다.
+            let rigEntity = Entity()
+            content.add(rigEntity)
+            rig = rigEntity
+
             let sphere = ModelEntity(mesh: .generateSphere(radius: 0.5),
                                      materials: [UnlitMaterial(color: .darkGray)])
             sphere.components.set(ImageBasedLightReceiverComponent(imageBasedLight: iblHolder))
-            content.add(sphere)
+            sphere.components.set(MoonAutoSpinComponent(radiansPerSecond: Self.autoSpin))
+            rigEntity.addChild(sphere)
             moon = sphere
 
         } update: { _ in
-            // 손가락 따라 굴러가는 회전. 2D 시절의 roll/rollY를 그대로 받는다.
-            moon?.orientation =
+            // 손가락 따라 굴러가는 회전은 rig 에 건다(자전은 자식이 따로 돈다)
+            rig?.orientation =
                 simd_quatf(angle: Float(-roll * .pi / 180), axis: SIMD3<Float>(0, 1, 0))
                 * simd_quatf(angle: Float(rollY * .pi / 180), axis: SIMD3<Float>(1, 0, 0))
 
@@ -80,7 +118,7 @@ struct Moon3DView: View {
             // 단, 틴트를 그대로 쓰면 보라색 램프처럼 쨍해진다. 흰색 쪽으로 끌어당겨
             // '달빛에 색이 살짝 섞인' 정도로만 남긴다.
             sun?.light.color = Self.moonlight(tint)
-            sun?.light.intensity = isPlaying ? 6_200 : 4_600
+            sun?.light.intensity = isPlaying ? 3_900 : 3_100
         }
         .frame(width: size, height: size)
         .allowsHitTesting(false)

@@ -275,7 +275,9 @@ enum UsageInsights {
         return [
             Signal(id: "proRate",
                    name: L.Signal.proRate.localized,
-                   value: ratio { ($0["flag.isPro"] ?? 0) > 0 },
+                   // 결제로 센다 — 접근 권한(flag.isPro = 구독 ∪ 무료 코드)이 아니라.
+                   // 옛 스냅샷에는 flag.isPaid 가 없어서 그때만 옛 키로 물러선다.
+                   value: ratio { ($0["flag.isPaid"] ?? $0["flag.isPro"] ?? 0) > 0 },
                    hint: L.Signal.proRateHint.localized),
             Signal(id: "madeOwnMix",
                    name: L.Signal.madeOwnMix.localized,

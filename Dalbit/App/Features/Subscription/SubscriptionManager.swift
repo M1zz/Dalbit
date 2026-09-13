@@ -55,15 +55,32 @@ class SubscriptionManager: ObservableObject {
     // MARK: - 통계 지표용 캐시
 
     /// 사용 통계가 읽는 프리미엄 상태 캐시 키.
+    ///
+    /// ⚠️ 이 값은 **접근 권한**이다(구독 ∪ 무료 코드). 결제 지표로 쓰면 안 된다 —
+    ///    아래 `didPayCacheKey` 가 결제만 담는다.
     static let isPremiumCacheKey = "dalbit.flag.isPro"
+
+    /// 실제로 돈을 낸 상태(구독 권한)만 담는 캐시 키.
+    static let didPayCacheKey = "dalbit.flag.isPaid"
+
+    /// 무료 사용 코드로 열린 상태만 담는 캐시 키.
+    static let compedCacheKey = "dalbit.flag.isComped"
 
     /// 프리미엄 여부를 평평한 값으로 남긴다.
     ///
     /// 지표 수집(`UsageReportingService.currentMetrics`)은 백그라운드에서 도는데 이 매니저는
     /// `@MainActor` 이고 싱글톤도 아니라 거기서 직접 읽을 방법이 없다. 상태가 바뀌는 지점마다
     /// UserDefaults 에 한 줄 남겨 두면 수집 쪽이 액터를 넘지 않고도 정확한 값을 본다.
+    ///
+    /// **세 줄로 나눠 남기는 이유**: `isPremium` 하나로는 "돈을 냈다"와 "지금 기능이
+    /// 열려 있다"를 구분할 수 없다. 허브가 유료를 셀 때 무료 코드 사용자가 결제자에
+    /// 섞이면 전환율이 그대로 거짓이 된다 — 같은 실수로 다른 앱에서 신규 설치의
+    /// 99%가 유료로 기록된 적이 있다.
     func cachePremiumFlag() {
-        UserDefaults.standard.set(isPremium, forKey: Self.isPremiumCacheKey)
+        let defaults = UserDefaults.standard
+        defaults.set(isPremium, forKey: Self.isPremiumCacheKey)
+        defaults.set(store.hasPro, forKey: Self.didPayCacheKey)
+        defaults.set(hasActivePromo, forKey: Self.compedCacheKey)
     }
 
     // MARK: - 공개 상태 (기존 API 유지)

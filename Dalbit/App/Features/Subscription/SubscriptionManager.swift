@@ -66,6 +66,9 @@ class SubscriptionManager: ObservableObject {
     /// 무료 사용 코드로 열린 상태만 담는 캐시 키.
     static let compedCacheKey = "dalbit.flag.isComped"
 
+    /// **인트로 무료 기간**으로 열린 상태만 담는 캐시 키.
+    static let trialCacheKey = "dalbit.flag.isTrial"
+
     /// 프리미엄 여부를 평평한 값으로 남긴다.
     ///
     /// 지표 수집(`UsageReportingService.currentMetrics`)은 백그라운드에서 도는데 이 매니저는
@@ -79,8 +82,55 @@ class SubscriptionManager: ObservableObject {
     func cachePremiumFlag() {
         let defaults = UserDefaults.standard
         defaults.set(isPremium, forKey: Self.isPremiumCacheKey)
-        defaults.set(store.hasPro, forKey: Self.didPayCacheKey)
         defaults.set(hasActivePromo, forKey: Self.compedCacheKey)
+
+        // 결제와 체험은 **함께** 정해야 한다 — 아래 `currentlyInIntroOffer` 머리말 참고.
+        // 거래를 훑어야 알 수 있어 비동기다. 앞의 두 줄을 막지 않는다: 스냅샷은 12시간에
+        // 한 번 나가므로 한 박자 늦게 적혀도 다음 갱신에 실린다.
+        let entitledNow = store.hasPro
+        Task { [weak self] in
+            let trial = await self?.currentlyInIntroOffer() ?? false
+            let defaults = UserDefaults.standard
+            defaults.set(trial, forKey: Self.trialCacheKey)
+            defaults.set(entitledNow && !trial, forKey: Self.didPayCacheKey)
+        }
+    }
+
+    /// 지금 **인트로 무료 기간**(첫 주 무료)으로 열려 있는가.
+    ///
+    /// ⚠️ 예전에는 "구독의 인트로 무료 기간은 StoreKit 권한상 결제와 구분되지 않는다"며
+    ///    `flag.isTrial` 을 아예 안 보냈다. **그 전제가 틀렸다** — 유효한 거래에게
+    ///    인트로 오퍼인지 물어보면 된다. 구분하지 않는 동안 체험 첫 주의 사람이 전부
+    ///    `flag.isPaid` 로 들어갔고, 허브의 결제 전환율은 그만큼 부풀어 있었다.
+    ///
+    /// ⚠️ 그래서 `flag.isPaid` 에서 체험을 **빼야** 한다. 허브의 결제 축은 isPaid 를 먼저
+    ///    보기 때문에(FeedbackStore.Entitlement.paymentKind), 빼지 않으면 isTrial 을 함께
+    ///    보내도 그 사람은 "Pro 결제" 칸에 그대로 남는다.
+    private func currentlyInIntroOffer() async -> Bool {
+        let entitlementIDs = store.config.entitlementIDs
+        for await result in StoreKit.Transaction.currentEntitlements {
+            guard case .verified(let transaction) = result,
+                  entitlementIDs.contains(transaction.productID),
+                  transaction.revocationDate == nil else { continue }
+            if Self.isIntroOffer(transaction) { return true }
+        }
+        return false
+    }
+
+    private static func isIntroOffer(_ transaction: StoreKit.Transaction) -> Bool {
+        if #available(iOS 17.2, macOS 14.2, watchOS 10.2, *) {
+            return transaction.offer?.type == .introductory
+        }
+        return legacyIsIntroOffer(transaction)
+    }
+
+    /// iOS 17.2 미만에서만 쓰는 길. `offerType` 은 그 버전에서 대체됐지만 배포 하한이
+    /// 15.0 이라 아직 필요하다 — 경고는 이 함수 안에 가둔다.
+    @available(iOS, deprecated: 17.2)
+    @available(macOS, deprecated: 14.2)
+    @available(watchOS, deprecated: 10.2)
+    private static func legacyIsIntroOffer(_ transaction: StoreKit.Transaction) -> Bool {
+        transaction.offerType == .introductory
     }
 
     // MARK: - 공개 상태 (기존 API 유지)

@@ -225,9 +225,11 @@ enum UsageReportingService {
         // 권한은 **나눠서** 보낸다 — 허브 규약: flag.isPaid(실제 결제) ·
         // flag.isTrial(체험) · flag.isComped(돈 안 내고 열린 접근). 셋 다 0이면 무료.
         // 이 앱의 무료 사용 코드는 결제가 아니라 무상이므로 isComped 로 간다.
-        // 구독의 인트로 무료 기간은 StoreKit 권한상 결제와 구분되지 않아 flag.isTrial
-        // 은 보내지 않는다 — 모르는 것을 0으로 적으면 "체험자가 없다"가 되어 버린다.
+        // 인트로 무료 기간(첫 주)은 isTrial 로 따로 나가고, isPaid 에서는 빠진다 —
+        // 아직 돈이 나가지 않은 사람이라 결제에 섞이면 전환율이 부푼다
+        // (`SubscriptionManager.currentlyInIntroOffer`).
         metrics["flag.isPaid"] = UserDefaults.standard.bool(forKey: SubscriptionManager.didPayCacheKey) ? 1 : 0
+        metrics["flag.isTrial"] = UserDefaults.standard.bool(forKey: SubscriptionManager.trialCacheKey) ? 1 : 0
         metrics["flag.isComped"] = UserDefaults.standard.bool(forKey: SubscriptionManager.compedCacheKey) ? 1 : 0
         // 옛 키는 계속 보낸다 — 앱 자체 통계의 과거 기록과 이어 보려면 필요하다.
         // 다만 이 값은 접근 권한이지 결제가 아니다. 유료를 세는 데 쓰지 말 것.

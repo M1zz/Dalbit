@@ -47,6 +47,7 @@
 		594012762A17DD7900221DE7 /* Forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 594012722A17DD7900221DE7 /* Forest.mp3 */; };
 		5970E2FBA12E4A9D4D95F257 /* MeditationPad.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D8999CB90199853226247F6 /* MeditationPad.mp3 */; };
 		630903C8F065B61C9BFA760B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 03C047869B83EAF5E36D4BC3 /* Localizable.xcstrings */; };
+		D4A1B17E0000000000000001 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D4A1B17E0000000000000002 /* InfoPlist.xcstrings */; };
 		66377C5C0E9E1368AF2F267E /* SoftRain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B53790AB535F668DEE440512 /* SoftRain.mp3 */; };
 		68D504FD5581CF0ED5A04FC3 /* TibetanBowl.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFDBD9965458E87AF0E53BAD /* TibetanBowl.mp3 */; };
 		7AB1D9C3BDB047F962FCF0AA /* Atmosphere.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B44E72EC850D0D85EA34FB9A /* Atmosphere.mp3 */; };
@@ -204,6 +205,7 @@
 		TST000000000000000F03 /* UsageReportingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReportingServiceTests.swift; sourceTree = "<group>"; };
 		TST000000000000000T02 /* DalbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DalbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C047869B83EAF5E36D4BC3 /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = App/Resources/Localizable.xcstrings; sourceTree = "<group>"; };
+		D4A1B17E0000000000000002 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; name = InfoPlist.xcstrings; path = App/Resources/InfoPlist.xcstrings; sourceTree = "<group>"; };
 		0B8A77712079DB40B0C16ED8 /* BowlLoud.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = BowlLoud.mp3; sourceTree = "<group>"; };
 		18E999CF36B64FB99C403643 /* PresetSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetSound.swift; sourceTree = "<group>"; };
 		18F787B9DFE4DC8F447491C3 /* IndigoMusic.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = IndigoMusic.mp3; sourceTree = "<group>"; };
@@ -725,6 +727,7 @@
 			children = (
 				D4B5C3647D837C396E18D4C1 /* Localization */,
 				03C047869B83EAF5E36D4BC3 /* Localizable.xcstrings */,
+				D4A1B17E0000000000000002 /* InfoPlist.xcstrings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -965,6 +968,7 @@
 				5940126D2A17DD3B00221DE7 /* Focus.mp3 in Resources */,
 				594012692A17DD3B00221DE7 /* Vibration.mp3 in Resources */,
 				630903C8F065B61C9BFA760B /* Localizable.xcstrings in Resources */,
+				D4A1B17E0000000000000001 /* InfoPlist.xcstrings in Resources */,
 				CCFF29742C8FC76940F1E802 /* Jungle.mp3 in Resources */,
 				BD5DD63A6A387694BDBA80EC /* ForestBird.mp3 in Resources */,
 				B2574EF779062CB43FCF1653 /* SpringForest.mp3 in Resources */,

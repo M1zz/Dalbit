@@ -17,6 +17,12 @@
             "state" : "new",
             "value" : "%1$@ · %2$@"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ · %2$@"
+          }
         }
       }
     },
@@ -27,6 +33,12 @@
         "ko" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "%1$@ · iOS %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%1$@ · iOS %2$@"
           }
         }
@@ -41,6 +53,12 @@
             "state" : "new",
             "value" : "%1$@ %2$@"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@"
+          }
         }
       }
     },
@@ -51,17 +69,44 @@
             "state" : "new",
             "value" : "%1$@, %2$@"
           }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@"
+          }
         }
       }
     },
     "%@m" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@m"
+          }
+        }
+      }
     },
     "%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "%lld°" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld°"
+          }
+        }
+      }
     },
     "•" : {
       "comment" : "A period used to separate elements in a list or sequence.",
@@ -1508,6 +1553,142 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "앰비언트"
+          }
+        }
+      }
+    },
+    "background.brainmassage_bright" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bright"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브라이트"
+          }
+        }
+      }
+    },
+    "background.brainmassage_celeste" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Celeste"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "셀레스트"
+          }
+        }
+      }
+    },
+    "background.brainmassage_deep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deep Sleep"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "딥 슬립"
+          }
+        }
+      }
+    },
+    "background.brainmassage_drone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimal Drone"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "미니멀 드론"
+          }
+        }
+      }
+    },
+    "background.brainmassage_full" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brain Massage"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브레인 마사지"
+          }
+        }
+      }
+    },
+    "background.brainmassage_glow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glow"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글로우"
+          }
+        }
+      }
+    },
+    "background.brainmassage_midnight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Midnight"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "미드나잇"
+          }
+        }
+      }
+    },
+    "background.brainmassage_warm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warm Harmony"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "웜 하모니"
           }
         }
       }
@@ -3553,7 +3734,14 @@
       }
     },
     "OK" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "onboarding.next" : {
       "extractionState" : "manual",
@@ -8725,43 +8913,123 @@
     },
     "나" : {
       "comment" : "A label displayed on the user's ship.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You"
+          }
+        }
+      }
     },
     "나선팔 4개 · 중심 팽대부" : {
       "comment" : "A label displayed in the galaxy map's legend.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 spiral arms · central bulge"
+          }
+        }
+      }
     },
     "별 배경" : {
       "comment" : "A toggle to show or hide the star field.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starfield"
+          }
+        }
+      }
     },
     "우리 태양계" : {
       "comment" : "The name of the user's solar system.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Our solar system"
+          }
+        }
+      }
     },
     "우리 태양계는 중심에서 약 60% 지점" : {
       "comment" : "A description of the Milky Way galaxy.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Our solar system sits about 60% of the way out"
+          }
+        }
+      }
     },
     "은하 지도" : {
       "comment" : "A title for the galaxy map screen.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galaxy map"
+          }
+        }
+      }
     },
     "자전" : {
       "comment" : "A toggle to spin the planets.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rotation"
+          }
+        }
+      }
     },
     "점선은 지나온 5분간의 항로" : {
       "comment" : "A description of the path taken by the user's spaceship.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The dotted line traces the last 5 minutes"
+          }
+        }
+      }
     },
     "태양" : {
       "comment" : "A label displayed under the name of a solar body.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sun"
+          }
+        }
+      }
     },
     "태양계 프로토타입" : {
       "comment" : "A title for the planet prototype view.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solar system prototype"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"

@@ -140,6 +140,7 @@
 		E60AC831B23D8791A00A6D47 /* RainMaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 39AA5589C6B322081300DF31 /* RainMaker.mp3 */; };
 		FBA0000000000000000000B2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0000000000000000000B1 /* AnalyticsManager.swift */; };
 		FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000032F2A0000000000C3 /* FeedbackView.swift */; };
+		RDM000022F2A0000000000D2 /* DalbitRoadmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = RDM000012F2A0000000000D1 /* DalbitRoadmap.swift */; };
 		FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */; };
 		FIN000022F2800000000000A /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FIN000012F28000000000009 /* FileInfo.swift */; };
 		SPCB00000000000000000001 /* space_cinematic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = SPCF00000000000000000001 /* space_cinematic.mp3 */; };
@@ -340,6 +341,7 @@
 		EFDBD9965458E87AF0E53BAD /* TibetanBowl.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = TibetanBowl.mp3; sourceTree = "<group>"; };
 		FBA0000000000000000000B1 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		FBK000032F2A0000000000C3 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		RDM000012F2A0000000000D1 /* DalbitRoadmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DalbitRoadmap.swift; sourceTree = "<group>"; };
 		FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackInboxView.swift; sourceTree = "<group>"; };
 		FIN000012F28000000000009 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
 		SPCF00000000000000000001 /* space_cinematic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space_cinematic.mp3; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 			children = (
 				FBK000052F2A0000000000C5 /* FeedbackInboxView.swift */,
 				FBK000032F2A0000000000C3 /* FeedbackView.swift */,
+				RDM000012F2A0000000000D1 /* DalbitRoadmap.swift */,
 				RCP000012F2C0000000000E1 /* ListeningRecapView.swift */,
 				STV000012F2800000000000B /* SettingsView.swift */,
 			);
@@ -1073,6 +1076,7 @@
 				INS000022F2C0000000000H2 /* InsightComponents.swift in Sources */,
 				ALM000022F28000000000B4 /* AlarmService.swift in Sources */,
 				FBK000042F2A0000000000C4 /* FeedbackView.swift in Sources */,
+				RDM000022F2A0000000000D2 /* DalbitRoadmap.swift in Sources */,
 				FBK000062F2A0000000000C6 /* FeedbackInboxView.swift in Sources */,
 				ALM000042F28000000000B6 /* AlarmItem.swift in Sources */,
 				ALV000022F28000000000B8 /* AlarmListView.swift in Sources */,
@@ -1381,7 +1385,7 @@
 			repositoryURL = "https://github.com/M1zz/LeeoKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.0;
+				minimumVersion = 3.20.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

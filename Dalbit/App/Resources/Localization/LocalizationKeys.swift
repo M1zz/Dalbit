@@ -777,6 +777,42 @@ enum L {
         static let countFormat = "stability.count_format"   // %lld = 건수
     }
 
+    // MARK: - Roadmap (앞으로 만들 기능 — 원본: Features/Settings/DalbitRoadmap.swift)
+    enum Roadmap {
+        static let entry = "roadmap.entry"
+        static let entryHint = "roadmap.entry_hint"
+        static let voiceoverTitle = "roadmap.voiceover.title"
+        static let voiceoverDetail = "roadmap.voiceover.detail"
+        static let largetextTitle = "roadmap.largetext.title"
+        static let largetextDetail = "roadmap.largetext.detail"
+        static let contrastTitle = "roadmap.contrast.title"
+        static let contrastDetail = "roadmap.contrast.detail"
+        static let motionTitle = "roadmap.motion.title"
+        static let motionDetail = "roadmap.motion.detail"
+        static let keyboardTitle = "roadmap.keyboard.title"
+        static let keyboardDetail = "roadmap.keyboard.detail"
+        static let langMoreTitle = "roadmap.lang_more.title"
+        static let langMoreDetail = "roadmap.lang_more.detail"
+        static let whatsnewTitle = "roadmap.whatsnew.title"
+        static let whatsnewDetail = "roadmap.whatsnew.detail"
+        static let giftTitle = "roadmap.gift.title"
+        static let giftDetail = "roadmap.gift.detail"
+        static let widgetsTitle = "roadmap.widgets.title"
+        static let widgetsDetail = "roadmap.widgets.detail"
+        static let shortcutsTitle = "roadmap.shortcuts.title"
+        static let shortcutsDetail = "roadmap.shortcuts.detail"
+        static let syncTitle = "roadmap.sync.title"
+        static let syncDetail = "roadmap.sync.detail"
+        static let backupTitle = "roadmap.backup.title"
+        static let backupDetail = "roadmap.backup.detail"
+        static let foldTitle = "roadmap.fold.title"
+        static let foldDetail = "roadmap.fold.detail"
+        static let dataDeleteTitle = "roadmap.data_delete.title"
+        static let dataDeleteDetail = "roadmap.data_delete.detail"
+        static let autosaveTitle = "roadmap.autosave.title"
+        static let autosaveDetail = "roadmap.autosave.detail"
+    }
+
     // MARK: - App
     enum App {
         static let name = "app.name"

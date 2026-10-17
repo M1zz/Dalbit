@@ -24,6 +24,25 @@ enum DalbitSpec: LeeoAppSpec {
         appIdentifier: "com.leeo.LullabyRecipe"
     )
 
+    /// 개인정보·지원 링크 (LeeoKit 3.x 부터 필수).
+    /// ⚠️ 주소는 App Store Connect 에 등록한 것(`APPSTORE.md`)과 같아야 한다.
+    static let legal = LeeoLegalConfig(
+        privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html")!,
+        supportURL: URL(string: "https://m1zz.github.io/Dalbit/")!,
+        termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!,
+        // 계정을 만들지 않는다 — 데이터는 사용자 기기에만 있다.
+        createsAccounts: false
+    )
+
+    /// 수익모델 (LeeoKit 3.x 부터 필수) — 무료로 쓰다가 월 구독으로 프리미엄을 연다.
+    /// 실제 판매 설정은 아래 `paywall` 이 우선한다(직접 선언). 둘의 상품 ID 는 같아야 한다.
+    static let monetization = LeeoMonetization.freemiumSubscription(
+        LeeoSubscriptionConfig(
+            productIDs: [SubscriptionManager.productId],
+            termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
+        )
+    )
+
     /// 인앱 결제(구독). StoreKit 엔진은 LeeoKit(LeeoStore)이 담당하고,
     /// 앱은 이 구성과 얇은 SubscriptionManager 파사드(무료 게이트·프로모 코드)만 유지한다.
     /// ⚠️ 상품 ID("month")는 App Store Connect·기존 사용자 기기와의 계약이다 — 변경 금지.

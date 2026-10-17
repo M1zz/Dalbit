@@ -21,6 +21,7 @@ struct SettingsView: View {
     @State private var showFeedback = false
     @State private var showAbout = false
     @State private var showRecap = false
+    @State private var showRoadmap = false
     /// 다시 보기용 — 설정에서 끄면 다음 진입 때 안내가 되살아난다.
     @AppStorage("didShowOnboarding") private var didShowOnboarding = false
     @AppStorage("didShowGestureCoach") private var didShowGestureCoach = false
@@ -79,6 +80,9 @@ struct SettingsView: View {
         }
         .navigationDestination(isPresented: $showRecap) {
             ListeningRecapView()
+        }
+        .navigationDestination(isPresented: $showRoadmap) {
+            RoadmapScreen()
         }
         .navigationDestination(isPresented: $showInbox) {
             FeedbackInboxView()
@@ -224,6 +228,22 @@ struct SettingsView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(L.Feedback.entry.localized)
+
+                divider()
+
+                // 앞으로 만들 기능 — 원본은 DalbitRoadmap.swift. 의견을 보내기 전에 이미 계획에 있는지 볼 수 있게 바로 아래에 둔다.
+                Button { showRoadmap = true } label: {
+                    settingRow(icon: "sparkles",
+                               iconColor: DS.Colors.accent,
+                               title: L.Roadmap.entry.localized,
+                               subtitle: L.Roadmap.entryHint.localized) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L.Roadmap.entry.localized)
             }
             .dsGlassPanel(radius: DS.Radius.md)
         }

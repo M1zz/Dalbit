@@ -17,6 +17,17 @@ enum DalbitSpec: LeeoAppSpec {
     static let appName = "달빛"
     static let developerEmail = "mizzking75@gmail.com"
 
+    /// App Store 앱 ID — '리뷰 쓰기' 가 작성 페이지로 바로 간다.
+    /// 확인: `curl "https://itunes.apple.com/lookup?bundleId=com.leeo.LullabyRecipe"`
+    static let appStoreID: String? = "1626715109"
+
+    /// 무료 문턱 — 앱에 원래 있던 한도(직접 만든 소리 3개)를 계약으로 선언한다.
+    /// 판정은 `SubscriptionManager.canCreateMoreSounds` 가 `LeeoGate` 로 한다(페이월이 뜨는 유일한 문턱).
+    enum GateKey {
+        static let customSound = "customSound"
+    }
+    static let gatePolicy = LeeoGatePolicy(freeLimits: [GateKey.customSound: 3])
+
     /// Dalbit.entitlements에 iCloud.com.Ysoup.FeedbackHub 컨테이너가 있어야 한다.
     /// 공용 피드백 허브(FeedbackHub)로 수집 — appIdentifier로 앱을 구분한다.
     static let feedback = LeeoFeedbackConfig(
@@ -28,7 +39,7 @@ enum DalbitSpec: LeeoAppSpec {
     /// ⚠️ 주소는 App Store Connect 에 등록한 것(`APPSTORE.md`)과 같아야 한다.
     static let legal = LeeoLegalConfig(
         privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html")!,
-        supportURL: URL(string: "https://m1zz.github.io/Dalbit/")!,
+        supportURL: URL(string: "https://m1zz.github.io/Dalbit/support.html")!,
         termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!,
         // 계정을 만들지 않는다 — 데이터는 사용자 기기에만 있다.
         createsAccounts: false
@@ -39,7 +50,8 @@ enum DalbitSpec: LeeoAppSpec {
     static let monetization = LeeoMonetization.freemiumSubscription(
         LeeoSubscriptionConfig(
             productIDs: [SubscriptionManager.productId],
-            termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
+            termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!,
+            gate: gatePolicy
         )
     )
 
@@ -53,7 +65,8 @@ enum DalbitSpec: LeeoAppSpec {
     static let paywall: LeeoPaywallConfig? = LeeoPaywallConfig(
         productIDs: [SubscriptionManager.productId],
         termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"),
-        privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html")
+        privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html"),
+        gate: gatePolicy
     )
 }
 

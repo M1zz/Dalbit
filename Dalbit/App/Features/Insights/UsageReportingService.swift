@@ -34,6 +34,8 @@ enum UsageReportingService {
     /// 테스트 중에는 허브에 실제로 쓰지 않는다(쓰로틀 로직 자체는 그대로 검증된다).
     private static var isRunningTests: Bool {
         ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+            // UI 시험이 띄운 앱 — 서명 없는 시뮬레이터 빌드에서 CloudKit 을 건드리면 멈출 수 있다.
+            || ProcessInfo.processInfo.arguments.contains("-uiTesting")
     }
 
     /// 수집을 멈추는 단 하나의 지점.
@@ -53,9 +55,15 @@ enum UsageReportingService {
 
     /// 앱 시작 시 1회. 원격 플래그를 새로 받아 캐시에 넣는다(6시간 쓰로틀은 LeeoKit 담당).
     /// 실패해도 조용히 넘어간다 — 캐시가 없으면 "켬"으로 동작한다.
+    ///
+    /// ⚠️ 인스턴스를 붙잡아 둔다. `refreshInBackground` 는 자기 자신을 **약하게** 잡은 Task 로 조회하므로,
+    ///    예전처럼 `LeeoRemoteFlags(...).refreshInBackground(...)` 로 부르면 Task 가 돌기도 전에 인스턴스가
+    ///    사라져 조회가 한 번도 일어나지 않았다 — 대시보드에서 꺼도 앱은 영원히 켠 채로 돌았다.
     static func refreshRemoteFlags() {
-        LeeoRemoteFlags(spec: DalbitSpec.self).refreshInBackground(DalbitFlag.self)
+        guard !isRunningTests else { return }
+        remoteFlags.refreshInBackground(DalbitFlag.self)
     }
+    private static let remoteFlags = LeeoRemoteFlags(spec: DalbitSpec.self)
 
     // MARK: - 이벤트 이름
 

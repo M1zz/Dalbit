@@ -34,7 +34,7 @@ extension UserDefaultsManager {
                 let customSounds = try decoder.decode([CustomSound].self, from: customSoundsData)
                 return customSounds
             } catch {
-                print("Error decoding custom sounds: \(error)")
+                Log.storage.failure("Error decoding custom sounds: \(error)")
                 return []
             }
         }
@@ -45,7 +45,7 @@ extension UserDefaultsManager {
                 let customSoundsData = try encoder.encode(newValue)
                 standard.set(customSoundsData, forKey: CUSTOM_SOUND_KEY)
             } catch {
-                print("Error encoding custom sounds: \(error)")
+                Log.storage.failure("Error encoding custom sounds: \(error)")
             }
         }
     }

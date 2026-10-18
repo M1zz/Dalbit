@@ -9,11 +9,15 @@
 
 import SwiftUI
 import TipKit
+import LeeoKit
 
 struct SettingsView: View {
 
     @EnvironmentObject var viewModel: CustomSoundViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
+    /// 큰 글씨(손쉬운 사용 크기)에서는 행의 글과 스위치를 위아래로 쌓는다.
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @ObservedObject private var audioManager = AudioEngineManager.shared
     // 즐겨찾기만 재생 모드 (홈의 곡 순환과 공유)
     @AppStorage("favoritesOnlyPlayback") private var favoritesOnlyPlayback = false
@@ -22,6 +26,9 @@ struct SettingsView: View {
     @State private var showAbout = false
     @State private var showRecap = false
     @State private var showRoadmap = false
+    @State private var showWhatsNew = false
+    /// 메일 앱이 없어 mailto 를 못 열었을 때 — 주소를 복사해 두었다고 알린다.
+    @State private var showMailCopied = false
     /// 다시 보기용 — 설정에서 끄면 다음 진입 때 안내가 되살아난다.
     @AppStorage("didShowOnboarding") private var didShowOnboarding = false
     @AppStorage("didShowGestureCoach") private var didShowGestureCoach = false
@@ -83,6 +90,15 @@ struct SettingsView: View {
         }
         .navigationDestination(isPresented: $showRoadmap) {
             RoadmapScreen()
+        }
+        .navigationDestination(isPresented: $showWhatsNew) {
+            WhatsNewView { showWhatsNew = false }
+                .navigationBarBackButtonHidden(false)
+        }
+        .alert(L.Support.mailCopiedTitle.localized, isPresented: $showMailCopied) {
+            Button("OK") {}
+        } message: {
+            Text(String(format: L.Support.mailCopiedMessage.localized, DalbitSpec.developerEmail))
         }
         .navigationDestination(isPresented: $showInbox) {
             FeedbackInboxView()
@@ -244,9 +260,102 @@ struct SettingsView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(L.Roadmap.entry.localized)
+
+                divider()
+
+                // 업데이트 소식 다시 보기 — 처음 열 때 한 번 뜬 안내를 놓친 사람을 위해.
+                Button { showWhatsNew = true } label: {
+                    settingRow(icon: "gift",
+                               iconColor: DS.Colors.accent,
+                               title: L.WhatsNew.entry.localized,
+                               subtitle: String(format: L.WhatsNew.subtitle.localized, WhatsNewContent.version)) {
+                        chevron()
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L.WhatsNew.entry.localized)
+
+                divider()
+
+                // 개발자에게 메일 — 의견 화면보다 길게, 사진을 붙여 쓰고 싶은 사람을 위해.
+                Button(action: writeMail) {
+                    settingRow(icon: "at",
+                               iconColor: DS.Colors.accent,
+                               title: L.Support.mail.localized,
+                               subtitle: DalbitSpec.developerEmail) {
+                        chevron()
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L.Support.mail.localized)
+                .accessibilityIdentifier("settings.mail")
+
+                divider()
+
+                // App Store 리뷰 쓰기 — 작성 페이지로 바로 간다.
+                Button(action: writeReview) {
+                    settingRow(icon: "star.bubble",
+                               iconColor: DS.Colors.warm,
+                               title: L.Support.review.localized,
+                               subtitle: L.Support.reviewHint.localized) {
+                        chevron()
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L.Support.review.localized)
+                .accessibilityIdentifier("settings.review")
             }
             .dsGlassPanel(radius: DS.Radius.md)
+
+            // 같은 사람이 만든 다른 앱 — 잠들기 전후에 함께 쓰기 좋은 앱을 이야기로 소개한다.
+            LeeoFamilySettingsRow<DalbitSpec>()
+                // 눌러 들어간 '함께 쓰는 앱' 화면도 이 앱의 밤하늘 색을 입는다.
+                .leeoStyle(LeeoStyle(accent: DS.Colors.accent,
+                                     bg: DS.Colors.background,
+                                     surface: DS.Colors.surface,
+                                     surfaceAlt: DS.Colors.surfaceElevated,
+                                     text: DS.Colors.textPrimary,
+                                     textMuted: DS.Colors.textSecondary,
+                                     textFaint: DS.Colors.textTertiary))
+                .foregroundColor(DS.Colors.textPrimary)
+                .padding(.horizontal, DS.Spacing.lg)
+                .padding(.vertical, DS.Spacing.sm)
+                .dsGlassPanel(radius: DS.Radius.md)
         }
+    }
+
+    @ViewBuilder
+    private func chevron() -> some View {
+        Image(systemName: "chevron.right")
+            .font(.system(size: 13, weight: .semibold))
+            .foregroundColor(DS.Colors.textSecondary)
+    }
+
+    /// 메일 앱으로 개발자에게. 받는 쪽이 재현할 수 있게 앱·OS 버전을 본문 끝에 붙인다.
+    /// 메일 앱이 없는 기기(지운 경우)에서는 주소를 복사해 두고 그렇게 알린다.
+    private func writeMail() {
+        var parts = URLComponents()
+        parts.scheme = "mailto"
+        parts.path = DalbitSpec.developerEmail
+        parts.queryItems = [
+            URLQueryItem(name: "subject", value: String(format: L.Support.mailSubject.localized, appVersion)),
+            URLQueryItem(name: "body", value: "\n\n—\n\(L.App.name.localized) \(appVersion) · iOS \(UIDevice.current.systemVersion)")
+        ]
+        guard let url = parts.url else { return }
+        openURL(url) { accepted in
+            if !accepted {
+                UIPasteboard.general.string = DalbitSpec.developerEmail
+                showMailCopied = true
+            }
+        }
+    }
+
+    /// App Store 의 이 앱 리뷰 작성 페이지(`action=write-review`).
+    private func writeReview() {
+        guard let id = DalbitSpec.appStoreID,
+              let url = URL(string: "https://apps.apple.com/app/id\(id)?action=write-review") else { return }
+        LeeoReviewRequest.markRequested()
+        openURL(url)
     }
 
     // MARK: - About Section (앱 버전 · 히든 모드)
@@ -394,24 +503,34 @@ struct SettingsView: View {
                                             title: String,
                                             subtitle: String?,
                                             @ViewBuilder trailing: () -> Trailing) -> some View {
-        HStack(spacing: DS.Spacing.sm) {
-            Image(systemName: icon)
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(iconColor)
-                .frame(width: 22)
+        // 손쉬운 사용 크기의 글씨에서는 글이 스위치 옆에 서너 글자씩 끊겨 쌓인다 —
+        // 그때는 글을 한 줄 전체로 쓰고 스위치·화살표는 그 아래로 내린다.
+        let stacked = dynamicTypeSize.isAccessibilitySize
+        let layout = stacked
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: DS.Spacing.xs))
+            : AnyLayout(HStackLayout(spacing: DS.Spacing.sm))
+        layout {
+            HStack(spacing: DS.Spacing.sm) {
+                Image(systemName: icon)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(iconColor)
+                    .frame(width: 22)
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(DS.Font.subhead().weight(.semibold))
-                    .foregroundColor(DS.Colors.textPrimary)
-                if let subtitle {
-                    Text(subtitle)
-                        .font(DS.Font.caption())
-                        .foregroundColor(DS.Colors.textTertiary)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(DS.Font.subhead().weight(.semibold))
+                        .foregroundColor(DS.Colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if let subtitle {
+                        Text(subtitle)
+                            .font(DS.Font.caption())
+                            .foregroundColor(DS.Colors.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
             }
 
-            Spacer()
+            if !stacked { Spacer() }
 
             trailing()
         }

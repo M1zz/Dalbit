@@ -164,6 +164,8 @@ struct CampfireView: View {
     var sway: CGSize = .zero
 
     @State private var breathe = false
+    /// 동작 줄이기 — 달이 부풀었다 줄었다 하는 호흡을 멈춘다(그림자가 드리우는 위상 변화는 움직임이 아니라 남긴다).
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var glow = false
     @State private var moonPhase: Double = 1.0   // 1=보름달, 0=반달, -1=신월
     @State private var moonCycleToken = 0        // 위상 2단계 애니메이션 취소용 (일시정지 시)
@@ -200,7 +202,8 @@ struct CampfireView: View {
             }
 
             // 본체 — 소리마다 바뀌는 색(틴트)의 구체
-            if use3DMoon { moon3DView } else { moonView }
+            // 세이프 모드(직전 실행이 연달아 죽음)에서는 가장 무거운 3D 달을 건너뛴다 — LaunchSafety 참고.
+            if use3DMoon && !LaunchSafety.isInSafeMode { moon3DView } else { moonView }
 
             // 위성 — 궤도 앞쪽 반(달 앞으로 지나감)
             if satelliteVisible {
@@ -213,6 +216,16 @@ struct CampfireView: View {
             startBreathing()
             if isPlaying { startMoonCycle() } else { moonPhase = 1.0 }
             revealIcon()
+        }
+        .onChange(of: reduceMotion) { _, reduced in
+            if reduced {
+                // 이미 걸린 무한 반복을 끊는다 — 애니메이션 없이 제자리로.
+                var still = Transaction()
+                still.disablesAnimations = true
+                withTransaction(still) { breathe = false; glow = false }
+            } else {
+                startBreathing()
+            }
         }
         .onChange(of: isPlaying) { _, playing in
             startBreathing()
@@ -444,6 +457,7 @@ struct CampfireView: View {
     /// 5~7회/분에서 심박변이도(HRV)가 최대가 되고 부교감신경이 활성화되어 진정 효과가 가장 크다.
     /// (들숨 5초 + 날숨 5초, easeInOut 대칭) 사용자가 무의식 중에 따라 쉬도록 진폭은 아주 미묘하게.
     private func startBreathing() {
+        guard !reduceMotion else { return }
         let duration: Double = 5.0   // 반주기 5초 → 한 호흡 10초 = 분당 6회
         withAnimation(.easeInOut(duration: duration).repeatForever(autoreverses: true)) {
             breathe = true

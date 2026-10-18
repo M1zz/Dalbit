@@ -40,7 +40,7 @@ struct AlarmListView: View {
                                          Task { await service.setEnabled(enabled, for: alarm) }
                                      },
                                      onTap: { editingAlarm = alarm },
-                                     onDelete: { service.remove(alarm) })
+                                     onDelete: { delete(alarm) })
                         }
                     }
                 }
@@ -62,6 +62,7 @@ struct AlarmListView: View {
                             .font(.system(size: 17, weight: .semibold))
                     }
                     .accessibilityLabel(L.Alarm.add.localized)
+                    .accessibilityInputLabels([Text(L.Voice.addAlarm.localized), Text(L.Alarm.add.localized)])
                 }
             }
         }
@@ -83,29 +84,36 @@ struct AlarmListView: View {
         }
     }
 
+    /// 알람을 지우고, 화면을 못 보는 사람에게도 지워졌다고 알린다.
+    private func delete(_ alarm: AlarmItem) {
+        service.remove(alarm)
+        AccessibilityNotification.Announcement(
+            String(format: L.Announce.alarmDeleted.localized, alarm.timeText)
+        ).post()
+    }
+
+    /// 알람이 하나도 없을 때 — 시스템 빈 화면 틀(제목·설명·행동)을 그대로 따른다.
     @ViewBuilder
     private func emptyState() -> some View {
-        VStack(spacing: DS.Spacing.md) {
-            Image(systemName: "alarm")
-                .font(.system(size: 44, weight: .light))
-                .foregroundColor(DS.Colors.accent)
-                .accessibilityHidden(true)
-            Text(L.Alarm.emptyTitle.localized)
-                .font(DS.Font.headline())
-                .foregroundColor(DS.Colors.textPrimary)
+        ContentUnavailableView {
+            Label {
+                Text(L.Alarm.emptyTitle.localized)
+                    .foregroundColor(DS.Colors.textPrimary)
+            } icon: {
+                Image(systemName: "alarm")
+                    .foregroundColor(DS.Colors.accent)
+            }
+        } description: {
             Text(L.Alarm.emptyDesc.localized)
-                .font(DS.Font.subhead())
                 .foregroundColor(DS.Colors.textSecondary)
-                .multilineTextAlignment(.center)
-
+        } actions: {
             Button(L.Alarm.add.localized) {
                 if embedded { onRequestAdd?() } else { isPresentingNew = true }
             }
             .buttonStyle(PrimaryButtonStyle(fullWidth: false))
-            .padding(.top, DS.Spacing.xs)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, DS.Spacing.xxxl)
+        .padding(.vertical, DS.Spacing.xl)
     }
 }
 
@@ -117,18 +125,31 @@ private struct AlarmRow: View {
     let onTap: () -> Void
     let onDelete: () -> Void
 
+    /// 큰 글씨(손쉬운 사용 크기)에서는 시각과 스위치를 한 줄에 우겨넣지 않고 위아래로 쌓는다.
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .largeTitle) private var timeSize: CGFloat = 40
+
     var body: some View {
-        HStack(spacing: DS.Spacing.md) {
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: DS.Spacing.sm))
+            : AnyLayout(HStackLayout(spacing: DS.Spacing.md))
+        layout {
             Button(action: onTap) {
                 VStack(alignment: .leading, spacing: DS.Spacing.xxs) {
                     Text(alarm.timeText)
-                        .font(.system(size: 40, weight: .light, design: .rounded))
+                        .font(.system(size: timeSize, weight: .light, design: .rounded))
                         .foregroundColor(alarm.isEnabled ? DS.Colors.textPrimary : DS.Colors.textTertiary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
                     HStack(spacing: DS.Spacing.xs) {
                         if !alarm.label.isEmpty {
+                            // 사람이 붙인 이름이라 길이를 알 수 없다 — 한 줄로 두고 끝을 줄인다.
                             Text(alarm.label)
                                 .font(DS.Font.subhead())
                                 .foregroundColor(DS.Colors.textSecondary)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .allowsTightening(true)
                         }
                         Text(repeatText)
                             .font(DS.Font.caption())
@@ -151,7 +172,10 @@ private struct AlarmRow: View {
                                     alarm.label.isEmpty ? "" : ", \(alarm.label)",
                                     repeatText))
         .accessibilityHint(L.Alarm.rowHint.localized)
-        .swipeActions(edge: .trailing) {
+        .accessibilityAction(named: Text(L.Common.delete.localized), onDelete)
+        // ⚠️ 이 행은 List 가 아니라 ScrollView 안에 있어서 swipeActions 가 동작하지 않았다 —
+        //    지우는 길이 편집 화면밖에 없었다. 길게 눌러 지울 수 있게 메뉴를 단다.
+        .contextMenu {
             Button(role: .destructive, action: onDelete) {
                 Label(L.Common.delete.localized, systemImage: "trash")
             }

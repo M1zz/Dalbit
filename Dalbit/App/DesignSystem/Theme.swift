@@ -81,13 +81,18 @@ enum DS {
 
         /// 텍스트
         static let textPrimary = Color(light: 0x1B1A2E, dark: 0xF3F2FA)
-        static let textSecondary = Color(light: 0x6A6880, dark: 0xAFADC2)
-        static let textTertiary = Color(light: 0x9B99AD, dark: 0x726F86)
+        /// 보조·흐린 글씨는 '대비 증가'를 켜면 한 단계 진해진다 — 우주 배경 위 흐린 글씨가
+        /// 저시력 사용자에게는 아예 안 읽히기 때문이다.
+        static let textSecondary = Color(light: 0x6A6880, dark: 0xAFADC2,
+                                         lightHighContrast: 0x45435A, darkHighContrast: 0xD6D4E6)
+        static let textTertiary = Color(light: 0x9B99AD, dark: 0x726F86,
+                                        lightHighContrast: 0x5E5C73, darkHighContrast: 0xB4B1C9)
         /// 포인트 위에 올라가는 텍스트
         static let onAccent = Color.white
 
         /// 구분선/테두리
-        static let separator = Color(light: 0xE7E5F1, dark: 0x322E46)
+        static let separator = Color(light: 0xE7E5F1, dark: 0x322E46,
+                                     lightHighContrast: 0xA9A6BD, darkHighContrast: 0x6E6987)
 
         /// 상태색
         static let success = Color(light: 0x4FAE84, dark: 0x6FD3A6)
@@ -127,6 +132,17 @@ extension Color {
             trait.userInterfaceStyle == .dark
                 ? UIColor(rgb: dark)
                 : UIColor(rgb: light)
+        })
+    }
+
+    /// 손쉬운 사용 ▸ '대비 증가'(`accessibilityContrast == .high`)일 때 쓸 진한 색까지 받는 적응형 컬러.
+    init(light: UInt, dark: UInt, lightHighContrast: UInt, darkHighContrast: UInt) {
+        self.init(uiColor: UIColor { trait in
+            let high = trait.accessibilityContrast == .high
+            if trait.userInterfaceStyle == .dark {
+                return UIColor(rgb: high ? darkHighContrast : dark)
+            }
+            return UIColor(rgb: high ? lightHighContrast : light)
         })
     }
 }

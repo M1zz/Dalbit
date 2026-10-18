@@ -23,6 +23,8 @@ struct AlarmEditView: View {
     @State private var selectedDays: Set<AlarmItem.Weekday> = []
     @State private var soundFileName: String?
     @State private var label: String = ""
+    /// 색 없이 구별 — 고른 요일을 채운 색만이 아니라 테두리로도 보여 준다.
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
 
     var body: some View {
         ZStack {
@@ -92,8 +94,14 @@ struct AlarmEditView: View {
                             .background(
                                 Circle().fill(selectedDays.contains(day) ? DS.Colors.accent : DS.Colors.surfaceSunken)
                             )
+                            .overlay(
+                                Circle()
+                                    .strokeBorder(DS.Colors.textPrimary, lineWidth: 2)
+                                    .opacity(differentiateWithoutColor && selectedDays.contains(day) ? 1 : 0)
+                            )
                     }
                     .buttonStyle(.plain)
+                    .accessibilityIdentifier("alarm.day.\(day.rawValue)")
                     .accessibilityLabel(String(format: L.Alarm.a11yWeekday.localized, day.shortLabel))
                     .accessibilityAddTraits(selectedDays.contains(day) ? .isSelected : [])
                 }
@@ -130,6 +138,7 @@ struct AlarmEditView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(sound.fileName == soundFileName ? .isSelected : [])
+                .accessibilityIdentifier("alarm.sound.\(sound.fileName ?? "default")")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

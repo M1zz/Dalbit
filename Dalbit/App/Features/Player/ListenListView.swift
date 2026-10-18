@@ -14,6 +14,8 @@ import TipKit
 struct ListenListView: View {
 
     @EnvironmentObject var viewModel: CustomSoundViewModel
+    /// 손쉬운 사용 ▸ 동작 줄이기 — 달이 굴러 들어오거나 우주를 떠다니지 않고 제자리에 있다.
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var searchText = ""
 
     @State private var selectedFile = CustomSound()
@@ -199,6 +201,8 @@ struct ListenListView: View {
 
         .trackScreen("Home")
         .onAppear {
+            // 홈이 떴다 — 몇 초 더 살아 있으면 이번 실행은 무사히 뜬 것(크래시 루프 가드).
+            LaunchSafety.homeAppeared()
             // 앱 실행당 1회만 카운트 (뉴비 안내 칩 노출 판단용)
             if !countedThisSession {
                 countedThisSession = true
@@ -214,10 +218,6 @@ struct ListenListView: View {
             }
             selectedFile = viewModel.lastSound
             timerManager.viewModel = viewModel
-            timerManager.timerDidFinish = {
-                // 타이머 종료 시 처리
-                print("⏰ 타이머 종료")
-            }
 
             // 앱 시작 시 1회: 우주 앰비언트(space_1min) 자동 재생 (무한 루프)
             // Space는 좌우 굴리기 리스트의 첫 프리셋이기도 하므로 그 항목을 그대로 재생해 리스트와 정합시킨다.
@@ -242,6 +242,9 @@ struct ListenListView: View {
 
             // 잠금화면/제어센터 컨트롤 연결
             setupNowPlaying()
+
+            // 동작 줄이기: 굴러 들어오는 등장을 건너뛰고 처음부터 가운데에 둔다.
+            if reduceMotion { didOrbEntrance = true }
 
             // 앱 시작 시 1회: 기기 기울기(중력)를 읽어 그 방향에서 데굴데굴 굴러옴
             if !didOrbEntrance {
@@ -293,6 +296,20 @@ struct ListenListView: View {
             if playing && !satelliteVisible { flashSatellite() }
         }
         .onChange(of: currentSoundTitle) { _, _ in updateNowPlaying() }
+        // 앱을 쓰는 도중에 '동작 줄이기'를 켜면 떠다니던 달을 그 자리에서 멈춰 가운데로.
+        .onChange(of: reduceMotion) { _, reduced in
+            if reduced {
+                var still = Transaction()
+                still.disablesAnimations = true
+                withTransaction(still) {
+                    floatX = 0.5
+                    floatY = 0.5
+                    isFloating = false
+                }
+            } else {
+                startFloating()
+            }
+        }
         // 첫 실행 안내를 닫은 직후 — 이제 달이 보이니 조작을 알려 줄 차례다.
         .onChange(of: didShowOnboarding) { _, done in
             if done { scheduleGestureCoachIfNeeded() }
@@ -312,6 +329,12 @@ struct ListenListView: View {
     /// 가로·세로 주기가 달라(47초 / 31초) 왕복이 아니라 천천히 배회하는 궤적이 된다.
     private func startFloating() {
         guard !isFloating else { return }
+        guard !reduceMotion else {
+            // 흔들림의 가운데(0.5)에 세워 둔다 — 시차 레이어도 모두 정렬된다.
+            floatX = 0.5
+            floatY = 0.5
+            return
+        }
         isFloating = true
         // repeatForever는 반드시 다음 런루프에서 건다.
         // 같은 트랜잭션에서 걸면 그 프레임에 함께 바뀐 다른 상태까지 이 애니메이션에 끌려간다.
@@ -422,6 +445,11 @@ struct ListenListView: View {
                     .accessibilityAction(named: Text(L.A11y.favorite.localized)) { toggleFavoriteCurrent() }
                     .accessibilityAction(named: Text(L.A11y.timerButton.localized)) { goTo(2) }
                     .accessibilityAction(named: Text(L.A11y.savedSoundsButton.localized)) { goTo(0) }
+                    // 음성 제어: "달 탭" · "재생 탭" · "일시정지 탭" 어느 쪽으로 불러도 된다.
+                    .accessibilityIdentifier("home.moon")
+                    .accessibilityInputLabels([Text(L.Voice.moon.localized),
+                                               Text(L.Voice.play.localized),
+                                               Text(L.Voice.pause.localized)])
 
                     // 달을 지그시 누르면 떠오르는 하트 팝 (즐겨찾기에 담았을 때)
                     if heartBurst {
@@ -483,6 +511,9 @@ struct ListenListView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(title)
+        // 음성 제어: 화면에 보이는 글 그대로 불러도, 짧게 '보관함'·'타이머'로 불러도 된다.
+        .accessibilityInputLabels([Text(title), Text(icon == "chevron.down" ? L.Voice.library.localized
+                                                                        : L.Voice.timer.localized)])
     }
 
     /// page 0 — 보관함 (위에서 내려옴). 자체 커스텀 헤더(닫기+제목+추가) 사용.
@@ -1048,6 +1079,9 @@ struct ListenListView: View {
                                         .font(.system(size: 10))
                                     Text(formatRemainingTime(timerManager.remainingSeconds))
                                         .font(DS.Font.caption().weight(.medium))
+                                        .monospacedDigit()
+                                        .contentTransition(.numericText(countsDown: true))
+                                        .animation(.default, value: timerManager.remainingSeconds / 60)
                                 }
                                 .foregroundColor(DS.Colors.accent)
                             }
@@ -1083,6 +1117,7 @@ struct ListenListView: View {
             }
             .buttonStyle(PlainButtonStyle())
             .accessibilityLabel(viewModel.isPlaying ? L.A11y.pause.localized : L.A11y.play.localized)
+            .accessibilityInputLabels([Text(L.Voice.play.localized), Text(L.Voice.pause.localized)])
         }
         .padding(.horizontal, DS.Spacing.md)
         .padding(.vertical, DS.Spacing.sm)
@@ -1099,15 +1134,12 @@ struct ListenListView: View {
     }
 
     // MARK: - Helper Functions
+    /// 남은 시간 — 언어마다 그 나라 표기로("1시간 5분", "1 hr, 5 min", "1時間5分").
+    /// 예전엔 "1h 5m" 를 손으로 조립해서 한국어 화면에도 영어 약자가 섞였다.
     private func formatRemainingTime(_ seconds: Int) -> String {
-        let hours = seconds / 3600
-        let minutes = (seconds % 3600) / 60
-
-        if hours > 0 {
-            return "\(hours)h \(minutes)m"
-        } else {
-            return "\(minutes)m"
-        }
+        let rounded = seconds >= 60 ? seconds / 60 * 60 : seconds
+        let allowed: Set<Duration.UnitsFormatStyle.Unit> = seconds >= 60 ? [.hours, .minutes] : [.seconds]
+        return Duration.seconds(rounded).formatted(.units(allowed: allowed, width: .abbreviated))
     }
 
     // MARK: - Empty Player View

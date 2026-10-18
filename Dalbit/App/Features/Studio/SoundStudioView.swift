@@ -25,6 +25,9 @@ struct SoundStudioView: View {
     @EnvironmentObject var viewModel: CustomSoundViewModel
     @ObservedObject private var audioManager = AudioEngineManager.shared   // 실시간 출력 음량(파형용)
     @Environment(\.dismiss) var dismiss
+    /// 색 없이 구별 — 고른 배경음을 색 반전만이 아니라 체크 표시로도 보여 준다.
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     // 선택 상태
     @State private var selectedBackground: BackgroundSound? = nil
@@ -157,6 +160,12 @@ struct SoundStudioView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 Spacer(minLength: 0)
+                if selected && differentiateWithoutColor {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(DS.Colors.onAccent)
+                        .accessibilityHidden(true)
+                }
             }
             .padding(DS.Spacing.sm)
             .frame(maxWidth: .infinity)
@@ -169,6 +178,7 @@ struct SoundStudioView: View {
         .buttonStyle(.plain)
         .accessibilityLabel(name)
         .accessibilityAddTraits(selected ? [.isButton, .isSelected] : .isButton)
+        .accessibilityIdentifier("studio.bg.\(bg?.rawValue ?? "none")")
     }
 
     // MARK: - 배경음 볼륨
@@ -184,9 +194,12 @@ struct SoundStudioView: View {
                     .font(DS.Font.headline())
                     .foregroundColor(DS.Colors.textPrimary)
                 Spacer()
-                Text(String(format: "%.0f%%", backgroundVolume * 100))
+                Text(Double(backgroundVolume).formatted(.percent.precision(.fractionLength(0))))
                     .font(DS.Font.headline())
                     .foregroundColor(DS.Colors.accent)
+                    .monospacedDigit()
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: backgroundVolume)
             }
             Slider(value: $backgroundVolume, in: 0.0...1.0, step: 0.01)
                 .tint(DS.Colors.accent)
@@ -227,7 +240,7 @@ struct SoundStudioView: View {
                            selectedLayers.contains(where: { $0.filter == editing }) {
                             personalizationPanel(for: editing)
                                 .padding(.top, DS.Spacing.xs)
-                                .transition(.opacity.combined(with: .move(edge: .top)))
+                                .transition(reduceMotion ? .opacity : .opacity.combined(with: .move(edge: .top)))
                         }
                     }
                 }
@@ -273,6 +286,7 @@ struct SoundStudioView: View {
         .buttonStyle(.plain)
         .accessibilityLabel(filter.displayName)
         .accessibilityAddTraits(on ? [.isButton, .isSelected] : .isButton)
+        .accessibilityIdentifier("studio.effect.\(filter.rawValue)")
     }
 
     // MARK: - 개인화 패널 (효과음별 볼륨·피치·간격·불규칙)
@@ -304,11 +318,11 @@ struct SoundStudioView: View {
 
                 sliderRow(icon: "speaker.wave.2.fill", title: L.Customize.volume.localized,
                           value: bindingVolume(idx), range: 0.1...1.0,
-                          display: String(format: "%.0f%%", layer.variation.volume * 100))
+                          display: Double(layer.variation.volume).formatted(.percent.precision(.fractionLength(0))))
 
                 sliderRow(icon: "tuningfork", title: L.Studio.space.localized,
                           value: bindingPitch(idx), range: -5.0...5.0,
-                          display: String(format: "%+.1f", layer.variation.pitch))
+                          display: Double(layer.variation.pitch).formatted(.number.precision(.fractionLength(1)).sign(strategy: .always())))
             }
             .padding(DS.Spacing.md)
             .background(
@@ -335,6 +349,9 @@ struct SoundStudioView: View {
                 Text(display)
                     .font(DS.Font.caption().weight(.bold))
                     .foregroundColor(DS.Colors.accent)
+                    .monospacedDigit()
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: display)
             }
             Slider(value: value, in: range) { editing in
                 if !editing { restartPreview() }   // 손을 떼면 미리듣기 갱신 (드래그 중 끊김 방지)
@@ -514,6 +531,10 @@ struct SoundStudioView: View {
         let title = soundTitle.isEmpty ? L.SaveView.defaultSoundName.localized : soundTitle
         viewModel.customSounds.append(buildSound(title: title))
         Haptics.success()
+        // 화면이 닫히며 보관함으로 돌아가는 것만으로는 저장됐는지 알 수 없다 — 말로 알린다.
+        AccessibilityNotification.Announcement(
+            String(format: L.Announce.soundSaved.localized, title)
+        ).post()
         soundTitle = ""
         dismiss()
     }

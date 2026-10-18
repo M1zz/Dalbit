@@ -16,6 +16,12 @@
             "state" : "translated",
             "value" : "달빛"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dalbit"
+          }
         }
       }
     }

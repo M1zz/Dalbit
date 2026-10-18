@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import OSLog
 
 /**
  Timer의 시간을 감지하는 객체
@@ -15,6 +16,9 @@ class TimerManager: ObservableObject {
     
     var viewModel: CustomSoundViewModel?
     var timerDidFinish: (() -> Void)?
+
+    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.leeo.LullabyRecipe",
+                                    category: "SleepTimer")
     
     @Published var selectedTimeIndexHours: Int = 0
     @Published var selectedTimeIndexMinutes: Int = 15
@@ -30,6 +34,8 @@ class TimerManager: ObservableObject {
     // 타이머객체 실행
     func startTimer(timerManager: TimerManager) {
         self.remainingSeconds = getTime(timerManager: self)
+        didFinishCurrentRun = false
+        Self.log.info("수면 타이머 시작: \(self.remainingSeconds / 60, privacy: .public)분")
 
         AnalyticsManager.shared.log(.timerStart(minutes: self.remainingSeconds / 60))
 
@@ -51,13 +57,24 @@ class TimerManager: ObservableObject {
 
             if self.remainingSeconds <= 0 {
                 timer.invalidate()
-                self.remainingSeconds = 0
                 // 끝까지 끄지 않았다 — 잠들었다고 볼 가장 믿을 만한 신호다.
-                self.viewModel?.stopSound(reason: .timerCompleted)
-                self.timerDidFinish?()
+                self.finishTimer()
             }
         }
     }
+    /// 타이머가 끝까지 흘렀다 — 소리를 멈추고, 화면을 못 보는 사람에게도 끝났다고 말한다.
+    /// 글자 타이머와 진행바 타이머가 거의 같은 순간에 끝나므로 이미 끝낸 뒤면 아무것도 하지 않는다.
+    private var didFinishCurrentRun = false
+    private func finishTimer() {
+        remainingSeconds = 0
+        guard !didFinishCurrentRun else { return }
+        didFinishCurrentRun = true
+        viewModel?.stopSound(reason: .timerCompleted)
+        Self.log.info("수면 타이머 종료 — 소리를 멈춤")
+        AccessibilityNotification.Announcement(L.Announce.timerFinished.localized).post()
+        timerDidFinish?()
+    }
+
     // 설정한 시간을 초로 변환
     func getTime(timerManager: TimerManager) -> Int {
         var hour = self.selectedTimeIndexHours
@@ -107,9 +124,7 @@ class TimerManager: ObservableObject {
 
             if self.remainingSeconds <= 0 {
                 timer.invalidate()
-                self.remainingSeconds = 0
-                self.viewModel?.stopSound(reason: .timerCompleted)
-                self.timerDidFinish?()
+                self.finishTimer()
             }
         }
         startTimeprogressBar(timerManager: self)
@@ -126,10 +141,9 @@ class TimerManager: ObservableObject {
             if self.progress <= 0 {
                 timer.invalidate()
                 self.progress = 1.0
-                // 페이드 아웃이 이미 진행 중이므로 여기서는 stopSound만 호출
-                // (텍스트 타이머가 먼저 닫았으면 여기 호출은 열린 세션이 없어 무시된다)
-                self.viewModel?.stopSound(reason: .timerCompleted)
-                self.timerDidFinish?()
+                // 페이드 아웃이 이미 진행 중이므로 여기서는 멈춤만.
+                // (텍스트 타이머가 먼저 끝냈으면 finishTimer 가 두 번 말하지 않는다)
+                self.finishTimer()
             }
         }
     }
@@ -141,6 +155,10 @@ class TimerManager: ObservableObject {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .font(.system(size: 50, weight: .light))
+                    .monospacedDigit()
+                    // 초가 바뀔 때 숫자만 아래로 굴러간다 — 시계 전체가 깜빡이지 않는다.
+                    .contentTransition(.numericText(countsDown: true))
+                    .animation(.default, value: self.remainingSeconds)
                     .onAppear {
                         if self.remainingSeconds == 0 {
                             self.startTimer(timerManager: self)
@@ -154,6 +172,10 @@ class TimerManager: ObservableObject {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .font(.system(size: 60, weight: .light))
+                    .monospacedDigit()
+                    // 초가 바뀔 때 숫자만 아래로 굴러간다 — 시계 전체가 깜빡이지 않는다.
+                    .contentTransition(.numericText(countsDown: true))
+                    .animation(.default, value: self.remainingSeconds)
                     .onAppear {
                         if self.remainingSeconds == 0 {
                             self.startTimer(timerManager: self)

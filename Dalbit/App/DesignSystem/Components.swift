@@ -80,15 +80,26 @@ struct CardModifier: ViewModifier {
     var padding: CGFloat = DS.Spacing.lg
     var radius: CGFloat = DS.Radius.lg
     var elevated: Bool = false
+    /// 손쉬운 사용 ▸ 투명도 줄이기 — 별이 비치는 유리 대신 불투명한 판으로 그린다.
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    /// 손쉬운 사용 ▸ 대비 증가 — 머리카락 굵기 테두리를 또렷하게.
+    @Environment(\.colorSchemeContrast) private var contrast
 
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
         content
             .padding(padding)
             .background {
-                shape.fill(.ultraThinMaterial)
-                    .overlay(shape.fill(DS.Colors.surface.opacity(elevated ? 0.55 : 0.38)))
-                    .overlay(shape.strokeBorder(DS.Colors.glassStroke, lineWidth: 1))
+                if reduceTransparency {
+                    shape.fill(DS.Colors.surface)
+                        .overlay(shape.strokeBorder(DS.Colors.separator, lineWidth: contrast == .increased ? 2 : 1))
+                } else {
+                    shape.fill(.ultraThinMaterial)
+                        .overlay(shape.fill(DS.Colors.surface.opacity(elevated ? 0.55 : 0.38)))
+                        .overlay(shape.strokeBorder(contrast == .increased ? AnyShapeStyle(Color.white.opacity(0.5))
+                                                                           : AnyShapeStyle(DS.Colors.glassStroke),
+                                                    lineWidth: contrast == .increased ? 1.5 : 1))
+                }
             }
             .shadow(color: Color.black.opacity(elevated ? 0.28 : 0.20),
                     radius: elevated ? 22 : 14, x: 0, y: elevated ? 10 : 6)
@@ -145,6 +156,7 @@ struct PrimaryButtonStyle: ButtonStyle {
 /// 모양까지 다르면(사각형 vs 캡슐) 두 버튼이 서로 다른 앱에서 온 것처럼 보인다.
 struct SecondaryButtonStyle: ButtonStyle {
     var fullWidth: Bool = true
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -154,9 +166,15 @@ struct SecondaryButtonStyle: ButtonStyle {
             .padding(.vertical, DS.Spacing.md)
             .padding(.horizontal, DS.Spacing.xl)
             .background {
-                Capsule(style: .continuous)
-                    .fill(.ultraThinMaterial)
-                    .overlay(Capsule(style: .continuous).strokeBorder(DS.Colors.glassStroke, lineWidth: 1))
+                if reduceTransparency {
+                    Capsule(style: .continuous)
+                        .fill(DS.Colors.surfaceElevated)
+                        .overlay(Capsule(style: .continuous).strokeBorder(DS.Colors.accent.opacity(0.5), lineWidth: 1))
+                } else {
+                    Capsule(style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .overlay(Capsule(style: .continuous).strokeBorder(DS.Colors.glassStroke, lineWidth: 1))
+                }
             }
             .opacity(configuration.isPressed ? 0.85 : 1.0)
             .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
@@ -216,19 +234,29 @@ struct CircleIconButton: View {
     var active: Bool = false
     let action: () -> Void
 
+    /// 색 없이 구별 — 켜짐을 색으로만 말하지 않게 테두리를 굵히고 글리프를 채운다.
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var contrast
+    @ScaledMetric(relativeTo: .body) private var glyphSize: CGFloat = 18
+
     var body: some View {
         Button(action: action) {
             Image(systemName: systemName)
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(active ? DS.Colors.accent : DS.Colors.textSecondary)
+                .symbolVariant(active && differentiateWithoutColor ? .fill : .none)
+                .font(.system(size: glyphSize, weight: .semibold))
+                .foregroundColor(active ? DS.Colors.accent
+                                        : (contrast == .increased ? DS.Colors.textPrimary : DS.Colors.textSecondary))
                 .frame(width: 44, height: 44)
                 .background {
                     Circle()
-                        .fill(.ultraThinMaterial)
+                        .fill(reduceTransparency ? AnyShapeStyle(DS.Colors.surfaceElevated)
+                                                 : AnyShapeStyle(.ultraThinMaterial))
                         .overlay(
                             Circle().strokeBorder(
-                                active ? DS.Colors.accent.opacity(0.45) : Color.white.opacity(0.12),
-                                lineWidth: 1
+                                active ? DS.Colors.accent.opacity(differentiateWithoutColor ? 0.9 : 0.45)
+                                       : Color.white.opacity(contrast == .increased ? 0.4 : 0.12),
+                                lineWidth: active && differentiateWithoutColor ? 2.5 : 1
                             )
                         )
                 }
@@ -284,6 +312,7 @@ struct GlassSegmentedControl<Value: Hashable>: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(isSelected ? [.isSelected, .isButton] : .isButton)
+                .accessibilityIdentifier("segment.\(String(describing: item.value))")
             }
         }
         .padding(3)
@@ -387,13 +416,22 @@ struct GlassPanelModifier: ViewModifier {
     var radius: CGFloat = DS.Radius.md
     /// 별이 지나가도 글씨가 흔들리지 않게 얹는 틴트의 세기.
     var tint: Double = 0.34
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var contrast
 
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
+        let stroke = Color.white.opacity(contrast == .increased ? 0.40 : 0.10)
         content.background {
-            shape.fill(.ultraThinMaterial)
-                .overlay(shape.fill(DS.Colors.surface.opacity(tint)))
-                .overlay(shape.strokeBorder(Color.white.opacity(0.10), lineWidth: 1))
+            if reduceTransparency {
+                // 투명도 줄이기: 별이 비치지 않는 불투명한 판 — 글씨 뒤가 움직이지 않는다.
+                shape.fill(DS.Colors.surface)
+                    .overlay(shape.strokeBorder(stroke, lineWidth: 1))
+            } else {
+                shape.fill(.ultraThinMaterial)
+                    .overlay(shape.fill(DS.Colors.surface.opacity(tint)))
+                    .overlay(shape.strokeBorder(stroke, lineWidth: contrast == .increased ? 1.5 : 1))
+            }
         }
     }
 }

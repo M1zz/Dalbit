@@ -12,7 +12,7 @@
 
 ### 키워드
 
-화이트노이즈,ASMR,숙면,불면증,수면유도,잠잘때,자장가,명상,물소리,싱잉볼,집중,공부,타이머,알람,수면음악,힐링,앰비언트,우주,피아노,릴렉스,새소리,낮잠,휴식
+새소리,싱잉볼,빗소리,백색소음,파도소리,브라운노이즈,앰비언트,자장가,낮잠,화이트노이즈,ASMR,수면음악,불면증,수면유도,숙면,수면타이머,장작소리,잠오는소리,명상,핑크노이즈
 
 ### 프로모션 텍스트
 
@@ -78,7 +78,7 @@ Layer rain, birds and piano
 
 ### 키워드
 
-white,asmr,insomnia,relax,meditation,ambient,nature,timer,alarm,focus,study,calm,lullaby,bowl,nap
+ambient,insomnia,lullaby,white,brown,pink,asmr,tibetan,bowl,thunderstorm,crickets,waves,ocean,nap
 
 ### 프로모션 텍스트
 

@@ -7,16 +7,24 @@ DeployBar 는 이 파일의 `## <버전>` ▸ `### 앱스토어 (...)` 절을 �
 
 ### 앱스토어 (한국어)
 
-달이 입체적인 구체로 새로 태어났어요
-분화구가 보이고 아주 천천히 자전해요
-밤하늘을 떠다니며 먼 천체를 스쳐 지나가요
+달이 분화구가 보이는 입체 구체가 되었어요
 가만히 두면 화면이 저절로 어두워져요
-달이 손가락을 따라 같은 방향으로 굴러요
+동작 줄이기를 켜면 밤하늘이 차분해져요
+이제 일본어로도 쓸 수 있어요
+설정에서 바로 메일 문의와 리뷰를 남겨요
 
 ### App Store (English)
 
-The moon is now a true 3D sphere
-Real craters and a slow, steady spin
-Drift past distant worlds at night
+The moon is now a 3D sphere with craters
 The screen dims itself when left alone
-The moon rolls the way your finger goes
+Reduce Motion now stills the night sky
+Now available in Japanese
+Email us or write a review from Settings
+
+### 앱스토어 (ja)
+
+月がクレーターの見える立体的な球体になりました
+触らずにいると画面が自動で暗くなります
+「視差効果を減らす」で夜空が静かになります
+日本語で使えるようになりました
+設定からメールやレビューを送れます

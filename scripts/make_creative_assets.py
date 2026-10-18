@@ -24,9 +24,9 @@ OUT = ROOT / "docs" / "screenshots" / "creative"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 # 문구 언어 → App Store Connect 로케일
-STORE = {"en": "en-US"}
+STORE = {"en": "en-US", "ja": "ja"}
 # 문구 언어 → 기기 화면 캡처 폴더 (달 화면은 글자가 없다)
-SCREEN = {"ko": "ko", "en": "ko"}
+SCREEN = {"ko": "ko", "en": "ko", "ja": "ko"}
 
 # (가로, 세로, 안전 영역 left, top, right, bottom)
 SPEC = {
@@ -39,12 +39,14 @@ SPEC = {
 SEARCH = {
     "ko": ("백색소음", "내가 만드는<br>수면 소리", "자연의 소리를 겹치고 타이머로 잠들어요"),
     "en": ("White noise", "Mix your own<br>sleep sounds", "Layer nature sounds, then drift off on a timer"),
+    "ja": ("ホワイトノイズ", "自分でつくる<br>眠りの音", "自然の音を重ねて、タイマーで眠りへ"),
 }
 
 # 헤더: 처음 온 사람에게 한 가지 약속.
 HEADER = {
     "ko": ("수면 백색소음", "빗소리에 파도를 더해<br>나만의 잠드는 소리"),
     "en": ("Sleep sounds", "Layer rain and waves<br>into your own sleep sound"),
+    "ja": ("睡眠用の環境音", "雨音に波の音を重ねて<br>自分だけの眠りの音"),
 }
 
 # 바탕 · 글자색은 앱의 색이다(DesignSystem/Theme.swift 다크): 배경 #121019, 포인트 라벤더 #A8A4F2.
@@ -58,6 +60,8 @@ body { background:#121019; position:relative;
 .eyebrow { font-weight:700; color:#A8A4F2; letter-spacing:-0.01em; line-height:1.15; }
 .headline { font-weight:800; color:#F3F1FB; letter-spacing:-0.03em; line-height:1.12; text-wrap:balance; }
 .sub { font-weight:500; color:#9C98B3; letter-spacing:-0.01em; line-height:1.35; text-wrap:balance; }
+:lang(ja) body { font-family:-apple-system, "Hiragino Sans", sans-serif; }
+:lang(ja) .headline, :lang(ja) .sub { line-break:strict; }
 /* 한국어는 낱말 중간에서 끊지 않는다. */
 :lang(ko) .headline, :lang(ko) .sub, :lang(ko) .eyebrow { word-break:keep-all; }
 .phone { position:absolute; background:#17171a; border:6px solid #3a3a3e; padding:40px; border-radius:190px;

@@ -46,8 +46,8 @@
 가끔은 혜성이나 먼 행성이 밤하늘을 스쳐 지나갑니다.
 
 달빛 프리미엄
-무료로 기본 카테고리 2개와 직접 만든 소리 3개까지 쓸 수 있습니다.
-프리미엄을 구독하면 모든 소리 카테고리와 무제한으로 만드는 내 소리를 쓸 수 있습니다. 처음 1주는 무료로 써 볼 수 있습니다.
+무료로 모든 소리를 듣고, 직접 만든 소리는 3개까지 저장할 수 있습니다.
+프리미엄을 구독하면 내 소리를 개수 제한 없이 만들고 저장할 수 있습니다. 처음 1주는 무료로 써 볼 수 있습니다.
 구독은 현재 기간이 끝나기 최소 24시간 전에 해지하지 않으면 자동으로 갱신되며, 무료 체험이 끝나면 요금이 청구됩니다. 해지는 설정 앱의 Apple 계정 구독에서 할 수 있습니다.
 이용약관(EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 개인정보처리방침: https://m1zz.github.io/Dalbit/privacy.html
@@ -56,7 +56,7 @@ iPhone과 iPad에서 쓸 수 있습니다.
 
 ### 지원 URL
 
-https://m1zz.github.io/Dalbit/
+https://m1zz.github.io/Dalbit/support.html
 
 ### 개인정보처리방침 URL
 
@@ -112,8 +112,8 @@ While a sound plays, a shadow creeps slowly across the moon, and the moon breath
 Now and then a comet or a distant planet drifts past.
 
 DALBIT PREMIUM
-Free includes two basic categories and up to three sounds of your own.
-Premium unlocks every sound category and unlimited custom sounds. Try it free for one week.
+Free lets you listen to every sound and save up to three mixes of your own.
+Premium lets you create and save as many mixes as you like. Try it free for one week.
 The subscription renews automatically unless cancelled at least 24 hours before the end of the current period, and you are charged when the free trial ends. Manage or cancel it in Settings > Apple Account > Subscriptions.
 Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 Privacy Policy: https://m1zz.github.io/Dalbit/en/privacy.html
@@ -122,7 +122,7 @@ Available on iPhone and iPad.
 
 ### 지원 URL
 
-https://m1zz.github.io/Dalbit/en/
+https://m1zz.github.io/Dalbit/en/support.html
 
 ### 개인정보처리방침 URL
 
@@ -131,3 +131,69 @@ https://m1zz.github.io/Dalbit/en/privacy.html
 ### 마케팅 URL
 
 https://m1zz.github.io/Dalbit/en/
+
+## ja
+
+### 이름
+
+Dalbit：睡眠用ホワイトノイズ
+
+### 부제
+
+雨音と鳥の声を重ねてつくる眠りの音
+
+### 키워드
+
+安眠,快眠,入眠,寝落ち,不眠,環境音,自然音,ASMR,ヒーリング,リラックス,瞑想,集中,勉強,作業用,タイマー,アラーム,シンギングボウル,水の音,ピアノ,昼寝,癒し,BGM,子守唄,宇宙
+
+### 프로모션 텍스트
+
+眠るための音探しで、夜を終わらせないでください。好きな音を重ねて一度保存すれば、次の夜からは月をタップするだけです。
+
+### 설명
+
+寝るときに流す音を探して、気づけば1時間たっていた。そんな経験はありませんか？Dalbit は、その時間をなくすために作ったアプリです。
+雨音に水のしずく、その上にピアノ。好きな音を重ねて一度保存しておけば、次の夜からは月をタップするだけで流れます。
+
+月ひとつで、すべての操作
+月をタップすると再生、もう一度タップで停止します。
+横にスワイプすると別の音に切り替わります。
+上にスワイプするとスリープタイマー、下にスワイプするとマイサウンドのライブラリが開きます。
+気に入った音が流れたら、月を長押ししてお気に入りに追加できます。
+
+自分の手で作る音
+雨音、水のしずく、鳥のさえずり、シンギングボウルなどの音を何層にも重ねられます。
+音ごとに音量や聞こえる間隔、聞こえる位置を調整し、BGMを加えることもできます。
+作った音には名前をつけて保存し、いつでも呼び出せます。
+
+眠ったあとのことまで考えました
+スリープタイマーは音をぷつりと切らずに少しずつ小さくするので、終わる瞬間に目が覚めにくくなっています。
+画面が消えても音は流れ続けます。眠っている人はアプリを閉じないからです。
+しばらく触らないと、画面は自動で暗くなります。
+朝はシンギングボウルや鳥の声など、やさしいアラームで目覚められます。
+
+夜空のような画面
+暗い空に、月と本当に必要なボタンだけが光ります。
+音が流れているあいだ、月にはゆっくりと影が差し、1分間に6回、ごくかすかに呼吸します。
+ときどき、彗星や遠くの惑星が夜空を横切っていきます。
+
+Dalbit プレミアム
+無料版でもすべてのサウンドを聴くことができ、自作サウンドは3つまで保存できます。
+プレミアムに登録すると、自作サウンドを数の制限なく作成・保存できます。最初の1週間は無料でお試しいただけます。
+サブスクリプションは、現在の期間が終了する24時間以上前に解約しない限り自動で更新され、無料体験の終了後に料金が発生します。解約は設定アプリのAppleアカウントのサブスクリプションから行えます。
+利用規約（EULA）：https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+プライバシーポリシー：https://m1zz.github.io/Dalbit/ja/privacy.html
+
+iPhone と iPad でご利用いただけます。
+
+### 지원 URL
+
+https://m1zz.github.io/Dalbit/ja/support.html
+
+### 개인정보처리방침 URL
+
+https://m1zz.github.io/Dalbit/ja/privacy.html
+
+### 마케팅 URL
+
+https://m1zz.github.io/Dalbit/ja/

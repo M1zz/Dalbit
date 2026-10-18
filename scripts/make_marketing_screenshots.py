@@ -17,7 +17,7 @@ RAW = ROOT / "docs" / "screenshots" / "raw"
 OUT = ROOT / "docs" / "screenshots" / "marketing"
 WORK = pathlib.Path("/tmp") / "dalbit-marketing"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-STORE = {"ko": "ko", "en": "en-US"}
+STORE = {"ko": "ko", "en": "en-US", "ja": "ja"}
 
 # (원본 파일, 헤드라인, 서브카피) — 언어마다 따로 쓴다.
 SHOTS = {
@@ -34,6 +34,13 @@ SHOTS = {
         ("03-library.png", "Make it once,<br>play it every night", "Sleep, focus and meditation mixes, one tap away"),
         ("04-timer.png",   "It fades.<br>It never cuts out.", "A sleep timer that won't wake you up"),
         ("05-alarm.png",   "Wake up to<br>a singing bowl", "Gentle alarms for the days you choose"),
+    ],
+    "ja": [
+        ("01-moon.png",    "月をタップすれば<br>眠りの時間", "横にスワイプで別の音、長押しでお気に入り"),
+        ("02-studio.png",  "雨音の上に<br>しずくをひと粒", "音量もリズムも、聞こえる位置も思いのまま"),
+        ("03-library.png", "一度つくれば<br>次の夜はワンタップ", "睡眠・集中・瞑想、保存した音をすぐ再生"),
+        ("04-timer.png",   "ぷつりと切れず<br>そっと止まる", "スリープタイマーは音をゆっくり小さくします"),
+        ("05-alarm.png",   "やさしい朝は<br>シンギングボウルで", "曜日ごとに設定できる、穏やかなアラーム"),
     ],
 }
 
@@ -54,6 +61,7 @@ body { background:#121019; position:relative;
 .headline { font-size:%(HS)dpx; font-weight:800; color:#F3F1FB; letter-spacing:-0.03em; line-height:1.14; }
 .sub { margin-top:40px; font-size:%(SS)dpx; font-weight:500; color:#9C98B3; letter-spacing:-0.01em; line-height:1.3; }
 :lang(ko) .headline, :lang(ko) .sub { word-break:keep-all; }
+:lang(ja) .headline, :lang(ja) .sub { line-break:strict; font-family:-apple-system, "Hiragino Sans", sans-serif; }
 .dev { position:absolute; left:50%%; top:%(DT)dpx; width:%(DW)dpx; margin-left:-%(DH)dpx; background:#0c0b10;
   border:4px solid #3a3850; padding:%(PAD)dpx; border-radius:%(R)dpx; box-shadow:0 60px 160px rgba(0,0,0,.6); }
 .dev img { width:100%%; display:block; border-radius:%(IR)dpx; }

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Dalbit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "28940A4B08E0EEB0C299C3C2"
+               BuildableName = "DalbitUITests.xctest"
+               BlueprintName = "DalbitUITests"
+               ReferencedContainer = "container:Dalbit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

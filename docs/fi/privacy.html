@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalbit - Tietosuojakäytäntö</title>
+<meta name="description" content="Miten Dalbit-sovellus käsittelee tietoja: nimettömät käyttötilastot, palaute ja yhteydenotto.">
+<link rel="canonical" href="https://m1zz.github.io/Dalbit/fi/privacy.html">
+<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/privacy.html">
+<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/privacy.html">
+<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/privacy.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/privacy.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/privacy.html">
+<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/privacy.html">
+<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/privacy.html">
+<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/privacy.html">
+<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/privacy.html">
+<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/privacy.html">
+<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/privacy.html">
+<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/privacy.html">
+<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/privacy.html">
+<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/privacy.html">
+<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/privacy.html">
+<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/privacy.html">
+<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/privacy.html">
+<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/privacy.html">
+<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/privacy.html">
+<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/privacy.html">
+<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/privacy.html">
+<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/privacy.html">
+<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/privacy.html">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 760px; margin: 0 auto; padding: 32px 20px 80px;
+    line-height: 1.7; color: #1c1c1e; background: #fff;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e5e5e7; background: #15101c; }
+    a { color: #b89cff; }
+    hr { border-color: #333; }
+  }
+  h1 { font-size: 28px; }
+  h2 { font-size: 20px; margin-top: 32px; }
+  a { color: #6c3fd1; }
+  .meta { color: #888; font-size: 14px; }
+  hr { border: none; border-top: 1px solid #e0e0e0; margin: 48px 0; }
+  code { background: rgba(128,128,128,.15); padding: 2px 6px; border-radius: 4px; }
+  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:24px; }
+  nav.langs a[aria-current] { font-weight:700; text-decoration:none; }
+</style>
+</head>
+<body>
+<nav class="langs" aria-label="Language">
+  <a href="../privacy.html" hreflang="ko" lang="ko">한국어</a>
+  <a href="../en/privacy.html" hreflang="en" lang="en">English</a>
+  <a href="../ja/privacy.html" hreflang="ja" lang="ja">日本語</a>
+  <a href="../zh-Hans/privacy.html" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+  <a href="../zh-Hant/privacy.html" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+  <a href="../ru/privacy.html" hreflang="ru" lang="ru">Русский</a>
+  <a href="../es/privacy.html" hreflang="es" lang="es">Español</a>
+  <a href="../de/privacy.html" hreflang="de" lang="de">Deutsch</a>
+  <a href="../fr/privacy.html" hreflang="fr" lang="fr">Français</a>
+  <a href="../it/privacy.html" hreflang="it" lang="it">Italiano</a>
+  <a href="../pt-BR/privacy.html" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+  <a href="../th/privacy.html" hreflang="th" lang="th">ไทย</a>
+  <a href="../vi/privacy.html" hreflang="vi" lang="vi">Tiếng Việt</a>
+  <a href="../cs/privacy.html" hreflang="cs" lang="cs">Čeština</a>
+  <a href="../da/privacy.html" hreflang="da" lang="da">Dansk</a>
+  <a href="../el/privacy.html" hreflang="el" lang="el">Ελληνικά</a>
+  <a href="privacy.html" hreflang="fi" lang="fi" aria-current="true">Suomi</a>
+  <a href="../id/privacy.html" hreflang="id" lang="id">Bahasa Indonesia</a>
+  <a href="../nb/privacy.html" hreflang="nb" lang="nb">Norsk bokmål</a>
+  <a href="../nl/privacy.html" hreflang="nl" lang="nl">Nederlands</a>
+  <a href="../pl/privacy.html" hreflang="pl" lang="pl">Polski</a>
+  <a href="../sv/privacy.html" hreflang="sv" lang="sv">Svenska</a>
+  <a href="../tr/privacy.html" hreflang="tr" lang="tr">Türkçe</a>
+</nav>
+
+<h1>Tietosuojakäytäntö</h1>
+<p class="meta">Päivitetty viimeksi: 8. lokakuuta 2026 · Sovellus: Dalbit</p>
+
+<p>Dalbit (”sovellus”) kunnioittaa yksityisyyttäsi. Tässä käytännössä kerrotaan, miten sovellus käsittelee tietoja.</p>
+
+<h2>1. Keräämämme tiedot</h2>
+<p>Dalbit <strong>ei kerää henkilötietoja</strong>, kuten nimeäsi tai sähköpostiosoitettasi. Kaikki tietosi – luomasi äänet, herätyksesi ja asetuksesi – tallennetaan vain laitteellesi.</p>
+<p>Sovellus <strong>ei käytä kolmannen osapuolen analytiikkatyökaluja, kuten Google Analyticsia, eikä mainos-SDK:ita.</strong> Sovelluksen parantamiseksi se lähettää kehittäjän Apple iCloudiin (CloudKit) seuraavat <strong>nimettömät käyttötilastot</strong>:</p>
+<ul>
+  <li>Kuinka monta kertaa ja kuinka pitkään kuuntelit (yhteismäärät minuutteina ja kertoina, mukaan lukien 7 ja 30 päivän yhteenvedot)</li>
+  <li>Mihin vuorokaudenaikaan kuuntelit (vain määrät 4 tunnin jaksoissa, ei koskaan tarkkoja kellonaikoja)</li>
+  <li>Käytitkö uniajastinta ja annoitko sen käydä loppuun</li>
+  <li>Luomiesi äänien, suosikkien ja toistokertojen <strong>määrä</strong></li>
+  <li>Kiinteän joukon keskeisten toimintojen, kuten toiston aloituksen, nimet (ei koskaan niiden sisältöä)</li>
+  <li>Sovelluksen versio, käyttöjärjestelmän versio, kieli, asennuksesta kulunut aika ja päivät, jolloin avasit sovelluksen</li>
+</ul>
+<p>Jos sovellus kaatuu tai jumiutuu, samaan iCloudiin lähetetään myös Applen <strong>MetricKitin</strong> tuottamat <strong>diagnostiikkatiedot</strong> – tekninen tallenne, joka osoittaa, missä virhe tapahtui, sekä sovelluksen versio, käyttöjärjestelmän versio ja laitetyyppi. Näissä diagnostiikkatiedoissa ei ole edes jäljempänä kuvattua satunnaislukua, joten niitä ei voi yhdistää tiettyyn asennukseen, ja niitä käytetään vain virheen korjaamiseen.</p>
+<p><strong>Sitä, mitä ei koskaan lähetetä:</strong> äänien <strong>nimiä tai sisältöä</strong>, nimeäsi, sähköpostiosoitettasi tai puhelinnumeroasi, laite- tai mainostunnisteita eikä sijaintiasi. Tilastot ryhmitellään vain satunnaisluvulla, joka ei liity laitteeseesi tai tiliisi, ja luku luodaan uudelleen, jos poistat sovelluksen ja asennat sen uudelleen. Nämä tiedot eivät tunnista sinua, niitä ei käytetä seurantaan eikä koskaan mainontaan, eikä niitä jaeta kolmansille osapuolille.</p>
+
+<h2>2. Palautteen lähettäminen</h2>
+<p>Kun päätät lähettää palautetta sovelluksen asetuksista, kirjoittamasi viesti ja palautteen tyyppi, nimesi ja vastausosoitteesi, jos annat ne, liittämäsi kuvakaappaukset sekä – asian selvittämiseksi – sovelluksen versio, laitetyyppi, käyttöjärjestelmän versio ja kieliasetus toimitetaan kehittäjälle Applen iCloudin (CloudKit) kautta. Mitään ei lähetetä, ellet napauta Lähetä, ja palautetta käytetään vain sinulle vastaamiseen ja sovelluksen parantamiseen.</p>
+
+<h2>3. Tilaukset ja maksut</h2>
+<p>Maksulliset tilaukset käsitellään Applen App Storen kautta (In-App Purchase, StoreKit). Maksutiedot käsittelee Apple; sovellus ei koskaan pääse käsiksi maksutietoihisi. Tilauksen tila varmistetaan vain Applen toimittamien kuittitietojen avulla.</p>
+
+<h2>4. Kolmannet osapuolet</h2>
+<p>Sovellus ei myy eikä jaa henkilötietojasi kolmansille osapuolille. Palaute sekä kohdassa 1 kuvatut nimettömät käyttötilastot ja diagnostiikkatiedot tallennetaan Applen iCloudiin (CloudKit), ja vain kehittäjä pääsee niihin käsiksi. Tietoja ei lähetetä millekään muulle ulkopuoliselle taholle.</p>
+
+<h2>5. Lasten yksityisyys</h2>
+<p>Sovellus ei tietoisesti kerää henkilötietoja alle 13-vuotiailta lapsilta.</p>
+
+<h2>6. Muutokset</h2>
+<p>Voimme päivittää tätä käytäntöä aika ajoin. Kaikki muutokset julkaistaan tällä sivulla.</p>
+
+<h2>7. Yhteystiedot</h2>
+<p>Tietosuojaa koskevat kysymykset: <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
+
+<hr>
+<p class="meta"><a href="./">← Tietoa Dalbitista</a> · <a href="support.html">Tuki</a></p>
+
+</body>
+</html>

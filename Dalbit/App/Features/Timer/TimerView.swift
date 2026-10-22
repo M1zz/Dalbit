@@ -37,17 +37,10 @@ struct TimerView: View {
     }
 
     // 남은 시간을 VoiceOver용 문자열로 변환
+    /// 언어마다 자연스러운 길이 표기("1시간 5분", "1 hour, 5 minutes", "1時間5分")를 시스템 포맷터에 맡긴다.
     private func formatRemainingTime(_ seconds: Int) -> String {
-        let hours = seconds / 3600
-        let minutes = (seconds % 3600) / 60
-        let secs = seconds % 60
-        if hours > 0 {
-            return "\(hours)\(L.Timer.hour.localized) \(minutes)\(L.Timer.minute.localized)"
-        } else if minutes > 0 {
-            return "\(minutes)\(L.Timer.minute.localized) \(secs)\(L.Timer.second.localized)"
-        } else {
-            return "\(secs)\(L.Timer.second.localized)"
-        }
+        let allowed: Set<Duration.UnitsFormatStyle.Unit> = seconds >= 3600 ? [.hours, .minutes] : [.minutes, .seconds]
+        return Duration.seconds(max(seconds, 0)).formatted(.units(allowed: allowed, width: .wide))
     }
 
     // MARK: - Timer Setting View

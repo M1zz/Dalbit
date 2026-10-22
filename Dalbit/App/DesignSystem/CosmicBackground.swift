@@ -30,10 +30,12 @@ struct CosmicEventsView: View {
     // 등장 시점이 아니라 발사 시점의 화면 크기를 쓰기 위해 상시 추적
     // (onAppear 때는 레이아웃 확정 전이라 작은 값이 잡혀 경로가 화면 꼭대기에 몰리는 버그가 있었다)
     @State private var canvas: CGSize = .zero
+    /// 손쉬운 사용 ▸ 동작 줄이기 — 켜져 있으면 혜성·행성·우주선이 화면을 가로지르지 않는다.
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         GeometryReader { geo in
-            TimelineView(.animation) { ctx in
+            TimelineView(.animation(paused: reduceMotion)) { ctx in
                 if let event {
                     let now = ctx.date.timeIntervalSinceReferenceDate
                     let t = max(0.0, min(1.0, (now - event.start) / event.duration))
@@ -134,6 +136,12 @@ struct CosmicEventsView: View {
         let tk = token
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             guard tk == token else { return }
+            // 동작 줄이기 중에는 띄우지 않고 다음 차례만 잡아 둔다 — 설정을 끄면 다시 지나간다.
+            if reduceMotion {
+                event = nil
+                scheduleNext(after: 240)
+                return
+            }
             // 레이아웃이 아직 안 잡혔으면 잠시 뒤 재시도
             if canvas.width < 100 || canvas.height < 300 {
                 scheduleNext(after: 3)
@@ -203,6 +211,8 @@ struct CosmicEventsView: View {
 
 struct Starfield: View {
     private let count = 64
+    /// 동작 줄이기 — 별이 흐르지도 반짝이지도 않고 제자리에 머문다(한 장의 밤하늘).
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private func frac(_ v: Double) -> Double { v - floor(v) }
 
     /// 앞으로 나아가는 속도. 별이 중심에서 태어나 바깥으로 흘러가며 커진다 = 내가 다가간다.
@@ -216,8 +226,9 @@ struct Starfield: View {
     private let zSpeed = 0.05
 
     var body: some View {
-        TimelineView(.animation) { tl in
-            let t = tl.date.timeIntervalSinceReferenceDate
+        TimelineView(.animation(paused: reduceMotion)) { tl in
+            // 멈춘 하늘은 늘 같은 자리여야 한다 — 시각이 아니라 고정된 위상으로 그린다.
+            let t = reduceMotion ? 7.0 : tl.date.timeIntervalSinceReferenceDate
             Canvas { ctx, size in
                 let cx = size.width / 2, cy = size.height / 2
                 let maxR = (size.width * size.width + size.height * size.height).squareRoot() / 2 * 1.05

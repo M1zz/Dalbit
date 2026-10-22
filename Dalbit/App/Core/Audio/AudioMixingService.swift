@@ -117,7 +117,7 @@ class AudioMixingService {
                     progress(min(progressValue, 1.0))
                 }
             } catch {
-                print("❌ [AudioMixing] 버퍼 쓰기 실패: \(error)")
+                Log.audio.failure("❌ [AudioMixing] 버퍼 쓰기 실패: \(error)")
             }
         }
 

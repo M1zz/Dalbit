@@ -22,6 +22,9 @@ struct SubscriptionView: View {
     @State private var promoInput = ""
     @State private var promoResult: PromoResult?
 
+    // App Store 오퍼 코드(구독 할인·무료 기간 코드) — 애플 시트로 받는다.
+    @State private var showOfferCodeSheet = false
+
     private enum PromoResult {
         case success(expiry: Date)
         case invalid
@@ -76,6 +79,15 @@ struct SubscriptionView: View {
                                 .underline()
                         }
 
+                        // App Store 오퍼 코드 — App Store Connect 에서 만든 구독 코드(할인·무료 기간)를 쓰는 곳.
+                        // 아래 '무료 사용 코드'(앱 자체 코드)와 다르다: 이쪽은 애플이 검증하고 결제가 따라온다.
+                        Button(action: { showOfferCodeSheet = true }) {
+                            Label(L.Subscription.offerCode.localized, systemImage: "giftcard")
+                                .font(DS.Font.subhead())
+                                .foregroundColor(DS.Colors.textSecondary)
+                        }
+                        .accessibilityIdentifier("subscription.offerCode")
+
                         // 무료 사용 코드 입력
                         promoCodeSection()
 
@@ -92,6 +104,23 @@ struct SubscriptionView: View {
             Button("OK") {}
         } message: {
             Text(errorMessage)
+        }
+        .offerCodeRedemption(isPresented: $showOfferCodeSheet) { result in
+            Task { @MainActor in
+                switch result {
+                case .success:
+                    // 코드가 열어 준 구독이 거래로 들어온다 — 권한을 다시 읽고, 열렸으면 닫는다.
+                    await subscriptionManager.checkEntitlements()
+                    if subscriptionManager.isPremium {
+                        AccessibilityNotification.Announcement(L.Subscription.offerCodeRedeemed.localized).post()
+                        dismiss()
+                    }
+                case .failure(let error):
+                    Log.store.failure("오퍼 코드 시트 실패: \(error.localizedDescription)")
+                    errorMessage = error.localizedDescription
+                    showError = true
+                }
+            }
         }
         .trackScreen("Subscription")
         .onAppear {

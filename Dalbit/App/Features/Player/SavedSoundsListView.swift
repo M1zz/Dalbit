@@ -11,6 +11,9 @@ struct SavedSoundsListView: View {
     @EnvironmentObject var viewModel: CustomSoundViewModel
     @EnvironmentObject var subscriptionManager: SubscriptionManager
     @Environment(\.dismiss) var dismiss
+    /// 색 없이 구별 — 무료 한도에 닿은 것을 색만이 아니라 표시로도 알린다.
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @State private var searchText = ""
     @FocusState private var isSearchFocused: Bool
     @State private var showCreateView = false
@@ -64,6 +67,9 @@ struct SavedSoundsListView: View {
         .sheet(isPresented: $showSubscription) {
             SubscriptionView()
                 .environmentObject(subscriptionManager)
+                // 끝까지 펼친 시트 — 손잡이를 보여 줘서 아래로 밀면 닫힌다는 걸 알린다.
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
         }
         .navigationDestination(isPresented: $showCreateView) {
             SoundStudioView()
@@ -155,7 +161,9 @@ struct SavedSoundsListView: View {
                     .padding(.bottom, DS.Spacing.xs)
             }
         }
-        .background(.ultraThinMaterial)
+        .background {
+            if reduceTransparency { DS.Colors.background } else { Rectangle().fill(.ultraThinMaterial) }
+        }
     }
 
     // MARK: - Embedded Header (페이저용 상단 바)
@@ -169,6 +177,8 @@ struct SavedSoundsListView: View {
                     .frame(width: 44, height: 44)
             }
             .accessibilityLabel(L.Common.close.localized)
+            .accessibilityInputLabels([Text(L.Voice.close.localized), Text(L.Common.close.localized)])
+            .accessibilityIdentifier("library.close")
 
             Spacer()
 
@@ -186,6 +196,8 @@ struct SavedSoundsListView: View {
                     .frame(width: 44, height: 44)
             }
             .accessibilityLabel(L.A11y.createNewButton.localized)
+            .accessibilityInputLabels([Text(L.Voice.newSound.localized), Text(L.A11y.createNewButton.localized)])
+            .accessibilityIdentifier("library.add")
 
             // 설정 (효과음 끄기·즐겨찾기만 재생·피드백·앱 정보)
             Button { showSettings = true } label: {
@@ -195,30 +207,28 @@ struct SavedSoundsListView: View {
                     .frame(width: 44, height: 44)
             }
             .accessibilityLabel(L.Settings.title.localized)
+            .accessibilityInputLabels([Text(L.Voice.settings.localized)])
+            .accessibilityIdentifier("library.settings")
         }
         .padding(.horizontal, DS.Spacing.sm)
     }
 
     // MARK: - Empty State
+    /// 보관함이 비었을 때 — 시스템 빈 화면 틀(제목·설명·행동)을 따르되 색은 이 앱의 밤하늘에 맞춘다.
     @ViewBuilder
     private func emptyStateView() -> some View {
-        VStack(spacing: DS.Spacing.xl) {
-            Image(systemName: "music.note.list")
-                .font(.system(size: 56, weight: .light))
-                .foregroundColor(DS.Colors.accent.opacity(0.5))
-                .accessibilityHidden(true)
-
-            VStack(spacing: DS.Spacing.xs) {
+        ContentUnavailableView {
+            Label {
                 Text(L.Listen.noSavedSounds.localized)
-                    .font(DS.Font.title())
                     .foregroundColor(DS.Colors.textPrimary)
-
-                Text(L.Listen.createFirstSound.localized)
-                    .font(DS.Font.callout())
-                    .foregroundColor(DS.Colors.textSecondary)
-                    .multilineTextAlignment(.center)
+            } icon: {
+                Image(systemName: "music.note.list")
+                    .foregroundColor(DS.Colors.accent.opacity(0.7))
             }
-
+        } description: {
+            Text(L.Listen.createFirstSound.localized)
+                .foregroundColor(DS.Colors.textSecondary)
+        } actions: {
             Button {
                 if embedded { onRequestCreate?() } else { showCreateView = true }
             } label: {
@@ -228,9 +238,8 @@ struct SavedSoundsListView: View {
                 }
             }
             .buttonStyle(PrimaryButtonStyle(fullWidth: false))
-            .padding(.top, DS.Spacing.xs)
         }
-        .padding(.horizontal, DS.Spacing.xxl)
+        .padding(.horizontal, DS.Spacing.xl)
     }
 
     // MARK: - Sounds List (네이티브 List + 스와이프: 삭제/즐겨찾기)
@@ -262,10 +271,10 @@ struct SavedSoundsListView: View {
                 } else {
                     Section {
                         if filteredSounds.isEmpty {
-                            Text(L.Listen.noSearchResults.localized)
-                                .font(DS.Font.callout())
-                                .foregroundColor(DS.Colors.textSecondary)
+                            // 무엇으로 찾았는지까지 말해 주는 시스템 '검색 결과 없음' 화면.
+                            ContentUnavailableView.search(text: searchText)
                                 .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
                         } else {
                             ForEach(filteredSounds) { soundRow($0) }
                         }
@@ -295,9 +304,17 @@ struct SavedSoundsListView: View {
         if !subscriptionManager.isPremium {
             let userCount = viewModel.customSounds.filter { !$0.isPreset }.count
             let reached = userCount >= SubscriptionManager.freeMaxCustomSounds
-            Text(String(format: L.SoundList.freeCount.localized,
-                        userCount, SubscriptionManager.freeMaxCustomSounds))
-                .foregroundColor(reached ? DS.Colors.warm : DS.Colors.textTertiary)
+            HStack(spacing: 3) {
+                if reached && differentiateWithoutColor {
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .accessibilityHidden(true)
+                }
+                Text(String(format: L.SoundList.freeCount.localized,
+                            userCount, SubscriptionManager.freeMaxCustomSounds))
+                    .contentTransition(.numericText())
+                    .animation(.default, value: userCount)
+            }
+            .foregroundColor(reached ? DS.Colors.warm : DS.Colors.textTertiary)
         }
     }
 
@@ -316,6 +333,9 @@ struct SavedSoundsListView: View {
                 .font(DS.Font.callout())
                 .foregroundColor(DS.Colors.textPrimary)
                 .lineLimit(2)
+                // 사람이 지은 이름이라 얼마나 길지 모른다 — 두 줄을 넘으면 끝을 줄이고, 그 전에 자간부터 좁힌다.
+                .truncationMode(.tail)
+                .allowsTightening(true)
             Spacer(minLength: 0)
             if sound.isFavorite {
                 Image(systemName: "star.fill")
@@ -463,6 +483,10 @@ struct SavedSoundsListView: View {
     private func deleteSound(_ sound: CustomSound) {
         guard let index = viewModel.customSounds.firstIndex(where: { $0.id == sound.id }) else { return }
         viewModel.remove(at: index)
+        // 행이 사라지는 건 눈으로만 보인다 — VoiceOver 사용자에게는 말로 알린다.
+        AccessibilityNotification.Announcement(
+            String(format: L.Announce.soundDeleted.localized, sound.title)
+        ).post()
     }
 
     /// 카드에 길게 눌러 수정/삭제하는 컨텍스트 메뉴 (내가 만든 사운드 전용)

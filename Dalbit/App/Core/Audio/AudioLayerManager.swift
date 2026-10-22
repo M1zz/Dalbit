@@ -128,7 +128,7 @@ final class AudioLayerManager {
     /// 레이어 제거
     func removeLayer(_ layerId: UUID) {
         guard let layer = layers[layerId] else {
-            print("⚠️ [LayerManager] 제거할 레이어를 찾을 수 없음: \(layerId)")
+            Log.audio.caution("⚠️ [LayerManager] 제거할 레이어를 찾을 수 없음: \(layerId)")
             return
         }
 
@@ -158,7 +158,7 @@ final class AudioLayerManager {
     /// 레이어 재생 시작
     func startLayer(_ layerId: UUID) {
         guard var layer = layers[layerId] else {
-            print("⚠️ [LayerManager] 재생할 레이어를 찾을 수 없음: \(layerId)")
+            Log.audio.caution("⚠️ [LayerManager] 재생할 레이어를 찾을 수 없음: \(layerId)")
             return
         }
 

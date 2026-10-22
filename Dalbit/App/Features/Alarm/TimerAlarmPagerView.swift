@@ -64,6 +64,8 @@ struct TimerAlarmPagerView: View {
                     .frame(width: 44, height: 44)
             }
             .accessibilityLabel(L.Common.close.localized)
+            .accessibilityInputLabels([Text(L.Voice.close.localized), Text(L.Common.close.localized)])
+            .accessibilityIdentifier("timer.close")
 
             GlassSegmentedControl(
                 items: Segment.allCases.map { ($0, $0.title) },
@@ -80,6 +82,8 @@ struct TimerAlarmPagerView: View {
                             .foregroundColor(DS.Colors.accent)
                     }
                     .accessibilityLabel(L.Alarm.add.localized)
+                    .accessibilityInputLabels([Text(L.Voice.addAlarm.localized), Text(L.Alarm.add.localized)])
+                    .accessibilityIdentifier("alarm.add")
                 } else {
                     Color.clear
                 }

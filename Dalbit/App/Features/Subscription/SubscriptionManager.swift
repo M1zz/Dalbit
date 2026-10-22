@@ -19,7 +19,8 @@ import LeeoKit
 class SubscriptionManager: ObservableObject {
 
     static let productId = "month"
-    static let freeMaxCustomSounds = 3
+    /// 무료로 만들 수 있는 내 소리 개수 — 원본은 계약(`DalbitSpec.gatePolicy`).
+    static let freeMaxCustomSounds = DalbitSpec.gatePolicy.freeLimits[DalbitSpec.GateKey.customSound] ?? 3
     /// 무료 사용 코드 (고정) — 리딤하면 1개월간 프리미엄
     static let promoCode = "DALBIT-MOON"
     private static let promoExpiryKey = "promoExpiryDate"
@@ -224,9 +225,14 @@ class SubscriptionManager: ObservableObject {
         return !Self.freeCategories.contains(category)
     }
 
+    /// 지금 권한(구독 ∪ 무료 사용 코드)을 반영한 게이트 판정기.
+    /// `LeeoStore.gate` 는 구독만 알아서, 무료 사용 코드로 열린 사람까지 보려면 여기서 만든다.
+    var gate: LeeoGate {
+        LeeoGate(policy: DalbitSpec.gatePolicy, hasPro: isPremium, isTrialActive: false)
+    }
+
     func canCreateMoreSounds(currentCount: Int) -> Bool {
-        if isPremium { return true }
-        return currentCount < Self.freeMaxCustomSounds
+        gate.evaluate(DalbitSpec.GateKey.customSound, current: currentCount).isAllowed
     }
 }
 

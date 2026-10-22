@@ -15,7 +15,7 @@ extension FileManager {
         encoder.outputFormatting = .prettyPrinted
 
         guard let encodedData = try? encoder.encode(data) else {
-            print("❌ [FILE] 인코딩 실패: '\(fileName)'")
+            Log.storage.failure("❌ [FILE] 인코딩 실패: '\(fileName)'")
             return false
         }
         print("✅ [FILE] 인코딩 성공: \(encodedData.count) bytes")
@@ -45,16 +45,16 @@ extension FileManager {
                     let fileSize = attributes[.size] as? Int ?? 0
                     print("✅ [FILE] 파일 저장 확인: \(fileSize) bytes")
                 } else {
-                    print("⚠️ [FILE] 경고: 파일이 존재하지 않음")
+                    Log.storage.caution("⚠️ [FILE] 경고: 파일이 존재하지 않음")
                 }
 
             } catch {
-                print("❌ [FILE] 저장 실패: \(fileName)")
+                Log.storage.failure("❌ [FILE] 저장 실패: \(fileName)")
                 print("   에러: \(error.localizedDescription)")
                 return false
             }
         } else {
-            print("❌ [FILE] 저장 경로를 찾을 수 없음")
+            Log.storage.failure("❌ [FILE] 저장 경로를 찾을 수 없음")
             return false
         }
 

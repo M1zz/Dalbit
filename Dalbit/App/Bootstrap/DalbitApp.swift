@@ -18,6 +18,21 @@ struct DalbitApp: App {
     @StateObject private var subscriptionManager = SubscriptionManager()
 
     init() {
+        // 크래시 루프 가드 — 직전 실행들이 연달아 죽었으면 이번엔 세이프 모드(2D 달)로 연다.
+        // 무엇보다 먼저 판단해야 화면이 그려지기 전에 무거운 경로를 피할 수 있다.
+        LaunchSafety.begin()
+
+        #if DEBUG
+        // 출시 전 점검 — 계약(DalbitSpec)이 출시할 수 없는 상태면 개발 중에 바로 알아챈다.
+        // (부트스트랩을 쓰지 않고 각 장치를 손으로 켜는 앱이라 감사도 여기서 직접 부른다.)
+        Self.auditContract()
+        #endif
+
+        // UI 시험은 팁 말풍선이 화면을 가리지 않은 상태에서 흐름을 확인한다.
+        if ProcessInfo.processInfo.arguments.contains("-uiTesting") {
+            Tips.hideAllTipsForTesting()
+        }
+
         // TipKit 초기화 (효과음 끄기 안내 등)
         try? Tips.configure([
             .displayFrequency(.immediate),
@@ -56,6 +71,21 @@ struct DalbitApp: App {
             // 사람이 실제로 앞으로 가져온 순간만 활동으로 센다(콜드 런치 + 백그라운드 복귀).
             // 실행 횟수는 프로세스당 1회로 UsageReportingService 가 눌러 준다.
             if phase == .active { UsageReportingService.reportForegroundOpen() }
+            // 사람이 앱을 내렸다 — 이번 실행은 무사히 끝난 것이다.
+            if phase == .background { LaunchSafety.movedToBackground() }
         }
     }
+
+    #if DEBUG
+    /// 계약 감사. 오류(출시 불가)는 개발 중 즉시 멈춰 세우고, 경고는 로그로 남긴다.
+    /// 같은 감사를 DalbitTests 의 `testContractIsReleasable` 이 시험에서도 지킨다.
+    private static func auditContract() {
+        let issues = LeeoPreflight.audit(DalbitSpec.self)
+        for issue in issues where issue.severity != .info {
+            Log.launch.caution("[LeeoPreflight] \(issue.code) — \(issue.message)")
+        }
+        assert(issues.isReleasable,
+               "DalbitSpec 이 출시 전 점검을 통과하지 못했다: \(issues.errors.map(\.code))")
+    }
+    #endif
 }

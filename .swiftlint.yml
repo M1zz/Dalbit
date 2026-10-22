@@ -1,0 +1,33 @@
+# SwiftLint — 최소 규칙으로 시작한다(클립키보드와 같은 출발점).
+#
+# ⚠️ 의도적으로 몇 개만 켠다. 전체 규칙을 걸면 수천 건 경고가 쏟아지고, 그러면 아무도 안 본다.
+#    여기 있는 규칙은 "나오면 반드시 고친다"는 뜻이다. 늘릴 땐 하나씩, 기존 위반을 0으로 만든 뒤에.
+#
+# 실행: swiftlint            (경고 확인)
+#       swiftlint --strict   (경고도 실패 처리)
+
+only_rules:
+  - force_try          # try! — 저장·디코딩 실패가 곧 크래시가 된다
+  - force_cast         # as! — 형이 어긋나면 크래시
+  - file_length        # 파일 비대화 방지 (AudioEngineManager · ListenListView 를 줄여가는 게 목표)
+
+included:
+  - Dalbit
+# 시험 코드는 제외한다 — 시험에서 강제 언랩·try! 는 "여기서 바로 실패하라"는 관용 표현이다.
+
+excluded:
+  - build
+  - DerivedData
+  - .build
+  - docs
+  - scripts
+  - UITest
+
+file_length:
+  # 지금 가장 긴 파일이 1,100줄대(AudioEngineManager · ListenListView)다.
+  # 1,200 에서 시작해 새로 커지는 파일만 막고, 두 파일을 쪼갠 뒤 조인다.
+  warning: 1200
+  error: 2000
+  ignore_comment_only_lines: true
+
+reporter: "xcode"

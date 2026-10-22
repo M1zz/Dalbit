@@ -74,27 +74,27 @@ enum BackgroundSound: String, CaseIterable {
         case .ambient: return L.Background.ambient.localized
         case .lofi: return L.Background.lofi.localized
         case .meditation: return L.Background.meditation.localized
-        case .space: return "우주"
-        case .spaceCinematic: return "우주 시네마틱"
-        case .spaceAmbient1: return "우주 앰비언트 I"
-        case .spaceDeep: return "딥 스페이스"
-        case .spaceAmbient2: return "우주 앰비언트 II"
-        case .spaceCinematic2: return "우주 시네마틱 II"
-        case .spaceShuttle: return "스페이스 셔틀"
-        case .spaceSolar: return "솔라 윈드"
-        case .spaceDrift: return "우주 표류"
-        case .spaceCinematic3: return "우주 시네마틱 III"
-        case .spaceAmbient3: return "우주 앰비언트 III"
-        case .spaceOrbit: return "오빗"
-        case .spaceVoid: return "보이드"
-        case .brainmassageFull: return "브레인 마사지"
-        case .brainmassageDeep: return "딥 슬립"
-        case .brainmassageWarm: return "웜 하모니"
-        case .brainmassageBright: return "브라이트"
-        case .brainmassageDrone: return "미니멀 드론"
-        case .brainmassageGlow: return "글로우"
-        case .brainmassageMidnight: return "미드나잇"
-        case .brainmassageCeleste: return "셀레스트"
+        case .space: return "preset_space.space.name".localized
+        case .spaceCinematic: return "preset_space.space_cinematic.name".localized
+        case .spaceAmbient1: return "preset_space.space_ambient_1.name".localized
+        case .spaceDeep: return "preset_space.space_deep.name".localized
+        case .spaceAmbient2: return "preset_space.space_ambient_2.name".localized
+        case .spaceCinematic2: return "preset_space.space_cinematic_2.name".localized
+        case .spaceShuttle: return "preset_space.space_shuttle.name".localized
+        case .spaceSolar: return "preset_space.space_solar.name".localized
+        case .spaceDrift: return "preset_space.space_drift.name".localized
+        case .spaceCinematic3: return "preset_space.space_cinematic_3.name".localized
+        case .spaceAmbient3: return "preset_space.space_ambient_3.name".localized
+        case .spaceOrbit: return "preset_space.space_orbit.name".localized
+        case .spaceVoid: return "preset_space.space_void.name".localized
+        case .brainmassageFull: return "background.brainmassage_full".localized
+        case .brainmassageDeep: return "background.brainmassage_deep".localized
+        case .brainmassageWarm: return "background.brainmassage_warm".localized
+        case .brainmassageBright: return "background.brainmassage_bright".localized
+        case .brainmassageDrone: return "background.brainmassage_drone".localized
+        case .brainmassageGlow: return "background.brainmassage_glow".localized
+        case .brainmassageMidnight: return "background.brainmassage_midnight".localized
+        case .brainmassageCeleste: return "background.brainmassage_celeste".localized
         }
     }
 

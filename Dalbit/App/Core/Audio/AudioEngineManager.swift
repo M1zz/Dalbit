@@ -247,14 +247,14 @@ extension AudioEngineManager {
         do {
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("⚠️ [AudioEngineManager] 세션 재활성화 실패: \(error.localizedDescription)")
+            Log.audio.caution("⚠️ [AudioEngineManager] 세션 재활성화 실패: \(error.localizedDescription)")
         }
 
         if !engine.isRunning {
             do {
                 try engine.start()
             } catch {
-                print("⚠️ [AudioEngineManager] 구성 변경 후 엔진 재시작 실패: \(error.localizedDescription)")
+                Log.audio.caution("⚠️ [AudioEngineManager] 구성 변경 후 엔진 재시작 실패: \(error.localizedDescription)")
                 return
             }
         }
@@ -476,6 +476,9 @@ extension AudioEngineManager {
 extension AudioEngineManager {
 
     func play<T: Playable>(with sound: T) {
+        // 누르고 소리가 나기까지 — 레이어 준비·배경음 디코딩이 이 구간 안에서 일어난다.
+        let playInterval = Log.signposter.beginInterval("Play", id: Log.signposter.makeSignpostID())
+        defer { Log.signposter.endInterval("Play", playInterval) }
         print("🎵 [AudioEngineManager] play() 호출됨")
         print("   - 재생할 사운드: \(sound.filter.rawValue)")
         print("   - 현재 배경음 재생 중: \(currentBackgroundSound?.rawValue ?? "없음")")
@@ -540,7 +543,7 @@ extension AudioEngineManager {
         // 일반 사운드 재생 (기존 로직)
         let targetFile = sound.filter.rawValue
         guard let fileURL = Bundle.main.url(forResource: targetFile, withExtension: MusicExtension.mp3.rawValue) else {
-            print("❌ [AudioEngineManager] 파일을 찾을 수 없음: \(targetFile)")
+            Log.audio.failure("❌ [AudioEngineManager] 파일을 찾을 수 없음: \(targetFile)")
             return
         }
 
@@ -572,7 +575,7 @@ extension AudioEngineManager {
             print("✅ [AudioEngineManager] 메인 사운드 재생 시작 완료")
 
         } catch {
-            print("❌ [AudioEngineManager] 재생 오류: \(error.localizedDescription)")
+            Log.audio.failure("❌ [AudioEngineManager] 재생 오류: \(error.localizedDescription)")
             engine.mainMixerNode.outputVolume = 1.0 // 실패 시 볼륨 복원
         }
     }
@@ -582,12 +585,12 @@ extension AudioEngineManager {
         print("🎵 [AudioEngineManager] 레이어 사운드 재생")
 
         guard let layers = sound.soundLayers, !layers.isEmpty else {
-            print("❌ [AudioEngineManager] 레이어 정보가 없음")
+            Log.audio.failure("❌ [AudioEngineManager] 레이어 정보가 없음")
             return
         }
 
         guard let manager = layerManager else {
-            print("❌ [AudioEngineManager] LayerManager가 초기화되지 않음")
+            Log.audio.failure("❌ [AudioEngineManager] LayerManager가 초기화되지 않음")
             return
         }
 
@@ -617,7 +620,7 @@ extension AudioEngineManager {
                     successfulLayers += 1
                     print("✅ [AudioEngineManager] 레이어 \(index) 추가: \(layer.filter.rawValue) (ID: \(layerId))")
                 } catch {
-                    print("❌ [AudioEngineManager] 레이어 \(index) 추가 실패: \(error.localizedDescription)")
+                    Log.audio.failure("❌ [AudioEngineManager] 레이어 \(index) 추가 실패: \(error.localizedDescription)")
                     print("   - 필터: \(layer.filter.rawValue)")
                     print("   - 파일 존재 여부 확인 필요: \(layer.filter.rawValue).mp3")
                 }
@@ -625,7 +628,7 @@ extension AudioEngineManager {
 
             // 레이어가 하나도 추가되지 않았으면 단일 사운드로 폴백
             if successfulLayers == 0 {
-                print("⚠️ [AudioEngineManager] 레이어 추가 실패, 단일 사운드로 폴백")
+                Log.audio.caution("⚠️ [AudioEngineManager] 레이어 추가 실패, 단일 사운드로 폴백")
                 playSingleSoundFallback(sound)
                 return
             }
@@ -645,7 +648,7 @@ extension AudioEngineManager {
             print("✅ [AudioEngineManager] 모든 레이어 재생 시작 (성공: \(successfulLayers)/\(layers.count)개)")
 
         } catch {
-            print("❌ [AudioEngineManager] 레이어 재생 오류: \(error.localizedDescription)")
+            Log.audio.failure("❌ [AudioEngineManager] 레이어 재생 오류: \(error.localizedDescription)")
             // 폴백: 단일 사운드로 재생 시도
             playSingleSoundFallback(sound)
         }
@@ -657,7 +660,7 @@ extension AudioEngineManager {
 
         let targetFile = sound.filter.rawValue
         guard let fileURL = Bundle.main.url(forResource: targetFile, withExtension: MusicExtension.mp3.rawValue) else {
-            print("❌ [AudioEngineManager] 폴백 파일도 찾을 수 없음: \(targetFile)")
+            Log.audio.failure("❌ [AudioEngineManager] 폴백 파일도 찾을 수 없음: \(targetFile)")
             return
         }
 
@@ -680,7 +683,7 @@ extension AudioEngineManager {
             print("✅ [AudioEngineManager] 폴백 단일 사운드 재생 시작")
 
         } catch {
-            print("❌ [AudioEngineManager] 폴백 재생 오류: \(error.localizedDescription)")
+            Log.audio.failure("❌ [AudioEngineManager] 폴백 재생 오류: \(error.localizedDescription)")
         }
     }
 
@@ -704,7 +707,12 @@ extension AudioEngineManager {
             return nil
         }
 
-        try? file.read(into: buffer)
+        do {
+            try file.read(into: buffer)
+        } catch {
+            Log.audio.failure("효과음 버퍼 읽기 실패(\(file.url.lastPathComponent)): \(error.localizedDescription)")
+            return nil
+        }
         return buffer
     }
 
@@ -916,7 +924,7 @@ extension AudioEngineManager {
         do {
             try audioFile.read(into: buffer)
         } catch {
-            print("Failed to read buffer")
+            Log.audio.failure("Failed to read buffer")
             return nil
         }
         return buffer
@@ -931,7 +939,7 @@ extension AudioEngineManager {
         print(#function)
 
         guard let buffer = audioBuffer else {
-            print("Failed to prepare buffer")
+            Log.audio.failure("Failed to prepare buffer")
             return
         }
 
@@ -1042,7 +1050,7 @@ extension AudioEngineManager {
     func playBackground(_ background: BackgroundSound) {
         // subdirectory 없이 파일명으로만 검색 시도
         guard let fileURL = Bundle.main.url(forResource: background.fileName, withExtension: "mp3") else {
-            print("⚠️ [AudioEngineManager] 배경음 파일을 찾을 수 없음: \(background.fileName).mp3")
+            Log.audio.caution("⚠️ [AudioEngineManager] 배경음 파일을 찾을 수 없음: \(background.fileName).mp3")
             print("   - 배경음 없이 메인 사운드만 재생됩니다")
             // 배경음 파일이 없어도 currentBackgroundSound는 설정하지 않음
             return
@@ -1078,7 +1086,7 @@ extension AudioEngineManager {
             }
 
         } catch {
-            print("Background play error: \(error.localizedDescription)")
+            Log.audio.failure("배경음 재생 실패(\(background.fileName)): \(error.localizedDescription)")
         }
     }
 
@@ -1091,13 +1099,17 @@ extension AudioEngineManager {
     /// 배경음 버퍼 준비
     private func prepareBackgroundBuffer() -> AVAudioPCMBuffer? {
         guard let audioFile = backgroundAudioFile else { return nil }
+        // 10분짜리 mp3 를 통째로 PCM 으로 푼다 — 앱에서 가장 무거운 한 번.
+        let decode = Log.signposter.beginInterval("DecodeBackground", id: Log.signposter.makeSignpostID(),
+                                                  "\(audioFile.length) frames")
+        defer { Log.signposter.endInterval("DecodeBackground", decode) }
 
         let buffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat,
                                       frameCapacity: AVAudioFrameCount(audioFile.length))!
         do {
             try audioFile.read(into: buffer)
         } catch {
-            print("Failed to read background buffer")
+            Log.audio.failure("Failed to read background buffer")
             return nil
         }
         return buffer

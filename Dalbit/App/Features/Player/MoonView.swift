@@ -164,6 +164,8 @@ struct CampfireView: View {
     var sway: CGSize = .zero
 
     @State private var breathe = false
+    /// 동작 줄이기 — 달이 부풀었다 줄었다 하는 호흡을 멈춘다(그림자가 드리우는 위상 변화는 움직임이 아니라 남긴다).
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var glow = false
     @State private var moonPhase: Double = 1.0   // 1=보름달, 0=반달, -1=신월
     @State private var moonCycleToken = 0        // 위상 2단계 애니메이션 취소용 (일시정지 시)
@@ -200,7 +202,8 @@ struct CampfireView: View {
             }
 
             // 본체 — 소리마다 바뀌는 색(틴트)의 구체
-            if use3DMoon { moon3DView } else { moonView }
+            // 세이프 모드(직전 실행이 연달아 죽음)에서는 가장 무거운 3D 달을 건너뛴다 — LaunchSafety 참고.
+            if use3DMoon && !LaunchSafety.isInSafeMode { moon3DView } else { moonView }
 
             // 위성 — 궤도 앞쪽 반(달 앞으로 지나감)
             if satelliteVisible {
@@ -213,6 +216,16 @@ struct CampfireView: View {
             startBreathing()
             if isPlaying { startMoonCycle() } else { moonPhase = 1.0 }
             revealIcon()
+        }
+        .onChange(of: reduceMotion) { _, reduced in
+            if reduced {
+                // 이미 걸린 무한 반복을 끊는다 — 애니메이션 없이 제자리로.
+                var still = Transaction()
+                still.disablesAnimations = true
+                withTransaction(still) { breathe = false; glow = false }
+            } else {
+                startBreathing()
+            }
         }
         .onChange(of: isPlaying) { _, playing in
             startBreathing()
@@ -286,63 +299,86 @@ struct CampfireView: View {
     }
 
     /// 달 본체 (식이 길어 별도 프로퍼티로 분리 — 컴파일러 타입체크 부담 완화)
+    ///
+    /// ⚠️ Xcode 27 에서 이 식을 한 덩어리로 두면 "unable to type-check this expression in
+    ///    reasonable time" 으로 빌드가 멈춘다. 그래서 층마다 프로퍼티로 나눴다. 쌓는 순서와
+    ///    수정자는 나누기 전과 똑같다 — 모양을 바꾸지 말고 층만 고칠 것.
     private var moonView: some View {
+        moonDisc
+            // 가장자리 음영
+            .overlay(moonRim)
+            // 재생/일시정지 심볼 (그림자 위, 위상에 따라 색 대비) — 잠깐 보였다 사라짐
+            .overlay(moonIcon)
+            .clipShape(Circle())
+            // 호흡 진폭 ±1.5% — 눈에 띄지 않고 무의식적으로 따라 쉬게 되는 미묘한 크기 변화
+            .scaleEffect(breathe ? 1.015 : 0.985)
+            .shadow(color: tint.opacity(0.35), radius: 36, x: 0, y: 12)
+    }
+
+    /// 달 원판 — 색 · 불투명 베이스 · 빛 질감 · 분화구 · 위상 그림자까지
+    private var moonDisc: some View {
         Circle()
-            .fill(
-                LinearGradient(
-                    colors: [tint.opacity(0.95), tint.opacity(0.60)],
-                    startPoint: .topLeading, endPoint: .bottomTrailing
-                )
-            )
+            .fill(moonFill)
             .frame(width: moonSize, height: moonSize)
             // 불투명 베이스 — 달 뒤로 지나가는 위성이 비쳐 보이지 않게 한다.
             // (배경색과 동일 → 기존 반투명 룩은 그대로 유지하면서 뒤쪽만 가림)
             .background(Circle().fill(DS.Colors.background))
             .overlay(lightTexture)   // 여러 빛 → 불균일 질감
             // 흐릿한 분화구 — 표면을 따라 굴러감
-            .overlay(
-                RollingSphereSurface(roll: roll, rollY: rollY, isPlaying: isPlaying,
-                                     showIcon: false, showSpots: true)
-                    .frame(width: moonSize, height: moonSize)
-                    .opacity(0.5)
-            )
+            .overlay(moonCraters)
             // 위상 그림자 — 원 밖까지 채워 림에 딱 맞고, 경계(터미네이터)는 블러로 흐리게.
             // 달을 굴리면(roll/rollY) 그림자도 표면과 함께 미끄러져 구체에 붙어 도는 느낌.
-            .overlay(
-                MoonShadow(phase: moonPhase)
-                    .fill(
-                        LinearGradient(
-                            colors: [Color(red: 0.05, green: 0.06, blue: 0.13),
-                                     Color(red: 0.09, green: 0.10, blue: 0.20)],
-                            startPoint: .trailing, endPoint: .leading
-                        )
-                    )
-                    .opacity(0.9)
-                    .blur(radius: 7)   // 그림자 경계를 부드럽게
-                    // 표면 회전에 맞춰 좌우/상하로 따라 굴러감(주기적이라 무한 스와이프해도 안정)
-                    .offset(x: CGFloat(sin(roll * .pi / 180)) * 40,
-                            y: CGFloat(sin(rollY * .pi / 180)) * 18)
-            )
-            // 가장자리 음영
-            .overlay(
-                Circle().strokeBorder(Color.black.opacity(0.12), lineWidth: 1.5)
-                    .blur(radius: 1)
-            )
-            // 재생/일시정지 심볼 (그림자 위, 위상에 따라 색 대비) — 잠깐 보였다 사라짐
-            .overlay(
-                RollingSphereSurface(
-                    roll: roll, rollY: rollY, isPlaying: isPlaying,
-                    showIcon: true, showSpots: false,
-                    iconColor: moonPhase > 0 ? Color(red: 0.18, green: 0.16, blue: 0.10) : .white
-                )
-                .frame(width: moonSize, height: moonSize)
-                .opacity(iconShown ? 1 : 0)
-                .animation(.easeInOut(duration: 0.9), value: iconShown)
-            )
-            .clipShape(Circle())
-            // 호흡 진폭 ±1.5% — 눈에 띄지 않고 무의식적으로 따라 쉬게 되는 미묘한 크기 변화
-            .scaleEffect(breathe ? 1.015 : 0.985)
-            .shadow(color: tint.opacity(0.35), radius: 36, x: 0, y: 12)
+            .overlay(moonPhaseShadow)
+    }
+
+    private var moonFill: LinearGradient {
+        LinearGradient(
+            colors: [tint.opacity(0.95), tint.opacity(0.60)],
+            startPoint: .topLeading, endPoint: .bottomTrailing
+        )
+    }
+
+    private var moonCraters: some View {
+        RollingSphereSurface(roll: roll, rollY: rollY, isPlaying: isPlaying,
+                             showIcon: false, showSpots: true)
+            .frame(width: moonSize, height: moonSize)
+            .opacity(0.5)
+    }
+
+    private var moonShadowFill: LinearGradient {
+        LinearGradient(
+            colors: [Color(red: 0.05, green: 0.06, blue: 0.13),
+                     Color(red: 0.09, green: 0.10, blue: 0.20)],
+            startPoint: .trailing, endPoint: .leading
+        )
+    }
+
+    private var moonPhaseShadow: some View {
+        // 표면 회전에 맞춰 좌우/상하로 따라 굴러감(주기적이라 무한 스와이프해도 안정)
+        let dx: CGFloat = CGFloat(sin(roll * .pi / 180)) * 40
+        let dy: CGFloat = CGFloat(sin(rollY * .pi / 180)) * 18
+        return MoonShadow(phase: moonPhase)
+            .fill(moonShadowFill)
+            .opacity(0.9)
+            .blur(radius: 7)   // 그림자 경계를 부드럽게
+            .offset(x: dx, y: dy)
+    }
+
+    private var moonRim: some View {
+        Circle().strokeBorder(Color.black.opacity(0.12), lineWidth: 1.5)
+            .blur(radius: 1)
+    }
+
+    private var moonIcon: some View {
+        let iconColor: Color = moonPhase > 0 ? Color(red: 0.18, green: 0.16, blue: 0.10) : .white
+        return RollingSphereSurface(
+            roll: roll, rollY: rollY, isPlaying: isPlaying,
+            showIcon: true, showSpots: false,
+            iconColor: iconColor
+        )
+        .frame(width: moonSize, height: moonSize)
+        .opacity(iconShown ? 1 : 0)
+        .animation(.easeInOut(duration: 0.9), value: iconShown)
     }
 
     /// RealityKit 구체 본체. 위상 그림자는 실제 조명이 만드는 명암 경계가 대신하므로
@@ -421,6 +457,7 @@ struct CampfireView: View {
     /// 5~7회/분에서 심박변이도(HRV)가 최대가 되고 부교감신경이 활성화되어 진정 효과가 가장 크다.
     /// (들숨 5초 + 날숨 5초, easeInOut 대칭) 사용자가 무의식 중에 따라 쉬도록 진폭은 아주 미묘하게.
     private func startBreathing() {
+        guard !reduceMotion else { return }
         let duration: Double = 5.0   // 반주기 5초 → 한 호흡 10초 = 분당 6회
         withAnimation(.easeInOut(duration: duration).repeatForever(autoreverses: true)) {
             breathe = true

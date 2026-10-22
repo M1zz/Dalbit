@@ -48,9 +48,14 @@ struct AlarmItem: Identifiable, Codable, Hashable {
         self.isEnabled = isEnabled
     }
 
-    /// "07:30" 형태의 표시 문자열
+    /// 표시용 시각 — 기기 언어·지역의 시계 표기를 따른다("오전 7:30", "7:30 AM", "7:30", "午前7:30").
+    /// 예전엔 "%02d:%02d" 로 조립해서 12시간제 사용자에게도 24시간제가 보였다.
     var timeText: String {
-        String(format: "%02d:%02d", hour, minute)
+        var parts = DateComponents()
+        parts.hour = hour
+        parts.minute = minute
+        let date = Calendar.current.date(from: parts) ?? Date()
+        return date.formatted(.dateTime.hour().minute())
     }
 
     /// 1회성 알람인지 여부

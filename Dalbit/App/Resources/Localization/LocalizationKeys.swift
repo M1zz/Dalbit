@@ -460,6 +460,8 @@ enum L {
 
     // MARK: - Subscription
     enum Subscription {
+        static let offerCode = "subscription.offer_code"
+        static let offerCodeRedeemed = "subscription.offer_code_redeemed"
         static let title = "subscription.title"
         static let description = "subscription.description"
         static let subscribe = "subscription.subscribe"
@@ -777,8 +779,93 @@ enum L {
         static let countFormat = "stability.count_format"   // %lld = 건수
     }
 
+    // MARK: - Roadmap (앞으로 만들 기능 — 원본: Features/Settings/DalbitRoadmap.swift)
+    enum Roadmap {
+        static let entry = "roadmap.entry"
+        static let entryHint = "roadmap.entry_hint"
+        static let voiceoverTitle = "roadmap.voiceover.title"
+        static let voiceoverDetail = "roadmap.voiceover.detail"
+        static let largetextTitle = "roadmap.largetext.title"
+        static let largetextDetail = "roadmap.largetext.detail"
+        static let contrastTitle = "roadmap.contrast.title"
+        static let contrastDetail = "roadmap.contrast.detail"
+        static let motionTitle = "roadmap.motion.title"
+        static let motionDetail = "roadmap.motion.detail"
+        static let keyboardTitle = "roadmap.keyboard.title"
+        static let keyboardDetail = "roadmap.keyboard.detail"
+        static let langMoreTitle = "roadmap.lang_more.title"
+        static let langMoreDetail = "roadmap.lang_more.detail"
+        static let whatsnewTitle = "roadmap.whatsnew.title"
+        static let whatsnewDetail = "roadmap.whatsnew.detail"
+        static let giftTitle = "roadmap.gift.title"
+        static let giftDetail = "roadmap.gift.detail"
+        static let widgetsTitle = "roadmap.widgets.title"
+        static let widgetsDetail = "roadmap.widgets.detail"
+        static let shortcutsTitle = "roadmap.shortcuts.title"
+        static let shortcutsDetail = "roadmap.shortcuts.detail"
+        static let syncTitle = "roadmap.sync.title"
+        static let syncDetail = "roadmap.sync.detail"
+        static let backupTitle = "roadmap.backup.title"
+        static let backupDetail = "roadmap.backup.detail"
+        static let foldTitle = "roadmap.fold.title"
+        static let foldDetail = "roadmap.fold.detail"
+        static let dataDeleteTitle = "roadmap.data_delete.title"
+        static let dataDeleteDetail = "roadmap.data_delete.detail"
+        static let autosaveTitle = "roadmap.autosave.title"
+        static let autosaveDetail = "roadmap.autosave.detail"
+    }
+
     // MARK: - App
     enum App {
         static let name = "app.name"
+    }
+
+    // MARK: - Voice Control (음성 제어로 부르는 짧은 이름 — accessibilityInputLabels)
+    enum Voice {
+        static let moon = "voice.moon"
+        static let play = "voice.play"
+        static let pause = "voice.pause"
+        static let library = "voice.library"
+        static let timer = "voice.timer"
+        static let settings = "voice.settings"
+        static let newSound = "voice.new_sound"
+        static let close = "voice.close"
+        static let addAlarm = "voice.add_alarm"
+    }
+
+    // MARK: - Announcements (화면 밖 변화를 VoiceOver 로 알림)
+    enum Announce {
+        static let timerFinished = "announce.timer_finished"
+        static let soundSaved = "announce.sound_saved"       // %@ = 소리 이름
+        static let soundDeleted = "announce.sound_deleted"   // %@ = 소리 이름
+        static let alarmDeleted = "announce.alarm_deleted"   // %@ = 알람 시각
+    }
+
+    // MARK: - What's New (업데이트 소식 — 원본: Features/Onboarding/WhatsNewView.swift)
+    enum WhatsNew {
+        static let title = "whats_new.title"
+        static let subtitle = "whats_new.subtitle"           // %@ = 버전
+        static let done = "whats_new.done"
+        static let entry = "whats_new.entry"
+        static let moonTitle = "whats_new.moon.title"
+        static let moonDetail = "whats_new.moon.detail"
+        static let dimTitle = "whats_new.dim.title"
+        static let dimDetail = "whats_new.dim.detail"
+        static let comfortTitle = "whats_new.comfort.title"
+        static let comfortDetail = "whats_new.comfort.detail"
+        static let japaneseTitle = "whats_new.japanese.title"
+        static let japaneseDetail = "whats_new.japanese.detail"
+        static let contactTitle = "whats_new.contact.title"
+        static let contactDetail = "whats_new.contact.detail"
+    }
+
+    // MARK: - Support (설정 ▸ 지원 — 메일·리뷰)
+    enum Support {
+        static let mail = "support.mail"
+        static let mailSubject = "support.mail_subject"           // %@ = 앱 버전
+        static let mailCopiedTitle = "support.mail_copied_title"
+        static let mailCopiedMessage = "support.mail_copied_message" // %@ = 메일 주소
+        static let review = "support.review"
+        static let reviewHint = "support.review_hint"
     }
 }

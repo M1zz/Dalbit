@@ -22,11 +22,13 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 RAW = ROOT / "docs" / "screenshots" / "raw" / "creative"
 OUT = ROOT / "docs" / "screenshots" / "creative"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+# 다른 세션의 Chrome 과 프로필이 겹치면 멈추거나 아무것도 안 그린다 — 따로 쓴다.
+PROFILE = pathlib.Path(tempfile.gettempdir()) / "dalbit-creative-chrome"
 
 # 문구 언어 → App Store Connect 로케일
 STORE = {"en": "en-US", "ja": "ja"}
 # 문구 언어 → 기기 화면 캡처 폴더 (달 화면은 글자가 없다)
-SCREEN = {"ko": "ko", "en": "ko", "ja": "ko"}
+SCREEN = {}  # 모든 언어가 ko 캡처를 쓴다
 
 # (가로, 세로, 안전 영역 left, top, right, bottom)
 SPEC = {
@@ -40,6 +42,27 @@ SEARCH = {
     "ko": ("백색소음", "내가 만드는<br>수면 소리", "자연의 소리를 겹치고 타이머로 잠들어요"),
     "en": ("White noise", "Mix your own<br>sleep sounds", "Layer nature sounds, then drift off on a timer"),
     "ja": ("ホワイトノイズ", "自分でつくる<br>眠りの音", "自然の音を重ねて、タイマーで眠りへ"),
+    "en-GB": ("White noise", "Mix your own<br>sleep sounds", "Layer nature sounds, then drift off on a timer"),
+    "zh-Hans": ("白噪音", "自己调出<br>助眠的声音", "叠加大自然的声音，定时入眠"),
+    "zh-Hant": ("白噪音", "自己調出<br>助眠的聲音", "疊加大自然的聲音，定時入眠"),
+    "ru": ("Белый шум", "Свои звуки<br>для сна", "Смешивайте звуки природы и засыпайте по таймеру"),
+    "es": ("Ruido blanco", "Tus sonidos<br>para dormir", "Mezcla sonidos naturales y duérmete con temporizador"),
+    "de": ("Weißes Rauschen", "Dein eigener<br>Einschlafklang", "Naturklänge mischen und mit Timer einschlafen"),
+    "fr": ("Bruit blanc", "Vos propres<br>sons pour dormir", "Mêlez les sons de la nature, la minuterie fait le reste"),
+    "it": ("Rumore bianco", "I tuoi suoni<br>per dormire", "Mescola i suoni della natura e addormentati col timer"),
+    "pt-BR": ("Ruído branco", "Seus sons<br>para dormir", "Misture sons da natureza e durma com o timer"),
+    "th": ("ไวท์นอยส์", "เสียงกล่อมนอน<br>ที่คุณผสมเอง", "ผสมเสียงธรรมชาติ แล้วหลับไปพร้อมตัวตั้งเวลา"),
+    "vi": ("Tiếng ồn trắng", "Tự phối<br>âm thanh ru ngủ", "Chồng âm thanh thiên nhiên, hẹn giờ rồi ngủ"),
+    "cs": ("Bílý šum", "Vlastní zvuky<br>na spaní", "Vrstvěte zvuky přírody a usněte s časovačem"),
+    "da": ("Hvid støj", "Dine egne<br>søvnlyde", "Læg naturlyde i lag, og fald i søvn med timer"),
+    "el": ("Λευκός θόρυβος", "Οι δικοί σας<br>ήχοι για ύπνο", "Συνδυάστε ήχους της φύσης και κοιμηθείτε με χρονόμετρο"),
+    "fi": ("Valkoinen kohina", "Omat<br>uniäänesi", "Yhdistele luonnon ääniä ja nukahda ajastimella"),
+    "id": ("White noise", "Racik suara<br>tidurmu sendiri", "Padukan suara alam, lalu terlelap dengan timer"),
+    "nb": ("Hvit støy", "Dine egne<br>søvnlyder", "Legg naturlyder i lag, og sovn inn med timer"),
+    "nl": ("Witte ruis", "Je eigen<br>slaapgeluiden", "Combineer natuurgeluiden en val in slaap met een timer"),
+    "pl": ("Biały szum", "Własne dźwięki<br>do snu", "Łącz dźwięki natury i zasypiaj z wyłącznikiem czasowym"),
+    "sv": ("Vitt brus", "Dina egna<br>sömnljud", "Lägg naturljud i lager och somna med timer"),
+    "tr": ("Beyaz gürültü", "Kendi uyku<br>sesini yap", "Doğa seslerini birleştir, zamanlayıcıyla uykuya dal"),
 }
 
 # 헤더: 처음 온 사람에게 한 가지 약속.
@@ -47,6 +70,27 @@ HEADER = {
     "ko": ("수면 백색소음", "빗소리에 파도를 더해<br>나만의 잠드는 소리"),
     "en": ("Sleep sounds", "Layer rain and waves<br>into your own sleep sound"),
     "ja": ("睡眠用の環境音", "雨音に波の音を重ねて<br>自分だけの眠りの音"),
+    "en-GB": ("Sleep sounds", "Layer rain and waves<br>into your own sleep sound"),
+    "zh-Hans": ("助眠白噪音", "雨声叠上海浪<br>调出你的入睡之声"),
+    "zh-Hant": ("助眠白噪音", "雨聲疊上海浪<br>調出你的入睡之聲"),
+    "ru": ("Звуки для сна", "Дождь и волны<br>в вашем звуке для сна"),
+    "es": ("Sonidos para dormir", "Lluvia y olas,<br>mezcladas a tu manera"),
+    "de": ("Schlafgeräusche", "Regen und Wellen<br>zu deinem Schlafklang"),
+    "fr": ("Sons pour dormir", "Pluie et vagues<br>mêlées à votre façon"),
+    "it": ("Suoni per dormire", "Pioggia e onde,<br>mescolate a modo tuo"),
+    "pt-BR": ("Sons para dormir", "Chuva e ondas,<br>misturadas do seu jeito"),
+    "th": ("เสียงช่วยนอนหลับ", "ผสมเสียงฝนกับคลื่น<br>เป็นเสียงนอนของคุณ"),
+    "vi": ("Âm thanh ru ngủ", "Hòa tiếng mưa và sóng<br>thành âm ru của riêng bạn"),
+    "cs": ("Zvuky na spaní", "Déšť a vlny<br>namíchané po svém"),
+    "da": ("Søvnlyde", "Regn og bølger<br>blandet på din måde"),
+    "el": ("Ήχοι για ύπνο", "Βροχή και κύματα<br>όπως σας αρέσει"),
+    "fi": ("Unen äänet", "Sade ja aallot<br>omaksi uniääneksi"),
+    "id": ("Suara tidur", "Hujan dan ombak<br>jadi suara tidurmu"),
+    "nb": ("Søvnlyder", "Regn og bølger<br>blandet på din måte"),
+    "nl": ("Slaapgeluiden", "Regen en golven<br>op jouw manier gemengd"),
+    "pl": ("Dźwięki do snu", "Deszcz i fale<br>zmiksowane po swojemu"),
+    "sv": ("Sömnljud", "Regn och vågor<br>blandat på ditt sätt"),
+    "tr": ("Uyku sesleri", "Yağmur ve dalgalar<br>kendi uyku sesinde"),
 }
 
 # 바탕 · 글자색은 앱의 색이다(DesignSystem/Theme.swift 다크): 배경 #121019, 포인트 라벤더 #A8A4F2.
@@ -62,6 +106,9 @@ body { background:#121019; position:relative;
 .sub { font-weight:500; color:#9C98B3; letter-spacing:-0.01em; line-height:1.35; text-wrap:balance; }
 :lang(ja) body { font-family:-apple-system, "Hiragino Sans", sans-serif; }
 :lang(ja) .headline, :lang(ja) .sub { line-break:strict; }
+:lang(zh-Hans) body { font-family:-apple-system, "PingFang SC", sans-serif; }
+:lang(zh-Hant) body { font-family:-apple-system, "PingFang TC", sans-serif; }
+:lang(zh-Hans) .headline, :lang(zh-Hant) .headline, :lang(zh-Hans) .sub, :lang(zh-Hant) .sub { line-break:strict; }
 /* 한국어는 낱말 중간에서 끊지 않는다. */
 :lang(ko) .headline, :lang(ko) .sub, :lang(ko) .eyebrow { word-break:keep-all; }
 .phone { position:absolute; background:#17171a; border:6px solid #3a3a3e; padding:40px; border-radius:190px;
@@ -117,7 +164,7 @@ def stars(W, H, seed, n):
 
 
 def shot(lang, name):
-    return (RAW / SCREEN[lang] / name).as_uri()
+    return (RAW / SCREEN.get(lang, "ko") / name).as_uri()
 
 
 def search_html(lang):
@@ -165,7 +212,7 @@ def render(lang, kind):
     # 글이 끝까지 안 맞으면 그림을 만들지 않는다(잘린 글이 스토어에 올라가는 것보다 낫다).
     dom = subprocess.run([CHROME, "--headless=new", "--dump-dom", f"--window-size={W},{H}",
                           "--force-device-scale-factor=1", "--disable-gpu", "--virtual-time-budget=3000",
-                          html_path.as_uri()], capture_output=True, text=True, timeout=90).stdout
+                          "--no-first-run", f"--user-data-dir={PROFILE}", html_path.as_uri()], capture_output=True, text=True, timeout=300).stdout
     if 'data-done="1"' not in dom:
         raise SystemExit(f"글 맞추기가 끝나지 않았다: {lang} {kind}")
     if 'data-overflow="1"' in dom:
@@ -179,8 +226,9 @@ def render(lang, kind):
             r = subprocess.run([CHROME, "--headless=new", f"--screenshot={out_png}",
                                 f"--window-size={W},{H}", "--force-device-scale-factor=1",
                                 "--hide-scrollbars", "--disable-gpu", "--virtual-time-budget=3000",
-                                "--allow-file-access-from-files", html_path.as_uri()],
-                               capture_output=True, timeout=90)
+                                "--allow-file-access-from-files", "--no-first-run", f"--user-data-dir={PROFILE}",
+                                html_path.as_uri()],
+                               capture_output=True, timeout=300)
         except subprocess.TimeoutExpired:
             continue
         if r.returncode == 0:

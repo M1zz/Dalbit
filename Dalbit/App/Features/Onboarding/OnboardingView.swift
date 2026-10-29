@@ -91,8 +91,16 @@ struct OnboardingView: View {
         .padding(.horizontal, DS.Spacing.screen)
     }
 
-    @ViewBuilder
+    /// 큰 글씨에서 한 장이 화면을 넘으면 그 장만 스크롤된다(글이 잘리지 않게).
     private func pageBody(_ item: Page) -> some View {
+        ViewThatFits(in: .vertical) {
+            pageContent(item)
+            ScrollView { pageContent(item) }
+        }
+    }
+
+    @ViewBuilder
+    private func pageContent(_ item: Page) -> some View {
         VStack(spacing: DS.Spacing.xl) {
             Spacer(minLength: 0)
 

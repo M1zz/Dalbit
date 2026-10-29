@@ -160,19 +160,21 @@ private struct AlarmRow: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
+            // 편집 버튼과 켜고 끄는 스위치를 따로 둔다 — 한 요소로 묶으면 두 번 탭이 어느 쪽인지
+            // 알 수 없고, 켜짐 여부가 글씨 색으로만 남는다.
+            .accessibilityLabel(String(format: L.Alarm.a11yRow.localized,
+                                        alarm.timeText,
+                                        alarm.label.isEmpty ? "" : ", \(alarm.label)",
+                                        repeatText))
+            .accessibilityHint(L.Alarm.rowHint.localized)
+            .accessibilityAction(named: Text(L.Common.delete.localized), onDelete)
 
-            Toggle("", isOn: Binding(get: { alarm.isEnabled }, set: onToggle))
+            // 화면에선 숨기지만 VoiceOver 는 "7:00, 스위치, 켬" 처럼 시각을 이름으로 읽는다.
+            Toggle(alarm.timeText, isOn: Binding(get: { alarm.isEnabled }, set: onToggle))
                 .labelsHidden()
                 .tint(DS.Colors.accent)
         }
         .dsCard()
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(String(format: L.Alarm.a11yRow.localized,
-                                    alarm.timeText,
-                                    alarm.label.isEmpty ? "" : ", \(alarm.label)",
-                                    repeatText))
-        .accessibilityHint(L.Alarm.rowHint.localized)
-        .accessibilityAction(named: Text(L.Common.delete.localized), onDelete)
         // ⚠️ 이 행은 List 가 아니라 ScrollView 안에 있어서 swipeActions 가 동작하지 않았다 —
         //    지우는 길이 편집 화면밖에 없었다. 길게 눌러 지울 수 있게 메뉴를 단다.
         .contextMenu {

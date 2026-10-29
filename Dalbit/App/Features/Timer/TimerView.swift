@@ -23,8 +23,11 @@ struct TimerView: View {
                     // 타이머 실행 중
                     timerProgressView()
                 } else {
-                    // 타이머 설정
-                    timerSettingView()
+                    // 타이머 설정 — 큰 글씨에서 화면을 넘으면 스크롤된다(시작 버튼이 밀려나지 않게).
+                    ViewThatFits(in: .vertical) {
+                        timerSettingView()
+                        ScrollView { timerSettingView() }
+                    }
                 }
             }
             .dsConstrainedWidth()
@@ -175,7 +178,7 @@ struct TimerView: View {
                     VStack(spacing: DS.Spacing.xs) {
                         ZStack {
                             Circle()
-                                .fill(DS.Colors.accent)
+                                .fill(DS.Colors.accentFillBottom)
                                 .frame(width: 90, height: 90)
                                 .shadow(color: DS.Colors.accent.opacity(0.4), radius: 16, x: 0, y: 8)
 

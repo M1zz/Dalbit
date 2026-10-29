@@ -139,16 +139,22 @@ struct ListenListView: View {
                         .frame(width: W, height: H)
                         .offset(y: pageOffset(0, H))
                         .zIndex(page == 0 ? 1 : 0)
+                        // 화면 밖으로 밀려난 페이지는 VoiceOver 가 훑지 못하게 한다.
+                        .accessibilityHidden(page != 0)
 
                     homePage()
                         .frame(width: W, height: H)
                         .offset(y: pageOffset(1, H))
                         .zIndex(page == 1 ? 1 : 0)
+                        // 화면 밖으로 밀려난 페이지는 VoiceOver 가 훑지 못하게 한다.
+                        .accessibilityHidden(page != 1)
 
                     timerPage()
                         .frame(width: W, height: H)
                         .offset(y: pageOffset(2, H))
                         .zIndex(page == 2 ? 1 : 0)
+                        // 화면 밖으로 밀려난 페이지는 VoiceOver 가 훑지 못하게 한다.
+                        .accessibilityHidden(page != 2)
                 }
                 .frame(width: W, height: H)
                 .clipped()
@@ -235,7 +241,8 @@ struct ListenListView: View {
             // 처음 한 번: 옆으로 넘기면 소리가 바뀐다는 힌트
             if !didShowSwipeHint {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    flashLabel(L.Listen.swipeHint.localized, duration: 3.5)
+                    // 화면을 미는 안내라 VoiceOver 로는 읽지 않는다(달의 동작 메뉴가 대신한다).
+                    flashLabel(L.Listen.swipeHint.localized, duration: 3.5, announce: false)
                     didShowSwipeHint = true
                 }
             }
@@ -441,6 +448,8 @@ struct ListenListView: View {
                     .accessibilityLabel(viewModel.isPlaying ? L.A11y.pause.localized : L.A11y.play.localized)
                     .accessibilityValue(currentSoundTitle)
                     .accessibilityAddTraits(.isButton)
+                    // 두 번 탭 = 재생/일시정지. 화면 전체 제스처에 맡기지 않고 직접 잇는다.
+                    .accessibilityAction { togglePlay(); pressOrb() }
                     .accessibilityAction(named: Text(L.A11y.nextSound.localized)) { nextSound() }
                     .accessibilityAction(named: Text(L.A11y.favorite.localized)) { toggleFavoriteCurrent() }
                     .accessibilityAction(named: Text(L.A11y.timerButton.localized)) { goTo(2) }
@@ -690,6 +699,18 @@ struct ListenListView: View {
         guard p != from else { return }
         Haptics.light()
         didUseModeSwitch = true   // 한 번 써봤으면 안내 칩은 다음부터 숨김
+        // VoiceOver 가 새로 들어온 페이지의 첫 요소부터 읽게 한다.
+        defer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                UIAccessibility.post(notification: .screenChanged, argument: nil)
+            }
+        }
+        // 동작 줄이기: 달이 구르고 화면이 미끄러지는 대신 그 자리에서 바뀐다.
+        if reduceMotion {
+            page = p
+            orbDragV = 0
+            return
+        }
         let dir = p > from ? 1.0 : -1.0
         let rollDur = 0.5
 
@@ -1018,8 +1039,10 @@ struct ListenListView: View {
     }
 
     /// 라벨(소리 이름/힌트)을 잠깐 보여주고 사라지게
-    private func flashLabel(_ text: String, duration: Double = 1.8) {
+    private func flashLabel(_ text: String, duration: Double = 1.8, announce: Bool = true) {
         nameLabelText = text
+        // 라벨은 잠깐 보였다 사라지는 그림이라 VoiceOver 에선 숨겨 두었다 — 대신 말로 알린다.
+        if announce { AccessibilityNotification.Announcement(text).post() }
         nameToken += 1
         let token = nameToken
         withAnimation(.easeInOut(duration: 0.35)) { showNameLabel = true }

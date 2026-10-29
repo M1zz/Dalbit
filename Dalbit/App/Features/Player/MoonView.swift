@@ -203,7 +203,8 @@ struct CampfireView: View {
 
             // 본체 — 소리마다 바뀌는 색(틴트)의 구체
             // 세이프 모드(직전 실행이 연달아 죽음)에서는 가장 무거운 3D 달을 건너뛴다 — LaunchSafety 참고.
-            if use3DMoon && !LaunchSafety.isInSafeMode { moon3DView } else { moonView }
+            // 동작 줄이기: 3D 달은 저 멀리서 다가와 옆으로 빠져나가는 여행을 계속한다 — 제자리에 선 2D 달로 바꾼다.
+            if use3DMoon && !LaunchSafety.isInSafeMode && !reduceMotion { moon3DView } else { moonView }
 
             // 위성 — 궤도 앞쪽 반(달 앞으로 지나감)
             if satelliteVisible {

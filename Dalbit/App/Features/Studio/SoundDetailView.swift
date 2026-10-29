@@ -16,6 +16,8 @@ struct SoundDetailView: View {
 
     // MARK: - Properties
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    /// 색 없이 구별 — 고른 무드·음원 종류를 채운 색만이 아니라 테두리로도 보여 준다.
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
     @EnvironmentObject var viewModel: CustomSoundViewModel
 
     let isTutorial: Bool
@@ -195,7 +197,12 @@ struct SoundDetailView: View {
             .padding(.vertical, DS.Spacing.lg)
             .background(
                 RoundedRectangle(cornerRadius: DS.Radius.lg, style: .continuous)
-                    .fill(selected ? DS.Colors.accent : DS.Colors.surface)
+                    .fill(selected ? DS.Colors.accentFillBottom : DS.Colors.surface)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: DS.Radius.lg, style: .continuous)
+                    .strokeBorder(DS.Colors.textPrimary, lineWidth: 2)
+                    .opacity(differentiateWithoutColor && selected ? 1 : 0)
             )
             .shadow(color: DS.Shadow.card.color, radius: DS.Shadow.card.radius, y: DS.Shadow.card.y)
         }
@@ -294,7 +301,12 @@ struct SoundDetailView: View {
                 .padding(.vertical, DS.Spacing.xs)
                 .background(
                     Capsule(style: .continuous)
-                        .fill(viewModel.filter == filter ? DS.Colors.accent : DS.Colors.surfaceSunken)
+                        .fill(viewModel.filter == filter ? DS.Colors.accentFillBottom : DS.Colors.surfaceSunken)
+                )
+                .overlay(
+                    Capsule(style: .continuous)
+                        .strokeBorder(DS.Colors.textPrimary, lineWidth: 2)
+                        .opacity(differentiateWithoutColor && viewModel.filter == filter ? 1 : 0)
                 )
         }
         .accessibilityLabel(filter.displayName)

@@ -89,10 +89,13 @@ struct AlarmEditView: View {
                     } label: {
                         Text(day.shortLabel)
                             .font(DS.Font.subhead().weight(.semibold))
+                            // 원 크기는 고정이라 큰 글씨에서는 원 안에 맞춰 줄인다(읽는 이름은 VoiceOver 라벨이 따로 말한다).
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                             .frame(width: 38, height: 38)
                             .foregroundColor(selectedDays.contains(day) ? DS.Colors.onAccent : DS.Colors.textSecondary)
                             .background(
-                                Circle().fill(selectedDays.contains(day) ? DS.Colors.accent : DS.Colors.surfaceSunken)
+                                Circle().fill(selectedDays.contains(day) ? DS.Colors.accentFillBottom : DS.Colors.surfaceSunken)
                             )
                             .overlay(
                                 Circle()

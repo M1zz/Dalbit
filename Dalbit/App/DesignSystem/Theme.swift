@@ -63,7 +63,7 @@ enum DS {
         ///    라벤더라 흰 글씨와의 명도 대비가 2.2:1 밖에 안 나온다(WCAG AA 4.5:1 미달).
         ///    큰 파스텔 덩어리가 우주 배경 위에 얹히면 값싸 보이기도 한다.
         ///    아래 두 색은 흰 글씨 기준 4.8:1 이상을 확보한다.
-        static let accentFillTop = Color(light: 0x7B75E4, dark: 0x7B6FF0)
+        static let accentFillTop = Color(light: 0x7B75E4, dark: 0x6A5FE0)
         static let accentFillBottom = Color(light: 0x5B55C7, dark: 0x5B4FD0)
 
         /// 채워진 포인트 면. 위→아래로 살짝 어두워져 평평한 판때기로 보이지 않게 한다.
@@ -85,7 +85,8 @@ enum DS {
         /// 저시력 사용자에게는 아예 안 읽히기 때문이다.
         static let textSecondary = Color(light: 0x6A6880, dark: 0xAFADC2,
                                          lightHighContrast: 0x45435A, darkHighContrast: 0xD6D4E6)
-        static let textTertiary = Color(light: 0x9B99AD, dark: 0x726F86,
+        /// 다크 값은 표면(surface) 위에서도 4.5:1 을 넘기도록 잡았다(예전 0x726F86 은 3.5:1).
+        static let textTertiary = Color(light: 0x9B99AD, dark: 0x8E8BA3,
                                         lightHighContrast: 0x5E5C73, darkHighContrast: 0xB4B1C9)
         /// 포인트 위에 올라가는 텍스트
         static let onAccent = Color.white

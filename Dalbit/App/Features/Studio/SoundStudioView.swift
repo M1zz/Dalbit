@@ -148,11 +148,11 @@ struct SoundStudioView: View {
             HStack(spacing: DS.Spacing.sm) {
                 ZStack {
                     Circle()
-                        .fill(selected ? Color.white : DS.Colors.accent)
+                        .fill(selected ? Color.white : DS.Colors.accentFillBottom)
                         .frame(width: 40, height: 40)
                     Image(systemName: icon)
                         .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(selected ? DS.Colors.accent : .white)
+                        .foregroundColor(selected ? DS.Colors.accentFillBottom : .white)
                 }
                 Text(name)
                     .font(DS.Font.headline())
@@ -171,7 +171,8 @@ struct SoundStudioView: View {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: DS.Radius.lg, style: .continuous)
-                    .fill(selected ? DS.Colors.accent : DS.Colors.surface)
+                    // 흰 글씨가 올라가므로 밝은 accent 가 아니라 진한 채움색(흰 글씨 6:1)
+                    .fill(selected ? DS.Colors.accentFillBottom : DS.Colors.surface)
             )
             .shadow(color: DS.Shadow.card.color, radius: DS.Shadow.card.radius, y: DS.Shadow.card.y)
         }
@@ -275,7 +276,7 @@ struct SoundStudioView: View {
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
-                    .fill(on ? DS.Colors.accent : DS.Colors.surface)
+                    .fill(on ? DS.Colors.accentFillBottom : DS.Colors.surface)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
@@ -431,8 +432,16 @@ struct SoundStudioView: View {
                         dragBaseInterval = nil
                     }
             )
+            // 두드리기·끌기는 VoiceOver 로 할 수 없다 — 위아래로 쓸어 0.1초씩 조절한다.
+            .accessibilityElement(children: .ignore)
             .accessibilityLabel(L.Studio.interval.localized)
             .accessibilityValue(String(format: "%.1f%@", selectedLayers[idx].variation.interval, L.Customize.seconds.localized))
+            .accessibilityAdjustableAction { direction in
+                let step: Float = direction == .increment ? 0.1 : (direction == .decrement ? -0.1 : 0)
+                guard step != 0 else { return }
+                selectedLayers[idx].variation.interval = min(8.0, max(0.2, selectedLayers[idx].variation.interval + step))
+                schedulePreviewRestart()
+            }
         }
     }
 

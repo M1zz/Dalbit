@@ -350,7 +350,7 @@ struct SubscriptionView: View {
                                 .padding(.vertical, DS.Spacing.xs)
                                 .background(
                                     RoundedRectangle(cornerRadius: DS.Radius.sm, style: .continuous)
-                                        .fill(DS.Colors.accent)
+                                        .fill(DS.Colors.accentFillBottom)
                                 )
                         }
                         .disabled(promoInput.trimmingCharacters(in: .whitespaces).isEmpty)

@@ -34,7 +34,7 @@ struct GestureCoachmark: View {
                         .foregroundColor(DS.Colors.onAccent)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, DS.Spacing.sm)
-                        .background(Capsule().fill(DS.Colors.accent))
+                        .background(Capsule().fill(DS.Colors.accentFillBottom))
                 }
                 .padding(.top, DS.Spacing.xs)
             }
@@ -55,6 +55,7 @@ struct GestureCoachmark: View {
                 .foregroundColor(DS.Colors.accent)
                 .frame(width: 34, height: 34)
                 .background(Circle().fill(Color.white.opacity(0.12)))
+                .accessibilityHidden(true)
             Text(text)
                 .font(DS.Font.callout())
                 .foregroundColor(.white)

@@ -1583,3 +1583,26 @@ https://m1zz.github.io/Dalbit/tr/privacy.html
 ### 마케팅 URL
 
 https://m1zz.github.io/Dalbit/tr/
+
+## 손쉬운 사용
+
+<!-- DeployBar 가 App Store Connect '앱의 손쉬운 사용' 에 올린다. 실제로 확인한 것만 적는다. -->
+<!-- 자막·오디오 설명은 해당 없음: 말소리 없는 자연음·기악과 영상이 없는 앱이다. -->
+
+### iPhone
+voiceOver
+voiceControl
+largerText
+darkInterface
+differentiateWithoutColor
+sufficientContrast
+reducedMotion
+
+### iPad
+voiceOver
+voiceControl
+largerText
+darkInterface
+differentiateWithoutColor
+sufficientContrast
+reducedMotion

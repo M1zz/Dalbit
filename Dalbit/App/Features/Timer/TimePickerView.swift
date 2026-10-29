@@ -30,7 +30,7 @@ struct TimePickerView: View {
                 .accessibilityLabel(L.A11y.hoursPicker.localized)
 
                 Text(L.Timer.hours.localized)
-                    .font(.system(size: 20, weight: .medium))
+                    .font(.title3.weight(.medium))
                     .foregroundColor(DS.Colors.textSecondary)
                     .fixedSize()
                     .lineLimit(1)
@@ -48,7 +48,7 @@ struct TimePickerView: View {
                 .accessibilityLabel(L.A11y.minutesPicker.localized)
 
                 Text(L.Timer.minutes.localized)
-                    .font(.system(size: 20, weight: .medium))
+                    .font(.title3.weight(.medium))
                     .foregroundColor(DS.Colors.textSecondary)
                     .fixedSize()
                     .lineLimit(1)

@@ -18,10 +18,10 @@ import LeeoKit
 extension DalbitSpec {
     static var roadmap: [LeeoRoadmapItem] {[
         // MARK: 다음에 만들어요
-        .init(id: "a11y.voiceover", status: .planned,
+        .init(id: "a11y.voiceover", status: .building,
               title: L.Roadmap.voiceoverTitle.localized,
               detail: L.Roadmap.voiceoverDetail.localized),
-        .init(id: "a11y.largetext", status: .planned,
+        .init(id: "a11y.largetext", status: .building,
               title: L.Roadmap.largetextTitle.localized,
               detail: L.Roadmap.largetextDetail.localized),
         .init(id: "a11y.contrast", status: .shipped("4.1.1"),

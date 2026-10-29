@@ -183,9 +183,11 @@ struct SavedSoundsListView: View {
             Spacer()
 
             Text(L.Listen.savedSounds.localized)
-                .font(.system(size: 17, weight: .semibold))
+                .font(DS.Font.headline())
                 .foregroundColor(DS.Colors.textPrimary)
                 .lineLimit(1)
+                .minimumScaleFactor(0.7)
+                .accessibilityAddTraits(.isHeader)
 
             Spacer()
 
@@ -351,8 +353,14 @@ struct SavedSoundsListView: View {
         .accessibilityLabel(soundCardAccessibilityLabel(sound))
         .accessibilityAddTraits(.isButton)
         .accessibilityHint(L.A11y.playSoundHint.localized)
-        .accessibilityAction(named: Text(L.A11y.favorite.localized)) { viewModel.toggleFavorite(sound) }
-        .accessibilityAction(named: Text(L.Common.delete.localized)) { if !sound.isPreset { deleteSound(sound) } }
+        // 밀어서 하는 일(즐겨찾기·편집·삭제)을 VoiceOver 동작으로도. 기본 소리는 지우거나 고칠 수 없다.
+        .accessibilityActions {
+            Button(L.A11y.favorite.localized) { viewModel.toggleFavorite(sound) }
+            if !sound.isPreset {
+                Button(L.Common.edit.localized) { startEdit(sound) }
+                Button(L.Common.delete.localized) { deleteSound(sound) }
+            }
+        }
         // 왼쪽으로 밀기 → 즐겨찾기
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             Button { viewModel.toggleFavorite(sound) } label: {

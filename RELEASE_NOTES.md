@@ -3,6 +3,176 @@
 이전 버전의 상세 노트는 RELEASE_NOTES_4.0.x.md 에 있다.
 DeployBar 는 이 파일의 `## <버전>` ▸ `### 앱스토어 (...)` 절을 스토어에 올린다.
 
+## 4.1.2
+
+### 앱스토어 (한국어)
+
+고마울 때 개발자에게 작은 팁을 보낼 수 있어요
+VoiceOver와 음성 제어로 더 쉽게 쓸 수 있어요
+큰 글씨에서도 화면이 깔끔하게 보여요
+동작 줄이기를 켜면 움직임이 차분해져요
+
+### App Store (English)
+
+Send the developer a small tip of thanks
+Improved VoiceOver and Voice Control
+Looks tidy even with larger text sizes
+Calmer animations with Reduce Motion on
+
+### 앱스토어 (일본어)
+
+開発者にちょっとしたチップを送れるようになりました
+VoiceOverや音声コントロールで使いやすくなりました
+大きな文字でも画面がすっきり見やすくなりました
+視差効果を減らす設定で動きが控えめになります
+
+### 앱스토어 (영어(영국))
+
+Send the developer a small tip of thanks
+Improved VoiceOver and Voice Control
+Looks tidy even with larger text sizes
+Calmer animations with Reduce Motion on
+
+### 앱스토어 (중국어 간체)
+
+现在可以给开发者送上一点小费表达感谢
+VoiceOver 和语音控制更好用了
+使用大字体时界面也清晰整齐
+开启减弱动态效果后动画更柔和
+
+### 앱스토어 (중국어 번체)
+
+現在可以給開發者一點小費表達感謝
+VoiceOver 與語音控制更好用了
+使用大字體時畫面也清楚整齊
+開啟減少動態效果後動畫更柔和
+
+### 앱스토어 (러시아어)
+
+Можно отправить разработчику чаевые
+Лучше с VoiceOver и управлением голосом
+Аккуратный вид даже с крупным шрифтом
+Мягче анимация при уменьшении движения
+
+### 앱스토어 (스페인어)
+
+Puedes dar propina al desarrollador
+Mejor con VoiceOver y Control por voz
+Se ve bien incluso con texto grande
+Menos animación con Reducir movimiento
+
+### 앱스토어 (독일어)
+
+Du kannst dem Entwickler Trinkgeld geben
+Besser mit VoiceOver und Sprachsteuerung
+Auch mit großer Schrift übersichtlich
+Sanftere Effekte mit Bewegung reduzieren
+
+### 앱스토어 (프랑스어)
+
+Offrez un petit pourboire au développeur
+VoiceOver et Commande vocale améliorés
+Bien lisible avec un texte agrandi
+Plus calme avec Réduire les animations
+
+### 앱스토어 (이탈리아어)
+
+Puoi dare una mancia allo sviluppatore
+Meglio con VoiceOver e Controllo vocale
+Ordinata anche con testo più grande
+Più calma con Riduci movimento
+
+### 앱스토어 (포르투갈어 브라질)
+
+Dê uma gorjetinha ao desenvolvedor
+Melhor com VoiceOver e Controle por Voz
+Fica bem organizado com texto grande
+Mais calmo com Reduzir Movimento
+
+### 앱스토어 (태국어)
+
+ส่งทิปเล็กๆ ให้นักพัฒนาได้แล้ว
+ใช้ VoiceOver และสั่งงานด้วยเสียงได้ดีขึ้น
+ตัวอักษรใหญ่ก็ยังดูเป็นระเบียบ
+เปิดลดการเคลื่อนไหวแล้วภาพจะนิ่งขึ้น
+
+### 앱스토어 (베트남어)
+
+Gửi chút tiền tip cho nhà phát triển
+Dùng tốt hơn với VoiceOver và Khẩu lệnh
+Gọn gàng ngay cả khi dùng chữ lớn
+Nhẹ nhàng hơn khi bật Giảm chuyển động
+
+### 앱스토어 (체코어)
+
+Můžete poslat vývojáři malé spropitné
+Lepší s VoiceOverem a Ovládáním hlasem
+Přehledné i s větším písmem
+Klidnější animace při omezení pohybu
+
+### 앱스토어 (덴마크어)
+
+Du kan give udvikleren lidt drikkepenge
+Bedre med VoiceOver og Stemmestyring
+Overskuelig selv med stor tekst
+Roligere med Reducer bevægelse
+
+### 앱스토어 (그리스어)
+
+Δώστε ένα φιλοδώρημα στον δημιουργό
+Καλύτερο VoiceOver και Φωνητικός έλεγχος
+Καθαρή εμφάνιση και με μεγάλο κείμενο
+Πιο ήρεμη κίνηση με τη Μείωση κίνησης
+
+### 앱스토어 (핀란드어)
+
+Voit nyt antaa kehittäjälle pienen tipin
+Parempi VoiceOverilla ja puheohjauksella
+Selkeä myös suurella tekstillä
+Vähennä liikettä rauhoittaa animaatiot
+
+### 앱스토어 (인도네시아어)
+
+Kini bisa kirim tip untuk pengembang
+VoiceOver dan Kontrol Suara makin nyaman
+Tetap rapi meski memakai teks besar
+Lebih tenang dengan Kurangi Gerakan
+
+### 앱스토어 (노르웨이어 보크말)
+
+Du kan gi utvikleren litt tips
+Bedre med VoiceOver og Stemmekontroll
+Ryddig også med stor tekst
+Roligere med Reduser bevegelse
+
+### 앱스토어 (네덜란드어)
+
+Geef de ontwikkelaar een kleine fooi
+Beter met VoiceOver en Stembediening
+Ook met grote tekst overzichtelijk
+Rustiger met Verminder beweging
+
+### 앱스토어 (폴란드어)
+
+Możesz dać twórcy aplikacji napiwek
+Lepiej z VoiceOver i Sterowaniem głosem
+Przejrzyście nawet z dużym tekstem
+Spokojniej z opcją Ogranicz ruch
+
+### 앱스토어 (스웨덴어)
+
+Du kan ge utvecklaren lite dricks
+Bättre med VoiceOver och Röststyrning
+Tydligt även med stor text
+Lugnare med Minska rörelse
+
+### 앱스토어 (튀르키예어)
+
+Geliştiriciye bahşiş gönderebilirsiniz
+VoiceOver ve Sesle Denetim ile daha iyi
+Büyük metinde de düzenli görünüm
+Hareketi Azalt açıkken daha sakin
+
 ## 4.1.1
 
 ### 앱스토어 (한국어)

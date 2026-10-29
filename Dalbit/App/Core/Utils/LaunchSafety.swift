@@ -10,7 +10,7 @@
 //  소리는 들을 수 있고, 그동안 크래시 진단(LeeoDiagnostics)이 원인을 보내 온다.
 //  세이프 모드로 무사히 뜨면 그다음 실행은 평소대로 3D 로 연다(LeeoCrashLoopGuard 규칙).
 //
-//  ⚠️ 성공 표시는 홈이 뜨고 몇 초 살아 있은 뒤에, 또는 사람이 앱을 내렸을 때 한다.
+//  ⚠️ 성공 표시는 홈이 뜨고 몇 초 살아 있은 뒤에 한다. 사람이 앱을 내린 것은 LeeoKit(3.26.1~)이 스스로 성공으로 친다.
 //     알람·백그라운드 재생으로만 깨어난 실행은 화면을 그리지 않으므로 성공으로 치지 않는다.
 //
 
@@ -35,10 +35,5 @@ enum LaunchSafety {
     /// 홈 화면이 떴다. 몇 초 더 살아 있으면 무사히 뜬 것으로 친다.
     static func homeAppeared() {
         crashGuard.markLaunchSucceededAfterSurvivalDelay()
-    }
-
-    /// 사람이 앱을 내렸다 — 스스로 닫은 것은 죽은 것이 아니다.
-    static func movedToBackground() {
-        crashGuard.markLaunchSucceeded()
     }
 }

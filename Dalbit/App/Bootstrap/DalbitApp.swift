@@ -71,8 +71,6 @@ struct DalbitApp: App {
             // 사람이 실제로 앞으로 가져온 순간만 활동으로 센다(콜드 런치 + 백그라운드 복귀).
             // 실행 횟수는 프로세스당 1회로 UsageReportingService 가 눌러 준다.
             if phase == .active { UsageReportingService.reportForegroundOpen() }
-            // 사람이 앱을 내렸다 — 이번 실행은 무사히 끝난 것이다.
-            if phase == .background { LaunchSafety.movedToBackground() }
         }
     }
 

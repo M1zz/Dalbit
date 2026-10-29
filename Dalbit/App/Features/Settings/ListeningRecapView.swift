@@ -25,6 +25,7 @@ struct ListeningRecapView: View {
     @State private var tracker = Snapshot()
 
     @State private var showFeedback = false
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
 
     /// 원장에서 한 번에 떠 온 값. ListeningTracker 를 직접 들고 있지 않은 이유는 위 주석 참고.
     private struct Snapshot {
@@ -61,6 +62,13 @@ struct ListeningRecapView: View {
                         emptyState()
                     } else {
                         totalCard()
+                        // 이미 프리미엄인 사람이 자기 기록에서 달빛과 보낸 시간을 본 순간에만 응원을 부탁한다.
+                        // 아직 무료인 사람에게는 구독이 맞는 길이다.
+                        if subscriptionManager.isPremium, let tipJar = subscriptionManager.tipJar {
+                            LeeoTipAskSlot<DalbitSpec>(tipJar: tipJar,
+                                                       reached: DalbitTipMoments.reached(totalSeconds: tracker.totalSeconds))
+                                .leeoStyle(.dalbit)
+                        }
                         statsCard()
                         noteFootnote()
                     }
@@ -211,5 +219,20 @@ struct ListeningRecapView: View {
 struct ListeningRecapView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack { ListeningRecapView() }
+            .environmentObject(SubscriptionManager())
+    }
+}
+
+// MARK: - 응원 부탁 순간
+
+/// 팁을 부탁할 순간 — 달빛과 함께 보낸 누적 청취 시간. 큰 것부터.
+enum DalbitTipMoments {
+    static let hours = [100, 30, 10]
+
+    static func reached(totalSeconds: Double) -> [LeeoTipMoment] {
+        let h = Int(totalSeconds / 3600)
+        return hours.filter { h >= $0 }.map {
+            LeeoTipMoment(id: "hours.\($0)", message: String(format: L.TipJar.hoursFormat.localized, h))
+        }
     }
 }

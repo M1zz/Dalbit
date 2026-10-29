@@ -588,6 +588,11 @@ enum L {
         static let changeColor = "a11y.change_color"
     }
 
+    // MARK: - TipJar (응원 부탁 카드 — 나머지 문구는 LeeoKit 에 있다. TipKit 안내는 위의 `Tip`)
+    enum TipJar {
+        static let hoursFormat = "tipjar.hours_format"       // %lld = 누적 청취 시간(시간)
+    }
+
     // MARK: - Recap (나의 기록 — 사용자가 자기 청취 기록을 보는 화면)
     enum Recap {
         static let entry = "recap.entry"

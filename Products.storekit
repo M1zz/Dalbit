@@ -14,7 +14,51 @@
 
   ],
   "products" : [
-
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "D41B71001",
+      "localizations" : [
+        {
+          "description" : "Support the developer of Dalbit.",
+          "displayName" : "Small Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.leeo.LullabyRecipe.tip.small",
+      "referenceName" : "Small Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "D41B71002",
+      "localizations" : [
+        {
+          "description" : "Support the developer of Dalbit.",
+          "displayName" : "Medium Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.leeo.LullabyRecipe.tip.medium",
+      "referenceName" : "Medium Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "D41B71003",
+      "localizations" : [
+        {
+          "description" : "Support the developer of Dalbit.",
+          "displayName" : "Large Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.leeo.LullabyRecipe.tip.large",
+      "referenceName" : "Large Tip",
+      "type" : "Consumable"
+    }
   ],
   "settings" : {
     "_applicationInternalID" : "1626715109",

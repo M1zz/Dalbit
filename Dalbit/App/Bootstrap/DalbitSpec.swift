@@ -51,9 +51,18 @@ enum DalbitSpec: LeeoAppSpec {
         LeeoSubscriptionConfig(
             productIDs: [SubscriptionManager.productId],
             termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!,
-            gate: gatePolicy
+            gate: gatePolicy,
+            tipJar: tipJar
         )
     )
+
+    /// 개발자 응원하기(팁, 소모성 세 가지 — 작은 것부터). 기능을 열지 않는다.
+    /// ⚠️ productIDs · entitlementIDs 에 넣지 않는다. 넣으면 팁을 낸 사람이 프리미엄이 된다.
+    static let tipJar = LeeoTipJarConfig(productIDs: [
+        "com.leeo.LullabyRecipe.tip.small",
+        "com.leeo.LullabyRecipe.tip.medium",
+        "com.leeo.LullabyRecipe.tip.large"
+    ])
 
     /// 인앱 결제(구독). StoreKit 엔진은 LeeoKit(LeeoStore)이 담당하고,
     /// 앱은 이 구성과 얇은 SubscriptionManager 파사드(무료 게이트·프로모 코드)만 유지한다.
@@ -66,7 +75,8 @@ enum DalbitSpec: LeeoAppSpec {
         productIDs: [SubscriptionManager.productId],
         termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"),
         privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html"),
-        gate: gatePolicy
+        gate: gatePolicy,
+        tipJar: tipJar
     )
 }
 

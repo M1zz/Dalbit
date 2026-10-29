@@ -139,6 +139,9 @@ class SubscriptionManager: ObservableObject {
     /// 프리미엄 여부 = 실제 구독 권한(또는 DEBUG 언락) 이거나 유효한 무료 사용 코드 보유.
     var isPremium: Bool { store.hasPro || hasActivePromo }
 
+    /// 팁(응원) 엔진. 프리미엄과 상관없다. 상품 로드·결제 갱신은 LeeoStore 가 맡는다.
+    var tipJar: LeeoTipJar? { store.tipJar }
+
     /// 로드된 판매 상품.
     var products: [Product] { store.products }
 

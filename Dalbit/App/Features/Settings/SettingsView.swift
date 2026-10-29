@@ -14,6 +14,7 @@ import LeeoKit
 struct SettingsView: View {
 
     @EnvironmentObject var viewModel: CustomSoundViewModel
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     /// 큰 글씨(손쉬운 사용 크기)에서는 행의 글과 스위치를 위아래로 쌓는다.
@@ -310,17 +311,16 @@ struct SettingsView: View {
             // 같은 사람이 만든 다른 앱 — 잠들기 전후에 함께 쓰기 좋은 앱을 이야기로 소개한다.
             LeeoFamilySettingsRow<DalbitSpec>()
                 // 눌러 들어간 '함께 쓰는 앱' 화면도 이 앱의 밤하늘 색을 입는다.
-                .leeoStyle(LeeoStyle(accent: DS.Colors.accent,
-                                     bg: DS.Colors.background,
-                                     surface: DS.Colors.surface,
-                                     surfaceAlt: DS.Colors.surfaceElevated,
-                                     text: DS.Colors.textPrimary,
-                                     textMuted: DS.Colors.textSecondary,
-                                     textFaint: DS.Colors.textTertiary))
+                .leeoStyle(.dalbit)
                 .foregroundColor(DS.Colors.textPrimary)
                 .padding(.horizontal, DS.Spacing.lg)
                 .padding(.vertical, DS.Spacing.sm)
                 .dsGlassPanel(radius: DS.Radius.md)
+
+            // 개발자 응원하기(팁) — 판매 중인 팁이 있어야 선다.
+            if let tipJar = subscriptionManager.tipJar {
+                TipJarPanel(tipJar: tipJar)
+            }
         }
     }
 
@@ -552,6 +552,38 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack { SettingsView() }
             .environmentObject(CustomSoundViewModel())
+            .environmentObject(SubscriptionManager())
             .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - 응원하기 (팁)
+
+/// 설정의 '개발자 응원하기' 줄. 상품이 와야 서므로 `LeeoTipJar` 를 따로 관찰한다 — 빈 유리판이 남지 않게.
+private struct TipJarPanel: View {
+    @ObservedObject var tipJar: LeeoTipJar
+
+    var body: some View {
+        if tipJar.isAvailable {
+            LeeoTipJarLink<DalbitSpec>(tipJar: tipJar)
+                .leeoStyle(.dalbit)
+                .foregroundColor(DS.Colors.textPrimary)
+                .padding(.horizontal, DS.Spacing.lg)
+                .padding(.vertical, DS.Spacing.sm)
+                .dsGlassPanel(radius: DS.Radius.md)
+        }
+    }
+}
+
+extension LeeoStyle {
+    /// LeeoKit 화면이 입는 이 앱의 밤하늘 색.
+    static var dalbit: LeeoStyle {
+        LeeoStyle(accent: DS.Colors.accent,
+                  bg: DS.Colors.background,
+                  surface: DS.Colors.surface,
+                  surfaceAlt: DS.Colors.surfaceElevated,
+                  text: DS.Colors.textPrimary,
+                  textMuted: DS.Colors.textSecondary,
+                  textFaint: DS.Colors.textTertiary)
     }
 }

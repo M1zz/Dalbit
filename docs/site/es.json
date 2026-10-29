@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: crea tu propio ruido blanco para dormir mezclando sonidos",
+  "description": "Mezcla lluvia, gotas y piano en un sonido para dormir solo tuyo, guárdalo una vez y cada noche basta con tocar la luna. Todos los sonidos son gratis.",
+  "hero": {
+    "headline": "Deja de pasar la noche\nbuscando el sonido ideal",
+    "lead": "Mezcla una vez lluvia, gotas de agua y un cuenco tibetano en un sonido tuyo. A partir de la noche siguiente, solo tienes que tocar la luna.",
+    "cta": "Descárgala gratis en el App Store",
+    "note": "Todos los sonidos se pueden escuchar gratis. Para iPhone y iPad."
+  },
+  "problem": {
+    "title": "¿Alguna vez has perdido una hora buscando algo para dormirte?",
+    "text": "La lluvia es demasiado monótona, las olas suenan demasiado fuerte y el vídeo que pones se corta con un anuncio a mitad de la noche. Con Dalbit superpones tú mismo los sonidos que te gustan hasta dar con el que encaja contigo, y lo guardas detrás de una sola luna."
+  },
+  "features": [
+    {
+      "title": "Crea tu sonido por capas",
+      "text": "Superpón lluvia, gotas de agua, pájaros y cuencos tibetanos. Ajusta en cada capa el volumen, cada cuánto suena y desde dónde la oyes, y añade de fondo olas o piano.\nPonle nombre a la mezcla, guárdala y vuelve a ella cualquier noche.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Se apaga sin despertarte",
+      "text": "El temporizador de sueño nunca corta el sonido de golpe: lo va bajando poco a poco para que el final no te despierte.\nEl sonido sigue con la pantalla apagada o en otra app, y si no tocas nada la pantalla se atenúa sola.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Despierta con algo suave",
+      "text": "Configura alarmas con un cuenco tibetano, un cuenco cantor, pájaros o un cuco, y repítelas los días de la semana que elijas.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Una luna para todo",
+      "text": "Toca la luna para reproducir y otra vez para pausar. Desliza a los lados para cambiar de sonido, hacia arriba para el temporizador y hacia abajo para tus sonidos guardados.\nSi un sonido te convence, mantén pulsada la luna para añadirlo a favoritos.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Empezar lleva tres pasos",
+    "items": [
+      {
+        "title": "Toca la luna",
+        "text": "Abre la app, toca la luna y el sonido empieza al instante."
+      },
+      {
+        "title": "Desliza a los lados",
+        "text": "Ve pasando hasta que un sonido te guste."
+      },
+      {
+        "title": "Pon el temporizador y acuéstate",
+        "text": "Desliza hacia arriba, elige un tiempo y después el sonido se irá apagando."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Lo que hace la luna",
+    "rows": [
+      [
+        "Tocar",
+        "reproducir, pausar"
+      ],
+      [
+        "Deslizar a los lados",
+        "otro sonido"
+      ],
+      [
+        "Deslizar hacia arriba",
+        "temporizador y alarmas"
+      ],
+      [
+        "Deslizar hacia abajo",
+        "tus sonidos guardados"
+      ],
+      [
+        "Mantener pulsado",
+        "añadir a favoritos"
+      ]
+    ],
+    "note": "También puedes pausar y reanudar desde los controles de reproducción de la pantalla bloqueada."
+  },
+  "pricing": {
+    "title": "Escuchar es gratis. Premium es para crear más.",
+    "free": {
+      "name": "Gratis",
+      "items": [
+        "Todos los sonidos",
+        "Mezclar sonidos en capas",
+        "Guardar hasta tres mezclas",
+        "Temporizador de sueño que se desvanece",
+        "Alarmas con sonidos suaves",
+        "Favoritos"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Crea y guarda todas las mezclas que quieras"
+      ],
+      "note": "Suscripción mensual con renovación automática y prueba gratuita"
+    },
+    "note": "La suscripción se renueva automáticamente salvo que la canceles al menos 24 horas antes de que termine el periodo actual, y se cobra al acabar la prueba gratuita. Se aplican las condiciones de uso estándar de Apple (EULA)."
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "items": [
+      {
+        "q": "¿Cómo reproduzco y cambio los sonidos?",
+        "a": "Toca la luna de la pantalla de inicio para reproducir y vuelve a tocarla para parar. Desliza a los lados para cambiar de sonido, hacia arriba para el temporizador y hacia abajo para tu biblioteca."
+      },
+      {
+        "q": "¿Se para el sonido si apago la pantalla?",
+        "a": "No. Sigue sonando con la pantalla apagada o si cambias de app. Para pararlo, toca otra vez la luna o usa los controles de la pantalla bloqueada."
+      },
+      {
+        "q": "¿Qué pasa cuando termina el temporizador?",
+        "a": "El sonido no se corta de golpe: baja poco a poco y luego se detiene, para no despertarte."
+      },
+      {
+        "q": "La alarma no suena.",
+        "a": "Al crear tu primera alarma, la app pide permiso para las alarmas. Comprueba que esté activado en Ajustes > Dalbit."
+      },
+      {
+        "q": "¿Dónde se guardan mis mezclas?",
+        "a": "Tus mezclas, alarmas y ajustes se guardan solo en este dispositivo. Si borras la app, se borran con ella."
+      },
+      {
+        "q": "¿Qué puedo usar gratis?",
+        "a": "Todos los sonidos, mezclar capas y guardar hasta tres mezclas propias. El temporizador y las alarmas también son gratis. Premium quita el límite de mezclas."
+      },
+      {
+        "q": "¿Cómo cancelo la suscripción?",
+        "a": "Ve a Ajustes > Cuenta de Apple > Suscripciones, elige Dalbit y cancélala. Si no la cancelas al menos 24 horas antes de que termine el periodo actual, se renueva automáticamente."
+      },
+      {
+        "q": "He cambiado de móvil y he perdido la suscripción.",
+        "a": "Inicia sesión con la misma cuenta de Apple, abre la pantalla de suscripción de Dalbit y toca Restaurar compras."
+      },
+      {
+        "q": "¿Cómo informo de un error o sugiero una función?",
+        "a": "Usa la opción de enviar comentarios en los ajustes de la app o escríbenos a la dirección de abajo. Solemos responder en unos días."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Esta noche,\nsolo toca la luna",
+    "cta": "Descárgala gratis en el App Store"
+  },
+  "ui": {
+    "skip": "Ir al contenido",
+    "languages": "Idiomas",
+    "privacy": "Política de privacidad",
+    "contact": "¿Dudas o ideas? Escríbenos a {email}."
+  }
+}

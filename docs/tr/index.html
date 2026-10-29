@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit - Uyku İçin Beyaz Gürültü · Destek</title>
-<meta name="description" content="Dalbit, doğa seslerini üst üste koyarak kendi beyaz gürültünüzü oluşturduğunuz bir iOS uygulamasıdır. Uygulama ve destek hakkında bilgi.">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit: sesleri katman katman birleştirip kendi uyku sesini yap</title>
+  <meta name="description" content="Yağmuru, damlaları ve piyanoyu kendi uyku sesinde birleştir, bir kez kaydet, sonra her gece aya dokun. Tüm sesler ücretsiz.">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit: sesleri katman katman birleştirip kendi uyku sesini yap">
+  <meta property="og:description" content="Yağmuru, damlaları ve piyanoyu kendi uyku sesinde birleştir, bir kez kaydet, sonra her gece aya dokun. Tüm sesler ücretsiz.">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/tr/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/tr/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-  <a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
-  <a href="../th/" hreflang="th" lang="th">ไทย</a>
-  <a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="./" hreflang="tr" lang="tr" aria-current="true">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">İçeriğe geç</a>
+  <header class="bar">
+    <a class="brand" href="../tr/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">Diller</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">Kendi kusursuz beyaz gürültünüzü yapın</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>Geceni doğru sesi<br>aramakla geçirme</h1>
+        <p class="lead">Yağmuru, su damlalarını ve şarkı söyleyen kâseyi bir kez üst üste koyup kendi sesini yap. Ertesi geceden itibaren aya bir dokunuş yeter.</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">App Store’dan ücretsiz indir</a></div>
+        <p class="muted small">Tüm sesleri ücretsiz dinleyebilirsin. iPhone ve iPad için.</p>
+      </div>
+      <div class="phone"><img src="../img/tr/01-moon.jpg" alt="Geceni doğru sesi aramakla geçirme" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>Doğa seslerini üst üste koyarak kendi beyaz gürültünüzü oluşturun, kaydedin ve istediğiniz zaman geri dönün. Uyumanıza, odaklanmanıza ya da meditasyon yapmanıza yardımcı olan sesi siz tasarlayın.</p>
-</div>
 
-<h2>Özellikler</h2>
-<ul>
-  <li>🎵 Çok katmanlı ses karışımı</li>
-  <li>🔥 Kamp ateşi görselleri</li>
-  <li>⏱️ Uyku zamanlayıcısı</li>
-  <li>💾 Kendi karışımlarınızı kaydedin</li>
-</ul>
 
-<h2>Destek</h2>
-<p>Sorularınız, hata bildirimleriniz ya da özellik istekleriniz için uygulamanın ayarlarından geri bildirim gönderin veya bize e-posta yazın:</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">SSS ve destek →</a></p>
+    <section class="problem reveal">
+      <h2>Uyumadan önce ses seçmekle bir saatin geçtiği oldu mu?</h2>
+      <p>Yağmur fazla tekdüze, dalgalar fazla gürültülü, açtığın video da gecenin ortasında reklama giriyor. Dalbit’te sevdiğin sesleri tam sana uyana kadar kendin üst üste koyar, hepsini tek bir ayın arkasında saklarsın.</p>
+    </section>
 
-<h2>Abonelik</h2>
-<p>Dalbit Premium, sınırsız ses oluşturmanın ve tüm kategorilerin kilidini açan, otomatik yenilenen aylık bir aboneliktir. Aboneliğinizi istediğiniz zaman App Store hesap ayarlarınızdan yönetebilir veya iptal edebilirsiniz.</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Sesini katman katman kur</h2>
+        <p>Yağmur, su damlaları, kuş sesleri ve şarkı söyleyen kâseleri üst üste koy. Her katmanın ses düzeyini, ne sıklıkla çaldığını ve nereden duyulduğunu ayarla; altına arka plan müziği olarak dalga ya da piyano ekle.<br>Karışıma bir ad ver, kaydet ve istediğin gece yeniden aç.</p>
+      </div>
+      <div class="phone"><img src="../img/tr/02-studio.jpg" alt="Sesini katman katman kur" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>Yasal</h2>
-<ul>
-  <li><a href="privacy.html">Gizlilik Politikası</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Kullanım Koşulları (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Seni uyandırmadan söner</h2>
+        <p>Uyku zamanlayıcısı sesi asla birden kesmez. Yavaş yavaş kısar, böylece bitiş anı seni uyandırmaz.<br>Ekran kapalıyken ya da başka bir uygulamadayken ses çalmaya devam eder; hiçbir şeye dokunmazsan ekran kendiliğinden kararır.</p>
+      </div>
+      <div class="phone"><img src="../img/tr/04-timer.jpg" alt="Seni uyandırmadan söner" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Sabahları yumuşak bir uyanış</h2>
+        <p>Şarkı söyleyen kâse, Tibet kâsesi, kuş sesleri ya da guguk kuşuyla alarm kur ve seçtiğin günlerde tekrarla.</p>
+      </div>
+      <div class="phone"><img src="../img/tr/05-alarm.jpg" alt="Sabahları yumuşak bir uyanış" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Her şey tek bir ayda</h2>
+        <p>Çalmak için aya dokun, duraklatmak için yine dokun. Başka ses için yana, uyku zamanlayıcısı için yukarı, kaydettiğin sesler için aşağı kaydır.<br>Bir ses içine sinerse aya basılı tutarak favorilerine ekle.</p>
+      </div>
+      <div class="phone"><img src="../img/tr/03-library.jpg" alt="Her şey tek bir ayda" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>Üç adımda başla</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>Aya dokun</h3><p>Uygulamayı aç, aya dokun; ses hemen başlar.</p></li>
+<li class="card"><span class="n">2</span><h3>Yana kaydır</h3><p>Hoşuna giden sesi bulana kadar kaydır.</p></li>
+<li class="card"><span class="n">3</span><h3>Zamanlayıcıyı kur ve uzan</h3><p>Yukarı kaydır, süreyi seç; ardından ses yavaşça kaybolur.</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>Ay neler yapar</h2>
+      <div class="card table">
+        <dl><div><dt>Dokun</dt><dd>çal, duraklat</dd></div><div><dt>Yana kaydır</dt><dd>sonraki ses</dd></div><div><dt>Yukarı kaydır</dt><dd>uyku zamanlayıcısı ve alarmlar</dd></div><div><dt>Aşağı kaydır</dt><dd>kaydedilen sesler</dd></div><div><dt>Basılı tut</dt><dd>favorilere ekle</dd></div></dl>
+      </div>
+      <p class="muted">Kilitli ekrandaki oynatma denetimlerinden de duraklatıp devam ettirebilirsin.</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>Dinlemek ücretsiz. Daha fazlasını yapmak için Premium.</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>Ücretsiz</h3>
+          <ul><li>Tüm sesler</li><li>Sesleri katmanlayıp kendi karışımını yapma</li><li>En fazla üç karışım kaydetme</li><li>Yavaşça sönen uyku zamanlayıcısı</li><li>Yumuşak sesli alarmlar</li><li>Favoriler</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit Premium</h3>
+          <ul><li>İstediğin kadar karışım yap ve kaydet</li></ul>
+          <p class="muted">Ücretsiz deneme süreli, otomatik yenilenen aylık abonelik</p>
+        </div>
+      </div>
+      <p class="muted">Abonelik, mevcut dönemin bitiminden en az 24 saat önce iptal edilmezse otomatik olarak yenilenir ve ücretsiz deneme bittiğinde ücretlendirilir. Apple’ın standart kullanım koşulları (EULA) geçerlidir.</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>Sık sorulan sorular</h2>
+      <div class="faq"><details><summary>Sesleri nasıl çalıp değiştiririm?</summary><p>Çalmak için ana ekrandaki aya dokun, durdurmak için yine dokun. Başka ses için yana, uyku zamanlayıcısı için yukarı, kitaplığın için aşağı kaydır.</p></details>
+<details><summary>Ekran kapanınca ses durur mu?</summary><p>Hayır. Ekran kapalıyken ya da başka bir uygulamaya geçtiğinde de çalmaya devam eder. Durdurmak için aya yeniden dokun ya da kilitli ekrandaki denetimleri kullan.</p></details>
+<details><summary>Uyku zamanlayıcısı bitince ne olur?</summary><p>Ses birden kesilmez; yavaş yavaş azalır ve sonra durur, böylece uyanmazsın.</p></details>
+<details><summary>Alarmım çalmıyor.</summary><p>İlk alarmı oluştururken uygulama alarm izni ister. Ayarlar &gt; Dalbit bölümünde iznin açık olduğundan emin ol.</p></details>
+<details><summary>Karışımlarım nereye kaydediliyor?</summary><p>Karışımların, alarmların ve ayarların yalnızca bu cihazda durur. Uygulamayı silersen onlar da silinir.</p></details>
+<details><summary>Ücretsiz olarak neleri kullanabilirim?</summary><p>Tüm sesleri, katmanlamayı ve en fazla üç kendi karışımını. Uyku zamanlayıcısı ve alarmlar da ücretsiz. Premium, karışım sayısındaki sınırı kaldırır.</p></details>
+<details><summary>Aboneliğimi nasıl iptal ederim?</summary><p>Ayarlar &gt; Apple Hesabı &gt; Abonelikler’e git, Dalbit’i seç ve iptal et. Mevcut dönemin bitiminden en az 24 saat önce iptal etmezsen otomatik olarak yenilenir.</p></details>
+<details><summary>Telefon değiştirdim, aboneliğim gitti.</summary><p>Aynı Apple Hesabı ile giriş yap, Dalbit’te abonelik ekranını aç ve Satın Alımları Geri Yükle’ye dokun.</p></details>
+<details><summary>Hata bildirmek ya da özellik önermek istiyorum.</summary><p>Uygulamanın ayarlarından geri bildirim gönder ya da aşağıdaki adrese e-posta at. Genellikle birkaç gün içinde yanıt veririz.</p></details></div>
+      <p class="contact">Soruların ya da fikirlerin mi var? <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> adresine yaz.</p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>Bu gece<br>sadece aya dokun</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">App Store’dan ücretsiz indir</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="Diller"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr" aria-current="page">Türkçe</a></nav>
+    <p><a href="privacy.html">Gizlilik Politikası</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: poskládejte si vlastní šum na spaní z několika zvuků",
+  "description": "Kapky přes déšť a navrch klavír. Vrstvěte oblíbené zvuky, jednou je uložte a další noc už jen ťuknete na měsíc. Všechny zvuky zdarma.",
+  "hero": {
+    "headline": "Nehledejte celou noc\nten správný zvuk",
+    "lead": "Jednou si vrstvením deště, kapek vody a tibetské mísy vytvořte vlastní zvuk. Od další noci stačí ťuknout na měsíc.",
+    "cta": "Stáhnout zdarma z App Storu",
+    "note": "Všechny zvuky můžete poslouchat zdarma. Pro iPhone a iPad."
+  },
+  "problem": {
+    "title": "Strávili jste někdy hodinu hledáním něčeho na usnutí?",
+    "text": "Déšť je moc jednotvárný, vlny moc hlasité a video uprostřed noci přeruší reklama. V Dalbitu si oblíbené zvuky vrstvíte sami, dokud nesedí přesně vám, a celé to schováte za jediný měsíc."
+  },
+  "features": [
+    {
+      "title": "Postavte si zvuk z vrstev",
+      "text": "Skládejte na sebe déšť, kapky vody, zpěv ptáků a tibetské mísy. U každé vrstvy nastavíte hlasitost, jak často zazní a odkud ji slyšíte, a pod to můžete dát vlny nebo klavír jako hudbu na pozadí.\nMix pojmenujte, uložte a vracejte se k němu každou noc.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Utichne, aniž by vás probudil",
+      "text": "Časovač spánku zvuk nikdy neusekne. Pomalu ho ztiší, aby vás konec znovu nevzbudil.\nZvuk hraje dál i se zhasnutou obrazovkou nebo v jiné aplikaci, a když na nic nesaháte, obrazovka sama ztmavne.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Ráno vás vzbudí jemně",
+      "text": "Nastavte budíky se zvukem zpívající mísy, tibetské mísy, ptáků nebo kukačky a opakujte je ve vybrané dny.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Jeden měsíc na všechno",
+      "text": "Ťuknutím na měsíc spustíte přehrávání, dalším ho pozastavíte. Přejetím do strany změníte zvuk, nahoru otevřete časovač spánku, dolů uložené zvuky.\nKdyž se vám zvuk líbí, podržte na měsíci prst a přidejte ho do oblíbených.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Začnete ve třech krocích",
+    "items": [
+      {
+        "title": "Ťukněte na měsíc",
+        "text": "Otevřete aplikaci, ťukněte na měsíc a zvuk hned začne."
+      },
+      {
+        "title": "Přejeďte do strany",
+        "text": "Listujte, dokud nenarazíte na zvuk, který sedí."
+      },
+      {
+        "title": "Nastavte časovač a lehněte si",
+        "text": "Přejeďte nahoru, zvolte čas a potom zvuk pomalu dozní."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Co umí měsíc",
+    "rows": [
+      [
+        "Ťuknutí",
+        "přehrát, pozastavit"
+      ],
+      [
+        "Přejetí do strany",
+        "další zvuk"
+      ],
+      [
+        "Přejetí nahoru",
+        "časovač spánku a budíky"
+      ],
+      [
+        "Přejetí dolů",
+        "uložené zvuky"
+      ],
+      [
+        "Podržení",
+        "přidat do oblíbených"
+      ]
+    ],
+    "note": "Pozastavit a pokračovat můžete i z ovládání přehrávání na zamčené obrazovce."
+  },
+  "pricing": {
+    "title": "Poslech je zdarma. Premium je na tvoření víc.",
+    "free": {
+      "name": "Zdarma",
+      "items": [
+        "Všechny zvuky",
+        "Vrstvení zvuků do vlastního mixu",
+        "Až tři uložené mixy",
+        "Časovač spánku s postupným ztišením",
+        "Budíky s jemnými zvuky",
+        "Oblíbené"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Tvořte a ukládejte libovolný počet mixů"
+      ],
+      "note": "Měsíční automaticky obnovované předplatné se zkušební dobou zdarma"
+    },
+    "note": "Předplatné se automaticky obnoví, pokud ho nezrušíte alespoň 24 hodin před koncem aktuálního období. Po skončení zkušební doby se účtuje. Platí standardní podmínky užívání Apple (EULA)."
+  },
+  "faq": {
+    "title": "Časté dotazy",
+    "items": [
+      {
+        "q": "Jak spustím a změním zvuk?",
+        "a": "Ťukněte na měsíc na hlavní obrazovce a zvuk začne hrát, dalším ťuknutím ho zastavíte. Přejetím do strany změníte zvuk, nahoru otevřete časovač spánku a dolů svou knihovnu."
+      },
+      {
+        "q": "Přestane zvuk hrát, když zhasne obrazovka?",
+        "a": "Ne. Hraje dál i se zhasnutou obrazovkou nebo v jiné aplikaci. Zastavíte ho dalším ťuknutím na měsíc nebo ovládáním na zamčené obrazovce."
+      },
+      {
+        "q": "Co se stane, když časovač doběhne?",
+        "a": "Zvuk se neusekne, ale postupně slábne a pak se zastaví, aby vás nevzbudil."
+      },
+      {
+        "q": "Budík nezvoní.",
+        "a": "Při vytváření prvního budíku aplikace požádá o povolení. Zkontrolujte, že je zapnuté v Nastavení > Dalbit."
+      },
+      {
+        "q": "Kde jsou uložené moje mixy?",
+        "a": "Mixy, budíky i nastavení zůstávají jen v tomto zařízení. Když aplikaci smažete, smažou se s ní."
+      },
+      {
+        "q": "Co můžu používat zdarma?",
+        "a": "Všechny zvuky, vrstvení a až tři vlastní mixy. Časovač spánku a budíky jsou také zdarma. Premium ruší limit počtu mixů."
+      },
+      {
+        "q": "Jak zruším předplatné?",
+        "a": "Otevřete Nastavení > Účet Apple > Předplatné, vyberte Dalbit a zrušte ho. Pokud ho nezrušíte alespoň 24 hodin před koncem aktuálního období, automaticky se obnoví."
+      },
+      {
+        "q": "Po výměně telefonu mi zmizelo předplatné.",
+        "a": "Přihlaste se stejným účtem Apple, otevřete v Dalbitu obrazovku předplatného a klepněte na Obnovit nákupy."
+      },
+      {
+        "q": "Jak nahlásím chybu nebo navrhnu funkci?",
+        "a": "Pošlete zpětnou vazbu z nastavení aplikace nebo nám napište na adresu níže. Obvykle odpovídáme do několika dnů."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Dnes v noci\nstačí ťuknout na měsíc",
+    "cta": "Stáhnout zdarma z App Storu"
+  },
+  "ui": {
+    "skip": "Přejít na obsah",
+    "languages": "Jazyky",
+    "privacy": "Zásady ochrany osobních údajů",
+    "contact": "Dotazy nebo nápady posílejte na {email}."
+  }
+}

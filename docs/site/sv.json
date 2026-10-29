@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: skapa ditt eget sömnljud i flera lager",
+  "description": "Droppar över regn och piano ovanpå. Lägg dina favoritljud i lager, spara en gång och från nästa natt trycker du bara på månen. Alla ljud är gratis.",
+  "hero": {
+    "headline": "Lägg inte natten på\natt leta efter rätt ljud",
+    "lead": "Lägg regn, vattendroppar och en klangskål i lager till ditt eget ljud en gång. Från nästa natt räcker ett tryck på månen.",
+    "cta": "Hämta gratis på App Store",
+    "note": "Alla ljud är gratis att lyssna på. För iPhone och iPad."
+  },
+  "problem": {
+    "title": "Har du någon gång lagt en timme på att hitta något att somna till?",
+    "text": "Regnet är för enformigt, vågorna för höga och videon du sätter på avbryts av reklam mitt i natten. Med Dalbit lägger du själv dina favoritljud i lager tills det passar just dig, och sparar det bakom en enda måne."
+  },
+  "features": [
+    {
+      "title": "Bygg ditt ljud i lager",
+      "text": "Stapla regn, vattendroppar, fågelsång och klangskålar. Ställ in volym, hur ofta lagret hörs och varifrån det kommer, och lägg vågor eller piano under som bakgrundsmusik.\nGe mixen ett namn, spara den och gå tillbaka till den vilken natt som helst.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Tonar ut utan att väcka dig",
+      "text": "Sömntimern klipper aldrig ljudet tvärt. Den sänker långsamt, så att slutet inte väcker dig igen.\nLjudet fortsätter med skärmen släckt eller i en annan app, och låter du den vara dämpas skärmen av sig själv.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Väck dig mjukt på morgonen",
+      "text": "Ställ larm med klangskål, tibetansk skål, fågelsång eller gök och upprepa dem de veckodagar du väljer.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "En måne för allt",
+      "text": "Tryck på månen för att spela och igen för att pausa. Svep åt sidan för ett annat ljud, uppåt för sömntimern och nedåt för dina sparade ljud.\nNär ett ljud känns rätt håller du fingret på månen för att lägga till det bland favoriterna.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Kom igång i tre steg",
+    "items": [
+      {
+        "title": "Tryck på månen",
+        "text": "Öppna appen, tryck på månen och ljudet börjar direkt."
+      },
+      {
+        "title": "Svep åt sidan",
+        "text": "Fortsätt tills du hittar ett ljud du gillar."
+      },
+      {
+        "title": "Ställ timern och lägg dig",
+        "text": "Svep uppåt, välj en tid och sedan tonar ljudet långsamt ut."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Det här gör månen",
+    "rows": [
+      [
+        "Tryck",
+        "spela, pausa"
+      ],
+      [
+        "Svep åt sidan",
+        "nästa ljud"
+      ],
+      [
+        "Svep uppåt",
+        "sömntimer och larm"
+      ],
+      [
+        "Svep nedåt",
+        "sparade ljud"
+      ],
+      [
+        "Håll intryckt",
+        "lägg till i favoriter"
+      ]
+    ],
+    "note": "Du kan också pausa och fortsätta från uppspelningsreglagen på låsskärmen."
+  },
+  "pricing": {
+    "title": "Att lyssna är gratis. Premium är till för att skapa fler.",
+    "free": {
+      "name": "Gratis",
+      "items": [
+        "Alla ljud",
+        "Lägg ljud i lager till din egen mix",
+        "Spara upp till tre mixar",
+        "Sömntimer som tonar ut",
+        "Larm med mjuka ljud",
+        "Favoriter"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Skapa och spara så många mixar du vill"
+      ],
+      "note": "Månadsprenumeration som förnyas automatiskt, med gratis provperiod"
+    },
+    "note": "Prenumerationen förnyas automatiskt om du inte säger upp den minst 24 timmar innan den aktuella perioden tar slut, och du debiteras när provperioden är slut. Apples standardvillkor för användning (EULA) gäller."
+  },
+  "faq": {
+    "title": "Vanliga frågor",
+    "items": [
+      {
+        "q": "Hur spelar jag upp och byter ljud?",
+        "a": "Tryck på månen på hemskärmen för att spela och igen för att stoppa. Svep åt sidan för ett annat ljud, uppåt för sömntimern och nedåt för ditt bibliotek."
+      },
+      {
+        "q": "Slutar ljudet när skärmen släcks?",
+        "a": "Nej. Det fortsätter med skärmen släckt eller i en annan app. Tryck på månen igen eller använd reglagen på låsskärmen för att stoppa det."
+      },
+      {
+        "q": "Vad händer när sömntimern går ut?",
+        "a": "Ljudet tar inte tvärt slut. Det blir gradvis tystare och stannar sedan, så att du inte vaknar."
+      },
+      {
+        "q": "Mitt larm ringer inte.",
+        "a": "Appen ber om tillåtelse för larm när du skapar det första. Kontrollera att det är påslaget under Inställningar > Dalbit."
+      },
+      {
+        "q": "Var sparas mina mixar?",
+        "a": "Dina mixar, larm och inställningar finns bara på den här enheten. Raderar du appen försvinner de också."
+      },
+      {
+        "q": "Vad kan jag använda gratis?",
+        "a": "Alla ljud, lager på lager och upp till tre egna mixar. Sömntimern och larmen är också gratis. Premium tar bort gränsen för antal mixar."
+      },
+      {
+        "q": "Hur säger jag upp prenumerationen?",
+        "a": "Gå till Inställningar > Apple-konto > Prenumerationer, välj Dalbit och säg upp. Säger du inte upp minst 24 timmar innan perioden tar slut förnyas den automatiskt."
+      },
+      {
+        "q": "Jag bytte telefon och prenumerationen försvann.",
+        "a": "Logga in med samma Apple-konto, öppna prenumerationsskärmen i Dalbit och tryck på Återställ köp."
+      },
+      {
+        "q": "Hur rapporterar jag en bugg eller föreslår en funktion?",
+        "a": "Skicka feedback från appens inställningar eller mejla adressen nedan. Vi svarar oftast inom några dagar."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "I natt\nbehöver du bara trycka på månen",
+    "cta": "Hämta gratis på App Store"
+  },
+  "ui": {
+    "skip": "Hoppa till innehåll",
+    "languages": "Språk",
+    "privacy": "Integritetspolicy",
+    "contact": "Frågor eller idéer? Mejla {email}."
+  }
+}

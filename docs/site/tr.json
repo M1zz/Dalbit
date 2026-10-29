@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: sesleri katman katman birleştirip kendi uyku sesini yap",
+  "description": "Yağmuru, damlaları ve piyanoyu kendi uyku sesinde birleştir, bir kez kaydet, sonra her gece aya dokun. Tüm sesler ücretsiz.",
+  "hero": {
+    "headline": "Geceni doğru sesi\naramakla geçirme",
+    "lead": "Yağmuru, su damlalarını ve şarkı söyleyen kâseyi bir kez üst üste koyup kendi sesini yap. Ertesi geceden itibaren aya bir dokunuş yeter.",
+    "cta": "App Store’dan ücretsiz indir",
+    "note": "Tüm sesleri ücretsiz dinleyebilirsin. iPhone ve iPad için."
+  },
+  "problem": {
+    "title": "Uyumadan önce ses seçmekle bir saatin geçtiği oldu mu?",
+    "text": "Yağmur fazla tekdüze, dalgalar fazla gürültülü, açtığın video da gecenin ortasında reklama giriyor. Dalbit’te sevdiğin sesleri tam sana uyana kadar kendin üst üste koyar, hepsini tek bir ayın arkasında saklarsın."
+  },
+  "features": [
+    {
+      "title": "Sesini katman katman kur",
+      "text": "Yağmur, su damlaları, kuş sesleri ve şarkı söyleyen kâseleri üst üste koy. Her katmanın ses düzeyini, ne sıklıkla çaldığını ve nereden duyulduğunu ayarla; altına arka plan müziği olarak dalga ya da piyano ekle.\nKarışıma bir ad ver, kaydet ve istediğin gece yeniden aç.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Seni uyandırmadan söner",
+      "text": "Uyku zamanlayıcısı sesi asla birden kesmez. Yavaş yavaş kısar, böylece bitiş anı seni uyandırmaz.\nEkran kapalıyken ya da başka bir uygulamadayken ses çalmaya devam eder; hiçbir şeye dokunmazsan ekran kendiliğinden kararır.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Sabahları yumuşak bir uyanış",
+      "text": "Şarkı söyleyen kâse, Tibet kâsesi, kuş sesleri ya da guguk kuşuyla alarm kur ve seçtiğin günlerde tekrarla.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Her şey tek bir ayda",
+      "text": "Çalmak için aya dokun, duraklatmak için yine dokun. Başka ses için yana, uyku zamanlayıcısı için yukarı, kaydettiğin sesler için aşağı kaydır.\nBir ses içine sinerse aya basılı tutarak favorilerine ekle.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Üç adımda başla",
+    "items": [
+      {
+        "title": "Aya dokun",
+        "text": "Uygulamayı aç, aya dokun; ses hemen başlar."
+      },
+      {
+        "title": "Yana kaydır",
+        "text": "Hoşuna giden sesi bulana kadar kaydır."
+      },
+      {
+        "title": "Zamanlayıcıyı kur ve uzan",
+        "text": "Yukarı kaydır, süreyi seç; ardından ses yavaşça kaybolur."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Ay neler yapar",
+    "rows": [
+      [
+        "Dokun",
+        "çal, duraklat"
+      ],
+      [
+        "Yana kaydır",
+        "sonraki ses"
+      ],
+      [
+        "Yukarı kaydır",
+        "uyku zamanlayıcısı ve alarmlar"
+      ],
+      [
+        "Aşağı kaydır",
+        "kaydedilen sesler"
+      ],
+      [
+        "Basılı tut",
+        "favorilere ekle"
+      ]
+    ],
+    "note": "Kilitli ekrandaki oynatma denetimlerinden de duraklatıp devam ettirebilirsin."
+  },
+  "pricing": {
+    "title": "Dinlemek ücretsiz. Daha fazlasını yapmak için Premium.",
+    "free": {
+      "name": "Ücretsiz",
+      "items": [
+        "Tüm sesler",
+        "Sesleri katmanlayıp kendi karışımını yapma",
+        "En fazla üç karışım kaydetme",
+        "Yavaşça sönen uyku zamanlayıcısı",
+        "Yumuşak sesli alarmlar",
+        "Favoriler"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "İstediğin kadar karışım yap ve kaydet"
+      ],
+      "note": "Ücretsiz deneme süreli, otomatik yenilenen aylık abonelik"
+    },
+    "note": "Abonelik, mevcut dönemin bitiminden en az 24 saat önce iptal edilmezse otomatik olarak yenilenir ve ücretsiz deneme bittiğinde ücretlendirilir. Apple’ın standart kullanım koşulları (EULA) geçerlidir."
+  },
+  "faq": {
+    "title": "Sık sorulan sorular",
+    "items": [
+      {
+        "q": "Sesleri nasıl çalıp değiştiririm?",
+        "a": "Çalmak için ana ekrandaki aya dokun, durdurmak için yine dokun. Başka ses için yana, uyku zamanlayıcısı için yukarı, kitaplığın için aşağı kaydır."
+      },
+      {
+        "q": "Ekran kapanınca ses durur mu?",
+        "a": "Hayır. Ekran kapalıyken ya da başka bir uygulamaya geçtiğinde de çalmaya devam eder. Durdurmak için aya yeniden dokun ya da kilitli ekrandaki denetimleri kullan."
+      },
+      {
+        "q": "Uyku zamanlayıcısı bitince ne olur?",
+        "a": "Ses birden kesilmez; yavaş yavaş azalır ve sonra durur, böylece uyanmazsın."
+      },
+      {
+        "q": "Alarmım çalmıyor.",
+        "a": "İlk alarmı oluştururken uygulama alarm izni ister. Ayarlar > Dalbit bölümünde iznin açık olduğundan emin ol."
+      },
+      {
+        "q": "Karışımlarım nereye kaydediliyor?",
+        "a": "Karışımların, alarmların ve ayarların yalnızca bu cihazda durur. Uygulamayı silersen onlar da silinir."
+      },
+      {
+        "q": "Ücretsiz olarak neleri kullanabilirim?",
+        "a": "Tüm sesleri, katmanlamayı ve en fazla üç kendi karışımını. Uyku zamanlayıcısı ve alarmlar da ücretsiz. Premium, karışım sayısındaki sınırı kaldırır."
+      },
+      {
+        "q": "Aboneliğimi nasıl iptal ederim?",
+        "a": "Ayarlar > Apple Hesabı > Abonelikler’e git, Dalbit’i seç ve iptal et. Mevcut dönemin bitiminden en az 24 saat önce iptal etmezsen otomatik olarak yenilenir."
+      },
+      {
+        "q": "Telefon değiştirdim, aboneliğim gitti.",
+        "a": "Aynı Apple Hesabı ile giriş yap, Dalbit’te abonelik ekranını aç ve Satın Alımları Geri Yükle’ye dokun."
+      },
+      {
+        "q": "Hata bildirmek ya da özellik önermek istiyorum.",
+        "a": "Uygulamanın ayarlarından geri bildirim gönder ya da aşağıdaki adrese e-posta at. Genellikle birkaç gün içinde yanıt veririz."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Bu gece\nsadece aya dokun",
+    "cta": "App Store’dan ücretsiz indir"
+  },
+  "ui": {
+    "skip": "İçeriğe geç",
+    "languages": "Diller",
+    "privacy": "Gizlilik Politikası",
+    "contact": "Soruların ya da fikirlerin mi var? {email} adresine yaz."
+  }
+}

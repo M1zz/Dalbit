@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit - ไวต์นอยส์ช่วยนอน · ช่วยเหลือ</title>
-<meta name="description" content="Dalbit คือแอป iOS ที่ซ้อนเสียงธรรมชาติเป็นไวต์นอยส์ในแบบของคุณ ข้อมูลเกี่ยวกับแอปและช่องทางช่วยเหลือ">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit: ซ้อนเสียงสร้างไวต์นอยส์ช่วยนอนในแบบของคุณ</title>
+  <meta name="description" content="หยดน้ำบนเสียงฝน แล้วเติมเปียโนอีกชั้น ซ้อนเสียงที่ชอบแล้วบันทึกครั้งเดียว คืนถัดไปแค่แตะดวงจันทร์ ฟังทุกเสียงได้ฟรี">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit: ซ้อนเสียงสร้างไวต์นอยส์ช่วยนอนในแบบของคุณ">
+  <meta property="og:description" content="หยดน้ำบนเสียงฝน แล้วเติมเปียโนอีกชั้น ซ้อนเสียงที่ชอบแล้วบันทึกครั้งเดียว คืนถัดไปแค่แตะดวงจันทร์ ฟังทุกเสียงได้ฟรี">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/th/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/th/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-  <a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
-  <a href="./" hreflang="th" lang="th" aria-current="true">ไทย</a>
-  <a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="../tr/" hreflang="tr" lang="tr">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">ข้ามไปยังเนื้อหา</a>
+  <header class="bar">
+    <a class="brand" href="../th/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">ภาษา</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">สร้างไวต์นอยส์ที่ใช่สำหรับคุณ</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>เลิกเสียเวลาทั้งคืน<br>ไปกับการหาเสียงนอน</h1>
+        <p class="lead">ซ้อนเสียงฝน หยดน้ำ และขันทิเบตเป็นเสียงของคุณเองไว้ครั้งเดียว คืนต่อไปแค่แตะดวงจันทร์ก็พอ</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">ดาวน์โหลดฟรีบน App Store</a></div>
+        <p class="muted small">ฟังทุกเสียงได้ฟรี ใช้ได้บน iPhone และ iPad</p>
+      </div>
+      <div class="phone"><img src="../img/th/01-moon.jpg" alt="เลิกเสียเวลาทั้งคืน ไปกับการหาเสียงนอน" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>ซ้อนเสียงธรรมชาติหลายชั้นเป็นไวต์นอยส์ในแบบของคุณ บันทึกไว้ แล้วกลับมาฟังได้ทุกเมื่อ ออกแบบเสียงที่ช่วยให้หลับ จดจ่อ หรือทำสมาธิ</p>
-</div>
 
-<h2>ฟีเจอร์</h2>
-<ul>
-  <li>🎵 ผสมเสียงหลายเลเยอร์</li>
-  <li>🔥 ภาพแคมป์ไฟ</li>
-  <li>⏱️ ตัวตั้งเวลานอน</li>
-  <li>💾 บันทึกมิกซ์ของคุณเอง</li>
-</ul>
 
-<h2>ช่วยเหลือ</h2>
-<p>หากมีคำถาม พบบั๊ก หรืออยากเสนอฟีเจอร์ ส่งความเห็นจากการตั้งค่าในแอป หรืออีเมลถึงเราได้เลย</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">คำถามที่พบบ่อยและการช่วยเหลือ →</a></p>
+    <section class="problem reveal">
+      <h2>เคยเลือกเสียงก่อนนอนจนหมดไปชั่วโมงหนึ่งไหม</h2>
+      <p>เสียงฝนก็จำเจ เสียงคลื่นก็ดังเกิน เปิดคลิปก็มีโฆษณาแทรกกลางดึก Dalbit ให้คุณซ้อนเสียงที่ชอบเข้าด้วยกันเองจนได้เสียงที่พอดีกับหูของคุณ แล้วเก็บไว้หลังดวงจันทร์ดวงเดียว</p>
+    </section>
 
-<h2>การสมัครสมาชิก</h2>
-<p>Dalbit พรีเมียมเป็นการสมัครสมาชิกรายเดือนแบบต่ออายุอัตโนมัติ ปลดล็อกการสร้างเสียงได้ไม่จำกัดและทุกหมวดหมู่ คุณจัดการหรือยกเลิกได้ทุกเมื่อในการตั้งค่าบัญชี App Store</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>สร้างเสียงของคุณทีละชั้น</h2>
+        <p>ซ้อนเสียงฝน หยดน้ำ นกร้อง และขันทิเบตทีละชั้น ปรับระดับเสียง ความถี่ที่ดัง และตำแหน่งที่ได้ยินของแต่ละชั้น แล้วปูเสียงคลื่นหรือเปียโนเป็นเพลงพื้นหลังได้<br>ตั้งชื่อเสียงที่ทำเสร็จ บันทึกไว้ แล้วกลับมาฟังได้ทุกคืน</p>
+      </div>
+      <div class="phone"><img src="../img/th/02-studio.jpg" alt="สร้างเสียงของคุณทีละชั้น" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>ข้อมูลทางกฎหมาย</h2>
-<ul>
-  <li><a href="privacy.html">นโยบายความเป็นส่วนตัว</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">ข้อกำหนดการใช้งาน (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>ค่อย ๆ เงียบลงโดยไม่ปลุกคุณ</h2>
+        <p>ตัวตั้งเวลานอนจะไม่ตัดเสียงทันที แต่ค่อย ๆ ลดลงจนหยุด เพื่อไม่ให้ตอนจบปลุกคุณขึ้นมา<br>เสียงยังเล่นต่อแม้ปิดหน้าจอหรือสลับไปแอปอื่น และถ้าปล่อยไว้ หน้าจอจะมืดลงเอง</p>
+      </div>
+      <div class="phone"><img src="../img/th/04-timer.jpg" alt="ค่อย ๆ เงียบลงโดยไม่ปลุกคุณ" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>ตอนเช้าปลุกด้วยเสียงนุ่มนวล</h2>
+        <p>ตั้งปลุกด้วยเสียงขันสิงห์ ขันทิเบต นกร้อง หรือนกกาเหว่า และตั้งให้ปลุกซ้ำในวันที่เลือกได้</p>
+      </div>
+      <div class="phone"><img src="../img/th/05-alarm.jpg" alt="ตอนเช้าปลุกด้วยเสียงนุ่มนวล" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>ดวงจันทร์ดวงเดียวทำได้ทุกอย่าง</h2>
+        <p>แตะดวงจันทร์เพื่อเล่น แตะอีกครั้งเพื่อหยุด ปัดไปด้านข้างเพื่อเปลี่ยนเสียง ปัดขึ้นเพื่อตั้งเวลานอน ปัดลงเพื่อเปิดเสียงที่บันทึกไว้<br>เจอเสียงที่ชอบเมื่อไร กดดวงจันทร์ค้างไว้เพื่อเพิ่มในรายการโปรด</p>
+      </div>
+      <div class="phone"><img src="../img/th/03-library.jpg" alt="ดวงจันทร์ดวงเดียวทำได้ทุกอย่าง" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>เริ่มได้ใน 3 ขั้นตอน</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>แตะดวงจันทร์</h3><p>เปิดแอป แตะดวงจันทร์ เสียงก็ดังทันที</p></li>
+<li class="card"><span class="n">2</span><h3>ปัดไปด้านข้าง</h3><p>ปัดไปเรื่อย ๆ จนเจอเสียงที่ถูกใจ</p></li>
+<li class="card"><span class="n">3</span><h3>ตั้งเวลาแล้วนอนลง</h3><p>ปัดขึ้น เลือกเวลา แล้วเสียงจะค่อย ๆ จางหายไปเมื่อครบเวลา</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>ดวงจันทร์ทำอะไรได้บ้าง</h2>
+      <div class="card table">
+        <dl><div><dt>แตะ</dt><dd>เล่น หยุด</dd></div><div><dt>ปัดไปด้านข้าง</dt><dd>เปลี่ยนเสียง</dd></div><div><dt>ปัดขึ้น</dt><dd>ตั้งเวลานอนและปลุก</dd></div><div><dt>ปัดลง</dt><dd>เสียงที่บันทึกไว้</dd></div><div><dt>กดค้าง</dt><dd>เพิ่มในรายการโปรด</dd></div></dl>
+      </div>
+      <p class="muted">หยุดและเล่นต่อจากตัวควบคุมบนหน้าจอล็อกได้ด้วย</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>ฟังฟรี อยากสร้างมากขึ้นใช้พรีเมียม</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>ฟรี</h3>
+          <ul><li>ฟังได้ทุกเสียง</li><li>ซ้อนเสียงสร้างเสียงของตัวเอง</li><li>บันทึกเสียงของตัวเองได้ 3 เสียง</li><li>ตัวตั้งเวลานอนที่ค่อย ๆ เงียบลง</li><li>ปลุกด้วยเสียงนุ่มนวล</li><li>รายการโปรด</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit พรีเมียม</h3>
+          <ul><li>สร้างและบันทึกเสียงของตัวเองได้ไม่จำกัด</li></ul>
+          <p class="muted">การสมัครรับรายเดือนแบบต่ออายุอัตโนมัติ พร้อมช่วงทดลองใช้ฟรี</p>
+        </div>
+      </div>
+      <p class="muted">การสมัครรับจะต่ออายุอัตโนมัติ เว้นแต่จะยกเลิกอย่างน้อย 24 ชั่วโมงก่อนสิ้นสุดรอบปัจจุบัน และจะเริ่มเรียกเก็บเงินเมื่อสิ้นสุดช่วงทดลองใช้ฟรี ใช้ข้อกำหนดการใช้งานมาตรฐานของ Apple (EULA)</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>คำถามที่พบบ่อย</h2>
+      <div class="faq"><details><summary>เล่นและเปลี่ยนเสียงอย่างไร</summary><p>แตะดวงจันทร์บนหน้าหลักเพื่อเล่น แตะอีกครั้งเพื่อหยุด ปัดไปด้านข้างเพื่อเปลี่ยนเสียง ปัดขึ้นเพื่อตั้งเวลานอน ปัดลงเพื่อเปิดคลังเสียงของคุณ</p></details>
+<details><summary>ปิดหน้าจอแล้วเสียงจะหยุดไหม</summary><p>ไม่หยุด เสียงยังเล่นต่อแม้ปิดหน้าจอหรือสลับไปแอปอื่น ถ้าจะหยุด ให้แตะดวงจันทร์อีกครั้งหรือใช้ตัวควบคุมบนหน้าจอล็อก</p></details>
+<details><summary>เมื่อหมดเวลาตั้งนอนจะเป็นอย่างไร</summary><p>เสียงจะไม่ตัดทันที แต่ค่อย ๆ เบาลงแล้วจึงหยุด เพื่อไม่ให้คุณตื่น</p></details>
+<details><summary>ปลุกไม่ดัง</summary><p>ตอนสร้างการปลุกครั้งแรก แอปจะขอสิทธิ์การปลุก โปรดตรวจสอบว่าเปิดไว้ใน การตั้งค่า &gt; Dalbit</p></details>
+<details><summary>เสียงที่ฉันสร้างเก็บไว้ที่ไหน</summary><p>เสียงที่สร้าง การปลุก และการตั้งค่าทั้งหมดเก็บไว้ในอุปกรณ์เครื่องนี้เท่านั้น หากลบแอป ข้อมูลจะถูกลบไปด้วย</p></details>
+<details><summary>ใช้ฟรีได้แค่ไหน</summary><p>ฟังได้ทุกเสียง ซ้อนเสียง และบันทึกเสียงของตัวเองได้ 3 เสียง ตัวตั้งเวลานอนและการปลุกก็ใช้ฟรี สมัครพรีเมียมแล้วจะสร้างเสียงของตัวเองได้ไม่จำกัด</p></details>
+<details><summary>ยกเลิกการสมัครรับอย่างไร</summary><p>ไปที่ การตั้งค่า &gt; บัญชี Apple &gt; การสมัครรับ เลือก Dalbit แล้วยกเลิก หากไม่ยกเลิกอย่างน้อย 24 ชั่วโมงก่อนสิ้นสุดรอบปัจจุบัน ระบบจะต่ออายุอัตโนมัติ</p></details>
+<details><summary>เปลี่ยนเครื่องแล้วการสมัครรับหายไป</summary><p>ลงชื่อเข้าด้วยบัญชี Apple เดิม เปิดหน้าการสมัครรับใน Dalbit แล้วแตะ กู้คืนการซื้อ</p></details>
+<details><summary>อยากแจ้งปัญหาหรือเสนอฟีเจอร์</summary><p>ส่งความคิดเห็นจากการตั้งค่าในแอป หรือส่งอีเมลมาที่ที่อยู่ด้านล่าง ปกติเราจะตอบภายในไม่กี่วัน</p></details></div>
+      <p class="contact">มีคำถามหรือไอเดีย ส่งมาที่ <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>คืนนี้<br>แค่แตะดวงจันทร์แล้วหลับ</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">ดาวน์โหลดฟรีบน App Store</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="ภาษา"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th" aria-current="page">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+    <p><a href="privacy.html">นโยบายความเป็นส่วนตัว</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

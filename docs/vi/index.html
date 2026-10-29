@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit - Tiếng ồn trắng để ngủ · Hỗ trợ</title>
-<meta name="description" content="Dalbit là ứng dụng iOS giúp bạn xếp chồng các âm thanh thiên nhiên thành tiếng ồn trắng của riêng mình. Giới thiệu ứng dụng và hỗ trợ.">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit: chồng các âm thanh thành tiếng ồn trắng ru ngủ của riêng bạn</title>
+  <meta name="description" content="Giọt nước trên tiếng mưa, thêm tiếng piano. Chồng những âm thanh bạn thích, lưu một lần, từ đêm sau chỉ cần chạm mặt trăng. Mọi âm thanh đều miễn phí.">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit: chồng các âm thanh thành tiếng ồn trắng ru ngủ của riêng bạn">
+  <meta property="og:description" content="Giọt nước trên tiếng mưa, thêm tiếng piano. Chồng những âm thanh bạn thích, lưu một lần, từ đêm sau chỉ cần chạm mặt trăng. Mọi âm thanh đều miễn phí.">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/vi/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/vi/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-  <a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
-  <a href="../th/" hreflang="th" lang="th">ไทย</a>
-  <a href="./" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="../tr/" hreflang="tr" lang="tr">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">Chuyển đến nội dung</a>
+  <header class="bar">
+    <a class="brand" href="../vi/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">Ngôn ngữ</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">Tạo tiếng ồn trắng hoàn hảo của riêng bạn</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>Đừng mất cả đêm<br>chỉ để tìm âm thanh ru ngủ</h1>
+        <p class="lead">Chồng tiếng mưa, giọt nước và chuông xoay thành âm thanh của riêng bạn một lần. Từ đêm sau, chỉ cần chạm vào mặt trăng.</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">Tải miễn phí trên App Store</a></div>
+        <p class="muted small">Nghe mọi âm thanh miễn phí. Dùng trên iPhone và iPad.</p>
+      </div>
+      <div class="phone"><img src="../img/vi/01-moon.jpg" alt="Đừng mất cả đêm chỉ để tìm âm thanh ru ngủ" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>Xếp chồng các âm thanh thiên nhiên lên nhau để tạo tiếng ồn trắng của riêng bạn, lưu lại và quay về với nó bất cứ lúc nào. Hãy thiết kế âm thanh giúp bạn ngủ, tập trung hoặc thiền.</p>
-</div>
 
-<h2>Tính năng</h2>
-<ul>
-  <li>🎵 Phối nhiều lớp âm thanh</li>
-  <li>🔥 Hình ảnh lửa trại</li>
-  <li>⏱️ Hẹn giờ ngủ</li>
-  <li>💾 Lưu bản phối của riêng bạn</li>
-</ul>
 
-<h2>Hỗ trợ</h2>
-<p>Nếu có thắc mắc, báo lỗi hoặc đề xuất tính năng, hãy gửi góp ý từ phần cài đặt của ứng dụng hoặc email cho chúng tôi:</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">Câu hỏi thường gặp &amp; hỗ trợ →</a></p>
+    <section class="problem reveal">
+      <h2>Bạn từng mất cả tiếng đồng hồ chỉ để chọn âm thanh trước khi ngủ?</h2>
+      <p>Tiếng mưa thì đều đều, tiếng sóng thì quá to, mở video thì giữa đêm lại chen quảng cáo. Với Dalbit, bạn tự chồng những âm thanh mình thích cho đến khi vừa tai nhất, rồi cất nó sau một vầng trăng duy nhất.</p>
+    </section>
 
-<h2>Đăng ký</h2>
-<p>Dalbit Premium là gói đăng ký hằng tháng tự động gia hạn, mở khóa việc tạo âm thanh không giới hạn và mọi danh mục. Bạn có thể quản lý hoặc hủy bất cứ lúc nào trong cài đặt tài khoản App Store.</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Tạo âm thanh từ nhiều lớp</h2>
+        <p>Xếp chồng tiếng mưa, giọt nước, chim hót và chuông xoay. Mỗi lớp chỉnh được âm lượng, khoảng cách phát và vị trí nghe thấy, rồi lót thêm tiếng sóng hay piano làm nhạc nền.<br>Đặt tên cho bản phối, lưu lại và mở lại bất cứ đêm nào.</p>
+      </div>
+      <div class="phone"><img src="../img/vi/02-studio.jpg" alt="Tạo âm thanh từ nhiều lớp" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>Pháp lý</h2>
-<ul>
-  <li><a href="privacy.html">Chính sách quyền riêng tư</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Điều khoản sử dụng (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Tắt dần mà không đánh thức bạn</h2>
+        <p>Hẹn giờ ngủ không cắt phụt âm thanh mà giảm dần rồi mới dừng, để lúc kết thúc không làm bạn tỉnh giấc.<br>Âm thanh vẫn phát khi tắt màn hình hay chuyển sang ứng dụng khác, và nếu để yên, màn hình sẽ tự tối đi.</p>
+      </div>
+      <div class="phone"><img src="../img/vi/04-timer.jpg" alt="Tắt dần mà không đánh thức bạn" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Buổi sáng đánh thức thật nhẹ nhàng</h2>
+        <p>Đặt báo thức bằng chuông xoay, chuông Tây Tạng, tiếng chim hay chim cu, và lặp lại vào những ngày bạn chọn.</p>
+      </div>
+      <div class="phone"><img src="../img/vi/05-alarm.jpg" alt="Buổi sáng đánh thức thật nhẹ nhàng" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Một vầng trăng làm được tất cả</h2>
+        <p>Chạm mặt trăng để phát, chạm lần nữa để dừng. Vuốt ngang để đổi âm thanh, vuốt lên để hẹn giờ ngủ, vuốt xuống để mở các âm thanh đã lưu.<br>Gặp âm thanh ưng ý, nhấn giữ mặt trăng để thêm vào mục yêu thích.</p>
+      </div>
+      <div class="phone"><img src="../img/vi/03-library.jpg" alt="Một vầng trăng làm được tất cả" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>Bắt đầu chỉ với ba bước</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>Chạm mặt trăng</h3><p>Mở ứng dụng, chạm mặt trăng là âm thanh vang lên ngay.</p></li>
+<li class="card"><span class="n">2</span><h3>Vuốt ngang</h3><p>Vuốt tiếp cho đến khi gặp âm thanh bạn thích.</p></li>
+<li class="card"><span class="n">3</span><h3>Hẹn giờ rồi nằm xuống</h3><p>Vuốt lên, chọn thời gian, sau đó âm thanh sẽ nhỏ dần.</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>Mặt trăng làm được gì</h2>
+      <div class="card table">
+        <dl><div><dt>Chạm</dt><dd>phát, dừng</dd></div><div><dt>Vuốt ngang</dt><dd>âm thanh khác</dd></div><div><dt>Vuốt lên</dt><dd>hẹn giờ ngủ và báo thức</dd></div><div><dt>Vuốt xuống</dt><dd>âm thanh đã lưu</dd></div><div><dt>Nhấn giữ</dt><dd>thêm vào yêu thích</dd></div></dl>
+      </div>
+      <p class="muted">Bạn cũng có thể dừng và phát tiếp bằng điều khiển phát lại trên màn hình khóa.</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>Nghe miễn phí, muốn tạo nhiều hơn thì dùng Premium</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>Miễn phí</h3>
+          <ul><li>Nghe mọi âm thanh</li><li>Chồng âm thanh thành bản phối riêng</li><li>Lưu tối đa 3 bản phối</li><li>Hẹn giờ ngủ tắt dần</li><li>Báo thức âm thanh nhẹ nhàng</li><li>Yêu thích</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit Premium</h3>
+          <ul><li>Tạo và lưu bản phối riêng không giới hạn</li></ul>
+          <p class="muted">Gói đăng ký hằng tháng tự động gia hạn, có dùng thử miễn phí</p>
+        </div>
+      </div>
+      <p class="muted">Gói đăng ký tự động gia hạn trừ khi bạn hủy ít nhất 24 giờ trước khi kỳ hiện tại kết thúc, và bạn sẽ bị tính phí khi hết thời gian dùng thử. Áp dụng Điều khoản sử dụng tiêu chuẩn của Apple (EULA).</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>Câu hỏi thường gặp</h2>
+      <div class="faq"><details><summary>Làm sao để phát và đổi âm thanh?</summary><p>Chạm mặt trăng ở màn hình chính để phát, chạm lần nữa để dừng. Vuốt ngang để đổi âm thanh, vuốt lên để hẹn giờ ngủ, vuốt xuống để mở thư viện của bạn.</p></details>
+<details><summary>Tắt màn hình thì âm thanh có dừng không?</summary><p>Không. Âm thanh vẫn phát khi tắt màn hình hoặc chuyển sang ứng dụng khác. Muốn dừng, hãy chạm mặt trăng lần nữa hoặc dùng điều khiển trên màn hình khóa.</p></details>
+<details><summary>Hết giờ hẹn ngủ thì sao?</summary><p>Âm thanh không tắt đột ngột mà nhỏ dần rồi mới dừng, để bạn không bị đánh thức.</p></details>
+<details><summary>Báo thức không reo.</summary><p>Khi tạo báo thức đầu tiên, ứng dụng sẽ xin quyền báo thức. Hãy kiểm tra quyền này đã bật trong Cài đặt &gt; Dalbit.</p></details>
+<details><summary>Bản phối của tôi được lưu ở đâu?</summary><p>Bản phối, báo thức và cài đặt chỉ được lưu trên thiết bị này. Nếu xóa ứng dụng, chúng sẽ bị xóa theo.</p></details>
+<details><summary>Miễn phí thì dùng được những gì?</summary><p>Nghe mọi âm thanh, chồng các lớp và lưu tối đa 3 bản phối riêng. Hẹn giờ ngủ và báo thức cũng miễn phí. Premium bỏ giới hạn số bản phối.</p></details>
+<details><summary>Làm sao để hủy gói đăng ký?</summary><p>Vào Cài đặt &gt; Tài khoản Apple &gt; Đăng ký, chọn Dalbit rồi hủy. Nếu không hủy ít nhất 24 giờ trước khi kỳ hiện tại kết thúc, gói sẽ tự gia hạn.</p></details>
+<details><summary>Đổi máy xong thì mất gói đăng ký.</summary><p>Đăng nhập bằng cùng Tài khoản Apple, mở màn hình đăng ký trong Dalbit và chạm Khôi phục giao dịch mua.</p></details>
+<details><summary>Tôi muốn báo lỗi hoặc đề xuất tính năng.</summary><p>Hãy gửi phản hồi trong phần cài đặt của ứng dụng hoặc gửi email tới địa chỉ bên dưới. Chúng tôi thường trả lời trong vài ngày.</p></details></div>
+      <p class="contact">Có câu hỏi hay ý tưởng? Gửi đến <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a>.</p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>Đêm nay<br>chỉ cần chạm mặt trăng</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">Tải miễn phí trên App Store</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="Ngôn ngữ"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi" aria-current="page">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+    <p><a href="privacy.html">Chính sách quyền riêng tư</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

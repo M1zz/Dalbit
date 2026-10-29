@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit : composez votre propre bruit blanc pour dormir",
+  "description": "Superposez pluie, gouttes et piano pour créer votre son pour dormir, enregistrez-le une fois, puis touchez simplement la lune. Sons gratuits.",
+  "hero": {
+    "headline": "Ne passez plus la nuit\nà chercher le bon son",
+    "lead": "Superposez une fois la pluie, des gouttes d’eau et un bol chantant pour créer votre son. Dès la nuit suivante, il suffit de toucher la lune.",
+    "cta": "Téléchargez-la gratuitement sur l’App Store",
+    "note": "Tous les sons sont gratuits à l’écoute. Sur iPhone et iPad."
+  },
+  "problem": {
+    "title": "Vous avez déjà perdu une heure à chercher de quoi vous endormir ?",
+    "text": "La pluie est trop monotone, les vagues trop fortes, et la vidéo lancée s’interrompt pour une pub au milieu de la nuit. Avec Dalbit, vous superposez vous-même les sons que vous aimez jusqu’à obtenir celui qui vous convient, et vous le rangez derrière une seule lune."
+  },
+  "features": [
+    {
+      "title": "Composez votre son par couches",
+      "text": "Empilez pluie, gouttes d’eau, chants d’oiseaux et bols chantants. Réglez pour chaque couche le volume, la fréquence et l’endroit d’où elle vous parvient, puis ajoutez des vagues ou du piano en musique de fond.\nDonnez un nom au mélange, enregistrez-le et retrouvez-le chaque soir.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Il s’éteint sans vous réveiller",
+      "text": "Le minuteur de sommeil ne coupe jamais le son d’un coup : il le baisse lentement pour que la fin ne vous réveille pas.\nLe son continue écran éteint ou dans une autre app, et si vous ne touchez à rien, l’écran s’assombrit tout seul.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Un réveil tout en douceur",
+      "text": "Réglez des alarmes avec un bol chantant, un bol tibétain, des chants d’oiseaux ou un coucou, et répétez-les les jours de votre choix.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Une lune pour tout faire",
+      "text": "Touchez la lune pour lancer le son, encore une fois pour le mettre en pause. Balayez sur le côté pour changer de son, vers le haut pour le minuteur, vers le bas pour vos sons enregistrés.\nUn son vous plaît ? Maintenez la lune enfoncée pour l’ajouter aux favoris.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Trois étapes pour commencer",
+    "items": [
+      {
+        "title": "Touchez la lune",
+        "text": "Ouvrez l’app, touchez la lune, et le son démarre."
+      },
+      {
+        "title": "Balayez sur le côté",
+        "text": "Faites défiler jusqu’à trouver le son qui vous plaît."
+      },
+      {
+        "title": "Réglez le minuteur et couchez-vous",
+        "text": "Balayez vers le haut, choisissez une durée, puis le son s’estompe."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Ce que fait la lune",
+    "rows": [
+      [
+        "Toucher",
+        "lecture, pause"
+      ],
+      [
+        "Balayer sur le côté",
+        "son suivant"
+      ],
+      [
+        "Balayer vers le haut",
+        "minuteur et alarmes"
+      ],
+      [
+        "Balayer vers le bas",
+        "vos sons enregistrés"
+      ],
+      [
+        "Maintenir",
+        "ajouter aux favoris"
+      ]
+    ],
+    "note": "Vous pouvez aussi mettre en pause et reprendre depuis les commandes de lecture de l’écran verrouillé."
+  },
+  "pricing": {
+    "title": "L’écoute est gratuite. Premium sert à créer davantage.",
+    "free": {
+      "name": "Gratuit",
+      "items": [
+        "Tous les sons",
+        "Superposer des sons pour créer le vôtre",
+        "Jusqu’à trois mélanges enregistrés",
+        "Minuteur de sommeil en fondu",
+        "Alarmes aux sons doux",
+        "Favoris"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Créez et enregistrez autant de mélanges que vous voulez"
+      ],
+      "note": "Abonnement mensuel à renouvellement automatique, avec essai gratuit"
+    },
+    "note": "L’abonnement se renouvelle automatiquement sauf résiliation au moins 24 heures avant la fin de la période en cours, et il est facturé à la fin de l’essai gratuit. Les conditions d’utilisation standard d’Apple (EULA) s’appliquent."
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "items": [
+      {
+        "q": "Comment lancer et changer un son ?",
+        "a": "Touchez la lune sur l’écran d’accueil pour lancer le son et touchez-la à nouveau pour l’arrêter. Balayez sur le côté pour un autre son, vers le haut pour le minuteur et vers le bas pour votre bibliothèque."
+      },
+      {
+        "q": "Le son s’arrête-t-il quand l’écran s’éteint ?",
+        "a": "Non. Il continue écran éteint ou dans une autre app. Pour l’arrêter, touchez de nouveau la lune ou utilisez les commandes de l’écran verrouillé."
+      },
+      {
+        "q": "Que se passe-t-il à la fin du minuteur ?",
+        "a": "Le son ne se coupe pas brusquement : il baisse peu à peu puis s’arrête, pour ne pas vous réveiller."
+      },
+      {
+        "q": "Mon alarme ne sonne pas.",
+        "a": "À la création de votre première alarme, l’app demande l’autorisation. Vérifiez qu’elle est activée dans Réglages > Dalbit."
+      },
+      {
+        "q": "Où sont enregistrés mes mélanges ?",
+        "a": "Vos mélanges, alarmes et réglages restent uniquement sur cet appareil. Si vous supprimez l’app, ils sont supprimés avec elle."
+      },
+      {
+        "q": "Qu’est-ce qui est gratuit ?",
+        "a": "Tous les sons, la superposition et jusqu’à trois mélanges personnels. Le minuteur et les alarmes sont aussi gratuits. Premium supprime la limite de mélanges."
+      },
+      {
+        "q": "Comment résilier mon abonnement ?",
+        "a": "Allez dans Réglages > Compte Apple > Abonnements, choisissez Dalbit et résiliez. Sans résiliation au moins 24 heures avant la fin de la période en cours, il se renouvelle automatiquement."
+      },
+      {
+        "q": "J’ai changé d’iPhone et perdu mon abonnement.",
+        "a": "Connectez-vous avec le même compte Apple, ouvrez l’écran d’abonnement de Dalbit et touchez Restaurer les achats."
+      },
+      {
+        "q": "Comment signaler un bug ou proposer une idée ?",
+        "a": "Passez par l’envoi de commentaires dans les réglages de l’app ou écrivez-nous à l’adresse ci-dessous. Nous répondons en général sous quelques jours."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Ce soir,\ntouchez simplement la lune",
+    "cta": "Téléchargez-la gratuitement sur l’App Store"
+  },
+  "ui": {
+    "skip": "Aller au contenu",
+    "languages": "Langues",
+    "privacy": "Politique de confidentialité",
+    "contact": "Une question, une idée ? Écrivez à {email}."
+  }
+}

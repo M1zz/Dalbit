@@ -1,0 +1,157 @@
+/* 앱 소개 페이지 공용 디자인. sitegen.py 가 각 레포 docs/ 로 복사한다 — 여기서만 고친다.
+   앱마다 다른 것은 --accent 하나(페이지 <style> 에서 넣는다). */
+
+:root {
+  --bg: #f2f2f7; --surface: #fff; --text: #111418; --muted: #5d666d; --line: #e3e5ea;
+  --on-accent: #fff;
+  --r-outer: 28px; --r-inner: 16px;          /* 안쪽 = 바깥 - 여백(12) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0a0d0f; --surface: #141a1d; --text: #eef3f5; --muted: #93a0a6; --line: #232c30; --on-accent: #0a0d0f; }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Hiragino Sans",
+        "PingFang SC", "Segoe UI", Roboto, "Noto Sans", "Noto Sans KR", "Noto Sans JP", "Noto Sans SC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+:lang(ko) { word-break: keep-all; }
+:lang(ja) { word-break: auto-phrase; }   /* 일본어: 단어 가운데서 줄이 바뀌지 않게 (지원하는 브라우저만) */
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.15; letter-spacing: -0.02em; }
+p, li, dd, summary { text-wrap: pretty; }
+h1 { font-size: clamp(2.25rem, 6vw, 3.75rem); font-weight: 700; }
+h2 { font-size: clamp(1.625rem, 3.6vw, 2.25rem); font-weight: 700; margin-bottom: var(--s4); }
+h3 { font-size: 1.125rem; font-weight: 600; }
+p { margin: 0 0 var(--s3); }
+a { color: var(--accent); text-underline-offset: 3px; }
+code { font: inherit; font-weight: 600; color: var(--accent); }
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+
+/* 키보드 사용자: 본문 바로가기, 눈에 보이는 초점 */
+.skip { position: absolute; left: var(--s4); top: -100px; padding: var(--s2) var(--s4);
+        background: var(--surface); border-radius: var(--r-inner); z-index: 10; }
+.skip:focus { top: var(--s4); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+
+/* 위 막대 */
+.bar { display: flex; align-items: center; justify-content: space-between;
+       max-width: 1080px; margin: 0 auto; padding: var(--s4) var(--s5); }
+.brand { display: flex; align-items: center; gap: var(--s3); color: var(--text); text-decoration: none; font-weight: 600; }
+.brand img { border-radius: 8px; }
+.lang-link { color: var(--muted); text-decoration: none; font-size: 0.9375rem; }
+.lang-link:hover { color: var(--text); }
+
+main { max-width: 1080px; margin: 0 auto; padding: 0 var(--s5); }
+main > section { padding: var(--s8) 0; }
+main > section + section { border-top: 1px solid var(--line); }
+
+/* 첫 화면: 무엇을 해 주는지 + 받기 + 실제 화면 */
+.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--s7); align-items: center; padding-top: var(--s6) !important; }
+.hero h1 { margin-bottom: var(--s5); max-width: 14em; }
+.lead { font-size: 1.25rem; color: var(--muted); max-width: 32em; margin-bottom: var(--s6); }
+
+.cta { display: inline-flex; align-items: center; min-height: 52px; padding: 0 var(--s6);
+       background: var(--accent); color: var(--on-accent); border-radius: 999px;
+       font-weight: 600; text-decoration: none; margin-bottom: var(--s3);
+       transition: transform .2s var(--ease), filter .2s var(--ease), box-shadow .2s var(--ease); }
+.cta:hover { filter: brightness(1.08); transform: translateY(-1px);
+             box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 35%, transparent); }
+.cta:active { transform: translateY(0) scale(.98); filter: brightness(.95); }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s5); }
+.try { font-weight: 600; text-decoration: none; margin-bottom: var(--s3); }
+.try:hover { text-decoration: underline; }
+
+/* 아이폰 화면 */
+.phone { justify-self: center; width: min(300px, 72vw); padding: 10px; border-radius: 48px;
+         background: #0b0d0f; box-shadow: 0 30px 60px -20px rgb(0 0 0 / .35), 0 0 0 1px var(--line); }
+.phone img, .phone video { display: block; width: 100%; height: auto; border-radius: 38px; }
+.plain { justify-self: center; width: 100%; }
+.plain img, .plain video { display: block; width: 100%; height: auto; border-radius: var(--r-inner);
+                           box-shadow: 0 24px 48px -20px rgb(0 0 0 / .3), 0 0 0 1px var(--line); }
+
+/* 문제 */
+.problem > * { max-width: 40rem; }
+.problem p { font-size: 1.1875rem; }
+
+/* 좋아지는 점: 글과 화면을 번갈아 */
+.feature { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: center; }
+.feature:nth-of-type(odd) .copy { order: 2; }
+.feature .phone { width: min(260px, 66vw); }
+.feature .plain { max-width: 520px; }
+.feature p { font-size: 1.0625rem; color: var(--muted); max-width: 30em; }
+
+/* 시작하기 */
+.card { background: var(--surface); border-radius: var(--r-outer); padding: var(--s5); }
+.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); }
+.steps .n { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+            background: var(--accent); color: var(--on-accent); font-weight: 700; margin-bottom: var(--s4); }
+.steps h3 { margin-bottom: var(--s2); }
+.steps p { color: var(--muted); margin: 0; }
+
+/* 명령표 */
+.table dl { margin: 0; }
+.table div { display: grid; grid-template-columns: minmax(0, 22em) minmax(0, 1fr); gap: var(--s5);
+             padding: var(--s3) 0; border-bottom: 1px solid var(--line); }
+.table div:last-child { border-bottom: 0; }
+.table dt { font-weight: 600; color: var(--accent); }
+.table dd { margin: 0; }
+#commands .muted { margin-top: var(--s4); }
+
+/* 가격 */
+.plans { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-bottom: var(--s4); }
+.plan h3 { margin-bottom: var(--s3); }
+.plan ul { margin: 0 0 var(--s3); padding-left: 1.2em; }
+.plan li { margin-bottom: var(--s2); }
+.plan.pro { box-shadow: inset 0 0 0 2px var(--accent); }
+
+/* 자주 묻는 질문 */
+.faq { background: var(--surface); border-radius: var(--r-outer); padding: var(--s2) var(--s5); }
+details { border-bottom: 1px solid var(--line); }
+details:last-child { border-bottom: 0; }
+summary { cursor: pointer; list-style: none; padding: var(--s4) var(--s6) var(--s4) 0; font-weight: 600; position: relative; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; position: absolute; right: 0; top: var(--s4); color: var(--muted);
+                 font-weight: 400; transition: transform .25s var(--ease); }
+details[open] summary::after { transform: rotate(45deg); }
+summary:hover { color: var(--accent); }
+details p { color: var(--muted); padding-bottom: var(--s4); margin: 0; }
+.contact { margin-top: var(--s5); }
+
+/* 마지막 받기 */
+.closing { text-align: center; }
+.closing h2 { margin-bottom: var(--s5); }
+
+footer { max-width: 1080px; margin: 0 auto; padding: var(--s6) var(--s5) var(--s8); color: var(--muted); font-size: 0.875rem; }
+.langs { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin-bottom: var(--s5); }
+.langs a { color: var(--muted); text-decoration: none; }
+.langs a:hover { color: var(--text); }
+.langs a[aria-current] { color: var(--accent); font-weight: 600; }
+footer a { color: inherit; }
+
+/* 스크롤하면 부드럽게 나타난다. 스크립트가 없거나 동작 줄이기를 켰으면 처음부터 보인다. */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.js .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .cta { transition: none; }
+}
+
+@media (max-width: 760px) {
+  main { padding: 0 var(--s4); }
+  .bar, footer { padding-left: var(--s4); padding-right: var(--s4); }
+  main > section { padding: var(--s7) 0; }
+  .hero, .feature { grid-template-columns: 1fr; gap: var(--s6); }
+  .hero { text-align: left; }
+  .feature:nth-of-type(odd) .copy { order: 0; }
+  .steps, .plans { grid-template-columns: 1fr; }
+  .table div { grid-template-columns: 1fr; gap: var(--s1); }
+}

@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="el">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit - Λευκός θόρυβος για ύπνο · Υποστήριξη</title>
-<meta name="description" content="Το Dalbit είναι μια εφαρμογή iOS για να βάζετε ήχους της φύσης σε στρώματα και να φτιάχνετε τον δικό σας λευκό θόρυβο. Πληροφορίες και υποστήριξη.">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit: φτιάξε τον δικό σου ήχο για ύπνο σε στρώσεις</title>
+  <meta name="description" content="Βάλε σε στρώσεις βροχή, σταγόνες και πιάνο για δικό σου ήχο ύπνου, αποθήκευσέ τον μία φορά και μετά πάτα απλώς το φεγγάρι. Όλοι οι ήχοι δωρεάν.">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit: φτιάξε τον δικό σου ήχο για ύπνο σε στρώσεις">
+  <meta property="og:description" content="Βάλε σε στρώσεις βροχή, σταγόνες και πιάνο για δικό σου ήχο ύπνου, αποθήκευσέ τον μία φορά και μετά πάτα απλώς το φεγγάρι. Όλοι οι ήχοι δωρεάν.">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/el/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/el/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-  <a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
-  <a href="../th/" hreflang="th" lang="th">ไทย</a>
-  <a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="./" hreflang="el" lang="el" aria-current="true">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="../tr/" hreflang="tr" lang="tr">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">Μετάβαση στο περιεχόμενο</a>
+  <header class="bar">
+    <a class="brand" href="../el/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">Γλώσσες</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">Φτιάξτε τον δικό σας τέλειο λευκό θόρυβο</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>Μη χάνεις τη νύχτα<br>ψάχνοντας τον σωστό ήχο</h1>
+        <p class="lead">Φτιάξε μία φορά τον δικό σου ήχο με βροχή, σταγόνες νερού και θιβετιανό μπολ. Από την επόμενη νύχτα αρκεί ένα πάτημα στο φεγγάρι.</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">Κατέβασέ το δωρεάν από το App Store</a></div>
+        <p class="muted small">Όλοι οι ήχοι ακούγονται δωρεάν. Για iPhone και iPad.</p>
+      </div>
+      <div class="phone"><img src="../img/el/01-moon.jpg" alt="Μη χάνεις τη νύχτα ψάχνοντας τον σωστό ήχο" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>Βάλτε ήχους της φύσης σε στρώματα για να φτιάξετε τον δικό σας λευκό θόρυβο, αποθηκεύστε τον και επιστρέψτε σε αυτόν όποτε θέλετε. Σχεδιάστε τον ήχο που σας βοηθά να κοιμηθείτε, να συγκεντρωθείτε ή να διαλογιστείτε.</p>
-</div>
 
-<h2>Λειτουργίες</h2>
-<ul>
-  <li>🎵 Μίξη ήχων σε πολλά στρώματα</li>
-  <li>🔥 Εικόνες φωτιάς κατασκήνωσης</li>
-  <li>⏱️ Χρονόμετρο ύπνου</li>
-  <li>💾 Αποθήκευση των δικών σας μίξ</li>
-</ul>
 
-<h2>Υποστήριξη</h2>
-<p>Για ερωτήσεις, αναφορές σφαλμάτων ή αιτήματα νέων λειτουργιών, στείλτε σχόλια από τις ρυθμίσεις της εφαρμογής ή γράψτε μας email:</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">Συχνές ερωτήσεις και υποστήριξη →</a></p>
+    <section class="problem reveal">
+      <h2>Έχεις χάσει ποτέ μια ώρα ψάχνοντας κάτι για να κοιμηθείς;</h2>
+      <p>Η βροχή είναι πολύ μονότονη, τα κύματα πολύ δυνατά και το βίντεο σταματά για διαφήμιση μέσα στη νύχτα. Με το Dalbit βάζεις μόνος σου σε στρώσεις τους ήχους που σου αρέσουν μέχρι να ταιριάξουν ακριβώς σε σένα, και τους κρατάς πίσω από ένα μόνο φεγγάρι.</p>
+    </section>
 
-<h2>Συνδρομή</h2>
-<p>Το Dalbit Premium είναι μια μηνιαία συνδρομή με αυτόματη ανανέωση, που ξεκλειδώνει απεριόριστη δημιουργία ήχων και όλες τις κατηγορίες. Μπορείτε να τη διαχειριστείτε ή να την ακυρώσετε οποτεδήποτε στις ρυθμίσεις του λογαριασμού σας στο App Store.</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Χτίσε τον ήχο σου σε στρώσεις</h2>
+        <p>Στοίβαξε βροχή, σταγόνες νερού, κελαηδίσματα και θιβετιανά μπολ. Ρύθμισε σε κάθε στρώση την ένταση, πόσο συχνά ακούγεται και από πού, και πρόσθεσε κύματα ή πιάνο ως μουσική υποβάθρου.<br>Δώσε όνομα στη μίξη, αποθήκευσέ την και γύρνα σε αυτήν όποια νύχτα θέλεις.</p>
+      </div>
+      <div class="phone"><img src="../img/el/02-studio.jpg" alt="Χτίσε τον ήχο σου σε στρώσεις" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>Νομικά</h2>
-<ul>
-  <li><a href="privacy.html">Πολιτική απορρήτου</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Όροι χρήσης (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Σβήνει χωρίς να σε ξυπνήσει</h2>
+        <p>Ο χρονοδιακόπτης ύπνου δεν κόβει ποτέ απότομα τον ήχο. Τον χαμηλώνει σιγά σιγά, ώστε το τέλος να μη σε ξυπνήσει.<br>Ο ήχος συνεχίζει με σβηστή οθόνη ή σε άλλη εφαρμογή, κι αν δεν αγγίξεις τίποτα, η οθόνη σκοτεινιάζει μόνη της.</p>
+      </div>
+      <div class="phone"><img src="../img/el/04-timer.jpg" alt="Σβήνει χωρίς να σε ξυπνήσει" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Το πρωί σε ξυπνά απαλά</h2>
+        <p>Βάλε ξυπνητήρια με ήχο από τραγουδιστό μπολ, θιβετιανό μπολ, πουλιά ή κούκο και επανάλαβέ τα τις μέρες που διαλέγεις.</p>
+      </div>
+      <div class="phone"><img src="../img/el/05-alarm.jpg" alt="Το πρωί σε ξυπνά απαλά" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Ένα φεγγάρι για όλα</h2>
+        <p>Πάτα το φεγγάρι για αναπαραγωγή και ξανά για παύση. Σύρε στο πλάι για άλλον ήχο, πάνω για τον χρονοδιακόπτη ύπνου, κάτω για τους αποθηκευμένους ήχους.<br>Όταν ένας ήχος σού κάθεται καλά, κράτα πατημένο το φεγγάρι για να τον βάλεις στα αγαπημένα.</p>
+      </div>
+      <div class="phone"><img src="../img/el/03-library.jpg" alt="Ένα φεγγάρι για όλα" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>Ξεκινάς σε τρία βήματα</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>Πάτα το φεγγάρι</h3><p>Άνοιξε την εφαρμογή, πάτα το φεγγάρι και ο ήχος ξεκινά αμέσως.</p></li>
+<li class="card"><span class="n">2</span><h3>Σύρε στο πλάι</h3><p>Συνέχισε μέχρι να βρεις έναν ήχο που σου αρέσει.</p></li>
+<li class="card"><span class="n">3</span><h3>Βάλε χρονοδιακόπτη και ξάπλωσε</h3><p>Σύρε πάνω, διάλεξε χρόνο και μετά ο ήχος σβήνει σιγά σιγά.</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>Τι κάνει το φεγγάρι</h2>
+      <div class="card table">
+        <dl><div><dt>Πάτημα</dt><dd>αναπαραγωγή, παύση</dd></div><div><dt>Σύρσιμο στο πλάι</dt><dd>επόμενος ήχος</dd></div><div><dt>Σύρσιμο πάνω</dt><dd>χρονοδιακόπτης ύπνου και ξυπνητήρια</dd></div><div><dt>Σύρσιμο κάτω</dt><dd>αποθηκευμένοι ήχοι</dd></div><div><dt>Παρατεταμένο πάτημα</dt><dd>προσθήκη στα αγαπημένα</dd></div></dl>
+      </div>
+      <p class="muted">Μπορείς επίσης να κάνεις παύση και συνέχεια από τα χειριστήρια αναπαραγωγής στην οθόνη κλειδώματος.</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>Η ακρόαση είναι δωρεάν. Το Premium είναι για να φτιάχνεις περισσότερα.</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>Δωρεάν</h3>
+          <ul><li>Όλοι οι ήχοι</li><li>Στρώσεις ήχων για δική σου μίξη</li><li>Έως τρεις αποθηκευμένες μίξεις</li><li>Χρονοδιακόπτης ύπνου που σβήνει σταδιακά</li><li>Ξυπνητήρια με απαλούς ήχους</li><li>Αγαπημένα</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit Premium</h3>
+          <ul><li>Φτιάξε και αποθήκευσε όσες μίξεις θέλεις</li></ul>
+          <p class="muted">Μηνιαία συνδρομή με αυτόματη ανανέωση και δωρεάν δοκιμή</p>
+        </div>
+      </div>
+      <p class="muted">Η συνδρομή ανανεώνεται αυτόματα, εκτός αν ακυρωθεί τουλάχιστον 24 ώρες πριν από το τέλος της τρέχουσας περιόδου, και η χρέωση ξεκινά μετά τη δωρεάν δοκιμή. Ισχύουν οι τυπικοί όροι χρήσης της Apple (EULA).</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>Συχνές ερωτήσεις</h2>
+      <div class="faq"><details><summary>Πώς παίζω και αλλάζω ήχους;</summary><p>Πάτα το φεγγάρι στην αρχική οθόνη για αναπαραγωγή και ξανά για διακοπή. Σύρε στο πλάι για άλλον ήχο, πάνω για τον χρονοδιακόπτη ύπνου και κάτω για τη βιβλιοθήκη σου.</p></details>
+<details><summary>Σταματά ο ήχος όταν σβήσει η οθόνη;</summary><p>Όχι. Συνεχίζει με σβηστή οθόνη ή σε άλλη εφαρμογή. Για να τον σταματήσεις, πάτα ξανά το φεγγάρι ή χρησιμοποίησε τα χειριστήρια της οθόνης κλειδώματος.</p></details>
+<details><summary>Τι γίνεται όταν τελειώσει ο χρονοδιακόπτης;</summary><p>Ο ήχος δεν κόβεται απότομα. Χαμηλώνει σιγά σιγά και μετά σταματά, για να μη σε ξυπνήσει.</p></details>
+<details><summary>Το ξυπνητήρι δεν χτυπά.</summary><p>Όταν φτιάχνεις το πρώτο ξυπνητήρι, η εφαρμογή ζητά άδεια. Έλεγξε ότι είναι ενεργή στις Ρυθμίσεις &gt; Dalbit.</p></details>
+<details><summary>Πού αποθηκεύονται οι μίξεις μου;</summary><p>Οι μίξεις, τα ξυπνητήρια και οι ρυθμίσεις μένουν μόνο σε αυτή τη συσκευή. Αν διαγράψεις την εφαρμογή, διαγράφονται κι αυτά.</p></details>
+<details><summary>Τι μπορώ να χρησιμοποιώ δωρεάν;</summary><p>Όλους τους ήχους, τις στρώσεις και έως τρεις δικές σου μίξεις. Ο χρονοδιακόπτης ύπνου και τα ξυπνητήρια είναι επίσης δωρεάν. Το Premium αφαιρεί το όριο στις μίξεις.</p></details>
+<details><summary>Πώς ακυρώνω τη συνδρομή;</summary><p>Πήγαινε στις Ρυθμίσεις &gt; Λογαριασμός Apple &gt; Συνδρομές, διάλεξε το Dalbit και ακύρωσε. Αν δεν ακυρώσεις τουλάχιστον 24 ώρες πριν από το τέλος της τρέχουσας περιόδου, ανανεώνεται αυτόματα.</p></details>
+<details><summary>Άλλαξα κινητό και χάθηκε η συνδρομή.</summary><p>Συνδέσου με τον ίδιο λογαριασμό Apple, άνοιξε την οθόνη συνδρομής στο Dalbit και πάτα Επαναφορά αγορών.</p></details>
+<details><summary>Πώς αναφέρω ένα σφάλμα ή προτείνω μια λειτουργία;</summary><p>Στείλε σχόλια από τις ρυθμίσεις της εφαρμογής ή γράψε μας στη διεύθυνση παρακάτω. Συνήθως απαντάμε μέσα σε λίγες μέρες.</p></details></div>
+      <p class="contact">Ερωτήσεις ή ιδέες; Γράψε στο <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a>.</p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>Απόψε<br>απλώς πάτα το φεγγάρι</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">Κατέβασέ το δωρεάν από το App Store</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="Γλώσσες"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el" aria-current="page">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+    <p><a href="privacy.html">Πολιτική απορρήτου</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

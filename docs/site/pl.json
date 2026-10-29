@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: ułóż własny dźwięk do snu z kilku warstw",
+  "description": "Nałóż deszcz, krople i fortepian we własny dźwięk do snu, zapisz go raz, a potem co noc dotknij księżyca. Wszystkie dźwięki za darmo.",
+  "hero": {
+    "headline": "Nie trać nocy\nna szukanie właściwego dźwięku",
+    "lead": "Raz nałóż na siebie deszcz, krople wody i misę tybetańską, tworząc własny dźwięk. Od następnej nocy wystarczy dotknąć księżyca.",
+    "cta": "Pobierz za darmo z App Store",
+    "note": "Wszystkich dźwięków posłuchasz za darmo. Na iPhone’a i iPada."
+  },
+  "problem": {
+    "title": "Zdarzyło ci się przez godzinę szukać czegoś do zasypiania?",
+    "text": "Deszcz jest zbyt monotonny, fale za głośne, a włączony film w środku nocy przerywa reklama. W Dalbit sam nakładasz ulubione dźwięki, aż pasują dokładnie do ciebie, i chowasz je za jednym księżycem."
+  },
+  "features": [
+    {
+      "title": "Zbuduj dźwięk z warstw",
+      "text": "Układaj deszcz, krople wody, śpiew ptaków i misy tybetańskie. Dla każdej warstwy ustaw głośność, częstotliwość i miejsce, z którego ją słychać, a pod spód dodaj fale albo fortepian jako muzykę w tle.\nNazwij miks, zapisz go i wracaj do niego każdej nocy.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Cichnie, nie budząc cię",
+      "text": "Wyłącznik czasowy nigdy nie ucina dźwięku. Powoli go ścisza, żeby koniec cię nie obudził.\nDźwięk gra dalej przy wygaszonym ekranie lub w innej aplikacji, a jeśli niczego nie dotykasz, ekran sam się przyciemnia.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Rano budzi łagodnie",
+      "text": "Ustaw alarmy z dźwiękiem misy śpiewającej, misy tybetańskiej, ptaków albo kukułki i powtarzaj je w wybrane dni tygodnia.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Jeden księżyc do wszystkiego",
+      "text": "Dotknij księżyca, aby odtworzyć, i jeszcze raz, aby wstrzymać. Przesuń w bok, aby zmienić dźwięk, w górę po wyłącznik czasowy, w dół po zapisane dźwięki.\nGdy dźwięk ci pasuje, przytrzymaj księżyc, aby dodać go do ulubionych.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Zaczynasz w trzech krokach",
+    "items": [
+      {
+        "title": "Dotknij księżyca",
+        "text": "Otwórz aplikację, dotknij księżyca i dźwięk od razu rusza."
+      },
+      {
+        "title": "Przesuń w bok",
+        "text": "Przewijaj, aż trafisz na dźwięk, który ci odpowiada."
+      },
+      {
+        "title": "Ustaw wyłącznik i połóż się",
+        "text": "Przesuń w górę, wybierz czas, a potem dźwięk powoli wygaśnie."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Co robi księżyc",
+    "rows": [
+      [
+        "Dotknięcie",
+        "odtwórz, wstrzymaj"
+      ],
+      [
+        "Przesunięcie w bok",
+        "następny dźwięk"
+      ],
+      [
+        "Przesunięcie w górę",
+        "wyłącznik czasowy i alarmy"
+      ],
+      [
+        "Przesunięcie w dół",
+        "zapisane dźwięki"
+      ],
+      [
+        "Przytrzymanie",
+        "dodaj do ulubionych"
+      ]
+    ],
+    "note": "Wstrzymać i wznowić możesz też przyciskami odtwarzania na ekranie blokady."
+  },
+  "pricing": {
+    "title": "Słuchanie jest darmowe. Premium służy do tworzenia więcej.",
+    "free": {
+      "name": "Za darmo",
+      "items": [
+        "Wszystkie dźwięki",
+        "Nakładanie dźwięków we własny miks",
+        "Do trzech zapisanych miksów",
+        "Wyłącznik czasowy ze ściszaniem",
+        "Alarmy z łagodnymi dźwiękami",
+        "Ulubione"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Twórz i zapisuj dowolnie wiele miksów"
+      ],
+      "note": "Miesięczna subskrypcja odnawiana automatycznie, z darmowym okresem próbnym"
+    },
+    "note": "Subskrypcja odnawia się automatycznie, jeśli nie anulujesz jej co najmniej 24 godziny przed końcem bieżącego okresu, a opłata jest pobierana po zakończeniu okresu próbnego. Obowiązują standardowe warunki użytkowania Apple (EULA)."
+  },
+  "faq": {
+    "title": "Najczęstsze pytania",
+    "items": [
+      {
+        "q": "Jak odtwarzać i zmieniać dźwięki?",
+        "a": "Dotknij księżyca na ekranie głównym, aby odtworzyć, i jeszcze raz, aby zatrzymać. Przesuń w bok po inny dźwięk, w górę po wyłącznik czasowy, w dół po swoją bibliotekę."
+      },
+      {
+        "q": "Czy dźwięk ucichnie po wygaszeniu ekranu?",
+        "a": "Nie. Gra dalej przy wygaszonym ekranie i w innej aplikacji. Aby go zatrzymać, dotknij ponownie księżyca albo użyj przycisków na ekranie blokady."
+      },
+      {
+        "q": "Co się dzieje, gdy wyłącznik czasowy się skończy?",
+        "a": "Dźwięk nie urywa się nagle. Stopniowo cichnie i dopiero wtedy się zatrzymuje, żeby cię nie obudzić."
+      },
+      {
+        "q": "Alarm nie dzwoni.",
+        "a": "Przy tworzeniu pierwszego alarmu aplikacja prosi o zgodę. Sprawdź, czy jest włączona w Ustawienia > Dalbit."
+      },
+      {
+        "q": "Gdzie zapisują się moje miksy?",
+        "a": "Miksy, alarmy i ustawienia są tylko na tym urządzeniu. Po usunięciu aplikacji znikają razem z nią."
+      },
+      {
+        "q": "Z czego mogę korzystać za darmo?",
+        "a": "Ze wszystkich dźwięków, nakładania warstw i maksymalnie trzech własnych miksów. Wyłącznik czasowy i alarmy też są darmowe. Premium znosi limit miksów."
+      },
+      {
+        "q": "Jak anulować subskrypcję?",
+        "a": "Przejdź do Ustawienia > Konto Apple > Subskrypcje, wybierz Dalbit i anuluj. Jeśli nie anulujesz co najmniej 24 godziny przed końcem bieżącego okresu, odnowi się automatycznie."
+      },
+      {
+        "q": "Zmieniłem telefon i subskrypcja zniknęła.",
+        "a": "Zaloguj się tym samym kontem Apple, otwórz ekran subskrypcji w Dalbit i stuknij Przywróć zakupy."
+      },
+      {
+        "q": "Jak zgłosić błąd albo zaproponować funkcję?",
+        "a": "Wyślij opinię z ustawień aplikacji albo napisz na adres poniżej. Zwykle odpowiadamy w ciągu kilku dni."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Dziś w nocy\npo prostu dotknij księżyca",
+    "cta": "Pobierz za darmo z App Store"
+  },
+  "ui": {
+    "skip": "Przejdź do treści",
+    "languages": "Języki",
+    "privacy": "Polityka prywatności",
+    "contact": "Pytania lub pomysły? Napisz na {email}."
+  }
+}

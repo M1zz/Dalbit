@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: chồng các âm thanh thành tiếng ồn trắng ru ngủ của riêng bạn",
+  "description": "Giọt nước trên tiếng mưa, thêm tiếng piano. Chồng những âm thanh bạn thích, lưu một lần, từ đêm sau chỉ cần chạm mặt trăng. Mọi âm thanh đều miễn phí.",
+  "hero": {
+    "headline": "Đừng mất cả đêm\nchỉ để tìm âm thanh ru ngủ",
+    "lead": "Chồng tiếng mưa, giọt nước và chuông xoay thành âm thanh của riêng bạn một lần. Từ đêm sau, chỉ cần chạm vào mặt trăng.",
+    "cta": "Tải miễn phí trên App Store",
+    "note": "Nghe mọi âm thanh miễn phí. Dùng trên iPhone và iPad."
+  },
+  "problem": {
+    "title": "Bạn từng mất cả tiếng đồng hồ chỉ để chọn âm thanh trước khi ngủ?",
+    "text": "Tiếng mưa thì đều đều, tiếng sóng thì quá to, mở video thì giữa đêm lại chen quảng cáo. Với Dalbit, bạn tự chồng những âm thanh mình thích cho đến khi vừa tai nhất, rồi cất nó sau một vầng trăng duy nhất."
+  },
+  "features": [
+    {
+      "title": "Tạo âm thanh từ nhiều lớp",
+      "text": "Xếp chồng tiếng mưa, giọt nước, chim hót và chuông xoay. Mỗi lớp chỉnh được âm lượng, khoảng cách phát và vị trí nghe thấy, rồi lót thêm tiếng sóng hay piano làm nhạc nền.\nĐặt tên cho bản phối, lưu lại và mở lại bất cứ đêm nào.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Tắt dần mà không đánh thức bạn",
+      "text": "Hẹn giờ ngủ không cắt phụt âm thanh mà giảm dần rồi mới dừng, để lúc kết thúc không làm bạn tỉnh giấc.\nÂm thanh vẫn phát khi tắt màn hình hay chuyển sang ứng dụng khác, và nếu để yên, màn hình sẽ tự tối đi.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Buổi sáng đánh thức thật nhẹ nhàng",
+      "text": "Đặt báo thức bằng chuông xoay, chuông Tây Tạng, tiếng chim hay chim cu, và lặp lại vào những ngày bạn chọn.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Một vầng trăng làm được tất cả",
+      "text": "Chạm mặt trăng để phát, chạm lần nữa để dừng. Vuốt ngang để đổi âm thanh, vuốt lên để hẹn giờ ngủ, vuốt xuống để mở các âm thanh đã lưu.\nGặp âm thanh ưng ý, nhấn giữ mặt trăng để thêm vào mục yêu thích.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Bắt đầu chỉ với ba bước",
+    "items": [
+      {
+        "title": "Chạm mặt trăng",
+        "text": "Mở ứng dụng, chạm mặt trăng là âm thanh vang lên ngay."
+      },
+      {
+        "title": "Vuốt ngang",
+        "text": "Vuốt tiếp cho đến khi gặp âm thanh bạn thích."
+      },
+      {
+        "title": "Hẹn giờ rồi nằm xuống",
+        "text": "Vuốt lên, chọn thời gian, sau đó âm thanh sẽ nhỏ dần."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Mặt trăng làm được gì",
+    "rows": [
+      [
+        "Chạm",
+        "phát, dừng"
+      ],
+      [
+        "Vuốt ngang",
+        "âm thanh khác"
+      ],
+      [
+        "Vuốt lên",
+        "hẹn giờ ngủ và báo thức"
+      ],
+      [
+        "Vuốt xuống",
+        "âm thanh đã lưu"
+      ],
+      [
+        "Nhấn giữ",
+        "thêm vào yêu thích"
+      ]
+    ],
+    "note": "Bạn cũng có thể dừng và phát tiếp bằng điều khiển phát lại trên màn hình khóa."
+  },
+  "pricing": {
+    "title": "Nghe miễn phí, muốn tạo nhiều hơn thì dùng Premium",
+    "free": {
+      "name": "Miễn phí",
+      "items": [
+        "Nghe mọi âm thanh",
+        "Chồng âm thanh thành bản phối riêng",
+        "Lưu tối đa 3 bản phối",
+        "Hẹn giờ ngủ tắt dần",
+        "Báo thức âm thanh nhẹ nhàng",
+        "Yêu thích"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Tạo và lưu bản phối riêng không giới hạn"
+      ],
+      "note": "Gói đăng ký hằng tháng tự động gia hạn, có dùng thử miễn phí"
+    },
+    "note": "Gói đăng ký tự động gia hạn trừ khi bạn hủy ít nhất 24 giờ trước khi kỳ hiện tại kết thúc, và bạn sẽ bị tính phí khi hết thời gian dùng thử. Áp dụng Điều khoản sử dụng tiêu chuẩn của Apple (EULA)."
+  },
+  "faq": {
+    "title": "Câu hỏi thường gặp",
+    "items": [
+      {
+        "q": "Làm sao để phát và đổi âm thanh?",
+        "a": "Chạm mặt trăng ở màn hình chính để phát, chạm lần nữa để dừng. Vuốt ngang để đổi âm thanh, vuốt lên để hẹn giờ ngủ, vuốt xuống để mở thư viện của bạn."
+      },
+      {
+        "q": "Tắt màn hình thì âm thanh có dừng không?",
+        "a": "Không. Âm thanh vẫn phát khi tắt màn hình hoặc chuyển sang ứng dụng khác. Muốn dừng, hãy chạm mặt trăng lần nữa hoặc dùng điều khiển trên màn hình khóa."
+      },
+      {
+        "q": "Hết giờ hẹn ngủ thì sao?",
+        "a": "Âm thanh không tắt đột ngột mà nhỏ dần rồi mới dừng, để bạn không bị đánh thức."
+      },
+      {
+        "q": "Báo thức không reo.",
+        "a": "Khi tạo báo thức đầu tiên, ứng dụng sẽ xin quyền báo thức. Hãy kiểm tra quyền này đã bật trong Cài đặt > Dalbit."
+      },
+      {
+        "q": "Bản phối của tôi được lưu ở đâu?",
+        "a": "Bản phối, báo thức và cài đặt chỉ được lưu trên thiết bị này. Nếu xóa ứng dụng, chúng sẽ bị xóa theo."
+      },
+      {
+        "q": "Miễn phí thì dùng được những gì?",
+        "a": "Nghe mọi âm thanh, chồng các lớp và lưu tối đa 3 bản phối riêng. Hẹn giờ ngủ và báo thức cũng miễn phí. Premium bỏ giới hạn số bản phối."
+      },
+      {
+        "q": "Làm sao để hủy gói đăng ký?",
+        "a": "Vào Cài đặt > Tài khoản Apple > Đăng ký, chọn Dalbit rồi hủy. Nếu không hủy ít nhất 24 giờ trước khi kỳ hiện tại kết thúc, gói sẽ tự gia hạn."
+      },
+      {
+        "q": "Đổi máy xong thì mất gói đăng ký.",
+        "a": "Đăng nhập bằng cùng Tài khoản Apple, mở màn hình đăng ký trong Dalbit và chạm Khôi phục giao dịch mua."
+      },
+      {
+        "q": "Tôi muốn báo lỗi hoặc đề xuất tính năng.",
+        "a": "Hãy gửi phản hồi trong phần cài đặt của ứng dụng hoặc gửi email tới địa chỉ bên dưới. Chúng tôi thường trả lời trong vài ngày."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Đêm nay\nchỉ cần chạm mặt trăng",
+    "cta": "Tải miễn phí trên App Store"
+  },
+  "ui": {
+    "skip": "Chuyển đến nội dung",
+    "languages": "Ngôn ngữ",
+    "privacy": "Chính sách quyền riêng tư",
+    "contact": "Có câu hỏi hay ý tưởng? Gửi đến {email}."
+  }
+}

@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nb">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit – Hvit støy for søvn · Støtte</title>
-<meta name="description" content="Dalbit er en iOS-app der du legger naturlyder i lag til din egen hvite støy. Om appen og støtte.">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit: lag din egen søvnlyd i flere lag</title>
+  <meta name="description" content="Legg regn, dråper og piano i lag til din egen søvnlyd, lagre én gang, og trykk deretter bare på månen hver natt. Alle lyder er gratis.">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit: lag din egen søvnlyd i flere lag">
+  <meta property="og:description" content="Legg regn, dråper og piano i lag til din egen søvnlyd, lagre én gang, og trykk deretter bare på månen hver natt. Alle lyder er gratis.">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/nb/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/nb/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-  <a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
-  <a href="../th/" hreflang="th" lang="th">ไทย</a>
-  <a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="./" hreflang="nb" lang="nb" aria-current="true">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="../tr/" hreflang="tr" lang="tr">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">Gå til innhold</a>
+  <header class="bar">
+    <a class="brand" href="../nb/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">Språk</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">Lag din egen perfekte hvite støy</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>Ikke bruk natten på<br>å lete etter riktig lyd</h1>
+        <p class="lead">Legg regn, vanndråper og en syngebolle sammen til din egen lyd én gang. Fra neste natt holder det med ett trykk på månen.</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">Last ned gratis i App Store</a></div>
+        <p class="muted small">Alle lyder er gratis å lytte til. For iPhone og iPad.</p>
+      </div>
+      <div class="phone"><img src="../img/nb/01-moon.jpg" alt="Ikke bruk natten på å lete etter riktig lyd" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>Legg naturlyder oppå hverandre for å bygge din egen hvite støy, lagre den og vend tilbake til den når som helst. Lag lyden som hjelper deg å sove, fokusere eller meditere.</p>
-</div>
 
-<h2>Funksjoner</h2>
-<ul>
-  <li>🎵 Miks lyder i flere lag</li>
-  <li>🔥 Bål på skjermen</li>
-  <li>⏱️ Søvntimer</li>
-  <li>💾 Lagre dine egne mikser</li>
-</ul>
 
-<h2>Støtte</h2>
-<p>Har du spørsmål, har funnet en feil eller ønsker en funksjon? Send tilbakemelding fra appens innstillinger, eller send oss en e-post:</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">Vanlige spørsmål og støtte →</a></p>
+    <section class="problem reveal">
+      <h2>Har du brukt en time på å finne noe å sovne til?</h2>
+      <p>Regnet er for ensformig, bølgene for høye, og videoen avbrytes av reklame midt på natten. Med Dalbit legger du selv favorittlydene i lag til det passer akkurat deg, og gjemmer det bak én eneste måne.</p>
+    </section>
 
-<h2>Abonnement</h2>
-<p>Dalbit Premium er et månedlig abonnement som fornyes automatisk, og som gir ubegrenset lagring av egne lyder og tilgang til alle kategorier. Du kan administrere eller si opp når som helst i App Store-kontoinnstillingene.</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Bygg lyden din i lag</h2>
+        <p>Stable regn, vanndråper, fuglesang og syngeboller. Still inn volum, hvor ofte laget høres og hvor lyden kommer fra, og legg bølger eller piano under som bakgrunnsmusikk.<br>Gi miksen et navn, lagre den og kom tilbake til den hver natt.</p>
+      </div>
+      <div class="phone"><img src="../img/nb/02-studio.jpg" alt="Bygg lyden din i lag" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>Juridisk</h2>
-<ul>
-  <li><a href="privacy.html">Personvernerklæring</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Bruksvilkår (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Tones ut uten å vekke deg</h2>
+        <p>Søvntimeren kutter aldri lyden brått. Den skrur langsomt ned, så slutten ikke vekker deg igjen.<br>Lyden fortsetter med skjermen av eller i en annen app, og lar du den være, dempes skjermen av seg selv.</p>
+      </div>
+      <div class="phone"><img src="../img/nb/04-timer.jpg" alt="Tones ut uten å vekke deg" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Våkn mykt om morgenen</h2>
+        <p>Still alarmer med syngebolle, tibetansk bolle, fuglesang eller gjøk, og gjenta dem på ukedagene du velger.</p>
+      </div>
+      <div class="phone"><img src="../img/nb/05-alarm.jpg" alt="Våkn mykt om morgenen" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Én måne til alt</h2>
+        <p>Trykk på månen for å spille av og igjen for å sette på pause. Sveip til siden for en annen lyd, opp for søvntimeren og ned for lagrede lyder.<br>Når en lyd føles riktig, holder du fingeren på månen for å legge den til i favoritter.</p>
+      </div>
+      <div class="phone"><img src="../img/nb/03-library.jpg" alt="Én måne til alt" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>Kom i gang på tre steg</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>Trykk på månen</h3><p>Åpne appen, trykk på månen, og lyden starter med en gang.</p></li>
+<li class="card"><span class="n">2</span><h3>Sveip til siden</h3><p>Fortsett til du finner en lyd du liker.</p></li>
+<li class="card"><span class="n">3</span><h3>Still timeren og legg deg</h3><p>Sveip opp, velg en tid, og etterpå tones lyden langsomt ut.</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>Dette gjør månen</h2>
+      <div class="card table">
+        <dl><div><dt>Trykk</dt><dd>spill av, pause</dd></div><div><dt>Sveip til siden</dt><dd>neste lyd</dd></div><div><dt>Sveip opp</dt><dd>søvntimer og alarmer</dd></div><div><dt>Sveip ned</dt><dd>lagrede lyder</dd></div><div><dt>Hold inne</dt><dd>legg til i favoritter</dd></div></dl>
+      </div>
+      <p class="muted">Du kan også pause og fortsette fra avspillingskontrollene på låseskjermen.</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>Det er gratis å lytte. Premium er for å lage flere.</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>Gratis</h3>
+          <ul><li>Alle lyder</li><li>Legg lyder i lag til din egen miks</li><li>Lagre opptil tre mikser</li><li>Søvntimer som tones ut</li><li>Alarmer med myke lyder</li><li>Favoritter</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit Premium</h3>
+          <ul><li>Lag og lagre så mange mikser du vil</li></ul>
+          <p class="muted">Månedlig abonnement med automatisk fornyelse og gratis prøveperiode</p>
+        </div>
+      </div>
+      <p class="muted">Abonnementet fornyes automatisk med mindre det sies opp minst 24 timer før gjeldende periode slutter, og du belastes når prøveperioden er over. Apples standard bruksvilkår (EULA) gjelder.</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>Vanlige spørsmål</h2>
+      <div class="faq"><details><summary>Hvordan spiller jeg av og bytter lyder?</summary><p>Trykk på månen på startskjermen for å spille av og igjen for å stoppe. Sveip til siden for en annen lyd, opp for søvntimeren og ned for biblioteket ditt.</p></details>
+<details><summary>Stopper lyden når skjermen slås av?</summary><p>Nei. Den fortsetter med skjermen av eller i en annen app. Trykk på månen igjen eller bruk kontrollene på låseskjermen for å stoppe den.</p></details>
+<details><summary>Hva skjer når søvntimeren går ut?</summary><p>Lyden stopper ikke brått. Den blir gradvis svakere og stopper så, så du ikke våkner.</p></details>
+<details><summary>Alarmen ringer ikke.</summary><p>Appen ber om tillatelse til alarmer når du lager den første. Sjekk at den er slått på under Innstillinger &gt; Dalbit.</p></details>
+<details><summary>Hvor lagres miksene mine?</summary><p>Miksene, alarmene og innstillingene ligger bare på denne enheten. Sletter du appen, forsvinner de også.</p></details>
+<details><summary>Hva kan jeg bruke gratis?</summary><p>Alle lyder, lag på lag og opptil tre egne mikser. Søvntimeren og alarmene er også gratis. Premium fjerner grensen for antall mikser.</p></details>
+<details><summary>Hvordan sier jeg opp abonnementet?</summary><p>Gå til Innstillinger &gt; Apple-konto &gt; Abonnementer, velg Dalbit og si opp. Sier du ikke opp minst 24 timer før perioden slutter, fornyes det automatisk.</p></details>
+<details><summary>Jeg byttet telefon, og abonnementet er borte.</summary><p>Logg på med samme Apple-konto, åpne abonnementsskjermen i Dalbit og trykk på Gjenopprett kjøp.</p></details>
+<details><summary>Hvordan melder jeg en feil eller foreslår en funksjon?</summary><p>Send tilbakemelding fra appens innstillinger eller skriv til adressen nedenfor. Vi svarer som regel innen noen dager.</p></details></div>
+      <p class="contact">Spørsmål eller ideer? Skriv til <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a>.</p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>I natt trenger du<br>bare å trykke på månen</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">Last ned gratis i App Store</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="Språk"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb" aria-current="page">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+    <p><a href="privacy.html">Personvernerklæring</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

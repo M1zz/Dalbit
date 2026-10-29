@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit - Ruído Branco para Dormir · Suporte</title>
-<meta name="description" content="O Dalbit é um app para iOS que sobrepõe sons da natureza para criar o seu próprio ruído branco. Sobre o app e suporte.">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit: crie seu próprio ruído branco para dormir misturando sons</title>
+  <meta name="description" content="Misture chuva, gotas e piano num som para dormir só seu, salve uma vez e depois é só tocar na lua toda noite. Todos os sons são grátis.">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit: crie seu próprio ruído branco para dormir misturando sons">
+  <meta property="og:description" content="Misture chuva, gotas e piano num som para dormir só seu, salve uma vez e depois é só tocar na lua toda noite. Todos os sons são grátis.">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/pt-BR/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/pt-BR/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-  <a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="./" hreflang="pt-BR" lang="pt-BR" aria-current="true">Português (Brasil)</a>
-  <a href="../th/" hreflang="th" lang="th">ไทย</a>
-  <a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="../tr/" hreflang="tr" lang="tr">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+  <header class="bar">
+    <a class="brand" href="../pt-BR/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">Idiomas</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">Crie o seu ruído branco perfeito</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>Pare de passar a noite<br>procurando o som certo</h1>
+        <p class="lead">Misture uma vez chuva, gotas d’água e uma tigela tibetana num som só seu. Da noite seguinte em diante, é só tocar na lua.</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">Baixe grátis na App Store</a></div>
+        <p class="muted small">Todos os sons podem ser ouvidos de graça. Para iPhone e iPad.</p>
+      </div>
+      <div class="phone"><img src="../img/pt-BR/01-moon.jpg" alt="Pare de passar a noite procurando o som certo" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>Sobreponha sons da natureza para montar o seu próprio ruído branco, salve e volte a ele quando quiser. Crie o som que ajuda você a dormir, focar ou meditar.</p>
-</div>
 
-<h2>Recursos</h2>
-<ul>
-  <li>🎵 Mistura de sons em várias camadas</li>
-  <li>🔥 Visual de fogueira</li>
-  <li>⏱️ Timer de sono</li>
-  <li>💾 Salve suas próprias misturas</li>
-</ul>
 
-<h2>Suporte</h2>
-<p>Para dúvidas, relatos de bugs ou sugestões de recursos, envie um feedback pelos ajustes do app ou escreva para nós:</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">Dúvidas frequentes e suporte →</a></p>
+    <section class="problem reveal">
+      <h2>Já perdeu uma hora procurando algo para pegar no sono?</h2>
+      <p>A chuva é monótona demais, as ondas são altas demais e o vídeo que você coloca para no meio da noite com um anúncio. No Dalbit você mesmo sobrepõe os sons que curte até chegar no que combina com você, e guarda tudo atrás de uma única lua.</p>
+    </section>
 
-<h2>Assinatura</h2>
-<p>O Dalbit Premium é uma assinatura mensal com renovação automática que libera a criação ilimitada de sons e todas as categorias. Você pode gerenciar ou cancelar a qualquer momento nos ajustes da sua conta da App Store.</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Monte seu som em camadas</h2>
+        <p>Empilhe chuva, gotas d’água, canto de pássaros e tigelas tibetanas. Ajuste em cada camada o volume, a frequência e de onde ela soa, e coloque ondas ou piano como música de fundo.<br>Dê um nome à mistura, salve e volte a ela em qualquer noite.</p>
+      </div>
+      <div class="phone"><img src="../img/pt-BR/02-studio.jpg" alt="Monte seu som em camadas" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>Informações legais</h2>
-<ul>
-  <li><a href="privacy.html">Política de Privacidade</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Termos de Uso (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Desliga sem te acordar</h2>
+        <p>O timer de sono nunca corta o som de repente: ele vai abaixando devagar para que o fim não te acorde.<br>O som continua com a tela apagada ou em outro app, e se você deixar quieto a tela escurece sozinha.</p>
+      </div>
+      <div class="phone"><img src="../img/pt-BR/04-timer.jpg" alt="Desliga sem te acordar" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>De manhã, um despertar suave</h2>
+        <p>Crie alarmes com tigela cantante, tigela tibetana, canto de pássaros ou cuco, e repita nos dias da semana que quiser.</p>
+      </div>
+      <div class="phone"><img src="../img/pt-BR/05-alarm.jpg" alt="De manhã, um despertar suave" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>Uma lua para tudo</h2>
+        <p>Toque na lua para tocar e de novo para pausar. Deslize para o lado para trocar de som, para cima para o timer de sono e para baixo para os sons salvos.<br>Curtiu um som? Toque e segure a lua para adicionar aos favoritos.</p>
+      </div>
+      <div class="phone"><img src="../img/pt-BR/03-library.jpg" alt="Uma lua para tudo" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>Comece em três passos</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>Toque na lua</h3><p>Abra o app, toque na lua e o som começa na hora.</p></li>
+<li class="card"><span class="n">2</span><h3>Deslize para o lado</h3><p>Vá passando até achar um som que te agrade.</p></li>
+<li class="card"><span class="n">3</span><h3>Ajuste o timer e deite</h3><p>Deslize para cima, escolha um tempo e depois o som some aos poucos.</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>O que a lua faz</h2>
+      <div class="card table">
+        <dl><div><dt>Tocar</dt><dd>tocar, pausar</dd></div><div><dt>Deslizar para o lado</dt><dd>próximo som</dd></div><div><dt>Deslizar para cima</dt><dd>timer de sono e alarmes</dd></div><div><dt>Deslizar para baixo</dt><dd>sons salvos</dd></div><div><dt>Tocar e segurar</dt><dd>adicionar aos favoritos</dd></div></dl>
+      </div>
+      <p class="muted">Você também pode pausar e retomar pelos controles de reprodução da tela bloqueada.</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>Ouvir é grátis. O Premium é para criar mais.</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>Grátis</h3>
+          <ul><li>Todos os sons</li><li>Misturar sons em camadas</li><li>Salvar até três misturas</li><li>Timer de sono que vai sumindo</li><li>Alarmes com sons suaves</li><li>Favoritos</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit Premium</h3>
+          <ul><li>Crie e salve quantas misturas quiser</li></ul>
+          <p class="muted">Assinatura mensal com renovação automática e teste grátis</p>
+        </div>
+      </div>
+      <p class="muted">A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do fim do período atual, e a cobrança começa ao fim do teste grátis. Valem os termos de uso padrão da Apple (EULA).</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>Perguntas frequentes</h2>
+      <div class="faq"><details><summary>Como toco e troco os sons?</summary><p>Toque na lua da tela inicial para tocar e de novo para parar. Deslize para o lado para outro som, para cima para o timer de sono e para baixo para a sua biblioteca.</p></details>
+<details><summary>O som para se a tela apagar?</summary><p>Não. Ele continua com a tela apagada ou em outro app. Para parar, toque de novo na lua ou use os controles da tela bloqueada.</p></details>
+<details><summary>O que acontece quando o timer acaba?</summary><p>O som não corta de repente: vai ficando mais baixo e depois para, para não te acordar.</p></details>
+<details><summary>O alarme não toca.</summary><p>Ao criar o primeiro alarme, o app pede permissão. Confira se ela está ativada em Ajustes &gt; Dalbit.</p></details>
+<details><summary>Onde ficam salvas as minhas misturas?</summary><p>Misturas, alarmes e ajustes ficam só neste aparelho. Se você apagar o app, eles são apagados junto.</p></details>
+<details><summary>O que dá para usar de graça?</summary><p>Todos os sons, a mistura em camadas e até três misturas suas. O timer de sono e os alarmes também são grátis. O Premium tira o limite de misturas.</p></details>
+<details><summary>Como cancelo a assinatura?</summary><p>Vá em Ajustes &gt; Conta Apple &gt; Assinaturas, escolha o Dalbit e cancele. Se não cancelar pelo menos 24 horas antes do fim do período atual, ela renova automaticamente.</p></details>
+<details><summary>Troquei de celular e perdi a assinatura.</summary><p>Entre com a mesma Conta Apple, abra a tela de assinatura do Dalbit e toque em Restaurar compras.</p></details>
+<details><summary>Como relato um bug ou sugiro um recurso?</summary><p>Use o envio de feedback nos ajustes do app ou escreva para o endereço abaixo. Costumamos responder em poucos dias.</p></details></div>
+      <p class="contact">Dúvidas ou ideias? Escreva para <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a>.</p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>Hoje à noite,<br>é só tocar na lua</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">Baixe grátis na App Store</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="Idiomas"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR" aria-current="page">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+    <p><a href="privacy.html">Política de Privacidade</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: byg din egen søvnlyd af flere lag",
+  "description": "Dryp oven på regn og klaver ovenpå. Læg dine yndlingslyde i lag, gem én gang, og fra næste nat trykker du bare på månen. Alle lyde er gratis.",
+  "hero": {
+    "headline": "Brug ikke natten på\nat lede efter den rigtige lyd",
+    "lead": "Læg regn, vanddråber og en syngeskål sammen til din egen lyd én gang. Fra næste nat er det bare et tryk på månen.",
+    "cta": "Hent gratis i App Store",
+    "note": "Alle lyde er gratis at lytte til. Til iPhone og iPad."
+  },
+  "problem": {
+    "title": "Har du brugt en time på at finde noget at falde i søvn til?",
+    "text": "Regnen er for ensformig, bølgerne for høje, og videoen bliver afbrudt af en reklame midt om natten. Med Dalbit lægger du selv dine yndlingslyde i lag, til det passer lige præcis dig, og gemmer det bag én enkelt måne."
+  },
+  "features": [
+    {
+      "title": "Byg din lyd i lag",
+      "text": "Stabl regn, vanddråber, fuglesang og syngeskåle. Indstil lydstyrke, hvor tit laget lyder, og hvor du hører det fra, og læg bølger eller klaver ind som baggrundsmusik.\nGiv mixet et navn, gem det, og vend tilbage til det hver nat.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Den tones ud uden at vække dig",
+      "text": "Søvntimeren klipper aldrig lyden af. Den skruer langsomt ned, så slutningen ikke vækker dig igen.\nLyden fortsætter med skærmen slukket eller i en anden app, og lader du den være, dæmpes skærmen af sig selv.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Vågn blidt om morgenen",
+      "text": "Sæt alarmer med syngeskål, tibetansk skål, fuglesang eller gøg, og gentag dem på de ugedage, du vælger.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Én måne til det hele",
+      "text": "Tryk på månen for at afspille og igen for at sætte på pause. Stryg til siden for en anden lyd, op for søvntimeren og ned for dine gemte lyde.\nNår en lyd føles rigtig, så hold fingeren på månen for at føje den til favoritter.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Kom i gang i tre trin",
+    "items": [
+      {
+        "title": "Tryk på månen",
+        "text": "Åbn appen, tryk på månen, og lyden starter med det samme."
+      },
+      {
+        "title": "Stryg til siden",
+        "text": "Bliv ved, til du finder en lyd, du kan lide."
+      },
+      {
+        "title": "Sæt timeren og læg dig",
+        "text": "Stryg op, vælg en tid, og så toner lyden langsomt ud."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Det kan månen",
+    "rows": [
+      [
+        "Tryk",
+        "afspil, pause"
+      ],
+      [
+        "Stryg til siden",
+        "næste lyd"
+      ],
+      [
+        "Stryg op",
+        "søvntimer og alarmer"
+      ],
+      [
+        "Stryg ned",
+        "gemte lyde"
+      ],
+      [
+        "Hold fingeren nede",
+        "føj til favoritter"
+      ]
+    ],
+    "note": "Du kan også sætte på pause og fortsætte fra afspilningsknapperne på låseskærmen."
+  },
+  "pricing": {
+    "title": "Det er gratis at lytte. Premium er til at lave flere.",
+    "free": {
+      "name": "Gratis",
+      "items": [
+        "Alle lyde",
+        "Læg lyde i lag til dit eget mix",
+        "Gem op til tre mix",
+        "Søvntimer, der tones ud",
+        "Alarmer med blide lyde",
+        "Favoritter"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Lav og gem så mange mix, du vil"
+      ],
+      "note": "Månedligt abonnement med automatisk fornyelse og gratis prøveperiode"
+    },
+    "note": "Abonnementet fornyes automatisk, medmindre du opsiger det mindst 24 timer før den aktuelle periode slutter, og du betaler, når prøveperioden er slut. Apples standardbetingelser for brug (EULA) gælder."
+  },
+  "faq": {
+    "title": "Ofte stillede spørgsmål",
+    "items": [
+      {
+        "q": "Hvordan afspiller og skifter jeg lyde?",
+        "a": "Tryk på månen på hjemmeskærmen for at afspille og igen for at stoppe. Stryg til siden for en anden lyd, op for søvntimeren og ned for dit bibliotek."
+      },
+      {
+        "q": "Stopper lyden, når skærmen slukker?",
+        "a": "Nej. Den spiller videre med skærmen slukket eller i en anden app. Tryk på månen igen eller brug knapperne på låseskærmen for at stoppe den."
+      },
+      {
+        "q": "Hvad sker der, når søvntimeren udløber?",
+        "a": "Lyden stopper ikke brat. Den bliver gradvist svagere og stopper så, så du ikke vågner."
+      },
+      {
+        "q": "Min alarm ringer ikke.",
+        "a": "Appen beder om tilladelse til alarmer, når du opretter den første. Tjek, at den er slået til under Indstillinger > Dalbit."
+      },
+      {
+        "q": "Hvor gemmes mine mix?",
+        "a": "Dine mix, alarmer og indstillinger ligger kun på denne enhed. Sletter du appen, forsvinder de også."
+      },
+      {
+        "q": "Hvad kan jeg bruge gratis?",
+        "a": "Alle lyde, lag på lag og op til tre egne mix. Søvntimeren og alarmerne er også gratis. Premium fjerner grænsen for antal mix."
+      },
+      {
+        "q": "Hvordan opsiger jeg abonnementet?",
+        "a": "Gå til Indstillinger > Apple-konto > Abonnementer, vælg Dalbit, og opsig det. Opsiger du ikke mindst 24 timer før periodens udløb, fornyes det automatisk."
+      },
+      {
+        "q": "Jeg har skiftet telefon, og abonnementet er væk.",
+        "a": "Log ind med samme Apple-konto, åbn abonnementsskærmen i Dalbit, og tryk på Gendan køb."
+      },
+      {
+        "q": "Hvordan melder jeg en fejl eller foreslår en funktion?",
+        "a": "Send feedback fra appens indstillinger eller skriv til adressen nedenfor. Vi svarer som regel inden for få dage."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "I nat skal du\nbare trykke på månen",
+    "cta": "Hent gratis i App Store"
+  },
+  "ui": {
+    "skip": "Gå til indhold",
+    "languages": "Sprog",
+    "privacy": "Privatlivspolitik",
+    "contact": "Spørgsmål eller idéer? Skriv til {email}."
+  }
+}

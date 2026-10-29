@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: Mische dir dein eigenes Schlafgeräusch aus Klängen",
+  "description": "Leg Regen, Tropfen und Klavier zu deinem eigenen Einschlafklang übereinander, speichere ihn einmal und tippe dann nur noch auf den Mond.",
+  "hero": {
+    "headline": "Verbring nicht die Nacht\nmit der Suche nach dem Klang",
+    "lead": "Leg Regen, Wassertropfen und eine Klangschale einmal zu deinem eigenen Klang übereinander. Ab der nächsten Nacht reicht ein Tipp auf den Mond.",
+    "cta": "Kostenlos im App Store laden",
+    "note": "Alle Klänge kannst du kostenlos hören. Für iPhone und iPad."
+  },
+  "problem": {
+    "title": "Schon mal eine Stunde gebraucht, bis du etwas zum Einschlafen gefunden hast?",
+    "text": "Der Regen ist zu eintönig, die Wellen zu laut, und mitten im Video kommt Werbung. Mit Dalbit legst du deine Lieblingsklänge selbst übereinander, bis es genau für dich passt, und hast das Ergebnis hinter einem einzigen Mond."
+  },
+  "features": [
+    {
+      "title": "Bau deinen Klang aus Ebenen",
+      "text": "Staple Regen, Wassertropfen, Vogelgezwitscher und Klangschalen. Stell für jede Ebene Lautstärke, Häufigkeit und die Richtung ein, aus der sie kommt, und leg Wellen oder Klavier als Hintergrundmusik darunter.\nGib der Mischung einen Namen, speichere sie und hol sie jede Nacht wieder hervor.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Wird leise, ohne dich zu wecken",
+      "text": "Der Schlaf-Timer schneidet den Klang nie einfach ab. Er wird langsam leiser, damit dich das Ende nicht wieder aufweckt.\nDer Klang läuft bei ausgeschaltetem Bildschirm und in anderen Apps weiter, und lässt du alles in Ruhe, wird der Bildschirm von selbst dunkler.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Morgens sanft geweckt",
+      "text": "Stell Wecker mit Klangschale, tibetischer Klangschale, Vogelgezwitscher oder Kuckuck und wiederhole sie an den Wochentagen deiner Wahl.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Ein Mond für alles",
+      "text": "Tipp auf den Mond zum Abspielen, noch einmal zum Pausieren. Wisch zur Seite für einen anderen Klang, nach oben für den Schlaf-Timer, nach unten für deine gespeicherten Klänge.\nGefällt dir ein Klang, halte den Mond gedrückt, um ihn zu den Favoriten hinzuzufügen.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "In drei Schritten startklar",
+    "items": [
+      {
+        "title": "Tipp auf den Mond",
+        "text": "App öffnen, auf den Mond tippen, und es klingt sofort."
+      },
+      {
+        "title": "Wisch zur Seite",
+        "text": "Wisch weiter, bis ein Klang passt."
+      },
+      {
+        "title": "Timer stellen, hinlegen",
+        "text": "Wisch nach oben, wähl eine Zeit, danach blendet der Klang langsam aus."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Was der Mond kann",
+    "rows": [
+      [
+        "Tippen",
+        "abspielen, pausieren"
+      ],
+      [
+        "Zur Seite wischen",
+        "nächster Klang"
+      ],
+      [
+        "Nach oben wischen",
+        "Schlaf-Timer und Wecker"
+      ],
+      [
+        "Nach unten wischen",
+        "gespeicherte Klänge"
+      ],
+      [
+        "Gedrückt halten",
+        "zu Favoriten hinzufügen"
+      ]
+    ],
+    "note": "Pausieren und Fortsetzen geht auch über die Wiedergabesteuerung auf dem Sperrbildschirm."
+  },
+  "pricing": {
+    "title": "Hören ist kostenlos. Premium ist zum Mehr-Erstellen.",
+    "free": {
+      "name": "Kostenlos",
+      "items": [
+        "Alle Klänge abspielen",
+        "Klänge zu eigenen Mischungen schichten",
+        "Bis zu drei Mischungen speichern",
+        "Schlaf-Timer, der langsam ausblendet",
+        "Sanfte Weckerklänge",
+        "Favoriten"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "So viele eigene Mischungen erstellen und speichern, wie du willst"
+      ],
+      "note": "Monatliches, automatisch verlängertes Abo mit kostenlosem Probezeitraum"
+    },
+    "note": "Das Abo verlängert sich automatisch, wenn du es nicht mindestens 24 Stunden vor Ende des aktuellen Zeitraums kündigst. Nach dem kostenlosen Probezeitraum wird es abgerechnet. Es gelten die Standard-Nutzungsbedingungen von Apple (EULA)."
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Wie spiele ich Klänge ab und wechsle sie?",
+        "a": "Tipp auf den Mond im Startbildschirm der App zum Abspielen und noch einmal zum Stoppen. Wisch zur Seite für einen anderen Klang, nach oben für den Schlaf-Timer und nach unten für deine Mediathek."
+      },
+      {
+        "q": "Stoppt der Klang, wenn der Bildschirm ausgeht?",
+        "a": "Nein. Er läuft bei ausgeschaltetem Bildschirm und in anderen Apps weiter. Zum Stoppen tippst du noch einmal auf den Mond oder nutzt die Steuerung auf dem Sperrbildschirm."
+      },
+      {
+        "q": "Was passiert, wenn der Schlaf-Timer abläuft?",
+        "a": "Der Klang bricht nicht plötzlich ab, sondern wird nach und nach leiser und stoppt dann, damit du nicht aufwachst."
+      },
+      {
+        "q": "Mein Wecker klingelt nicht.",
+        "a": "Beim ersten Wecker fragt die App nach der Erlaubnis für Wecker. Prüf unter Einstellungen > Dalbit, ob sie aktiviert ist."
+      },
+      {
+        "q": "Wo werden meine Mischungen gespeichert?",
+        "a": "Deine Mischungen, Wecker und Einstellungen bleiben nur auf diesem Gerät. Wenn du die App löschst, sind sie auch weg."
+      },
+      {
+        "q": "Was kann ich kostenlos nutzen?",
+        "a": "Alle Klänge abspielen, sie übereinanderlegen und bis zu drei eigene Mischungen speichern. Schlaf-Timer und Wecker sind ebenfalls kostenlos. Mit Premium fällt die Begrenzung der Mischungen weg."
+      },
+      {
+        "q": "Wie kündige ich mein Abo?",
+        "a": "Geh zu Einstellungen > Apple Account > Abonnements, wähl Dalbit und kündige. Ohne Kündigung mindestens 24 Stunden vor Ende des aktuellen Zeitraums verlängert es sich automatisch."
+      },
+      {
+        "q": "Neues iPhone, und das Abo ist weg.",
+        "a": "Melde dich mit demselben Apple Account an, öffne in Dalbit den Abo-Bildschirm und tippe auf „Käufe wiederherstellen“."
+      },
+      {
+        "q": "Wie melde ich einen Fehler oder schlage eine Funktion vor?",
+        "a": "Nutze „Feedback senden“ in den Einstellungen der App oder schreib uns an die Adresse unten. Wir antworten in der Regel innerhalb weniger Tage."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Heute Nacht\neinfach auf den Mond tippen",
+    "cta": "Kostenlos im App Store laden"
+  },
+  "ui": {
+    "skip": "Zum Inhalt springen",
+    "languages": "Sprachen",
+    "privacy": "Datenschutzerklärung",
+    "contact": "Fragen oder Ideen? Schreib an {email}."
+  }
+}

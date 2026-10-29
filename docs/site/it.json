@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: crea il tuo rumore bianco per dormire sovrapponendo suoni",
+  "description": "Sovrapponi pioggia, gocce e pianoforte in un suono per dormire tutto tuo, salvalo una volta e poi tocca solo la luna. Tutti i suoni sono gratis.",
+  "hero": {
+    "headline": "Non passare la notte\na cercare il suono giusto",
+    "lead": "Sovrapponi una volta pioggia, gocce d’acqua e una campana tibetana in un suono tutto tuo. Dalla notte dopo basta toccare la luna.",
+    "cta": "Scaricala gratis dall’App Store",
+    "note": "Tutti i suoni si ascoltano gratis. Per iPhone e iPad."
+  },
+  "problem": {
+    "title": "Ti è mai capitato di perdere un’ora a cercare qualcosa per addormentarti?",
+    "text": "La pioggia è troppo monotona, le onde troppo forti e il video che metti si interrompe per una pubblicità nel cuore della notte. Con Dalbit sovrapponi tu i suoni che ti piacciono finché non trovi quello giusto per te, e lo tieni dietro un’unica luna."
+  },
+  "features": [
+    {
+      "title": "Costruisci il tuo suono a strati",
+      "text": "Sovrapponi pioggia, gocce d’acqua, canto degli uccelli e campane tibetane. Per ogni strato regoli volume, frequenza e il punto da cui lo senti, poi aggiungi onde o pianoforte come musica di sottofondo.\nDai un nome al mix, salvalo e ritrovalo ogni sera.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Si spegne senza svegliarti",
+      "text": "Il timer del sonno non taglia mai il suono di colpo: lo abbassa piano piano, così la fine non ti sveglia.\nIl suono continua a schermo spento o in un’altra app, e se non tocchi nulla lo schermo si scurisce da solo.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Al mattino, un risveglio dolce",
+      "text": "Imposta sveglie con una campana tibetana, una ciotola tibetana, il canto degli uccelli o un cuculo, e ripetile nei giorni che scegli.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Una luna per fare tutto",
+      "text": "Tocca la luna per riprodurre, toccala di nuovo per mettere in pausa. Scorri di lato per cambiare suono, in alto per il timer del sonno, in basso per i suoni salvati.\nSe un suono ti piace, tieni premuta la luna per aggiungerlo ai preferiti.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Si comincia in tre passi",
+    "items": [
+      {
+        "title": "Tocca la luna",
+        "text": "Apri l’app, tocca la luna e il suono parte subito."
+      },
+      {
+        "title": "Scorri di lato",
+        "text": "Vai avanti finché non trovi un suono che ti piace."
+      },
+      {
+        "title": "Imposta il timer e sdraiati",
+        "text": "Scorri in alto, scegli un tempo e poi il suono svanisce piano."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Cosa fa la luna",
+    "rows": [
+      [
+        "Tocco",
+        "riproduci, pausa"
+      ],
+      [
+        "Scorrere di lato",
+        "suono successivo"
+      ],
+      [
+        "Scorrere in alto",
+        "timer del sonno e sveglie"
+      ],
+      [
+        "Scorrere in basso",
+        "suoni salvati"
+      ],
+      [
+        "Tenere premuto",
+        "aggiungi ai preferiti"
+      ]
+    ],
+    "note": "Puoi anche mettere in pausa e riprendere dai controlli di riproduzione della schermata di blocco."
+  },
+  "pricing": {
+    "title": "Ascoltare è gratis. Premium serve per creare di più.",
+    "free": {
+      "name": "Gratis",
+      "items": [
+        "Tutti i suoni",
+        "Sovrapporre suoni per creare il tuo",
+        "Fino a tre mix salvati",
+        "Timer del sonno in dissolvenza",
+        "Sveglie con suoni delicati",
+        "Preferiti"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Crea e salva tutti i mix che vuoi"
+      ],
+      "note": "Abbonamento mensile a rinnovo automatico con prova gratuita"
+    },
+    "note": "L’abbonamento si rinnova automaticamente se non lo annulli almeno 24 ore prima della fine del periodo in corso, e l’addebito parte al termine della prova gratuita. Si applicano i termini d’uso standard di Apple (EULA)."
+  },
+  "faq": {
+    "title": "Domande frequenti",
+    "items": [
+      {
+        "q": "Come avvio e cambio i suoni?",
+        "a": "Tocca la luna nella schermata principale per avviare e toccala di nuovo per fermare. Scorri di lato per un altro suono, in alto per il timer del sonno e in basso per la tua libreria."
+      },
+      {
+        "q": "Il suono si ferma se spengo lo schermo?",
+        "a": "No. Continua a schermo spento o se passi a un’altra app. Per fermarlo tocca di nuovo la luna o usa i controlli della schermata di blocco."
+      },
+      {
+        "q": "Cosa succede quando finisce il timer?",
+        "a": "Il suono non si interrompe di colpo: si abbassa poco a poco e poi si ferma, per non svegliarti."
+      },
+      {
+        "q": "La sveglia non suona.",
+        "a": "Quando crei la prima sveglia, l’app chiede il permesso per le sveglie. Controlla che sia attivo in Impostazioni > Dalbit."
+      },
+      {
+        "q": "Dove vengono salvati i miei mix?",
+        "a": "Mix, sveglie e impostazioni restano solo su questo dispositivo. Se elimini l’app, vengono eliminati anche loro."
+      },
+      {
+        "q": "Cosa posso usare gratis?",
+        "a": "Tutti i suoni, la sovrapposizione e fino a tre mix personali. Anche timer del sonno e sveglie sono gratis. Premium toglie il limite ai mix."
+      },
+      {
+        "q": "Come annullo l’abbonamento?",
+        "a": "Vai in Impostazioni > Account Apple > Abbonamenti, scegli Dalbit e annulla. Se non annulli almeno 24 ore prima della fine del periodo in corso, si rinnova automaticamente."
+      },
+      {
+        "q": "Ho cambiato telefono e l’abbonamento è sparito.",
+        "a": "Accedi con lo stesso Account Apple, apri la schermata dell’abbonamento in Dalbit e tocca Ripristina acquisti."
+      },
+      {
+        "q": "Come segnalo un bug o propongo una funzione?",
+        "a": "Usa l’invio di feedback nelle impostazioni dell’app o scrivici all’indirizzo qui sotto. Di solito rispondiamo entro pochi giorni."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Stanotte\ntocca solo la luna",
+    "cta": "Scaricala gratis dall’App Store"
+  },
+  "ui": {
+    "skip": "Vai al contenuto",
+    "languages": "Lingue",
+    "privacy": "Informativa sulla privacy",
+    "contact": "Domande o idee? Scrivi a {email}."
+  }
+}

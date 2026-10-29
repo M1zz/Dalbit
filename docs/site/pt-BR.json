@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: crie seu próprio ruído branco para dormir misturando sons",
+  "description": "Misture chuva, gotas e piano num som para dormir só seu, salve uma vez e depois é só tocar na lua toda noite. Todos os sons são grátis.",
+  "hero": {
+    "headline": "Pare de passar a noite\nprocurando o som certo",
+    "lead": "Misture uma vez chuva, gotas d’água e uma tigela tibetana num som só seu. Da noite seguinte em diante, é só tocar na lua.",
+    "cta": "Baixe grátis na App Store",
+    "note": "Todos os sons podem ser ouvidos de graça. Para iPhone e iPad."
+  },
+  "problem": {
+    "title": "Já perdeu uma hora procurando algo para pegar no sono?",
+    "text": "A chuva é monótona demais, as ondas são altas demais e o vídeo que você coloca para no meio da noite com um anúncio. No Dalbit você mesmo sobrepõe os sons que curte até chegar no que combina com você, e guarda tudo atrás de uma única lua."
+  },
+  "features": [
+    {
+      "title": "Monte seu som em camadas",
+      "text": "Empilhe chuva, gotas d’água, canto de pássaros e tigelas tibetanas. Ajuste em cada camada o volume, a frequência e de onde ela soa, e coloque ondas ou piano como música de fundo.\nDê um nome à mistura, salve e volte a ela em qualquer noite.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Desliga sem te acordar",
+      "text": "O timer de sono nunca corta o som de repente: ele vai abaixando devagar para que o fim não te acorde.\nO som continua com a tela apagada ou em outro app, e se você deixar quieto a tela escurece sozinha.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "De manhã, um despertar suave",
+      "text": "Crie alarmes com tigela cantante, tigela tibetana, canto de pássaros ou cuco, e repita nos dias da semana que quiser.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Uma lua para tudo",
+      "text": "Toque na lua para tocar e de novo para pausar. Deslize para o lado para trocar de som, para cima para o timer de sono e para baixo para os sons salvos.\nCurtiu um som? Toque e segure a lua para adicionar aos favoritos.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Comece em três passos",
+    "items": [
+      {
+        "title": "Toque na lua",
+        "text": "Abra o app, toque na lua e o som começa na hora."
+      },
+      {
+        "title": "Deslize para o lado",
+        "text": "Vá passando até achar um som que te agrade."
+      },
+      {
+        "title": "Ajuste o timer e deite",
+        "text": "Deslize para cima, escolha um tempo e depois o som some aos poucos."
+      }
+    ]
+  },
+  "reference": {
+    "title": "O que a lua faz",
+    "rows": [
+      [
+        "Tocar",
+        "tocar, pausar"
+      ],
+      [
+        "Deslizar para o lado",
+        "próximo som"
+      ],
+      [
+        "Deslizar para cima",
+        "timer de sono e alarmes"
+      ],
+      [
+        "Deslizar para baixo",
+        "sons salvos"
+      ],
+      [
+        "Tocar e segurar",
+        "adicionar aos favoritos"
+      ]
+    ],
+    "note": "Você também pode pausar e retomar pelos controles de reprodução da tela bloqueada."
+  },
+  "pricing": {
+    "title": "Ouvir é grátis. O Premium é para criar mais.",
+    "free": {
+      "name": "Grátis",
+      "items": [
+        "Todos os sons",
+        "Misturar sons em camadas",
+        "Salvar até três misturas",
+        "Timer de sono que vai sumindo",
+        "Alarmes com sons suaves",
+        "Favoritos"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Crie e salve quantas misturas quiser"
+      ],
+      "note": "Assinatura mensal com renovação automática e teste grátis"
+    },
+    "note": "A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do fim do período atual, e a cobrança começa ao fim do teste grátis. Valem os termos de uso padrão da Apple (EULA)."
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "items": [
+      {
+        "q": "Como toco e troco os sons?",
+        "a": "Toque na lua da tela inicial para tocar e de novo para parar. Deslize para o lado para outro som, para cima para o timer de sono e para baixo para a sua biblioteca."
+      },
+      {
+        "q": "O som para se a tela apagar?",
+        "a": "Não. Ele continua com a tela apagada ou em outro app. Para parar, toque de novo na lua ou use os controles da tela bloqueada."
+      },
+      {
+        "q": "O que acontece quando o timer acaba?",
+        "a": "O som não corta de repente: vai ficando mais baixo e depois para, para não te acordar."
+      },
+      {
+        "q": "O alarme não toca.",
+        "a": "Ao criar o primeiro alarme, o app pede permissão. Confira se ela está ativada em Ajustes > Dalbit."
+      },
+      {
+        "q": "Onde ficam salvas as minhas misturas?",
+        "a": "Misturas, alarmes e ajustes ficam só neste aparelho. Se você apagar o app, eles são apagados junto."
+      },
+      {
+        "q": "O que dá para usar de graça?",
+        "a": "Todos os sons, a mistura em camadas e até três misturas suas. O timer de sono e os alarmes também são grátis. O Premium tira o limite de misturas."
+      },
+      {
+        "q": "Como cancelo a assinatura?",
+        "a": "Vá em Ajustes > Conta Apple > Assinaturas, escolha o Dalbit e cancele. Se não cancelar pelo menos 24 horas antes do fim do período atual, ela renova automaticamente."
+      },
+      {
+        "q": "Troquei de celular e perdi a assinatura.",
+        "a": "Entre com a mesma Conta Apple, abra a tela de assinatura do Dalbit e toque em Restaurar compras."
+      },
+      {
+        "q": "Como relato um bug ou sugiro um recurso?",
+        "a": "Use o envio de feedback nos ajustes do app ou escreva para o endereço abaixo. Costumamos responder em poucos dias."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Hoje à noite,\né só tocar na lua",
+    "cta": "Baixe grátis na App Store"
+  },
+  "ui": {
+    "skip": "Pular para o conteúdo",
+    "languages": "Idiomas",
+    "privacy": "Política de Privacidade",
+    "contact": "Dúvidas ou ideias? Escreva para {email}."
+  }
+}

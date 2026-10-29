@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: racik suara pengantar tidur versimu dari beberapa lapisan",
+  "description": "Tetesan air di atas hujan, lalu piano di atasnya. Tumpuk suara favoritmu, simpan sekali, dan malam berikutnya cukup ketuk bulan. Semua suara gratis.",
+  "hero": {
+    "headline": "Jangan habiskan malam\nuntuk mencari suara yang pas",
+    "lead": "Tumpuk hujan, tetesan air, dan singing bowl jadi suaramu sendiri sekali saja. Mulai malam berikutnya, cukup ketuk bulan.",
+    "cta": "Unduh gratis di App Store",
+    "note": "Semua suara bisa didengar gratis. Untuk iPhone dan iPad."
+  },
+  "problem": {
+    "title": "Pernah menghabiskan satu jam cuma untuk memilih suara sebelum tidur?",
+    "text": "Suara hujan terlalu datar, ombak terlalu keras, dan video yang diputar terpotong iklan tengah malam. Di Dalbit kamu sendiri yang menumpuk suara favorit sampai pas di telinga, lalu menyimpannya di balik satu bulan."
+  },
+  "features": [
+    {
+      "title": "Racik suaramu lapis demi lapis",
+      "text": "Tumpuk suara hujan, tetesan air, kicau burung, dan singing bowl. Atur volume, seberapa sering terdengar, dan dari mana suaranya datang untuk tiap lapisan, lalu tambahkan ombak atau piano sebagai musik latar.\nBeri nama racikanmu, simpan, dan putar lagi kapan pun.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Mereda tanpa membangunkanmu",
+      "text": "Timer tidur tidak pernah memutus suara mendadak. Suara dikecilkan perlahan supaya akhirnya tidak membangunkanmu.\nSuara tetap berjalan saat layar mati atau di aplikasi lain, dan kalau dibiarkan, layar akan meredup sendiri.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Pagi hari dibangunkan dengan lembut",
+      "text": "Pasang alarm dengan singing bowl, mangkuk Tibet, kicau burung, atau kukuk, dan ulangi di hari-hari yang kamu pilih.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Satu bulan untuk semuanya",
+      "text": "Ketuk bulan untuk memutar, ketuk lagi untuk jeda. Geser ke samping untuk ganti suara, ke atas untuk timer tidur, ke bawah untuk suara yang tersimpan.\nKalau ketemu suara yang pas, tekan lama bulan untuk menambahkannya ke favorit.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Mulai dalam tiga langkah",
+    "items": [
+      {
+        "title": "Ketuk bulan",
+        "text": "Buka aplikasi, ketuk bulan, dan suara langsung terdengar."
+      },
+      {
+        "title": "Geser ke samping",
+        "text": "Terus geser sampai ketemu suara yang kamu suka."
+      },
+      {
+        "title": "Pasang timer lalu berbaring",
+        "text": "Geser ke atas, pilih waktu, setelah itu suara perlahan menghilang."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Yang bisa dilakukan bulan",
+    "rows": [
+      [
+        "Ketuk",
+        "putar, jeda"
+      ],
+      [
+        "Geser ke samping",
+        "suara lain"
+      ],
+      [
+        "Geser ke atas",
+        "timer tidur dan alarm"
+      ],
+      [
+        "Geser ke bawah",
+        "suara tersimpan"
+      ],
+      [
+        "Tekan lama",
+        "tambah ke favorit"
+      ]
+    ],
+    "note": "Kamu juga bisa menjeda dan melanjutkan dari kontrol pemutaran di layar kunci."
+  },
+  "pricing": {
+    "title": "Mendengarkan gratis. Premium untuk meracik lebih banyak.",
+    "free": {
+      "name": "Gratis",
+      "items": [
+        "Semua suara",
+        "Menumpuk suara jadi racikan sendiri",
+        "Simpan hingga tiga racikan",
+        "Timer tidur yang memudar perlahan",
+        "Alarm dengan suara lembut",
+        "Favorit"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Buat dan simpan racikan sebanyak yang kamu mau"
+      ],
+      "note": "Langganan bulanan yang diperpanjang otomatis, dengan uji coba gratis"
+    },
+    "note": "Langganan diperpanjang otomatis kecuali dibatalkan paling lambat 24 jam sebelum periode berjalan berakhir, dan tagihan dimulai setelah uji coba gratis selesai. Berlaku Ketentuan Penggunaan standar Apple (EULA)."
+  },
+  "faq": {
+    "title": "Pertanyaan umum",
+    "items": [
+      {
+        "q": "Bagaimana cara memutar dan mengganti suara?",
+        "a": "Ketuk bulan di layar utama untuk memutar, ketuk lagi untuk berhenti. Geser ke samping untuk suara lain, ke atas untuk timer tidur, dan ke bawah untuk pustakamu."
+      },
+      {
+        "q": "Apakah suara berhenti saat layar mati?",
+        "a": "Tidak. Suara tetap berjalan saat layar mati atau saat pindah ke aplikasi lain. Untuk menghentikannya, ketuk bulan lagi atau pakai kontrol di layar kunci."
+      },
+      {
+        "q": "Apa yang terjadi saat timer tidur habis?",
+        "a": "Suara tidak terputus mendadak, tapi mengecil sedikit demi sedikit lalu berhenti, supaya kamu tidak terbangun."
+      },
+      {
+        "q": "Alarm tidak berbunyi.",
+        "a": "Saat membuat alarm pertama, aplikasi meminta izin alarm. Pastikan izinnya aktif di Pengaturan > Dalbit."
+      },
+      {
+        "q": "Di mana racikanku disimpan?",
+        "a": "Racikan, alarm, dan pengaturan hanya disimpan di perangkat ini. Kalau aplikasi dihapus, semuanya ikut terhapus."
+      },
+      {
+        "q": "Apa saja yang gratis?",
+        "a": "Semua suara, menumpuk lapisan, dan menyimpan hingga tiga racikan sendiri. Timer tidur dan alarm juga gratis. Premium menghapus batas jumlah racikan."
+      },
+      {
+        "q": "Bagaimana cara membatalkan langganan?",
+        "a": "Buka Pengaturan > Akun Apple > Langganan, pilih Dalbit, lalu batalkan. Kalau tidak dibatalkan paling lambat 24 jam sebelum periode berjalan berakhir, langganan diperpanjang otomatis."
+      },
+      {
+        "q": "Ganti HP dan langganan hilang.",
+        "a": "Masuk dengan Akun Apple yang sama, buka layar langganan di Dalbit, lalu ketuk Pulihkan Pembelian."
+      },
+      {
+        "q": "Bagaimana melaporkan bug atau mengusulkan fitur?",
+        "a": "Kirim masukan dari pengaturan aplikasi atau email ke alamat di bawah. Biasanya kami membalas dalam beberapa hari."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Malam ini,\ncukup ketuk bulan",
+    "cta": "Unduh gratis di App Store"
+  },
+  "ui": {
+    "skip": "Langsung ke konten",
+    "languages": "Bahasa",
+    "privacy": "Kebijakan Privasi",
+    "contact": "Ada pertanyaan atau ide? Kirim ke {email}."
+  }
+}

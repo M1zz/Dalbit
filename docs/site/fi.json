@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: rakenna oma uniäänesi kerroksista",
+  "description": "Kerrosta sade, pisarat ja piano omaksi uniääneksesi, tallenna kerran ja napauta sen jälkeen vain kuuta. Kaikki äänet ovat ilmaisia.",
+  "hero": {
+    "headline": "Älä käytä yötä\noikean äänen etsimiseen",
+    "lead": "Kerrosta kerran sade, vesipisarat ja laulava malja omaksi äänesi. Seuraavasta yöstä alkaen riittää kuun napautus.",
+    "cta": "Lataa ilmaiseksi App Storesta",
+    "note": "Kaikkia ääniä voi kuunnella ilmaiseksi. iPhonelle ja iPadille."
+  },
+  "problem": {
+    "title": "Onko nukahtamisäänen etsimiseen mennyt joskus tunti?",
+    "text": "Sade on liian yksitoikkoinen, aallot liian kovia ja video katkeaa mainokseen keskellä yötä. Dalbitissa kerrostat itse lempiäänesi, kunnes ne sopivat juuri sinulle, ja pidät tuloksen yhden kuun takana."
+  },
+  "features": [
+    {
+      "title": "Rakenna äänesi kerroksista",
+      "text": "Pinoa sadetta, vesipisaroita, linnunlaulua ja laulavia maljoja. Säädä jokaiselle kerrokselle äänenvoimakkuus, kuinka usein se kuuluu ja mistä suunnasta, ja lisää taustalle aaltoja tai pianoa.\nNimeä miksaus, tallenna se ja palaa siihen minä yönä tahansa.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Hiljenee herättämättä sinua",
+      "text": "Uniajastin ei koskaan katkaise ääntä kesken. Se hiljentää sitä hitaasti, jotta loppu ei herätä sinua.\nÄäni jatkuu näytön ollessa pimeänä tai toisessa appissa, ja jos et koske mihinkään, näyttö himmenee itsestään.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Aamulla herätys pehmeästi",
+      "text": "Aseta herätyksiä laulavalla maljalla, tiibetiläisellä maljalla, linnunlaululla tai käellä ja toista niitä valitseminasi viikonpäivinä.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Yksi kuu hoitaa kaiken",
+      "text": "Napauta kuuta toistaaksesi ja uudelleen keskeyttääksesi. Pyyhkäise sivulle vaihtaaksesi ääntä, ylös uniajastimeen ja alas tallennettuihin ääniin.\nKun ääni tuntuu oikealta, pidä sormea kuun päällä lisätäksesi sen suosikkeihin.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Alkuun kolmella askeleella",
+    "items": [
+      {
+        "title": "Napauta kuuta",
+        "text": "Avaa appi, napauta kuuta, ja ääni alkaa heti."
+      },
+      {
+        "title": "Pyyhkäise sivulle",
+        "text": "Selaa, kunnes löydät mieleisesi äänen."
+      },
+      {
+        "title": "Aseta ajastin ja käy makuulle",
+        "text": "Pyyhkäise ylös, valitse aika, ja sen jälkeen ääni hiipuu hitaasti."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Mitä kuu tekee",
+    "rows": [
+      [
+        "Napautus",
+        "toista, keskeytä"
+      ],
+      [
+        "Pyyhkäisy sivulle",
+        "seuraava ääni"
+      ],
+      [
+        "Pyyhkäisy ylös",
+        "uniajastin ja herätykset"
+      ],
+      [
+        "Pyyhkäisy alas",
+        "tallennetut äänet"
+      ],
+      [
+        "Pitkä painallus",
+        "lisää suosikkeihin"
+      ]
+    ],
+    "note": "Voit myös keskeyttää ja jatkaa lukitusnäytön toistosäätimistä."
+  },
+  "pricing": {
+    "title": "Kuuntelu on ilmaista. Premium on lisää luomista varten.",
+    "free": {
+      "name": "Ilmainen",
+      "items": [
+        "Kaikki äänet",
+        "Äänten kerrostaminen omaksi miksaukseksi",
+        "Enintään kolme tallennettua miksausta",
+        "Hiljalleen hiipuva uniajastin",
+        "Herätykset pehmeillä äänillä",
+        "Suosikit"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Luo ja tallenna miksauksia niin monta kuin haluat"
+      ],
+      "note": "Kuukausittain automaattisesti uusiutuva tilaus ilmaisella kokeilujaksolla"
+    },
+    "note": "Tilaus uusiutuu automaattisesti, ellei sitä peruta vähintään 24 tuntia ennen kuluvan jakson loppua, ja veloitus alkaa ilmaisen kokeilun päätyttyä. Applen vakiokäyttöehdot (EULA) ovat voimassa."
+  },
+  "faq": {
+    "title": "Usein kysyttyä",
+    "items": [
+      {
+        "q": "Miten toistan ja vaihdan ääniä?",
+        "a": "Napauta kuuta aloitusnäytöllä toistaaksesi ja uudelleen pysäyttääksesi. Pyyhkäise sivulle vaihtaaksesi ääntä, ylös uniajastimeen ja alas omaan kirjastoosi."
+      },
+      {
+        "q": "Loppuuko ääni, kun näyttö sammuu?",
+        "a": "Ei. Ääni jatkuu näytön ollessa pimeänä tai toisessa appissa. Pysäytä se napauttamalla kuuta uudelleen tai lukitusnäytön säätimillä."
+      },
+      {
+        "q": "Mitä tapahtuu, kun uniajastin päättyy?",
+        "a": "Ääni ei katkea äkisti. Se hiljenee vähitellen ja pysähtyy sitten, jotta et herää."
+      },
+      {
+        "q": "Herätys ei soi.",
+        "a": "Appi pyytää lupaa herätyksiin, kun luot ensimmäisen. Tarkista, että lupa on päällä kohdassa Asetukset > Dalbit."
+      },
+      {
+        "q": "Mihin miksaukseni tallentuvat?",
+        "a": "Miksaukset, herätykset ja asetukset ovat vain tällä laitteella. Jos poistat apin, ne poistuvat sen mukana."
+      },
+      {
+        "q": "Mitä voin käyttää ilmaiseksi?",
+        "a": "Kaikkia ääniä, kerrostamista ja enintään kolmea omaa miksausta. Uniajastin ja herätykset ovat myös ilmaisia. Premium poistaa miksausten määrärajan."
+      },
+      {
+        "q": "Miten peruutan tilauksen?",
+        "a": "Avaa Asetukset > Apple-tili > Tilaukset, valitse Dalbit ja peruuta. Jos et peruuta vähintään 24 tuntia ennen kuluvan jakson loppua, tilaus uusiutuu automaattisesti."
+      },
+      {
+        "q": "Vaihdoin puhelinta ja tilaus katosi.",
+        "a": "Kirjaudu samalla Apple-tilillä, avaa Dalbitin tilausnäkymä ja napauta Palauta ostot."
+      },
+      {
+        "q": "Miten ilmoitan virheestä tai ehdotan ominaisuutta?",
+        "a": "Lähetä palautetta apin asetuksista tai kirjoita alla olevaan osoitteeseen. Vastaamme yleensä muutaman päivän sisällä."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Tänä yönä\nnapauta vain kuuta",
+    "cta": "Lataa ilmaiseksi App Storesta"
+  },
+  "ui": {
+    "skip": "Siirry sisältöön",
+    "languages": "Kielet",
+    "privacy": "Tietosuojakäytäntö",
+    "contact": "Kysyttävää tai ideoita? Kirjoita osoitteeseen {email}."
+  }
+}

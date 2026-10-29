@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: stel je eigen slaapgeluid samen uit lagen",
+  "description": "Stapel regen, druppels en piano tot je eigen slaapgeluid, sla het één keer op en tik daarna elke nacht op de maan. Alle geluiden zijn gratis.",
+  "hero": {
+    "headline": "Verspil de nacht niet\naan zoeken naar het juiste geluid",
+    "lead": "Stapel één keer regen, waterdruppels en een klankschaal tot je eigen geluid. Vanaf de volgende nacht is het één tik op de maan.",
+    "cta": "Gratis downloaden in de App Store",
+    "note": "Alle geluiden zijn gratis te beluisteren. Voor iPhone en iPad."
+  },
+  "problem": {
+    "title": "Ooit een uur bezig geweest met iets zoeken om bij in slaap te vallen?",
+    "text": "De regen is te eentonig, de golven te hard en de video die je opzet wordt midden in de nacht onderbroken door een advertentie. Met Dalbit stapel je zelf de geluiden die je mooi vindt tot het precies bij jou past, en bewaar je het achter één maan."
+  },
+  "features": [
+    {
+      "title": "Bouw je geluid op in lagen",
+      "text": "Stapel regen, waterdruppels, vogelgezang en klankschalen. Stel per laag het volume in, hoe vaak hij klinkt en waar je hem hoort, en leg er golven of piano onder als achtergrondmuziek.\nGeef je mix een naam, sla hem op en zet hem elke nacht weer aan.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "Het sterft weg zonder je te wekken",
+      "text": "De slaaptimer kapt het geluid nooit abrupt af. Hij draait het langzaam zachter, zodat het einde je niet wakker maakt.\nHet geluid speelt door met het scherm uit of in een andere app, en als je niets aanraakt, dimt het scherm vanzelf.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "'s Ochtends zacht gewekt",
+      "text": "Zet wekkers met een klankschaal, Tibetaanse schaal, vogelgezang of koekoek en herhaal ze op de dagen die jij kiest.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "Eén maan voor alles",
+      "text": "Tik op de maan om af te spelen en nog eens om te pauzeren. Veeg opzij voor een ander geluid, omhoog voor de slaaptimer en omlaag voor je opgeslagen geluiden.\nVoelt een geluid goed? Houd de maan ingedrukt om het aan je favorieten toe te voegen.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "In drie stappen aan de slag",
+    "items": [
+      {
+        "title": "Tik op de maan",
+        "text": "Open de app, tik op de maan en het geluid begint meteen."
+      },
+      {
+        "title": "Veeg opzij",
+        "text": "Blijf vegen tot je een geluid vindt dat je bevalt."
+      },
+      {
+        "title": "Zet de timer en ga liggen",
+        "text": "Veeg omhoog, kies een tijd en daarna sterft het geluid langzaam weg."
+      }
+    ]
+  },
+  "reference": {
+    "title": "Wat de maan doet",
+    "rows": [
+      [
+        "Tikken",
+        "afspelen, pauzeren"
+      ],
+      [
+        "Opzij vegen",
+        "volgend geluid"
+      ],
+      [
+        "Omhoog vegen",
+        "slaaptimer en wekkers"
+      ],
+      [
+        "Omlaag vegen",
+        "opgeslagen geluiden"
+      ],
+      [
+        "Ingedrukt houden",
+        "toevoegen aan favorieten"
+      ]
+    ],
+    "note": "Je kunt ook pauzeren en verdergaan via de afspeelknoppen op het toegangsscherm."
+  },
+  "pricing": {
+    "title": "Luisteren is gratis. Premium is om meer te maken.",
+    "free": {
+      "name": "Gratis",
+      "items": [
+        "Alle geluiden",
+        "Geluiden stapelen tot je eigen mix",
+        "Tot drie mixen opslaan",
+        "Slaaptimer die langzaam uitfadet",
+        "Wekkers met zachte geluiden",
+        "Favorieten"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Maak en bewaar zoveel mixen als je wilt"
+      ],
+      "note": "Maandabonnement met automatische verlenging en gratis proefperiode"
+    },
+    "note": "Het abonnement wordt automatisch verlengd, tenzij je het minstens 24 uur voor het einde van de huidige periode opzegt. Na de gratis proefperiode wordt er afgerekend. De standaardgebruiksvoorwaarden van Apple (EULA) zijn van toepassing."
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "items": [
+      {
+        "q": "Hoe speel ik geluiden af en wissel ik ze?",
+        "a": "Tik op de maan op het beginscherm om af te spelen en nog eens om te stoppen. Veeg opzij voor een ander geluid, omhoog voor de slaaptimer en omlaag voor je bibliotheek."
+      },
+      {
+        "q": "Stopt het geluid als het scherm uitgaat?",
+        "a": "Nee. Het speelt door met het scherm uit of in een andere app. Tik nog eens op de maan of gebruik de knoppen op het toegangsscherm om het te stoppen."
+      },
+      {
+        "q": "Wat gebeurt er als de slaaptimer afloopt?",
+        "a": "Het geluid stopt niet abrupt. Het wordt geleidelijk zachter en stopt dan, zodat je niet wakker wordt."
+      },
+      {
+        "q": "Mijn wekker gaat niet af.",
+        "a": "Bij je eerste wekker vraagt de app om toestemming. Controleer of die aanstaat in Instellingen > Dalbit."
+      },
+      {
+        "q": "Waar worden mijn mixen bewaard?",
+        "a": "Je mixen, wekkers en instellingen staan alleen op dit apparaat. Verwijder je de app, dan verdwijnen ze ook."
+      },
+      {
+        "q": "Wat kan ik gratis gebruiken?",
+        "a": "Alle geluiden, lagen stapelen en tot drie eigen mixen. De slaaptimer en wekkers zijn ook gratis. Premium haalt de limiet op het aantal mixen weg."
+      },
+      {
+        "q": "Hoe zeg ik mijn abonnement op?",
+        "a": "Ga naar Instellingen > Apple Account > Abonnementen, kies Dalbit en zeg op. Zeg je niet minstens 24 uur voor het einde van de periode op, dan wordt het automatisch verlengd."
+      },
+      {
+        "q": "Nieuwe telefoon en mijn abonnement is weg.",
+        "a": "Log in met hetzelfde Apple Account, open het abonnementsscherm in Dalbit en tik op Herstel aankopen."
+      },
+      {
+        "q": "Hoe meld ik een fout of stel ik een functie voor?",
+        "a": "Stuur feedback via de instellingen van de app of mail naar het adres hieronder. Meestal reageren we binnen een paar dagen."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Vannacht\ntik je gewoon op de maan",
+    "cta": "Gratis downloaden in de App Store"
+  },
+  "ui": {
+    "skip": "Naar inhoud",
+    "languages": "Talen",
+    "privacy": "Privacybeleid",
+    "contact": "Vragen of ideeën? Mail naar {email}."
+  }
+}

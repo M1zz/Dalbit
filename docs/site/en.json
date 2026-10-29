@@ -1,0 +1,152 @@
+{
+  "title": "Dalbit: layer your own sleep sounds",
+  "description": "Layer rain, water drops and piano into a sleep sound of your own, save it once, then just tap the moon each night. Every sound is free.",
+  "hero": {
+    "headline": "Stop spending the night\nhunting for a sound",
+    "lead": "Layer rain, water drops and a singing bowl into a mix of your own once. From the next night on, it is a single tap on the moon.",
+    "cta": "Get it free on the App Store",
+    "note": "Every sound is free to play. Works on iPhone and iPad."
+  },
+  "problem": {
+    "title": "Ever lost an hour picking something to fall asleep to?",
+    "text": "The rain is too flat, the waves are too loud, and the video you put on stops for an ad halfway through. With Dalbit you stack the sounds you like into one that fits your ears, and keep it behind a single moon."
+  },
+  "features": [
+    {
+      "title": "Build your sound from layers",
+      "text": "Stack sounds like rain, water drops, birdsong and singing bowls. Set each layer's volume, how often it plays and where you hear it, then lay waves or piano underneath as background music.\nName the mix, save it, and come back to it any night.",
+      "shot": "02-studio"
+    },
+    {
+      "title": "It fades out without waking you",
+      "text": "The sleep timer never cuts the sound off. It turns it down slowly, so the ending does not pull you back awake.\nSound keeps playing with the screen off or in another app, and the screen dims on its own when you leave it alone.",
+      "shot": "04-timer"
+    },
+    {
+      "title": "Wake up to something gentle",
+      "text": "Set alarms that ring with a singing bowl, a Tibetan bowl, birdsong or a cuckoo, and repeat them on the days you choose.",
+      "shot": "05-alarm"
+    },
+    {
+      "title": "One moon does it all",
+      "text": "Tap the moon to play, tap again to pause. Swipe sideways for another sound, up for the sleep timer, down for your saved sounds.\nWhen a sound feels right, press and hold the moon to add it to your favorites.",
+      "shot": "03-library"
+    }
+  ],
+  "steps": {
+    "title": "Three steps to start",
+    "items": [
+      {
+        "title": "Tap the moon",
+        "text": "Open the app, tap the moon and the sound starts."
+      },
+      {
+        "title": "Swipe through",
+        "text": "Swipe sideways until a sound feels right."
+      },
+      {
+        "title": "Set a timer and lie down",
+        "text": "Swipe up, pick a time, and the sound fades out after it."
+      }
+    ]
+  },
+  "reference": {
+    "title": "What the moon does",
+    "rows": [
+      [
+        "Tap",
+        "play, pause"
+      ],
+      [
+        "Swipe sideways",
+        "next sound"
+      ],
+      [
+        "Swipe up",
+        "sleep timer and alarms"
+      ],
+      [
+        "Swipe down",
+        "your saved sounds"
+      ],
+      [
+        "Press and hold",
+        "add to favorites"
+      ]
+    ],
+    "note": "You can also pause and resume from the playback controls on the Lock Screen."
+  },
+  "pricing": {
+    "title": "Listening is free. Premium is for making more.",
+    "free": {
+      "name": "Free",
+      "items": [
+        "Play every sound",
+        "Layer sounds into your own mix",
+        "Save up to three mixes",
+        "Sleep timer that fades out",
+        "Gentle sound alarms",
+        "Favorites"
+      ]
+    },
+    "pro": {
+      "name": "Dalbit Premium",
+      "items": [
+        "Create and save as many mixes as you like"
+      ],
+      "note": "Monthly auto-renewing subscription with a free trial"
+    },
+    "note": "The subscription renews automatically unless cancelled at least 24 hours before the end of the current period, and you are charged when the free trial ends. Apple's standard Terms of Use (EULA) apply."
+  },
+  "faq": {
+    "title": "Questions",
+    "items": [
+      {
+        "q": "How do I play and change sounds?",
+        "a": "Tap the moon on the home screen to play, and tap it again to stop. Swipe sideways for another sound, up for the sleep timer, and down for your library."
+      },
+      {
+        "q": "Does the sound stop when the screen turns off?",
+        "a": "No. It keeps playing with the screen off or when you switch to another app. To stop it, tap the moon again or use the playback controls on the Lock Screen."
+      },
+      {
+        "q": "What happens when the sleep timer ends?",
+        "a": "The sound does not cut out. It gets quieter little by little and then stops, so it does not wake you."
+      },
+      {
+        "q": "My alarm doesn't ring.",
+        "a": "The app asks for alarm permission when you create your first alarm. Check that it is turned on in Settings > Dalbit."
+      },
+      {
+        "q": "Where are my mixes saved?",
+        "a": "Your mixes, alarms and settings stay on this device only. Deleting the app deletes them too."
+      },
+      {
+        "q": "What can I do for free?",
+        "a": "Play every sound, layer them, and save up to three mixes of your own. The sleep timer and alarms are free as well. Premium removes the limit on how many mixes you can make."
+      },
+      {
+        "q": "How do I cancel my subscription?",
+        "a": "Go to Settings > Apple Account > Subscriptions, choose Dalbit and cancel. It renews automatically unless you cancel at least 24 hours before the current period ends."
+      },
+      {
+        "q": "I switched phones and lost my subscription.",
+        "a": "Sign in with the same Apple Account, open the subscription screen in Dalbit and tap Restore Purchases."
+      },
+      {
+        "q": "How do I report a bug or suggest a feature?",
+        "a": "Use Settings > Send Feedback in the app, or email us at the address below. We usually reply within a few days."
+      }
+    ]
+  },
+  "closing": {
+    "headline": "Tonight,\njust tap the moon",
+    "cta": "Get it free on the App Store"
+  },
+  "ui": {
+    "skip": "Skip to content",
+    "languages": "Languages",
+    "privacy": "Privacy Policy",
+    "contact": "Questions or ideas? Write to {email}."
+  }
+}

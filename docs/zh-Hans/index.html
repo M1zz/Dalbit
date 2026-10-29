@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hans">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit - 助眠白噪音 · 支持</title>
-<meta name="description" content="Dalbit 是一款 iOS 应用，可以把自然声音层层叠加，调出属于你的白噪音。了解应用与获取支持。">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit：叠加声音，做出你自己的助眠白噪音</title>
+  <meta name="description" content="雨声上加水滴，再加一段钢琴。把喜欢的声音叠在一起保存一次，从第二天晚上起只要点一下月亮。所有声音都可免费收听。">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit：叠加声音，做出你自己的助眠白噪音">
+  <meta property="og:description" content="雨声上加水滴，再加一段钢琴。把喜欢的声音叠在一起保存一次，从第二天晚上起只要点一下月亮。所有声音都可免费收听。">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/zh-Hans/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
-  <a href="./" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
-  <a href="../th/" hreflang="th" lang="th">ไทย</a>
-  <a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="../tr/" hreflang="tr" lang="tr">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="bar">
+    <a class="brand" href="../zh-Hans/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">语言</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">调出属于你的完美白噪音</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>别再为了找助眠声音<br>耗掉整个晚上</h1>
+        <p class="lead">把雨声、水滴和颂钵叠成属于你的声音，保存一次，之后每晚点一下月亮就行。</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">在 App Store 免费下载</a></div>
+        <p class="muted small">所有声音均可免费收听。支持 iPhone 和 iPad。</p>
+      </div>
+      <div class="phone"><img src="../img/zh-Hans/01-moon.jpg" alt="别再为了找助眠声音 耗掉整个晚上" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>把自然的声音一层层叠加，做成你自己的白噪音，保存下来，随时再听。设计出帮助你入睡、专注或冥想的声音。</p>
-</div>
 
-<h2>功能</h2>
-<ul>
-  <li>🎵 多层声音混合</li>
-  <li>🔥 篝火画面</li>
-  <li>⏱️ 睡眠定时</li>
-  <li>💾 保存你自己的组合</li>
-</ul>
 
-<h2>支持</h2>
-<p>如有疑问、问题反馈或功能建议，请在应用的设置中发送反馈，或发邮件给我们：</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">常见问题与支持 →</a></p>
+    <section class="problem reveal">
+      <h2>睡前光是挑声音就花了一个小时？</h2>
+      <p>雨声太单调，海浪太吵，放个视频中途还插广告。Dalbit 让你把喜欢的声音亲手叠在一起，调成最合耳朵的样子，再把它收进一轮月亮里。</p>
+    </section>
 
-<h2>订阅</h2>
-<p>Dalbit Premium 是按月自动续订的订阅，可解锁不限数量的声音创作和所有类别。你可以随时在 App Store 账户设置中管理或取消订阅。</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>把喜欢的声音叠在一起</h2>
+        <p>雨声、水滴、鸟鸣、颂钵，一层层叠加。每一层都能调音量、出现的间隔和声音的位置，还能垫上海浪或钢琴作背景音乐。<br>做好的声音起个名字保存，随时都能再拿出来。</p>
+      </div>
+      <div class="phone"><img src="../img/zh-Hans/02-studio.jpg" alt="把喜欢的声音叠在一起" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>法律信息</h2>
-<ul>
-  <li><a href="privacy.html">隐私政策</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">使用条款 (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>睡着后悄悄停下，不把你吵醒</h2>
+        <p>睡眠定时器不会突然切断声音，而是慢慢调小再停下，让结束的那一刻不会把你惊醒。<br>关掉屏幕或切到别的应用，声音照样继续；放着不动，屏幕也会自己变暗。</p>
+      </div>
+      <div class="phone"><img src="../img/zh-Hans/04-timer.jpg" alt="睡着后悄悄停下，不把你吵醒" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>早上用温柔的声音叫醒你</h2>
+        <p>用颂钵、藏式颂钵、鸟鸣、布谷鸟等声音设置闹钟，还能按星期重复。</p>
+      </div>
+      <div class="phone"><img src="../img/zh-Hans/05-alarm.jpg" alt="早上用温柔的声音叫醒你" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>一轮月亮全搞定</h2>
+        <p>点一下月亮开始播放，再点一下暂停。左右滑换声音，上滑打开睡眠定时器，下滑打开已保存的声音。<br>听到喜欢的声音，长按月亮就能加入收藏。</p>
+      </div>
+      <div class="phone"><img src="../img/zh-Hans/03-library.jpg" alt="一轮月亮全搞定" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>三步就能开始</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>点一下月亮</h3><p>打开应用，点月亮，声音马上响起。</p></li>
+<li class="card"><span class="n">2</span><h3>左右滑一滑</h3><p>一直滑到听着顺耳的声音为止。</p></li>
+<li class="card"><span class="n">3</span><h3>定好时间，躺下</h3><p>上滑设定时间，到点后声音会慢慢消失。</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>月亮能做什么</h2>
+      <div class="card table">
+        <dl><div><dt>轻点</dt><dd>播放、暂停</dd></div><div><dt>左右滑动</dt><dd>切换声音</dd></div><div><dt>上滑</dt><dd>睡眠定时器和闹钟</dd></div><div><dt>下滑</dt><dd>已保存的声音</dd></div><div><dt>长按</dt><dd>加入收藏</dd></div></dl>
+      </div>
+      <p class="muted">也可以用锁定屏幕上的播放控制来暂停和继续。</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>收听免费，想做更多就用高级版</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>免费</h3>
+          <ul><li>收听所有声音</li><li>叠加声音做出自己的声音</li><li>最多保存 3 个自己的声音</li><li>慢慢淡出的睡眠定时器</li><li>温柔的声音闹钟</li><li>收藏</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit 高级版</h3>
+          <ul><li>不限数量地制作和保存自己的声音</li></ul>
+          <p class="muted">按月自动续期订阅，含免费试用</p>
+        </div>
+      </div>
+      <p class="muted">除非在当前周期结束前至少 24 小时取消，否则订阅会自动续期；免费试用结束后开始扣费。使用条款适用 Apple 标准许可协议（EULA）。</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>常见问题</h2>
+      <div class="faq"><details><summary>怎么播放和切换声音？</summary><p>点主屏幕上的月亮开始播放，再点一次停止。左右滑切换声音，上滑打开睡眠定时器，下滑打开我的声音。</p></details>
+<details><summary>关掉屏幕声音会停吗？</summary><p>不会。关掉屏幕或切换到其他应用，声音都会继续播放。要停止，请再点一下月亮，或使用锁定屏幕上的播放控制。</p></details>
+<details><summary>睡眠定时器结束后会怎样？</summary><p>到了设定的时间，声音不会突然中断，而是慢慢变小后停止，这样睡着后不会被吵醒。</p></details>
+<details><summary>闹钟不响。</summary><p>第一次创建闹钟时需要允许闹钟权限。请到“设置”&gt;“Dalbit”确认闹钟权限已打开。</p></details>
+<details><summary>我做的声音保存在哪里？</summary><p>你做的声音、闹钟和设置都只保存在这台设备上。删除应用会一并删除，请留意。</p></details>
+<details><summary>免费能用到什么程度？</summary><p>所有声音都能听，也能叠加声音并保存最多 3 个自己的声音。睡眠定时器和闹钟同样免费。订阅高级版后，自己的声音可以不限数量地制作。</p></details>
+<details><summary>怎么取消订阅？</summary><p>前往“设置”&gt;“Apple 账户”&gt;“订阅”，选择 Dalbit 即可取消。如果没有在当前周期结束前至少 24 小时取消，订阅会自动续期。</p></details>
+<details><summary>换了手机，订阅不见了。</summary><p>用同一个 Apple 账户登录，在 Dalbit 的订阅页面点“恢复购买”，订阅就会重新生效。</p></details>
+<details><summary>想反馈问题或提功能建议。</summary><p>请使用应用设置中的“给开发者反馈”，或发邮件到下面的地址。我们通常会在几天内回复。</p></details></div>
+      <p class="contact">有问题或想法，请发邮件到 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a>。</p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>今晚<br>点一下月亮就睡吧</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">在 App Store 免费下载</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="语言"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans" aria-current="page">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+    <p><a href="privacy.html">隐私政策</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

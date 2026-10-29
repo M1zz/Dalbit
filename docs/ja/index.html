@@ -1,118 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalbit - 睡眠用ホワイトノイズ</title>
-<meta name="description" content="自然の音を重ねて、自分だけのホワイトノイズを作れる iOS アプリ Dalbit の紹介ページです。">
-<link rel="canonical" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
-<link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
-<link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
-<link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
-<link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
-<link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
-<link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
-<link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
-<link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
-<link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
-<link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
-<link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
-<link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
-<link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
-<link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
-<link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
-<link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
-<link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
-<link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
-<link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
-<link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
-<link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
-<link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
-<link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Roboto, sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 20px 80px;
-    line-height: 1.7; color: #1c1c1e;
-    background: linear-gradient(160deg, #1a0d26 0%, #261533 100%);
-  }
-  body { color: #e5e5e7; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 36px; color: #fff; }
-  .tagline { color: #b89cff; font-size: 17px; margin-top: 0; }
-  a { color: #b89cff; }
-  .card {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(184,156,255,.25);
-    border-radius: 14px; padding: 20px 22px; margin: 18px 0;
-  }
-  ul { padding-left: 20px; }
-  .meta { color: #9b8fb0; font-size: 14px; }
-  footer { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
-  nav.langs { display:flex; gap:14px; flex-wrap:wrap; font-size:14px; margin-bottom:8px; }
-  nav.langs a[aria-current] { font-weight:700; text-decoration:none; color:#fff; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dalbit：音を重ねてつくる、自分だけの睡眠用ホワイトノイズ</title>
+  <meta name="description" content="雨音に水滴、その上にピアノ。好きな音を重ねて一度保存すれば、次の夜からは月をタップするだけ。すべての音を無料で聴けます。">
+  <meta name="theme-color" content="#6F6AD6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+  <meta name="apple-itunes-app" content="app-id=1626715109">
+  <link rel="canonical" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="ko" href="https://m1zz.github.io/Dalbit/">
+  <link rel="alternate" hreflang="en" href="https://m1zz.github.io/Dalbit/en/">
+  <link rel="alternate" hreflang="ja" href="https://m1zz.github.io/Dalbit/ja/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://m1zz.github.io/Dalbit/zh-Hans/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://m1zz.github.io/Dalbit/zh-Hant/">
+  <link rel="alternate" hreflang="ru" href="https://m1zz.github.io/Dalbit/ru/">
+  <link rel="alternate" hreflang="es" href="https://m1zz.github.io/Dalbit/es/">
+  <link rel="alternate" hreflang="de" href="https://m1zz.github.io/Dalbit/de/">
+  <link rel="alternate" hreflang="fr" href="https://m1zz.github.io/Dalbit/fr/">
+  <link rel="alternate" hreflang="it" href="https://m1zz.github.io/Dalbit/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://m1zz.github.io/Dalbit/pt-BR/">
+  <link rel="alternate" hreflang="th" href="https://m1zz.github.io/Dalbit/th/">
+  <link rel="alternate" hreflang="vi" href="https://m1zz.github.io/Dalbit/vi/">
+  <link rel="alternate" hreflang="cs" href="https://m1zz.github.io/Dalbit/cs/">
+  <link rel="alternate" hreflang="da" href="https://m1zz.github.io/Dalbit/da/">
+  <link rel="alternate" hreflang="el" href="https://m1zz.github.io/Dalbit/el/">
+  <link rel="alternate" hreflang="fi" href="https://m1zz.github.io/Dalbit/fi/">
+  <link rel="alternate" hreflang="id" href="https://m1zz.github.io/Dalbit/id/">
+  <link rel="alternate" hreflang="nb" href="https://m1zz.github.io/Dalbit/nb/">
+  <link rel="alternate" hreflang="nl" href="https://m1zz.github.io/Dalbit/nl/">
+  <link rel="alternate" hreflang="pl" href="https://m1zz.github.io/Dalbit/pl/">
+  <link rel="alternate" hreflang="sv" href="https://m1zz.github.io/Dalbit/sv/">
+  <link rel="alternate" hreflang="tr" href="https://m1zz.github.io/Dalbit/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://m1zz.github.io/Dalbit/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dalbit：音を重ねてつくる、自分だけの睡眠用ホワイトノイズ">
+  <meta property="og:description" content="雨音に水滴、その上にピアノ。好きな音を重ねて一度保存すれば、次の夜からは月をタップするだけ。すべての音を無料で聴けます。">
+  <meta property="og:url" content="https://m1zz.github.io/Dalbit/ja/">
+  <meta property="og:image" content="https://m1zz.github.io/Dalbit/img/ja/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../icon.png">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <link rel="stylesheet" href="../site.css">
+  <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
-<nav class="langs" aria-label="Language">
-  <a href="../" hreflang="ko" lang="ko">한국어</a>
-  <a href="../en/" hreflang="en" lang="en">English</a>
-  <a href="./" hreflang="ja" lang="ja" aria-current="true">日本語</a>
-  <a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
-  <a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
-  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
-  <a href="../es/" hreflang="es" lang="es">Español</a>
-  <a href="../de/" hreflang="de" lang="de">Deutsch</a>
-  <a href="../fr/" hreflang="fr" lang="fr">Français</a>
-  <a href="../it/" hreflang="it" lang="it">Italiano</a>
-  <a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
-  <a href="../th/" hreflang="th" lang="th">ไทย</a>
-  <a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
-  <a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
-  <a href="../da/" hreflang="da" lang="da">Dansk</a>
-  <a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
-  <a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
-  <a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
-  <a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
-  <a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
-  <a href="../pl/" hreflang="pl" lang="pl">Polski</a>
-  <a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
-  <a href="../tr/" hreflang="tr" lang="tr">Türkçe</a>
-</nav>
+  <a class="skip" href="#main">本文へスキップ</a>
+  <header class="bar">
+    <a class="brand" href="../ja/"><img src="../icon.png" alt="" width="32" height="32">Dalbit</a>
+    <a class="lang-link" href="#languages">言語</a>
+  </header>
 
-<h1>🌙 Dalbit</h1>
-<p class="tagline">自分だけの、ちょうどいいホワイトノイズを</p>
+  <main id="main">
+    <section class="hero">
+      <div class="copy">
+        <h1>眠るための音探しで<br>夜をつぶさないで</h1>
+        <p class="lead">雨音、水滴、シンギングボウルを重ねて自分の音を一度つくっておけば、次の夜からは月をタップするだけです。</p>
+        <div class="actions"><a class="cta" href="https://apps.apple.com/app/id1626715109">App Storeで無料ダウンロード</a></div>
+        <p class="muted small">すべての音を無料で聴けます。iPhoneとiPadに対応。</p>
+      </div>
+      <div class="phone"><img src="../img/ja/01-moon.jpg" alt="眠るための音探しで 夜をつぶさないで" width="720" height="1564" decoding="async"></div>
+    </section>
 
-<div class="card">
-  <p>自然の音をレイヤーのように重ねて、自分だけのホワイトノイズを作り、保存して、いつでも聴き直せます。眠りや集中、瞑想に合う音を自分の手でデザインしてみてください。</p>
-</div>
 
-<h2>主な機能</h2>
-<ul>
-  <li>🎵 いくつもの音を重ねるマルチレイヤーミックス</li>
-  <li>🔥 たき火のビジュアル</li>
-  <li>⏱️ スリープタイマー</li>
-  <li>💾 お気に入りの組み合わせを保存</li>
-</ul>
 
-<h2>サポート</h2>
-<p>ご質問、不具合の報告、機能のご要望は、アプリの設定画面からフィードバックを送るか、下記のメールアドレスまでお送りください。</p>
-<p>📧 <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a></p>
-<p><a href="support.html">よくある質問とサポート →</a></p>
+    <section class="problem reveal">
+      <h2>寝る前に、音を選ぶだけで1時間たっていたことはありませんか？</h2>
+      <p>雨音は単調すぎて、波の音は大きすぎて、動画を流せば途中で広告が入る。Dalbitなら、好きな音どうしを自分で重ねて耳にぴったりの音をつくり、それを月ひとつにしまっておけます。</p>
+    </section>
 
-<h2>サブスクリプション</h2>
-<p>Dalbit プレミアムは自動更新の月額サブスクリプションです。サウンドを無制限に作成でき、すべてのカテゴリを利用できます。サブスクリプションは App Store のアカウント設定からいつでも管理・解約できます。</p>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>好きな音を重ねてつくる</h2>
+        <p>雨音、水滴、鳥のさえずり、シンギングボウルなどを何層にも重ねます。音ごとに音量、鳴る間隔、聞こえる位置を調整し、波の音やピアノをBGMとして敷くこともできます。<br>できた音は名前をつけて保存し、いつでも呼び出せます。</p>
+      </div>
+      <div class="phone"><img src="../img/ja/02-studio.jpg" alt="好きな音を重ねてつくる" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<h2>法的情報</h2>
-<ul>
-  <li><a href="privacy.html">プライバシーポリシー</a></li>
-  <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">利用規約 (EULA)</a></li>
-</ul>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>眠ったあと、起こさずに消える</h2>
+        <p>スリープタイマーは音をぷつりと切らず、ゆっくり小さくしてから止めます。終わる瞬間に目が覚めないための動きです。<br>画面を消しても別のアプリに切り替えても音は続き、放っておくと画面は自動で暗くなります。</p>
+      </div>
+      <div class="phone"><img src="../img/ja/04-timer.jpg" alt="眠ったあと、起こさずに消える" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
-<footer>
-  <p class="meta">© 2026 Dalbit · <a href="https://github.com/M1zz/Dalbit">GitHub</a></p>
-</footer>
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>朝はやさしい音で起こす</h2>
+        <p>シンギングボウル、チベタンボウル、鳥のさえずり、カッコウなどの音でアラームを設定できます。曜日ごとの繰り返しにも対応しています。</p>
+      </div>
+      <div class="phone"><img src="../img/ja/05-alarm.jpg" alt="朝はやさしい音で起こす" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
 
+    <section class="feature reveal">
+      <div class="copy">
+        <h2>月ひとつで全部できる</h2>
+        <p>月をタップすると再生、もう一度タップで停止。横にスワイプで別の音、上でスリープタイマー、下で保存した音のライブラリが開きます。<br>気に入った音が流れたら、月を長押ししてお気に入りに追加しましょう。</p>
+      </div>
+      <div class="phone"><img src="../img/ja/03-library.jpg" alt="月ひとつで全部できる" width="720" height="1564" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="reveal">
+      <h2>はじめ方は3ステップ</h2>
+      <ol class="steps"><li class="card"><span class="n">1</span><h3>月をタップ</h3><p>アプリを開いて月をタップすれば、すぐに音が流れます。</p></li>
+<li class="card"><span class="n">2</span><h3>横にスワイプ</h3><p>気に入る音が見つかるまで横にめくってみてください。</p></li>
+<li class="card"><span class="n">3</span><h3>タイマーをセットして横になる</h3><p>上にスワイプして時間を決めれば、その後で音がゆっくり消えます。</p></li></ol>
+    </section>
+
+    <section class="reveal" id="commands">
+      <h2>月でできること</h2>
+      <div class="card table">
+        <dl><div><dt>タップ</dt><dd>再生、停止</dd></div><div><dt>横にスワイプ</dt><dd>別の音へ</dd></div><div><dt>上にスワイプ</dt><dd>スリープタイマーとアラーム</dd></div><div><dt>下にスワイプ</dt><dd>保存した音のライブラリ</dd></div><div><dt>長押し</dt><dd>お気に入りに追加</dd></div></dl>
+      </div>
+      <p class="muted">ロック画面の再生コントロールからも停止・再開できます。</p>
+    </section>
+
+
+    <section class="reveal" id="pricing">
+      <h2>聴くのは無料、たくさんつくるならプレミアム</h2>
+      <div class="plans">
+        <div class="card plan free">
+          <h3>無料</h3>
+          <ul><li>すべての音を再生</li><li>音を重ねて自分の音をつくる</li><li>自分の音を3つまで保存</li><li>ゆっくり消えるスリープタイマー</li><li>やさしい音のアラーム</li><li>お気に入り</li></ul>
+          
+        </div>
+        <div class="card plan pro">
+          <h3>Dalbit プレミアム</h3>
+          <ul><li>自分の音を数の制限なくつくって保存</li></ul>
+          <p class="muted">無料トライアル付きの月額自動更新サブスクリプション</p>
+        </div>
+      </div>
+      <p class="muted">サブスクリプションは、現在の期間が終わる24時間前までに解約しない限り自動で更新され、無料トライアル終了後に料金が発生します。利用規約はAppleの標準利用規約（EULA）に準じます。</p>
+    </section>
+
+    <section class="reveal" id="faq">
+      <h2>よくある質問</h2>
+      <div class="faq"><details><summary>音の再生や切り替えはどうすればいいですか？</summary><p>ホーム画面の月をタップすると再生、もう一度タップで停止します。横にスワイプすると別の音に、上にスワイプでスリープタイマー、下にスワイプで自分の音のライブラリが開きます。</p></details>
+<details><summary>画面を消すと音は止まりますか？</summary><p>いいえ。画面を消しても、別のアプリに切り替えても音は流れ続けます。止めるには月をもう一度タップするか、ロック画面の再生コントロールを使ってください。</p></details>
+<details><summary>スリープタイマーが終わるとどうなりますか？</summary><p>設定した時間になると、音はいきなり切れずに少しずつ小さくなってから止まります。眠ったあとに目が覚めないための動きです。</p></details>
+<details><summary>アラームが鳴りません。</summary><p>最初にアラームをつくるときに、アラームの許可が必要です。設定アプリ &gt; Dalbit でアラームの許可がオンになっているか確認してください。</p></details>
+<details><summary>つくった音はどこに保存されますか？</summary><p>つくった音、アラーム、設定はすべてこのデバイスの中だけに保存されます。アプリを削除すると一緒に消えるのでご注意ください。</p></details>
+<details><summary>無料でどこまで使えますか？</summary><p>すべての音を聴けて、音を重ねた自分の音を3つまで保存できます。スリープタイマーとアラームも無料です。プレミアムに登録すると、自分の音を数の制限なくつくれます。</p></details>
+<details><summary>サブスクリプションの解約方法は？</summary><p>設定アプリ &gt; Appleアカウント &gt; サブスクリプション で Dalbit を選んで解約できます。現在の期間が終わる24時間前までに解約しないと、自動で更新されます。</p></details>
+<details><summary>機種変更したらサブスクリプションが外れました。</summary><p>同じAppleアカウントでサインインし、Dalbitのサブスクリプション画面で「購入を復元」をタップすると、再び適用されます。</p></details>
+<details><summary>不具合の報告や機能の要望を送りたいです。</summary><p>アプリの設定からフィードバックを送るか、下記のメールアドレスまでお送りください。通常は数日以内にお返事します。</p></details></div>
+      <p class="contact">ご質問やご意見は <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> までお送りください。</p>
+    </section>
+
+    <section class="closing reveal">
+      <h2>今夜は<br>月をタップして眠るだけ</h2>
+      <a class="cta" href="https://apps.apple.com/app/id1626715109">App Storeで無料ダウンロード</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav id="languages" class="langs" aria-label="言語"><a href="../" hreflang="ko" lang="ko">한국어</a>
+<a href="../en/" hreflang="en" lang="en">English</a>
+<a href="../ja/" hreflang="ja" lang="ja" aria-current="page">日本語</a>
+<a href="../zh-Hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+<a href="../zh-Hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+<a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../fr/" hreflang="fr" lang="fr">Français</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+<a href="../pt-BR/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a>
+<a href="../th/" hreflang="th" lang="th">ไทย</a>
+<a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+<a href="../cs/" hreflang="cs" lang="cs">Čeština</a>
+<a href="../da/" hreflang="da" lang="da">Dansk</a>
+<a href="../el/" hreflang="el" lang="el">Ελληνικά</a>
+<a href="../fi/" hreflang="fi" lang="fi">Suomi</a>
+<a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a>
+<a href="../nb/" hreflang="nb" lang="nb">Norsk bokmål</a>
+<a href="../nl/" hreflang="nl" lang="nl">Nederlands</a>
+<a href="../pl/" hreflang="pl" lang="pl">Polski</a>
+<a href="../sv/" hreflang="sv" lang="sv">Svenska</a>
+<a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></nav>
+    <p><a href="privacy.html">プライバシーポリシー</a> · <a href="mailto:mizzking75@gmail.com">mizzking75@gmail.com</a> · © 2026 Dalbit</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

@@ -187,6 +187,9 @@
       if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
     }), { rootMargin: "0px 0px -10% 0px" });
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    document.querySelectorAll(".langs a").forEach(a => a.addEventListener("click", () => {
+      try { localStorage.setItem("sitegen-lang", a.hreflang) } catch (e) {}
+    }));
   </script>
 </body>
 </html>

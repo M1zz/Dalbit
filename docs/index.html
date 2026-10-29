@@ -44,6 +44,25 @@
   <link rel="stylesheet" href="sitegen.css">
   <style>:root{--accent:#6F6AD6}@media (prefers-color-scheme:dark){:root{--accent:#A8A4F2}}</style>
   <script>document.documentElement.classList.add("js")</script>
+  <script>(function () {
+    var P = {"ko": "", "en": "en/", "ja": "ja/", "zh-Hans": "zh-Hans/", "zh-Hant": "zh-Hant/", "ru": "ru/", "es": "es/", "de": "de/", "fr": "fr/", "it": "it/", "pt-BR": "pt-BR/", "th": "th/", "vi": "vi/", "cs": "cs/", "da": "da/", "el": "el/", "fi": "fi/", "id": "id/", "nb": "nb/", "nl": "nl/", "pl": "pl/", "sv": "sv/", "tr": "tr/"}, here = "ko", want;
+    try { want = localStorage.getItem("sitegen-lang"); } catch (e) {}
+    function match(tag) {
+      var t = (tag || "").toLowerCase(), b = t.split("-")[0], ks = Object.keys(P), i;
+      for (i = 0; i < ks.length; i++) if (ks[i].toLowerCase() === t) return ks[i];
+      if (b === "zh") return /hant|tw|hk|mo/.test(t) ? (P["zh-Hant"] !== undefined ? "zh-Hant" : null) : (P["zh-Hans"] !== undefined ? "zh-Hans" : null);
+      if (b === "no" || b === "nn") b = "nb";
+      if (P[b] !== undefined) return b;
+      for (i = 0; i < ks.length; i++) if (ks[i].toLowerCase().split("-")[0] === b) return ks[i];
+      return null;
+    }
+    if (!(want in P)) {
+      want = null;
+      var ls = navigator.languages || [navigator.language];
+      for (var i = 0; i < ls.length && !want; i++) want = match(ls[i]);
+    }
+    if (want && want !== here) location.replace(P[want] + location.hash);
+  })();</script>
 </head>
 <body>
   <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -187,6 +206,9 @@
       if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) }
     }), { rootMargin: "0px 0px -10% 0px" });
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    document.querySelectorAll(".langs a").forEach(a => a.addEventListener("click", () => {
+      try { localStorage.setItem("sitegen-lang", a.hreflang) } catch (e) {}
+    }));
   </script>
 </body>
 </html>

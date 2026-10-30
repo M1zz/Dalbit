@@ -58,7 +58,8 @@ struct AlarmEditView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(L.Common.save.localized) { save() }
+                // 아이콘이 있어야 세로로 서는 툴바(아이폰 듀오)에서도 사라지지 않는다
+                Button { save() } label: { Label(L.Common.save.localized, systemImage: "checkmark") }
                     .font(DS.Font.headline())
             }
         }

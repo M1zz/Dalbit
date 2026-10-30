@@ -66,6 +66,8 @@ struct DalbitApp: App {
                 .environmentObject(subscriptionManager)
                 // 사용량이 쌓이면 "즐겁게 쓰고 계신가요?" → 만족 시 리뷰 / 아쉬움 시 피드백
                 .leeoSatisfactionCheck(DalbitSpec.self)
+                // 아이폰 듀오: 접힘을 재서 아래로 흘리고, 시트 · 알림창이 접힌 선을 비킨다 (LeeoKit Fold)
+                .foldAware()
         }
         .onChange(of: scenePhase) { _, phase in
             // 사람이 실제로 앞으로 가져온 순간만 활동으로 센다(콜드 런치 + 백그라운드 복귀).

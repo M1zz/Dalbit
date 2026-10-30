@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LeeoKit
 
 struct MainTabView: View {
 
@@ -20,21 +21,32 @@ struct MainTabView: View {
     @State private var showWhatsNew = false
 
     var body: some View {
-        NavigationStack {
-            ListenListView()
-                .environmentObject(appState)
-                // 업데이트 뒤 처음 열 때 한 번. 첫 실행 안내와 다른 뷰에 걸어 두 표지가 겹치지 않게 한다.
-                .fullScreenCover(isPresented: $showWhatsNew) {
-                    WhatsNewView {
-                        lastSeenWhatsNew = WhatsNewContent.version
-                        showWhatsNew = false
+        // 접혀 있거나 보통 아이폰이면 달 화면만 선다. 지금 화면 그대로.
+        // 아이폰 듀오를 펴면 달(손잡이: 누르면 재생, 옆으로 밀면 다음 소리, 위아래로 보관함 · 타이머)은
+        // 왼쪽(세로면 아래)에 그대로 있고, 오른쪽(위)에 지금 듣는 소리의 플레이어가 선다.
+        // 들어가는 화면(만들기 · 설정)은 NavigationStack 째 달 쪽 판 안에서 열린다.
+        FoldSplitView {
+            NavigationStack {
+                ListenListView()
+                    .environmentObject(appState)
+                    // 업데이트 뒤 처음 열 때 한 번. 첫 실행 안내와 다른 뷰에 걸어 두 표지가 겹치지 않게 한다.
+                    .fullScreenCover(isPresented: $showWhatsNew) {
+                        WhatsNewView {
+                            lastSeenWhatsNew = WhatsNewContent.version
+                            showWhatsNew = false
+                        }
+                        .foldConfined()
                     }
-                }
+            }
+        } result: {
+            SoundPlayerFullModalView()
+                .background(ScreenBackground().ignoresSafeArea())
         }
         .onAppear(perform: decideWhatsNew)
         .fullScreenCover(isPresented: Binding(get: { !didShowOnboarding },
                                               set: { if !$0 { didShowOnboarding = true } })) {
             OnboardingView { didShowOnboarding = true }
+                .foldConfined()
         }
         // 우주 같은 검은 테마로 고정 (디자인 시스템의 다크 색이 대비까지 맞춰 적용됨)
         .preferredColorScheme(.dark)

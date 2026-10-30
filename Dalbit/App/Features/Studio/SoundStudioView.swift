@@ -94,7 +94,8 @@ struct SoundStudioView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { showSaveAlert = true }) {
-                    Text(L.Common.done.localized)
+                    // 아이콘이 있어야 세로로 서는 툴바(아이폰 듀오)에서도 사라지지 않는다
+                    Label(L.Common.done.localized, systemImage: "checkmark")
                         .font(DS.Font.headline())
                         .foregroundColor(canSave ? DS.Colors.accent : DS.Colors.textTertiary)
                 }

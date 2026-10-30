@@ -87,7 +87,8 @@ struct SoundDetailView: View {
 
                         isShowingSheet.toggle()
                     } label: {
-                        Text(L.Common.next.localized)
+                        // 아이콘이 있어야 세로로 서는 툴바(아이폰 듀오)에서도 사라지지 않는다
+                        Label(L.Common.next.localized, systemImage: "arrow.right")
                             .foregroundColor(DS.Colors.accent)
                             .font(DS.Font.subhead().weight(.semibold))
                     }

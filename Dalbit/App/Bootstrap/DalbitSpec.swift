@@ -15,7 +15,7 @@ import LeeoKit
 
 enum DalbitSpec: LeeoAppSpec {
     static let appName = "달빛"
-    static let developerEmail = "mizzking75@gmail.com"
+    static let developerEmail = "leeo@kakao.com"
 
     /// App Store 앱 ID — '리뷰 쓰기' 가 작성 페이지로 바로 간다.
     /// 확인: `curl "https://itunes.apple.com/lookup?bundleId=com.leeo.LullabyRecipe"`

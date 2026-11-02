@@ -207,8 +207,10 @@ final class AlarmService: ObservableObject {
     // MARK: - 영속화
 
     private func loadFromDisk() {
-        guard let data = UserDefaults.standard.data(forKey: storageKey),
-              let decoded = try? JSONDecoder().decode([AlarmItem].self, from: data) else {
+        guard let data = UserDefaults.standard.data(forKey: storageKey) else { return }
+        guard let decoded = try? JSONDecoder().decode([AlarmItem].self, from: data) else {
+            // 못 읽은 원본을 옆에 남긴다 — 빈 목록으로 시작해 다음 저장이 덮어써도 되찾을 수 있게
+            UserDefaults.standard.set(data, forKey: storageKey + ".unreadable")
             return
         }
         alarms = decoded

@@ -919,8 +919,9 @@ extension AudioEngineManager {
         
         guard let audioFile = audioFile else { return nil }
         
-        let buffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat,
-                                      frameCapacity: AVAudioFrameCount(audioFile.length))!
+        // 빈 파일(길이 0)이면 버퍼를 못 만든다 — 죽지 않고 소리 없이 넘어간다
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat,
+                                            frameCapacity: AVAudioFrameCount(audioFile.length)) else { return nil }
         do {
             try audioFile.read(into: buffer)
         } catch {
@@ -1104,8 +1105,9 @@ extension AudioEngineManager {
                                                   "\(audioFile.length) frames")
         defer { Log.signposter.endInterval("DecodeBackground", decode) }
 
-        let buffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat,
-                                      frameCapacity: AVAudioFrameCount(audioFile.length))!
+        // 빈 파일(길이 0)이면 버퍼를 못 만든다 — 죽지 않고 소리 없이 넘어간다
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat,
+                                            frameCapacity: AVAudioFrameCount(audioFile.length)) else { return nil }
         do {
             try audioFile.read(into: buffer)
         } catch {

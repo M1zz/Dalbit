@@ -107,7 +107,7 @@ struct SoundDetailView: View {
                 }
                 DispatchQueue.main.async {
                     viewModel.sound = originalSound
-                    viewModel.filters = viewModel.filterDictionary[viewModel.sound.category]!
+                    viewModel.filters = viewModel.filterDictionary[viewModel.sound.category] ?? []
 
                     // 편집 모드일 경우 기존 값 로드
                     if isEditMode, let editing = editingSound {

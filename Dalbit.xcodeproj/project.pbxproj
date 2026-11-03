@@ -16,6 +16,7 @@
 		3DE87622142CE17C3291BC13 /* CityRain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93ED06BCF44652CAE8CE3BEE /* CityRain.mp3 */; };
 		438AE9E9D7E551CAF938FAD1 /* BowlLoud.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B8A77712079DB40B0C16ED8 /* BowlLoud.mp3 */; };
 		4C408C2D0DE14B0D8C47B526 /* PresetSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E999CF36B64FB99C403643 /* PresetSound.swift */; };
+		4E1993A307C18D4771175DA6 /* SoundIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47F0AC6836518D071B83FD /* SoundIntents.swift */; };
 		530FD5BD0868BCC6754A00B8 /* WhatsNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79B03902B72CDF56D97AE3 /* WhatsNewView.swift */; };
 		588E497E2149E7014D230078 /* Underwater.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B4FEE92929BD0B763A07376B /* Underwater.mp3 */; };
 		58DE61832839C13900F25769 /* DalbitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE61822839C13900F25769 /* DalbitApp.swift */; };
@@ -46,6 +47,7 @@
 		630903C8F065B61C9BFA760B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 03C047869B83EAF5E36D4BC3 /* Localizable.xcstrings */; };
 		66377C5C0E9E1368AF2F267E /* SoftRain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B53790AB535F668DEE440512 /* SoftRain.mp3 */; };
 		68D504FD5581CF0ED5A04FC3 /* TibetanBowl.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFDBD9965458E87AF0E53BAD /* TibetanBowl.mp3 */; };
+		6FF39CD4FDD3881417AB1F78 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 51731B46AC2DB27399582744 /* AppShortcuts.xcstrings */; };
 		75354543A5E8166988F68832 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 66CD3FD68AA60AEBEC914643 /* PrivacyInfo.xcprivacy */; };
 		7AB1D9C3BDB047F962FCF0AA /* Atmosphere.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B44E72EC850D0D85EA34FB9A /* Atmosphere.mp3 */; };
 		7D67B162D63C04774E04D71B /* LaunchSafety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8F310DFD602D2103B4BBF /* LaunchSafety.swift */; };
@@ -235,6 +237,7 @@
 		39AA5589C6B322081300DF31 /* RainMaker.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = RainMaker.mp3; sourceTree = "<group>"; };
 		4AA37CA828D3656800B0F8FF /* LockScreenWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LockScreenWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
 		4AA37CA928D370E400B0F8FF /* WatchOSLockScreenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchOSLockScreenWidgetExtension.entitlements; sourceTree = "<group>"; };
+		51731B46AC2DB27399582744 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; path = App/Resources/AppShortcuts.xcstrings; sourceTree = "<group>"; };
 		583CFF872F28E8AA00F05CD0 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		58DE617F2839C13900F25769 /* Dalbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58DE61822839C13900F25769 /* DalbitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DalbitApp.swift; sourceTree = "<group>"; };
@@ -312,6 +315,7 @@
 		B44E72EC850D0D85EA34FB9A /* Atmosphere.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Atmosphere.mp3; sourceTree = "<group>"; };
 		B4FEE92929BD0B763A07376B /* Underwater.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Underwater.mp3; sourceTree = "<group>"; };
 		B53790AB535F668DEE440512 /* SoftRain.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = SoftRain.mp3; sourceTree = "<group>"; };
+		BA47F0AC6836518D071B83FD /* SoundIntents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SoundIntents.swift; sourceTree = "<group>"; };
 		BGS000012F2C0000000000J1 /* BackgroundSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSound.swift; sourceTree = "<group>"; };
 		BM85F0000000000000000000 /* brain_massage_01_sub_drone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_01_sub_drone.mp3; sourceTree = "<group>"; };
 		BM85F0000000000000000001 /* brain_massage_02_bass_root.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brain_massage_02_bass_root.mp3; sourceTree = "<group>"; };
@@ -582,6 +586,7 @@
 				D4B5C3647D837C396E18D4C1 /* Localization */,
 				03C047869B83EAF5E36D4BC3 /* Localizable.xcstrings */,
 				D4A1B17E0000000000000002 /* InfoPlist.xcstrings */,
+				51731B46AC2DB27399582744 /* AppShortcuts.xcstrings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -835,6 +840,7 @@
 				SPL237534525200F /* SavedSoundsListView.swift */,
 				8F5A0EBE2A15FBDD0061F42C /* SoundPlayerFullModalView.swift */,
 				99AA00012EF1960000000001 /* SoundThumbnailView.swift */,
+				BA47F0AC6836518D071B83FD /* SoundIntents.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -1105,6 +1111,7 @@
 				3DE87622142CE17C3291BC13 /* CityRain.mp3 in Resources */,
 				E60AC831B23D8791A00A6D47 /* RainMaker.mp3 in Resources */,
 				75354543A5E8166988F68832 /* PrivacyInfo.xcprivacy in Resources */,
+				6FF39CD4FDD3881417AB1F78 /* AppShortcuts.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,6 +1211,7 @@
 				530FD5BD0868BCC6754A00B8 /* WhatsNewView.swift in Sources */,
 				9E72EB520F93F723BF962857 /* Log.swift in Sources */,
 				7D67B162D63C04774E04D71B /* LaunchSafety.swift in Sources */,
+				4E1993A307C18D4771175DA6 /* SoundIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

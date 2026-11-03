@@ -12,6 +12,8 @@ import SwiftUI
  View와 직접적으로 사운드 데이터 바인딩하는 ViewModel 객체
  */
 final class CustomSoundViewModel: ObservableObject {
+    /// 앱 화면과 Siri 인텐트가 같은 재생기를 쓴다 (→ SoundIntents.swift).
+    @MainActor static let shared = CustomSoundViewModel()
     
     // MARK: - Properties
     /// 필터가 변경되었을 때 호출될 클로저

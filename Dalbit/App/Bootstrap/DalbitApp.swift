@@ -14,7 +14,7 @@ struct DalbitApp: App {
     @UIApplicationDelegateAdaptor var delegate: AppDelegate
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var appState = AppState()
-    @StateObject private var viewModel = CustomSoundViewModel()
+    @StateObject private var viewModel = CustomSoundViewModel.shared
     @StateObject private var subscriptionManager = SubscriptionManager()
 
     init() {

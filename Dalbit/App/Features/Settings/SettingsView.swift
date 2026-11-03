@@ -365,20 +365,36 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: DS.Spacing.sm) {
             sectionTitle(L.Settings.sectionAbout.localized)
 
-            // 앱 버전 — 7번 연속 탭하면 개발자 인박스(접수된 피드백)가 열린다
-            Button(action: versionTapped) {
-                settingRow(icon: "moon.stars",
-                           iconColor: DS.Colors.textSecondary,
-                           title: L.Settings.version.localized,
-                           subtitle: nil) {
-                    Text(appVersion)
-                        .font(DS.Font.subhead())
-                        .foregroundColor(DS.Colors.textSecondary)
+            VStack(spacing: 0) {
+                // 백업 및 복원 — 매일 · 업데이트 직전 자동 백업을 보고 되살린다 (LeeoKit 금고)
+                NavigationLink { LeeoVaultView(appName: DalbitSpec.displayName) } label: {
+                    settingRow(icon: "externaldrive.badge.timemachine",
+                               iconColor: DS.Colors.accent,
+                               title: LeeoVaultText.entry,
+                               subtitle: nil) {
+                        chevron()
+                    }
                 }
+                .buttonStyle(.plain)
+                .accessibilityLabel(LeeoVaultText.entry)
+
+                divider()
+
+                // 앱 버전 — 7번 연속 탭하면 개발자 인박스(접수된 피드백)가 열린다
+                Button(action: versionTapped) {
+                    settingRow(icon: "moon.stars",
+                               iconColor: DS.Colors.textSecondary,
+                               title: L.Settings.version.localized,
+                               subtitle: nil) {
+                        Text(appVersion)
+                            .font(DS.Font.subhead())
+                            .foregroundColor(DS.Colors.textSecondary)
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("\(L.Settings.version.localized) \(appVersion)")
             }
-            .buttonStyle(.plain)
             .dsGlassPanel(radius: DS.Radius.md)
-            .accessibilityLabel("\(L.Settings.version.localized) \(appVersion)")
         }
     }
 

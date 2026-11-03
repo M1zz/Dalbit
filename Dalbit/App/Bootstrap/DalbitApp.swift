@@ -18,6 +18,9 @@ struct DalbitApp: App {
     @StateObject private var subscriptionManager = SubscriptionManager()
 
     init() {
+        // 백업 금고: 예약된 복원 · 업데이트 직전 백업을 저장소가 열리기 전에 한다
+        LeeoVault.start(DalbitSpec.self)
+
         // 크래시 루프 가드 — 직전 실행들이 연달아 죽었으면 이번엔 세이프 모드(2D 달)로 연다.
         // 무엇보다 먼저 판단해야 화면이 그려지기 전에 무거운 경로를 피할 수 있다.
         LaunchSafety.begin()

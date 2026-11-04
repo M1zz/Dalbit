@@ -6,8 +6,11 @@
 //   - "달빛으로 빗소리 틀어줘": 내가 만든 소리나 기본 소리를 이름으로 골라 튼다.
 //   - "달빛 꺼줘": 천천히 줄이며 끈다.
 //
+//  내가 만든 소리는 Spotlight 에 색인해 Siri 가 이름으로 찾게 한다. 기본 소리는 고정 목록이라 색인하지 않는다.
+//
 
 import AppIntents
+import CoreSpotlight
 import Foundation
 
 struct DalbitSoundEntity: AppEntity {
@@ -44,6 +47,18 @@ struct DalbitSoundEntity: AppEntity {
     }
 }
 
+extension DalbitSoundEntity: IndexedEntity {}
+
+extension DalbitSoundEntity {
+    /// 내가 만든 소리만 다시 색인한다. 앱을 열 때 · 뒤로 보낼 때 부른다.
+    static func reindex() async {
+        let mine = all().filter { $0.id.hasPrefix("custom:") }
+        let index = CSSearchableIndex.default()
+        try? await index.deleteAppEntities(ofType: DalbitSoundEntity.self)
+        try? await index.indexAppEntities(mine)
+    }
+}
+
 struct DalbitSoundQuery: EntityStringQuery {
     func entities(for identifiers: [String]) async throws -> [DalbitSoundEntity] {
         let wanted = Set(identifiers)
@@ -67,6 +82,7 @@ struct PlaySoundIntent: AppIntent {
     static let openAppWhenRun = true
 
     @Parameter(title: LocalizedStringResource("소리", comment: "Siri: sound parameter"),
+               description: LocalizedStringResource("내가 만든 소리나 기본 소리 중 틀 소리입니다.", comment: "Siri: sound parameter description"),
                requestValueDialog: IntentDialog(LocalizedStringResource("어떤 소리를 틀까요?", comment: "Siri: ask which sound")))
     var sound: DalbitSoundEntity
 
@@ -74,6 +90,13 @@ struct PlaySoundIntent: AppIntent {
     func perform() async throws -> some IntentResult {
         if let playable = sound.sound() { CustomSoundViewModel.shared.play(with: playable) }
         return .result()
+    }
+
+    /// 앱에서 저장한 소리를 골라 틀면 Siri 에게 알려 준다. 다음에 Siri 가 이 동작을 더 잘 고른다.
+    static func donate(_ sound: CustomSound) {
+        var intent = PlaySoundIntent()
+        intent.sound = DalbitSoundEntity(id: "custom:\(sound.id.uuidString)", title: sound.title)
+        Task { _ = try? await intent.donate() }
     }
 }
 

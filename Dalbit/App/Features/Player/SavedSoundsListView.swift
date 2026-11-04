@@ -477,6 +477,7 @@ struct SavedSoundsListView: View {
         print("🎵 [SavedSoundsListView] 사운드 선택: \(sound.title)")
         viewModel.selectedSound = sound
         viewModel.play(with: sound)
+        PlaySoundIntent.donate(sound)
         dismiss()
     }
 

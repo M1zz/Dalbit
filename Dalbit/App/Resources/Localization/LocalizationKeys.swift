@@ -808,6 +808,8 @@ enum L {
         static let widgetsDetail = "roadmap.widgets.detail"
         static let shortcutsTitle = "roadmap.shortcuts.title"
         static let shortcutsDetail = "roadmap.shortcuts.detail"
+        static let siriAITitle = "roadmap.siri_ai.title"
+        static let siriAIDetail = "roadmap.siri_ai.detail"
         static let syncTitle = "roadmap.sync.title"
         static let syncDetail = "roadmap.sync.detail"
         static let backupTitle = "roadmap.backup.title"

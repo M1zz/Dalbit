@@ -76,6 +76,8 @@ struct DalbitApp: App {
             // 사람이 실제로 앞으로 가져온 순간만 활동으로 센다(콜드 런치 + 백그라운드 복귀).
             // 실행 횟수는 프로세스당 1회로 UsageReportingService 가 눌러 준다.
             if phase == .active { UsageReportingService.reportForegroundOpen() }
+            // Siri · Spotlight 가 내가 만든 소리를 이름으로 찾게 다시 색인한다.
+            if phase == .active || phase == .background { Task { await DalbitSoundEntity.reindex() } }
         }
     }
 

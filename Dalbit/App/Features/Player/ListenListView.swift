@@ -444,21 +444,7 @@ struct ListenListView: View {
                     .offset(x: orbAppearOffsetX, y: orbAppearOffsetY)   // 등장 시 기울어진 방향에서 굴러옴
                     .opacity(orbEntranceReady ? 1 : 0)                  // 시작 위치 잡기 전 숨김
                     .animation(.easeInOut(duration: 0.6), value: orbTint)
-                    .accessibilityElement()
-                    .accessibilityLabel(viewModel.isPlaying ? L.A11y.pause.localized : L.A11y.play.localized)
-                    .accessibilityValue(currentSoundTitle)
-                    .accessibilityAddTraits(.isButton)
-                    // 두 번 탭 = 재생/일시정지. 화면 전체 제스처에 맡기지 않고 직접 잇는다.
-                    .accessibilityAction { togglePlay(); pressOrb() }
-                    .accessibilityAction(named: Text(L.A11y.nextSound.localized)) { nextSound() }
-                    .accessibilityAction(named: Text(L.A11y.favorite.localized)) { toggleFavoriteCurrent() }
-                    .accessibilityAction(named: Text(L.A11y.timerButton.localized)) { goTo(2) }
-                    .accessibilityAction(named: Text(L.A11y.savedSoundsButton.localized)) { goTo(0) }
-                    // 음성 제어: "달 탭" · "재생 탭" · "일시정지 탭" 어느 쪽으로 불러도 된다.
-                    .accessibilityIdentifier("home.moon")
-                    .accessibilityInputLabels([Text(L.Voice.moon.localized),
-                                               Text(L.Voice.play.localized),
-                                               Text(L.Voice.pause.localized)])
+                    .modifier(MoonAccessibility(view: self))
 
                     // 달을 지그시 누르면 떠오르는 하트 팝 (즐겨찾기에 담았을 때)
                     if heartBurst {
@@ -1215,3 +1201,39 @@ struct ListenListView_Previews: PreviewProvider {
 }
 
 // MARK: - Saved Sounds List View
+
+/// 달 하나에 몰린 제스처(탭·옆으로 밀기·길게 누르기·위아래 밀기)를 VoiceOver 동작과 음성 제어 이름으로 연다.
+/// 본문 수식어 사슬이 길어 형 검사가 멈추므로 따로 뺐다.
+private struct MoonAccessibility: ViewModifier {
+    let view: ListenListView
+
+    func body(content: Content) -> some View {
+        content
+            .accessibilityElement()
+            .accessibilityLabel(view.moonA11yLabel)
+            .accessibilityValue(view.moonA11yValue)
+            .accessibilityAddTraits(.isButton)
+            // 두 번 탭 = 재생/일시정지. 화면 전체 제스처에 맡기지 않고 직접 잇는다.
+            .accessibilityAction { view.moonA11yToggle() }
+            .accessibilityAction(named: Text(L.A11y.nextSound.localized)) { view.moonA11yNext() }
+            .accessibilityAction(named: Text(L.A11y.previousSound.localized)) { view.moonA11yPrevious() }
+            .accessibilityAction(named: Text(L.A11y.favorite.localized)) { view.moonA11yFavorite() }
+            .accessibilityAction(named: Text(L.A11y.timerButton.localized)) { view.moonA11yGoTo(2) }
+            .accessibilityAction(named: Text(L.A11y.savedSoundsButton.localized)) { view.moonA11yGoTo(0) }
+            // 음성 제어: "달 탭" · "재생 탭" · "일시정지 탭" 어느 쪽으로 불러도 된다.
+            .accessibilityIdentifier("home.moon")
+            .accessibilityInputLabels([Text(L.Voice.moon.localized),
+                                       Text(L.Voice.play.localized),
+                                       Text(L.Voice.pause.localized)])
+    }
+}
+
+fileprivate extension ListenListView {
+    var moonA11yLabel: String { viewModel.isPlaying ? L.A11y.pause.localized : L.A11y.play.localized }
+    var moonA11yValue: String { currentSoundTitle }
+    func moonA11yToggle() { togglePlay(); pressOrb() }
+    func moonA11yNext() { nextSound() }
+    func moonA11yPrevious() { prevSound() }
+    func moonA11yFavorite() { toggleFavoriteCurrent() }
+    func moonA11yGoTo(_ page: Int) { goTo(page) }
+}

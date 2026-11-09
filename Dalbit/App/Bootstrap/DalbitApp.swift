@@ -69,6 +69,8 @@ struct DalbitApp: App {
                 .environmentObject(subscriptionManager)
                 // 사용량이 쌓이면 "즐겁게 쓰고 계신가요?" → 만족 시 리뷰 / 아쉬움 시 피드백
                 .leeoSatisfactionCheck(DalbitSpec.self)
+                // 개발자가 보낸 의견에 답장하면, 앱이 앞으로 올 때 답장을 시트로 보여 준다 (LeeoKit).
+                .leeoFeedbackReplyNotice(DalbitSpec.self)
                 // 아이폰 듀오: 접힘을 재서 아래로 흘리고, 시트 · 알림창이 접힌 선을 비킨다 (LeeoKit Fold)
                 .foldAware()
         }

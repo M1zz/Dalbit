@@ -203,16 +203,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		21B7A66E28A31DE800E90744 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CC5AC116289C033D00FE847B /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -236,7 +226,6 @@
 		376796FB8C85B14BDDABC649 /* Jungle.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = Jungle.mp3; sourceTree = "<group>"; };
 		39AA5589C6B322081300DF31 /* RainMaker.mp3 */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = audio.mp3; path = RainMaker.mp3; sourceTree = "<group>"; };
 		4AA37CA828D3656800B0F8FF /* LockScreenWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LockScreenWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
-		4AA37CA928D370E400B0F8FF /* WatchOSLockScreenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchOSLockScreenWidgetExtension.entitlements; sourceTree = "<group>"; };
 		51731B46AC2DB27399582744 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; path = App/Resources/AppShortcuts.xcstrings; sourceTree = "<group>"; };
 		583CFF872F28E8AA00F05CD0 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		58DE617F2839C13900F25769 /* Dalbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dalbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,7 +432,6 @@
 			isa = PBXGroup;
 			children = (
 				583CFF872F28E8AA00F05CD0 /* Products.storekit */,
-				4AA37CA928D370E400B0F8FF /* WatchOSLockScreenWidgetExtension.entitlements */,
 				4AA37CA828D3656800B0F8FF /* LockScreenWidgetExtensionExtension.entitlements */,
 				CC5AC18F289D573A00FE847B /* RelaxOnWidgetExtension.entitlements */,
 				58DE61812839C13900F25769 /* Dalbit */,
@@ -930,7 +918,6 @@
 				58DE617B2839C13900F25769 /* Sources */,
 				58DE617C2839C13900F25769 /* Frameworks */,
 				58DE617D2839C13900F25769 /* Resources */,
-				21B7A66E28A31DE800E90744 /* Embed Watch Content */,
 				CC5AC116289C033D00FE847B /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -1320,7 +1307,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1328,7 +1315,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -1377,7 +1363,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1385,7 +1371,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};

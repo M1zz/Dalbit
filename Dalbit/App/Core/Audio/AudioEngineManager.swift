@@ -42,7 +42,8 @@ final class AudioEngineManager: ObservableObject {
     private var backgroundPlayer = AVAudioPlayerNode()
     private var backgroundVolumeEffect = AVAudioMixerNode()
     private var backgroundAudioFile: AVAudioFile?
-    private var backgroundBuffer: AVAudioPCMBuffer?
+    /// 배경음 반복의 세대. 다시 걸 때마다 올려, 앞 세대의 완료 콜백이 줄을 잇지 못하게 한다.
+    private var backgroundLoopGeneration = 0
     @Published var backgroundVolume: Float = 0.3 {
         didSet {
             backgroundVolumeEffect.outputVolume = backgroundVolume
@@ -260,7 +261,7 @@ extension AudioEngineManager {
         }
 
         // 배경음이 재생 중이었다면 루프 버퍼를 다시 스케줄하고 재생 재개
-        if currentBackgroundSound != nil, backgroundBuffer != nil {
+        if currentBackgroundSound != nil, backgroundAudioFile != nil {
             scheduleBackgroundLoop()
             if !backgroundPlayer.isPlaying {
                 backgroundPlayer.play()
@@ -1062,7 +1063,6 @@ extension AudioEngineManager {
 
         do {
             backgroundAudioFile = try AVAudioFile(forReading: fileURL)
-            backgroundBuffer = prepareBackgroundBuffer()
 
             if !engine.attachedNodes.contains(backgroundPlayer) {
                 engine.attach(backgroundPlayer)
@@ -1097,30 +1097,29 @@ extension AudioEngineManager {
         currentBackgroundSound = nil
     }
 
-    /// 배경음 버퍼 준비
-    private func prepareBackgroundBuffer() -> AVAudioPCMBuffer? {
-        guard let audioFile = backgroundAudioFile else { return nil }
-        // 10분짜리 mp3 를 통째로 PCM 으로 푼다 — 앱에서 가장 무거운 한 번.
-        let decode = Log.signposter.beginInterval("DecodeBackground", id: Log.signposter.makeSignpostID(),
-                                                  "\(audioFile.length) frames")
-        defer { Log.signposter.endInterval("DecodeBackground", decode) }
-
-        // 빈 파일(길이 0)이면 버퍼를 못 만든다 — 죽지 않고 소리 없이 넘어간다
-        guard let buffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat,
-                                            frameCapacity: AVAudioFrameCount(audioFile.length)) else { return nil }
-        do {
-            try audioFile.read(into: buffer)
-        } catch {
-            Log.audio.failure("Failed to read background buffer")
-            return nil
-        }
-        return buffer
+    /// 배경음 반복 (10분 파일을 계속 돈다).
+    ///
+    /// 파일을 PCM 으로 통째로 풀지 않고 디스크에서 흘려 보낸다. 예전에는 10분 · 48kHz 스테레오를
+    /// 한 버퍼(약 230MB)로 풀어 `.loops` 로 걸었는데, 그 디코딩이 메인 스레드에서 돌아 재생을 누를 때
+    /// 2초씩 멈췄다(4.1.1 멈춤 진단: `prepareBackgroundBuffer`).
+    /// 두 바퀴를 미리 걸어 두고 한 바퀴를 다 쓸 때마다 한 바퀴를 더 건다 — 이음새 없이 돈다.
+    private func scheduleBackgroundLoop() {
+        guard let file = backgroundAudioFile, file.length > 0 else { return }
+        backgroundLoopGeneration &+= 1
+        let generation = backgroundLoopGeneration
+        enqueueBackgroundPass(file, generation: generation)
+        enqueueBackgroundPass(file, generation: generation)
     }
 
-    /// 배경음 루프 스케줄링 (10분 파일을 계속 반복)
-    private func scheduleBackgroundLoop() {
-        guard let buffer = backgroundBuffer else { return }
-
-        backgroundPlayer.scheduleBuffer(buffer, at: nil, options: .loops) { }
+    private func enqueueBackgroundPass(_ file: AVAudioFile, generation: Int) {
+        backgroundPlayer.scheduleSegment(file, startingFrame: 0, frameCount: AVAudioFrameCount(file.length),
+                                         at: nil, completionCallbackType: .dataConsumed) { [weak self] _ in
+            DispatchQueue.main.async {
+                // 멈췄거나(stop 도 완료 콜백을 부른다) 새로 걸었으면 잇지 않는다.
+                guard let self, self.backgroundLoopGeneration == generation,
+                      self.backgroundPlayer.isPlaying else { return }
+                self.enqueueBackgroundPass(file, generation: generation)
+            }
+        }
     }
 }

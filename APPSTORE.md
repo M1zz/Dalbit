@@ -16,7 +16,7 @@
 
 ### 프로모션 텍스트
 
-잠들 소리를 찾느라 밤을 보내지 마세요. 마음에 드는 소리를 겹쳐 한 번 저장하면, 다음 날 밤부터는 달을 한 번 누르면 됩니다.
+밤이 길어지는 겨울, 잠들 소리를 찾느라 뒤척이지 마세요. 마음에 드는 소리를 겹쳐 한 번 저장하면, 그다음 밤부터는 달을 한 번 누르면 됩니다.
 
 ### 설명
 
@@ -82,7 +82,7 @@ soundscape,nature,stream,mixer,calm,forest,ambient,brown,tibetan,lullaby,insomni
 
 ### 프로모션 텍스트
 
-Stop spending the night hunting for the right sound. Layer the ones you love, save the mix once, and from tomorrow night it is a single tap on the moon.
+Long winter nights deserve better than hunting for a sleep sound. Layer the sounds you love into your own mix, save it once, and every night after is one tap on the moon.
 
 ### 설명
 
@@ -148,7 +148,7 @@ Dalbit：睡眠用ホワイトノイズ
 
 ### 프로모션 텍스트
 
-眠るための音探しで、夜を終わらせないでください。好きな音を重ねて一度保存すれば、次の夜からは月をタップするだけです。
+夜が長くなる冬、眠るための音探しで寝返りを打つのはやめましょう。好きな音を重ねて一度保存すれば、次の夜からは月をタップするだけです。
 
 ### 설명
 
@@ -214,7 +214,7 @@ ambient,insomnia,lullaby,asmr,tibetan,thunderstorm,crickets,ocean,nap,relax,calm
 
 ### 프로모션 텍스트
 
-Stop spending the night hunting for the right sound. Layer the ones you love, save the mix once, and from tomorrow night it is a single tap on the moon.
+Long winter nights deserve better than hunting for a sleep sound. Layer the sounds you love into your own mix, save it once, and every night after is one tap on the moon.
 
 ### 설명
 
@@ -280,7 +280,7 @@ Dalbit：助眠白噪音与自然声
 
 ### 프로모션 텍스트
 
-别再为找一个能入睡的声音熬掉整晚。把喜欢的声音叠在一起，保存一次，从明晚起，只要点一下月亮就够了。
+冬夜漫长，别再翻来覆去地找助眠声音。把喜欢的声音叠成你自己的组合，保存一次，之后每个晚上只要点一下月亮。
 
 ### 설명
 
@@ -346,7 +346,7 @@ Dalbit：睡眠白噪音與自然聲
 
 ### 프로모션 텍스트
 
-別再為了找一個能入睡的聲音耗掉整晚。把喜歡的聲音疊在一起，存下來一次，從隔天晚上起，只要點一下月亮就好。
+冬夜漫長，別再翻來覆去找助眠的聲音。把喜歡的聲音疊成你自己的組合，存下來一次，之後每個晚上只要點一下月亮。
 
 ### 설명
 
@@ -412,7 +412,7 @@ Dalbit: сон и белый шум
 
 ### 프로모션 텍스트
 
-Не тратьте ночь на поиски звука для сна. Наложите любимые звуки друг на друга, сохраните один раз — и со следующей ночи достаточно коснуться луны.
+Зимние ночи длинные — не тратьте их на поиски звука для сна. Сложите любимые звуки в свой микс, сохраните один раз, и дальше каждую ночь хватит одного касания луны.
 
 ### 설명
 
@@ -478,7 +478,7 @@ dormir,insomnio,relajación,naturaleza,olas,mar,tormenta,truenos,nana,siesta,med
 
 ### 프로모션 텍스트
 
-Deja de pasar la noche buscando el sonido ideal. Superpón los que te gustan, guarda la mezcla una vez y, desde mañana, bastará un toque en la luna.
+Las noches de invierno son largas: no las pases buscando sonidos para dormir. Mezcla los que te gustan, guárdalos una vez y cada noche bastará un toque en la luna.
 
 ### 설명
 
@@ -544,7 +544,7 @@ Einschlafen,Durchschlafen,Meditation,Klangschale,Baby,Gewitter,Wecker,Ambient,AS
 
 ### 프로모션 텍스트
 
-Verbring die Nacht nicht mit der Suche nach dem passenden Sound. Mische deine Lieblingsklänge, speichere den Mix einmal – ab morgen Nacht genügt ein Tipp auf den Mond.
+Lange Winternächte sind zu schade für die Suche nach dem passenden Sound. Mische deine Lieblingsklänge, speichere den Mix einmal – dann reicht ein Tipp auf den Mond.
 
 ### 설명
 
@@ -610,7 +610,7 @@ insomnie,relaxation,méditation,ambiance,ASMR,berceuse,sieste,vagues,orage,minut
 
 ### 프로모션 텍스트
 
-Ne passez plus la nuit à chercher le bon son. Superposez ceux que vous aimez, enregistrez le mix une fois : dès demain soir, un seul toucher sur la lune suffit.
+Les longues nuits d'hiver méritent mieux que la chasse au bon son. Superposez vos sons préférés, enregistrez le mix une fois : chaque soir, un toucher sur la lune suffit.
 
 ### 설명
 
@@ -676,7 +676,7 @@ rumore,bianco,relax,meditazione,insonnia,nanna,ninnananna,onde,mare,temporale,gr
 
 ### 프로모션 텍스트
 
-Non passare la notte a cercare il suono giusto. Sovrapponi quelli che ami, salva il mix una volta e dalla sera dopo basta un tocco sulla luna.
+Le lunghe notti d'inverno non sono fatte per cercare il suono giusto. Sovrapponi quelli che ami nel tuo mix, salvalo una volta e ogni sera basterà un tocco sulla luna.
 
 ### 설명
 
@@ -742,7 +742,7 @@ ruído,branco,insônia,relaxar,meditação,ondas,mar,tibetana,cochilo,foco,estud
 
 ### 프로모션 텍스트
 
-Chega de passar a noite atrás do som certo. Misture os que você ama, salve uma vez e, a partir da noite seguinte, basta um toque na lua.
+Fim de ano agitado e a cabeça não desliga? Misture os sons que você ama no seu próprio mix, salve uma vez e, a partir daí, toda noite basta um toque na lua.
 
 ### 설명
 
@@ -808,7 +808,7 @@ Dalbit: เสียงไวต์นอยส์ช่วยนอน
 
 ### 프로모션 텍스트
 
-อย่าให้ทั้งคืนหมดไปกับการหาเสียงนอน ซ้อนเสียงที่ชอบแล้วบันทึกไว้ครั้งเดียว คืนต่อไปก็แค่แตะดวงจันทร์หนึ่งครั้ง
+ปลายปีงานยุ่ง อย่าเสียเวลานอนไปกับการหาเสียงที่ใช่ ซ้อนเสียงที่ชอบเป็นเสียงของคุณเอง บันทึกไว้ครั้งเดียว คืนต่อไปก็แค่แตะดวงจันทร์ครั้งเดียว
 
 ### 설명
 
@@ -874,7 +874,7 @@ thư giãn,thiền,an giấc,ASMR,sóng biển,tiếng suối,sấm sét,lửa t
 
 ### 프로모션 텍스트
 
-Đừng thức cả đêm để tìm âm thanh dễ ngủ. Xếp chồng những âm thanh bạn thích, lưu lại một lần, từ đêm sau chỉ cần chạm vào mặt trăng.
+Cuối năm bận rộn, đừng mất thêm giờ ngủ để tìm âm thanh. Xếp chồng những âm thanh bạn thích thành bản phối riêng, lưu một lần, từ đêm sau chỉ cần chạm vào mặt trăng.
 
 ### 설명
 
@@ -940,7 +940,7 @@ bílý,hnědý,růžový,usínání,nespavost,relaxace,meditace,ukolébavka,vlny
 
 ### 프로모션 텍스트
 
-Nestrávte noc hledáním toho pravého zvuku. Vrstvěte oblíbené, mix jednou uložte a od příští noci stačí jedno klepnutí na měsíc.
+Dlouhé zimní noci je škoda trávit hledáním zvuku na spaní. Navrstvěte oblíbené zvuky do vlastního mixu, jednou ho uložte a každou další noc stačí klepnout na měsíc.
 
 ### 설명
 
@@ -1006,7 +1006,7 @@ naturlyde,afslapning,meditation,søvnløshed,lur,bølger,havet,tordenvejr,ambien
 
 ### 프로모션 텍스트
 
-Brug ikke natten på at lede efter den rette lyd. Læg dine yndlingslyde i lag, gem mixet én gang, og fra næste aften er det ét tryk på månen.
+De lange vinternætter er for gode til at lede efter den rette lyd. Læg dine yndlingslyde i lag til dit eget mix, gem det én gang, og derefter er det ét tryk på månen.
 
 ### 설명
 
@@ -1072,7 +1072,7 @@ Dalbit: Ήχοι για ύπνο
 
 ### 프로모션 텍스트
 
-Μην περνάτε τη νύχτα ψάχνοντας ήχο για ύπνο. Στρώστε τους αγαπημένους σας, αποθηκεύστε το μίξ και από την επόμενη νύχτα αρκεί ένα πάτημα στο φεγγάρι.
+Οι μεγάλες νύχτες του χειμώνα δεν είναι για ψάξιμο ήχου. Στρώστε τους αγαπημένους σας ήχους, αποθηκεύστε το μίξ μία φορά και κάθε βράδυ αρκεί ένα πάτημα στο φεγγάρι.
 
 ### 설명
 
@@ -1138,7 +1138,7 @@ unettomuus,nukahtaminen,rentoutus,meditaatio,ambient,laulukulho,ukkonen,aallot,p
 
 ### 프로모션 텍스트
 
-Älä vietä yötä etsimällä oikeaa ääntä. Kerrosta suosikkisi, tallenna yhdistelmä kerran, ja ensi yöstä alkaen riittää yksi napautus kuuhun.
+Pitkät talviyöt ovat liian arvokkaita oikean äänen etsimiseen. Kerrosta suosikkiäänesi omaksi yhdistelmäksi, tallenna se kerran, ja joka yö riittää yksi napautus kuuhun.
 
 ### 설명
 
@@ -1204,7 +1204,7 @@ white,noise,brown,pink,asmr,meditasi,insomnia,nyenyak,ombak,petir,mangkuk,tibet,
 
 ### 프로모션 텍스트
 
-Jangan habiskan malam untuk mencari suara yang pas. Tumpuk suara favoritmu, simpan sekali, dan mulai malam berikutnya cukup satu ketukan di bulan.
+Akhir tahun sibuk, jangan habiskan malam mencari suara yang pas. Tumpuk suara favoritmu jadi racikan sendiri, simpan sekali, lalu tiap malam cukup ketuk bulan.
 
 ### 설명
 
@@ -1270,7 +1270,7 @@ sovne,innsovning,søvnløs,natur,bølger,klangskål,ambient,meditasjon,asmr,vugg
 
 ### 프로모션 텍스트
 
-Bruk ikke natten på å lete etter riktig lyd. Legg lydene du liker i lag, lagre miksen én gang, så er det ett trykk på månen fra neste natt.
+De lange vinternettene er for gode til å lete etter riktig lyd. Legg lydene du liker i lag til din egen miks, lagre den én gang, så er det ett trykk på månen hver kveld.
 
 ### 설명
 
@@ -1336,7 +1336,7 @@ inslapen,doorslapen,slapeloos,slaapmuziek,wekker,meditatie,klankschaal,golven,on
 
 ### 프로모션 텍스트
 
-Zoek niet de hele nacht naar het juiste geluid. Leg je favorieten over elkaar, bewaar de mix één keer en vanaf morgen is het één tik op de maan.
+Lange winternachten zijn te kostbaar om naar het juiste geluid te zoeken. Leg je favorieten over elkaar, bewaar de mix één keer en daarna is het één tik op de maan.
 
 ### 설명
 
@@ -1402,7 +1402,7 @@ bezsenność,kołysanka,relaks,medytacja,drzemka,ASMR,fale,ocean,burza,świerszc
 
 ### 프로모션 텍스트
 
-Nie spędzaj nocy na szukaniu dźwięku do snu. Nałóż warstwy ulubionych, zapisz miks raz, a od następnej nocy wystarczy jedno stuknięcie księżyca.
+Długie zimowe noce szkoda tracić na szukanie dźwięku do snu. Nałóż ulubione dźwięki we własny miks, zapisz go raz, a potem co noc wystarczy jedno stuknięcie księżyca.
 
 ### 설명
 
@@ -1468,7 +1468,7 @@ naturljud,regnljud,avslappning,insomning,sova,vaggvisa,tupplur,åska,vågor,klan
 
 ### 프로모션 텍스트
 
-Lägg inte natten på att leta efter ljud att somna till. Mixa ljuden du gillar, spara mixen en gång, och från nästa kväll räcker det med ett tryck på månen.
+De långa vinternätterna är för fina för att leta ljud att somna till. Mixa ljuden du gillar, spara mixen en gång, och sedan räcker ett tryck på månen varje kväll.
 
 ### 설명
 
@@ -1534,7 +1534,7 @@ ninni,uykusuzluk,dalga,ambient,meditasyon,odaklanma,ders,şömine,kamp,ateş,şi
 
 ### 프로모션 텍스트
 
-Uyumak için ses ararken geceyi harcamayın. Sevdiğiniz sesleri üst üste koyun, karışımı bir kez kaydedin; ertesi geceden itibaren Ay'a tek dokunuş yeter.
+Uzun kış gecelerini uyku sesi aramakla geçirmeyin. Sevdiğiniz sesleri üst üste koyup kendi karışımınızı yapın, bir kez kaydedin; sonra her gece Ay'a tek dokunuş yeter.
 
 ### 설명
 

@@ -65,15 +65,15 @@ struct ListenListView: View {
     // 달 중심의 화면(global) 좌표 — 달 길게 누르기(즐겨찾기) 판정용
     @State private var orbCenter: CGPoint = .zero
     // 달이 우주를 떠다니는 느낌 — 0~1을 아주 느리게 왕복한다.
-    // 가로·세로 주기를 서로 다르게(47초 / 31초) 줘야 같은 길을 오가는 게 아니라
-    // 천천히 배회하는 궤적이 된다.
+    // 가로·세로 주기를 서로 다르게(90초 / 70초) 줘야 같은 길을 오가는 게 아니라
+    // 천천히 배회하는 궤적이 된다. 움직이는 것을 눈치채기 어려울 만큼 느려야 마음이 편하다.
     @State private var floatX: CGFloat = 0
     @State private var floatY: CGFloat = 0
     @State private var isFloating = false
     /// 내가 흔들리는 폭. 가장 가까운 것(달)이 이만큼 움직이고,
     /// 먼 것일수록 조금만 움직인다 — 이 차이(시차)가 "내가 움직인다"로 읽히게 한다.
-    private static let floatRangeX: CGFloat = 56
-    private static let floatRangeY: CGFloat = 34
+    private static let floatRangeX: CGFloat = 36
+    private static let floatRangeY: CGFloat = 22
     /// 시차 계수 — 별(가장 멀다) < 앰비언트 천체 < 달(가장 가깝다)
     private static let parallaxStars: CGFloat = 0.22
     private static let parallaxCosmic: CGFloat = 0.34
@@ -335,7 +335,7 @@ struct ListenListView: View {
     }
 
     /// 달이 우주를 떠다니듯 아주 느리게 흘러가게 한다.
-    /// 가로·세로 주기가 달라(47초 / 31초) 왕복이 아니라 천천히 배회하는 궤적이 된다.
+    /// 가로·세로 주기가 달라(90초 / 70초) 왕복이 아니라 천천히 배회하는 궤적이 된다.
     private func startFloating() {
         guard !isFloating else { return }
         guard !reduceMotion else {
@@ -348,10 +348,10 @@ struct ListenListView: View {
         // repeatForever는 반드시 다음 런루프에서 건다.
         // 같은 트랜잭션에서 걸면 그 프레임에 함께 바뀐 다른 상태까지 이 애니메이션에 끌려간다.
         DispatchQueue.main.async {
-            withAnimation(.easeInOut(duration: 47).repeatForever(autoreverses: true)) {
+            withAnimation(.easeInOut(duration: 90).repeatForever(autoreverses: true)) {
                 floatX = 1
             }
-            withAnimation(.easeInOut(duration: 31).repeatForever(autoreverses: true)) {
+            withAnimation(.easeInOut(duration: 70).repeatForever(autoreverses: true)) {
                 floatY = 1
             }
         }

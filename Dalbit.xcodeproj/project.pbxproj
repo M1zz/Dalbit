@@ -128,7 +128,7 @@
 		FIN000022F2800000000000A /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FIN000012F28000000000009 /* FileInfo.swift */; };
 		IDM000022FB0000000002 /* IdleDimming.swift in Sources */ = {isa = PBXBuildFile; fileRef = IDM000012FB0000000001 /* IdleDimming.swift */; };
 		INS000022F2C0000000000H2 /* InsightComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = INS000012F2C0000000000H1 /* InsightComponents.swift */; };
-		MJ0000022FB000000000E /* MoonJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = MJ0000012FB000000000D /* MoonJourney.swift */; };
+		MJ0000022FB000000000E /* MoonDrift.swift in Sources */ = {isa = PBXBuildFile; fileRef = MJ0000012FB000000000D /* MoonDrift.swift */; };
 		MN3000022FB000000000C /* Moon3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MN3000012FB000000000B /* Moon3DView.swift */; };
 		ONB489283305800B /* AboutDalbitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ONB489283305800F /* AboutDalbitView.swift */; };
 		ONB606431003400B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ONB606431003400F /* OnboardingView.swift */; };
@@ -345,7 +345,7 @@
 		FIN000012F28000000000009 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
 		IDM000012FB0000000001 /* IdleDimming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleDimming.swift; sourceTree = "<group>"; };
 		INS000012F2C0000000000H1 /* InsightComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightComponents.swift; sourceTree = "<group>"; };
-		MJ0000012FB000000000D /* MoonJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonJourney.swift; sourceTree = "<group>"; };
+		MJ0000012FB000000000D /* MoonDrift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonDrift.swift; sourceTree = "<group>"; };
 		MN3000012FB000000000B /* Moon3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moon3DView.swift; sourceTree = "<group>"; };
 		ONB489283305800F /* AboutDalbitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDalbitView.swift; sourceTree = "<group>"; };
 		ONB606431003400F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -821,7 +821,7 @@
 				SPL359627028900F /* GestureCoachmark.swift */,
 				8F4E1B6229B9A5AE0013599C /* ListenListView.swift */,
 				SPL991271062100F /* ListenTips.swift */,
-				MJ0000012FB000000000D /* MoonJourney.swift */,
+				MJ0000012FB000000000D /* MoonDrift.swift */,
 				MN3000012FB000000000B /* Moon3DView.swift */,
 				SPL530412011000F /* MoonView.swift */,
 				SPL791298438500F /* NowPlayingManager.swift */,
@@ -1127,7 +1127,7 @@
 				ONB606431003400B /* OnboardingView.swift in Sources */,
 				8F4E1B6329B9A5AE0013599C /* ListenListView.swift in Sources */,
 				SPL991271062100B /* ListenTips.swift in Sources */,
-				MJ0000022FB000000000E /* MoonJourney.swift in Sources */,
+				MJ0000022FB000000000E /* MoonDrift.swift in Sources */,
 				MN3000022FB000000000C /* Moon3DView.swift in Sources */,
 				SPL530412011000B /* MoonView.swift in Sources */,
 				SPL237534525200B /* SavedSoundsListView.swift in Sources */,

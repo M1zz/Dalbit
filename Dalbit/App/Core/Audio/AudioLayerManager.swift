@@ -18,8 +18,8 @@ final class AudioLayerManager {
         let id: UUID
         let player: AVAudioPlayerNode
         let pitchEffect: AVAudioUnitTimePitch
+        /// 이 레이어만 쓰는 파일 핸들. 재생기가 여기서 직접 읽어 가므로 레이어끼리 나눠 쓰지 않는다.
         let audioFile: AVAudioFile
-        let audioBuffer: AVAudioPCMBuffer
         let variation: AudioVariation
         var position: AVAudio3DPoint
         let filter: AudioFilter
@@ -38,12 +38,6 @@ final class AudioLayerManager {
 
     /// 현재 활성화된 레이어들
     private(set) var layers: [UUID: AudioLayer] = [:]
-
-    /// 버퍼 캐시 (파일명 -> 버퍼)
-    private var bufferCache: [String: AVAudioPCMBuffer] = [:]
-
-    /// 오디오 파일 캐시 (파일명 -> AVAudioFile)
-    private var fileCache: [String: AVAudioFile] = [:]
 
     /// 레이어별 스케줄링 타이머
     private var schedulingTimers: [UUID: Timer] = [:]
@@ -70,14 +64,17 @@ final class AudioLayerManager {
     ) throws -> UUID {
         let layerId = UUID()
 
-        // 파일 로드 (캐시 사용)
+        // 파일은 열기만 한다. 소리는 재생할 때 디스크에서 흘려 읽는다(scheduleNextBuffer).
+        //
+        // ⚠️ 파일을 PCM 버퍼로 통째로 풀어 보관하지 말 것. 10분짜리 한 개가 약 230MB 이고
+        //    앱의 소리를 전부 풀면 3.8GB 다. 예전에는 한 번 튼 소리를 전부 캐시에 쌓아 두어서
+        //    소리를 이것저것 들어 보면 메모리 한도(3GB)를 넘어 앱이 죽었다.
         let fileName = filter.rawValue
-        guard let audioFile = try loadAudioFile(fileName: fileName) else {
+        guard let fileURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
             throw AudioLayerError.fileNotFound(fileName)
         }
-
-        // 버퍼 준비 (캐시 사용)
-        guard let buffer = try prepareBuffer(audioFile: audioFile, fileName: fileName) else {
+        let audioFile = try AVAudioFile(forReading: fileURL)
+        guard audioFile.length > 0 else {
             throw AudioLayerError.bufferCreationFailed
         }
 
@@ -111,7 +108,6 @@ final class AudioLayerManager {
             player: player,
             pitchEffect: pitchEffect,
             audioFile: audioFile,
-            audioBuffer: buffer,
             variation: variation,
             position: position,
             filter: filter,
@@ -237,47 +233,6 @@ final class AudioLayerManager {
 
     // MARK: - Private Methods
 
-    /// 오디오 파일 로드 (캐시 사용)
-    private func loadAudioFile(fileName: String) throws -> AVAudioFile? {
-        // 캐시에서 확인
-        if let cachedFile = fileCache[fileName] {
-            return cachedFile
-        }
-
-        // 새로 로드
-        guard let fileURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
-            return nil
-        }
-
-        let audioFile = try AVAudioFile(forReading: fileURL)
-        fileCache[fileName] = audioFile
-
-        return audioFile
-    }
-
-    /// 버퍼 준비 (캐시 사용)
-    private func prepareBuffer(audioFile: AVAudioFile, fileName: String) throws -> AVAudioPCMBuffer? {
-        // 캐시에서 확인
-        if let cachedBuffer = bufferCache[fileName] {
-            return cachedBuffer
-        }
-
-        // 새로 생성
-        guard let buffer = AVAudioPCMBuffer(
-            pcmFormat: audioFile.processingFormat,
-            frameCapacity: AVAudioFrameCount(audioFile.length)
-        ) else {
-            return nil
-        }
-
-        try audioFile.read(into: buffer)
-        bufferCache[fileName] = buffer
-
-        print("📦 [LayerManager] 버퍼 캐시 저장: \(fileName)")
-
-        return buffer
-    }
-
     /// 다음 버퍼 스케줄링
     private func scheduleNextBuffer(for layerId: UUID) {
         guard var layer = layers[layerId], layer.isScheduling else { return }
@@ -286,8 +241,8 @@ final class AudioLayerManager {
         let randomVolume = layer.variation.randomizedVolume
         let randomPitch = getRandomizedPitch(for: layer.variation)
 
-        // 버퍼 스케줄링
-        layer.player.scheduleBuffer(layer.audioBuffer) { [weak self] in
+        // 파일 한 바퀴를 건다 — 메모리에 올리지 않고 디스크에서 흘려 읽는다
+        layer.player.scheduleFile(layer.audioFile, at: nil) { [weak self] in
             guard let self = self else { return }
 
             // 다음 재생 스케줄 (메인 스레드가 아닌 백그라운드에서)
@@ -361,15 +316,6 @@ final class AudioLayerManager {
         }
 
         return Float(basePitch * 100)
-    }
-
-    // MARK: - Cleanup
-
-    /// 캐시 정리
-    func clearCache() {
-        bufferCache.removeAll()
-        fileCache.removeAll()
-        print("🧹 [LayerManager] 캐시 정리 완료")
     }
 }
 

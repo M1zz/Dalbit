@@ -699,24 +699,6 @@ extension AudioEngineManager {
         print("✅ [AudioEngineManager] 모든 레이어 중지 완료")
     }
 
-    /// 버퍼 준비 (AudioFile로부터)
-    private func prepareBuffer(from file: AVAudioFile) -> AVAudioPCMBuffer? {
-        guard let buffer = AVAudioPCMBuffer(
-            pcmFormat: file.processingFormat,
-            frameCapacity: AVAudioFrameCount(file.length)
-        ) else {
-            return nil
-        }
-
-        do {
-            try file.read(into: buffer)
-        } catch {
-            Log.audio.failure("효과음 버퍼 읽기 실패(\(file.url.lastPathComponent)): \(error.localizedDescription)")
-            return nil
-        }
-        return buffer
-    }
-
     func stop() {
         print("⏹️ [AudioEngineManager] stop() 호출됨")
         print("   - 배경음 상태: \(currentBackgroundSound?.rawValue ?? "없음")")

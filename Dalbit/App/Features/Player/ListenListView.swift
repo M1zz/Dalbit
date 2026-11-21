@@ -75,14 +75,16 @@ struct ListenListView: View {
     private static let floatRangeX: CGFloat = 56
     private static let floatRangeY: CGFloat = 34
     /// 시차 계수 — 별(가장 멀다) < 앰비언트 천체 < 달(가장 가깝다)
-    private static let parallaxStars: CGFloat = 0.10
+    private static let parallaxStars: CGFloat = 0.22
     private static let parallaxCosmic: CGFloat = 0.34
 
     /// 내 흔들림(-0.5~0.5). 모든 레이어가 이 하나를 공유한다.
     private var swayX: CGFloat { floatX - 0.5 }
     private var swayY: CGFloat { floatY - 0.5 }
-    /// 아주 느린 기울어짐 — 우주에서는 몸이 조금씩 돌아간다
-    private var swayRoll: Double { Double(swayX) * 2.6 }
+    /// 아주 느린 기울어짐 — 우주에서는 몸이 조금씩 돌아간다.
+    /// 기우는 것은 나(시점)이므로 별·천체·달이 모두 같은 각도로 돈다.
+    /// 레이어마다 다르게 돌리면 내가 아니라 저마다 따로 도는 것으로 읽힌다.
+    private var swayRoll: Double { Double(swayX) * 6 }
     // 모드 전환 안내 칩(타이머/보관함): 뉴비에게만 노출 — 써봤거나 몇 번 열면 숨김
     @AppStorage("homeAppearCount") private var homeAppearCount = 0
     @AppStorage("didUseModeSwitch") private var didUseModeSwitch = false
@@ -121,14 +123,14 @@ struct ListenListView: View {
                 .ignoresSafeArea()
                 .offset(x: swayX * Self.floatRangeX * Self.parallaxStars,
                         y: swayY * Self.floatRangeY * Self.parallaxStars)
-                .rotationEffect(.degrees(swayRoll * 0.35))
+                .rotationEffect(.degrees(swayRoll))
             // 우주 여행 앰비언트 — 가끔 혜성·먼 행성·우주선이 지나간다 (달 뒤로)
             // 별보다 가깝고 달보다 멀다.
             CosmicEventsView()
                 .ignoresSafeArea()
                 .offset(x: swayX * Self.floatRangeX * Self.parallaxCosmic,
                         y: swayY * Self.floatRangeY * Self.parallaxCosmic)
-                .rotationEffect(.degrees(swayRoll * 0.7))
+                .rotationEffect(.degrees(swayRoll))
 
             GeometryReader { geo in
                 let H = geo.size.height

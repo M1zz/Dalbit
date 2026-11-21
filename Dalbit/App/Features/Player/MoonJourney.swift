@@ -25,7 +25,11 @@ import simd
 enum MoonJourney {
 
     /// 저 멀리서 떠올라 눈앞을 지나 시야 밖으로 밀려나기까지. 수면 앱이라 아주 느리게.
-    static let period: Double = 120
+    ///
+    /// ⚠️ 120초였을 때는 "날아간다"로 읽혔다 — 천체가 다가오고 빠지는 것이 눈에 보이게 빨라서
+    ///    떠 있는 느낌이 없었다. 유영은 움직임을 알아채기 어려울 만큼 느려야 한다.
+    ///    별의 흐름(Starfield.zSpeed)도 같은 비율로 맞춰 둘 것 — 한쪽만 빠르면 따로 논다.
+    static let period: Double = 240
     /// 지나친 뒤 옆으로 밀려나는 폭(씬 단위)
     static let travelX: Float = 2.0
     /// 가장 멀 때의 깊이. 이만큼 앞에 있으면 점처럼 보인다.
@@ -67,7 +71,7 @@ enum MoonJourney {
     /// 열자마자 달이 멀어져 버리면 만질 틈이 없다. 처음 얼마간은 눈앞에 머물고,
     /// 그 뒤 정지 상태에서 부드럽게 출발한다(속도가 갑자기 붙지 않게).
     private static let holdSeconds: Double = 9
-    private static let easeSeconds: Double = 12
+    private static let easeSeconds: Double = 24
 
     /// 여행 시계. 실제 시간이 아니라 "머물다 천천히 출발하는" 시간이다.
     private static func journeyTime(at t: Double) -> Double {

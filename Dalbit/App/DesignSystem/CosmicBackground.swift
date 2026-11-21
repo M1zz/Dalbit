@@ -223,7 +223,10 @@ struct Starfield: View {
     ///
     /// 예전에는 세로로 흐르는 레이어도 있었는데, 별이 위에서 아래로 떨어지면
     /// "내가 위로 올라가는" 느낌이 나서 걷어냈다. 이제는 나아가는 방향 한 가지만 쓴다.
-    private let zSpeed = 0.05
+    ///
+    /// 느려야 한다. 0.05 였을 때는 별이 20초에 한 번씩 화면 밖으로 쏟아져 워프처럼 보였다.
+    /// 천체의 여행(MoonJourney.period)과 같은 비율로 늦춰 둔 값이다.
+    private let zSpeed = 0.02
 
     var body: some View {
         TimelineView(.animation(paused: reduceMotion)) { tl in

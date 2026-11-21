@@ -117,14 +117,14 @@ struct ListenListView: View {
             // 배경만 화면 전체를 채우고, 페이지는 safe area 안에 둬서
             // 중첩 NavigationStack(타이머/보관함)의 상단 바가 상태바에 가리지 않게 한다.
             ScreenBackground().ignoresSafeArea()
-            // 우주 느낌의 은은한 별 (홈 배경)
+            // 성운 · 먼 별 · 가까운 별 (홈 배경)
             // 가장 먼 레이어라 내가 흔들려도 아주 조금만 따라 움직인다.
             Starfield()
                 .ignoresSafeArea()
                 .offset(x: swayX * Self.floatRangeX * Self.parallaxStars,
                         y: swayY * Self.floatRangeY * Self.parallaxStars)
                 .rotationEffect(.degrees(swayRoll))
-            // 우주 여행 앰비언트 — 가끔 혜성·먼 행성·우주선이 지나간다 (달 뒤로)
+            // 아주 드물게 혜성 하나가 지나간다 (달 뒤로)
             // 별보다 가깝고 달보다 멀다.
             CosmicEventsView()
                 .ignoresSafeArea()

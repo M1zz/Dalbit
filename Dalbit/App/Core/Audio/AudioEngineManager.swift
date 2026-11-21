@@ -21,8 +21,6 @@ final class AudioEngineManager: ObservableObject {
     private var pitchEffect = AVAudioUnitTimePitch()
     private var volumeEffect = AVAudioMixerNode()
     private var audioFile: AVAudioFile?
-    private var audioBuffer: AVAudioPCMBuffer?
-    private var scheduleCompletionHandler: (() -> Void)?
     private var intervalCancellable: AnyCancellable?
     private var timerSubscription: Cancellable?
     private var fadeTimer: Timer?
@@ -514,7 +512,6 @@ extension AudioEngineManager {
         stopLayers()
         backgroundPlayer.stop()
         currentBackgroundSound = nil
-        clearBuffer()
 
         // 페이드 인을 위해 마스터 볼륨을 0에서 시작
         engine.mainMixerNode.outputVolume = 0
@@ -570,7 +567,6 @@ extension AudioEngineManager {
 
         do {
             audioFile = try AVAudioFile(forReading: fileURL)
-            audioBuffer = prepareBuffer()
             setupConnections()
 
             if let customSound = sound as? CustomSound {
@@ -687,7 +683,6 @@ extension AudioEngineManager {
 
         do {
             audioFile = try AVAudioFile(forReading: fileURL)
-            audioBuffer = prepareBuffer()
             setupConnections()
             audioVariation = sound.audioVariation
 
@@ -753,7 +748,6 @@ extension AudioEngineManager {
             }
         }
 
-        clearBuffer()
     }
 
     func stopAll() {
@@ -769,7 +763,6 @@ extension AudioEngineManager {
         stopLayers()
 
         engine.stop()
-        clearBuffer()
 
         print("✅ [AudioEngineManager] 모든 사운드 중지 완료")
     }
@@ -913,27 +906,9 @@ extension AudioEngineManager {
 // MARK: - Buffer
 extension AudioEngineManager {
     
-    private func clearBuffer() {
-        audioBuffer = nil
-    }
-    
-    private func prepareBuffer() -> AVAudioPCMBuffer? {
-        print(#function)
-        
-        guard let audioFile = audioFile else { return nil }
-        
-        // 빈 파일(길이 0)이면 버퍼를 못 만든다 — 죽지 않고 소리 없이 넘어간다
-        guard let buffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat,
-                                            frameCapacity: AVAudioFrameCount(audioFile.length)) else { return nil }
-        do {
-            try audioFile.read(into: buffer)
-        } catch {
-            Log.audio.failure("Failed to read buffer")
-            return nil
-        }
-        return buffer
-    }
-    
+    // ⚠️ 소리 파일을 PCM 버퍼로 통째로 풀지 말 것. 가장 긴 효과음(CityRain)이 10분 가까이라
+    //    풀면 200MB 가 넘는다. 재생할 때마다 파일을 디스크에서 흘려 읽는다(scheduleFile).
+
     /**
      다음 오디오 버퍼를 스케줄링합니다. 준비된 버퍼를 사용해 오디오를 재생하고, 주어진 인터벌에 따라 다음 버퍼 재생을 스케줄링합니다.
      Combine 프레임워크의 Timer.publish를 사용하여 지정된 인터벌마다 버퍼 재생을 반복합니다.
@@ -942,8 +917,8 @@ extension AudioEngineManager {
     private func scheduleNextBuffer(with playingSound: Playable? = nil, immediate: Bool = true) {
         print(#function)
 
-        guard let buffer = audioBuffer else {
-            Log.audio.failure("Failed to prepare buffer")
+        guard let file = audioFile, file.length > 0 else {
+            Log.audio.failure("재생할 소리 파일이 없거나 비어 있음")
             return
         }
 
@@ -957,7 +932,7 @@ extension AudioEngineManager {
 
         // 첫 번째 사운드를 즉시 재생
         if immediate {
-            playBufferImmediately(buffer: buffer)
+            playFileImmediately(file)
         }
 
         // 랜덤화된 간격 계산
@@ -982,10 +957,7 @@ extension AudioEngineManager {
                 self.pitchEffect.pitch = randomizedPitch * 100 // AVAudioUnitTimePitch는 cents 단위 (100 cents = 1 semitone)
 
                 let scheduleTime = AVAudioTime(hostTime: mach_absolute_time())
-                self.player.scheduleBuffer(buffer, at: scheduleTime) { [weak self] in
-                    self?.scheduleCompletionHandler?()
-                    self?.scheduleCompletionHandler = nil
-                }
+                self.player.scheduleFile(file, at: scheduleTime, completionHandler: nil)
 
                 if !self.engine.isRunning {
                     do {
@@ -1011,7 +983,7 @@ extension AudioEngineManager {
     }
 
     /// 버퍼를 즉시 재생
-    private func playBufferImmediately(buffer: AVAudioPCMBuffer) {
+    private func playFileImmediately(_ file: AVAudioFile) {
         // 랜덤화된 볼륨/피치 적용
         let randomizedVolume = audioVariation.randomizedVolume
         let randomizedPitch = getRandomizedPitch()
@@ -1020,10 +992,7 @@ extension AudioEngineManager {
         pitchEffect.pitch = randomizedPitch * 100
 
         let scheduleTime = AVAudioTime(hostTime: mach_absolute_time())
-        player.scheduleBuffer(buffer, at: scheduleTime) { [weak self] in
-            self?.scheduleCompletionHandler?()
-            self?.scheduleCompletionHandler = nil
-        }
+        player.scheduleFile(file, at: scheduleTime, completionHandler: nil)
 
         if !engine.isRunning {
             do {

@@ -245,8 +245,12 @@ final class AudioLayerManager {
         layer.player.scheduleFile(layer.audioFile, at: nil) { [weak self] in
             guard let self = self else { return }
 
-            // 다음 재생 스케줄 (메인 스레드가 아닌 백그라운드에서)
-            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + randomizedInterval) {
+            // 다음 차례는 반드시 메인에서 잇는다.
+            //
+            // ⚠️ 백그라운드 큐로 돌리지 말 것. `layers` 는 메인에서 레이어를 더하고 빼는 사전인데,
+            //    예전에는 이 줄이 global 큐에서 같은 사전을 고쳐 썼다. 소리를 바꾸는 순간 두 스레드가
+            //    한 사전을 동시에 고치면 앱이 그대로 죽는다. 파일을 거는 일은 가벼워서 메인이면 충분하다.
+            DispatchQueue.main.asyncAfter(deadline: .now() + randomizedInterval) {
                 self.scheduleNextBuffer(for: layerId)
             }
         }
@@ -261,10 +265,7 @@ final class AudioLayerManager {
         layer.pitchEffect.pitch = randomPitch
 
         // 재생 이벤트 콜백 (메인 스레드에서 UI 업데이트용)
-        let filter = layer.filter
-        DispatchQueue.main.async { [weak self] in
-            self?.onLayerPlay?(filter, randomVolume, randomPitch)
-        }
+        onLayerPlay?(layer.filter, randomVolume, randomPitch)
 
         layer.lastScheduleTime = Date()
         layers[layerId] = layer

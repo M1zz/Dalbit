@@ -41,11 +41,18 @@ if [ -z "$DEST_ID" ]; then
 fi
 DEST="platform=iOS Simulator,id=$DEST_ID"
 
+# 시뮬레이터가 다 켜질 때까지 기다린다. 켜지는 중에 UI 시험이 앱을 띄우면
+# "Application … does not have a process ID" 로 첫 시험이 138초를 기다리다 실패한다(2026-11-21).
+xcrun simctl bootstatus "$DEST_ID" -b > /dev/null
+
 echo "🧪 전체 테스트 실행 ($SCHEME)"
+# 실패한 시험만 한 번 더 돌린다 — 시뮬레이터가 앱을 못 띄우는 일시적인 실패로 배포가 막히지 않게.
+# 진짜 버그는 두 번 다 실패하므로 그대로 걸린다.
 xcodebuild test \
   "$PROJECT_FLAG" "$PROJECT" \
   -scheme "$SCHEME" \
   -destination "$DEST" \
+  -retry-tests-on-failure -test-iterations 2 \
   -quiet
 
 echo ""

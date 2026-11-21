@@ -30,6 +30,38 @@ final class DalbitUITests: XCTestCase {
         app.launch()
     }
 
+    /// 재생을 켜고 1분 넘게 둬도 앱이 살아 있어야 한다.
+    /// 1분 무렵에는 화면 자동 어둡게(45초 뒤)·청취 기록 생존 신호(60초마다)가 처음 돈다.
+    func testKeepsPlayingPastOneMinute() throws {
+        let moon = app.descendants(matching: .any)["home.moon"]
+        XCTAssertTrue(moon.waitForExistence(timeout: 15), "홈의 달이 떠야 한다")
+        let before = moon.label
+        moon.tap()   // 재생
+        sleep(2)
+        XCTAssertNotEqual(moon.label, before, "달을 누르면 재생 ↔ 일시정지가 바뀌어야 한다")
+        for second in stride(from: 10, through: 100, by: 10) {
+            sleep(10)
+            XCTAssertEqual(app.state, .runningForeground, "재생 \(second)초에 앱이 죽었다")
+        }
+    }
+
+    /// 실제 기기는 1분쯤이면 화면이 저절로 잠겨 앱이 백그라운드로 간다. 소리는 계속 나야 하고 앱도 살아 있어야 한다.
+    func testKeepsPlayingInBackground() throws {
+        let moon = app.descendants(matching: .any)["home.moon"]
+        XCTAssertTrue(moon.waitForExistence(timeout: 15), "홈의 달이 떠야 한다")
+        // 재생 중이면 달의 이름이 "일시정지"(누르면 멈춤)다. 아니면 눌러서 튼다.
+        if moon.label != "일시정지" { moon.tap() }
+        sleep(5)
+        XCTAssertEqual(moon.label, "일시정지", "소리가 재생 중이어야 한다")
+        XCUIDevice.shared.press(.home)
+        for second in stride(from: 10, through: 90, by: 10) {
+            sleep(10)
+            XCTAssertNotEqual(app.state, .notRunning, "백그라운드 재생 \(second)초에 앱이 죽었다")
+        }
+        app.activate()
+        XCTAssertTrue(moon.waitForExistence(timeout: 10), "돌아왔을 때 홈이 그대로여야 한다")
+    }
+
     /// 홈 → 보관함 → 설정 → 보관함 → 홈 → 타이머. 사용자가 처음 며칠 동안 가장 많이 도는 길이다.
     func testCoreFlow() throws {
         let moon = app.descendants(matching: .any)["home.moon"]

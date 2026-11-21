@@ -31,10 +31,25 @@ struct MoonAutoSpinComponent: Component {
     var radiansPerSecond: Float
 }
 
+/// 손가락으로 굴리는 회전(도). SwiftUI 가 목표만 주고, 실제 각도는 매 프레임 스프링으로 따라간다.
+///
+/// ⚠️ 회전을 SwiftUI 값으로 바로 꽂지 말 것. RealityView 는 `withAnimation` 을 보간하지 않는다 —
+///    놓았을 때 제자리로 돌아오는 스프링, 다음 소리로 넘어가는 한 바퀴가 전부 한 프레임에 **툭** 끊겼고,
+///    끌 때도 SwiftUI 가 화면을 다시 그릴 때만 각도가 바뀌어 "끼기긱" 걸리듯 움직였다.
+struct MoonRollComponent: Component {
+    var target: SIMD2<Double>       // (가로, 세로)
+    var current: SIMD2<Double>
+    var velocity: SIMD2<Double> = .zero
+}
+
 /// 천체를 궤적 위로 옮기고, 표면을 천천히 자전시킨다.
 struct MoonJourneySystem: System {
     private static let travel = EntityQuery(where: .has(MoonJourneyComponent.self))
     private static let spins  = EntityQuery(where: .has(MoonAutoSpinComponent.self))
+    private static let rolls  = EntityQuery(where: .has(MoonRollComponent.self))
+    /// 스프링의 빠르기. 클수록 손가락에 바짝 붙는다. 16 이면 약 0.06초 뒤처지고
+    /// 넘침 없이(임계 감쇠) 멈춘다 — 손을 따라오되 무게가 느껴지는 정도.
+    private static let rollStiffness: Double = 16
 
     init(scene: RealityKit.Scene) {}
 
@@ -49,6 +64,18 @@ struct MoonJourneySystem: System {
             // 저 멀리서 떠오르고 저 멀리로 잠긴다 — 궤적이 이어지는 이음매를 가린다
             e.components.set(OpacityComponent(opacity: MoonJourney.opacity(slot: c.slot, at: t)))
         }
+        // 프레임이 한 번 늦어도 튀지 않게 한 걸음의 길이를 묶어 둔다
+        let dt = min(context.deltaTime, 1.0 / 30.0)
+        let w = Self.rollStiffness
+        for e in context.entities(matching: Self.rolls, updatingSystemWhen: .rendering) {
+            guard var r = e.components[MoonRollComponent.self] else { continue }
+            // 임계 감쇠 스프링 — 목표를 넘치지 않고 가장 빨리 닿는다
+            let accel = -w * w * (r.current - r.target) - 2 * w * r.velocity
+            r.velocity += accel * dt
+            r.current += r.velocity * dt
+            e.components.set(r)
+            e.orientation = Moon3DView.orientation(roll: r.current.x, rollY: r.current.y)
+        }
         for e in context.entities(matching: Self.spins, updatingSystemWhen: .rendering) {
             guard let s = e.components[MoonAutoSpinComponent.self] else { continue }
             e.orientation *= simd_quatf(angle: s.radiansPerSecond * Float(context.deltaTime),
@@ -62,6 +89,7 @@ private enum MoonSceneRegistry {
     static let registerOnce: Void = {
         MoonJourneyComponent.registerComponent()
         MoonAutoSpinComponent.registerComponent()
+        MoonRollComponent.registerComponent()
         MoonJourneySystem.registerSystem()
     }()
 }
@@ -160,11 +188,17 @@ struct Moon3DView: View {
                          relativeTo: nil)
             }
 
-            // 손가락 따라 굴러가는 회전. RealityKit 은 +Y 오른손 법칙이라
-            // 각도가 양수일 때 앞면이 오른쪽으로 간다(2D 의 markX = sin(roll) 과 같다).
-            let q = simd_quatf(angle: Float(roll * .pi / 180), axis: SIMD3<Float>(0, 1, 0))
-                  * simd_quatf(angle: Float(rollY * .pi / 180), axis: SIMD3<Float>(1, 0, 0))
-            for (_, tilt) in tilts { tilt.orientation = q }
+            // 손가락 따라 굴러가는 회전 — 목표만 건네고, 움직임은 MoonJourneySystem 이 매 프레임 잇는다
+            let target = SIMD2(roll, rollY)
+            for (_, tilt) in tilts {
+                if var r = tilt.components[MoonRollComponent.self] {
+                    r.target = target
+                    tilt.components.set(r)
+                } else {
+                    tilt.components.set(MoonRollComponent(target: target, current: target))
+                    tilt.orientation = Self.orientation(roll: roll, rollY: rollY)
+                }
+            }
 
             sun?.light.color = Self.moonlight(tint)
             sun?.light.intensity = isPlaying ? 3_900 : 3_100
@@ -176,6 +210,13 @@ struct Moon3DView: View {
     }
 
     @State private var sun: DirectionalLight?
+
+    /// RealityKit 은 +Y 오른손 법칙이라 각도가 양수일 때 앞면이 오른쪽으로 간다
+    /// (2D 의 markX = sin(roll) 과 같다).
+    static func orientation(roll: Double, rollY: Double) -> simd_quatf {
+        simd_quatf(angle: Float(roll * .pi / 180), axis: SIMD3<Float>(0, 1, 0))
+            * simd_quatf(angle: Float(rollY * .pi / 180), axis: SIMD3<Float>(1, 0, 0))
+    }
 
     // MARK: - 표면
 

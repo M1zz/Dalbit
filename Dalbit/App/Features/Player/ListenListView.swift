@@ -567,6 +567,12 @@ struct ListenListView: View {
     private static let rollFlickDistance: CGFloat = 80
     private static let rollFlickPredicted: CGFloat = 300
 
+    /// 끝까지 굴렸을 때 벽에 부딪히듯 탁 멈추지 않고, 갈수록 무거워지며 한계에 다가간다(고무줄).
+    /// 처음에는 손가락을 거의 그대로 따라간다(기울기 1).
+    private static func rubberBand(_ x: Double, limit: Double) -> Double {
+        limit * tanh(x / limit)
+    }
+
     private func orbGesture() -> some Gesture {
         // global 좌표: 달 길게 누르기(즐겨찾기)의 위치 판정에 사용 (translation 로직은 영향 없음)
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
@@ -595,10 +601,10 @@ struct ListenListView: View {
                 }
                 if vLock == true {
                     // 세로: 구체만 손가락 따라 굴림 (화면은 그대로 — 다 구른 뒤 전환)
-                    orbDragV = max(-170, min(170, Double(value.translation.height) * 0.5))
+                    orbDragV = Self.rubberBand(Double(value.translation.height) * 0.5, limit: 170)
                 } else if vLock == false {
                     orbPressed = true
-                    orbDragAngle = max(-85, min(85, Double(value.translation.width) * 0.55))
+                    orbDragAngle = Self.rubberBand(Double(value.translation.width) * 0.55, limit: 85)
                     // 넘어갈 만큼 굴렸는지 손끝으로 알려 준다 — 어디까지 굴려야 하는지
                     // 눈으로는 알 수 없으므로, 임계를 넘는 순간 한 번 톡.
                     let armed = abs(value.translation.width) >= Self.rollCommitDistance

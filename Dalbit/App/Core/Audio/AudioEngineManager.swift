@@ -180,9 +180,30 @@ extension AudioEngineManager {
     private func setupAudioSession() {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("Audio session setup error: \(error.localizedDescription)")
+            Log.audio.caution("⚠️ [AudioEngineManager] 세션 카테고리 설정 실패: \(error.localizedDescription)")
+        }
+        activateSession()
+    }
+
+    /// 세션 활성화는 전용 줄에서 한다.
+    ///
+    /// `setActive(true)` 는 오디오 하드웨어와 협상하느라 수백 ms 를 붙잡을 수 있다.
+    /// 메인에서 부르면 그동안 화면이 멈춘다(Xcode 의 "UI unresponsiveness" 경고).
+    /// 줄이 하나(serial)라 활성화가 서로 엇갈리지 않는다.
+    private static let sessionQueue = DispatchQueue(label: "com.leeo.dalbit.audio-session", qos: .userInitiated)
+
+    /// 세션을 활성화하고, 끝나면 `then` 을 메인에서 부른다.
+    ///
+    /// 재생(engine.start)이 활성화보다 먼저 와도 괜찮다 — 엔진이 시작될 때 세션을 스스로 켠다.
+    private func activateSession(then: (() -> Void)? = nil) {
+        Self.sessionQueue.async {
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch {
+                Log.audio.caution("⚠️ [AudioEngineManager] 세션 활성화 실패: \(error.localizedDescription)")
+            }
+            if let then { DispatchQueue.main.async(execute: then) }
         }
     }
 
@@ -245,12 +266,11 @@ extension AudioEngineManager {
     /// 오디오 그래프 복구: 세션 재활성화 → 엔진 재시작 → 배경음·레이어 버퍼 재스케줄 후 재생.
     /// 엔진이 정지하면 플레이어에 예약된 버퍼가 사라지므로 반드시 다시 스케줄해야 한다.
     private func recoverAudioGraph() {
-        do {
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            Log.audio.caution("⚠️ [AudioEngineManager] 세션 재활성화 실패: \(error.localizedDescription)")
-        }
+        activateSession { [weak self] in self?.restartAfterRecovery() }
+    }
 
+    /// 세션이 다시 켜진 뒤(메인) — 엔진을 살리고 예약 버퍼를 다시 건다.
+    private func restartAfterRecovery() {
         if !engine.isRunning {
             do {
                 try engine.start()

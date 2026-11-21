@@ -94,7 +94,7 @@ struct PlaySoundIntent: AppIntent {
 
     /// 앱에서 저장한 소리를 골라 틀면 Siri 에게 알려 준다. 다음에 Siri 가 이 동작을 더 잘 고른다.
     static func donate(_ sound: CustomSound) {
-        var intent = PlaySoundIntent()
+        let intent = PlaySoundIntent()
         intent.sound = DalbitSoundEntity(id: "custom:\(sound.id.uuidString)", title: sound.title)
         Task { _ = try? await intent.donate() }
     }

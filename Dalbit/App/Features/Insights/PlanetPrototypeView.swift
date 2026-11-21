@@ -14,6 +14,7 @@
 //
 
 import SwiftUI
+import Combine
 import RealityKit
 import simd
 

@@ -18,7 +18,7 @@ import LeeoKit
 @MainActor
 class SubscriptionManager: ObservableObject {
 
-    static let productId = "month"
+    nonisolated static let productId = "month"
     /// 무료로 만들 수 있는 내 소리 개수 — 원본은 계약(`DalbitSpec.gatePolicy`).
     static let freeMaxCustomSounds = DalbitSpec.gatePolicy.freeLimits[DalbitSpec.GateKey.customSound] ?? 3
     /// 무료 사용 코드 (고정) — 리딤하면 1개월간 프리미엄
@@ -59,16 +59,16 @@ class SubscriptionManager: ObservableObject {
     ///
     /// ⚠️ 이 값은 **접근 권한**이다(구독 ∪ 무료 코드). 결제 지표로 쓰면 안 된다 —
     ///    아래 `didPayCacheKey` 가 결제만 담는다.
-    static let isPremiumCacheKey = "dalbit.flag.isPro"
+    nonisolated static let isPremiumCacheKey = "dalbit.flag.isPro"
 
     /// 실제로 돈을 낸 상태(구독 권한)만 담는 캐시 키.
-    static let didPayCacheKey = "dalbit.flag.isPaid"
+    nonisolated static let didPayCacheKey = "dalbit.flag.isPaid"
 
     /// 무료 사용 코드로 열린 상태만 담는 캐시 키.
-    static let compedCacheKey = "dalbit.flag.isComped"
+    nonisolated static let compedCacheKey = "dalbit.flag.isComped"
 
     /// **인트로 무료 기간**으로 열린 상태만 담는 캐시 키.
-    static let trialCacheKey = "dalbit.flag.isTrial"
+    nonisolated static let trialCacheKey = "dalbit.flag.isTrial"
 
     /// 프리미엄 여부를 평평한 값으로 남긴다.
     ///
@@ -119,19 +119,7 @@ class SubscriptionManager: ObservableObject {
     }
 
     private static func isIntroOffer(_ transaction: StoreKit.Transaction) -> Bool {
-        if #available(iOS 17.2, macOS 14.2, watchOS 10.2, *) {
-            return transaction.offer?.type == .introductory
-        }
-        return legacyIsIntroOffer(transaction)
-    }
-
-    /// iOS 17.2 미만에서만 쓰는 길. `offerType` 은 그 버전에서 대체됐지만 배포 하한이
-    /// 15.0 이라 아직 필요하다 — 경고는 이 함수 안에 가둔다.
-    @available(iOS, deprecated: 17.2)
-    @available(macOS, deprecated: 14.2)
-    @available(watchOS, deprecated: 10.2)
-    private static func legacyIsIntroOffer(_ transaction: StoreKit.Transaction) -> Bool {
-        transaction.offerType == .introductory
+        transaction.offer?.type == .introductory
     }
 
     // MARK: - 공개 상태 (기존 API 유지)

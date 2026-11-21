@@ -101,14 +101,19 @@ enum PlanetTextureFactory {
                 let p = SIMD3<Float>(sinT * cos(phi), cosT, sinT * sin(phi))
 
                 // 1) 바다(마리아) — 아주 낮은 주파수. 넓고 매끄럽고 어둡다.
-                let mare = smoothstep(0.52, 0.62,
+                //
+                // ⚠️ 진하게 두지 말 것. 바다가 고지대의 절반 밝기(0.38)일 때는 표면 위에
+                //    구름 그림자가 드리운 것처럼 읽혔다. 달의 그림자는 위상(빛의 방향)이 만든다 —
+                //    바다는 표면의 무늬로만 은은하게 보여야 한다. 경계도 넓게 풀어 둔다 —
+                //    가장자리가 또렷하면 옅어도 떠 있는 구름처럼 보인다(높이 차도 같은 이유로 작게).
+                let mare = smoothstep(0.42, 0.74,
                                      fbm(p * 1.15 + SIMD3<Float>(9 + seed, 9, 9 - seed), octaves: 3))
                 // 2) 고지대의 잔주름 + 더 잔 미세 요철(고해상도에서 표면이 매끈해 보이지 않게)
                 let grain = fbm(p * 9.0, octaves: 4) - 0.5
                 let micro = fbm(p * 46.0, octaves: 2) - 0.5
 
-                var hgt = grain * 0.10 * (1 - mare * 0.75) - mare * 0.06 + micro * 0.022
-                var alb = mix(0.78, 0.38, mare)          // 고지대 밝고, 바다 어둡다
+                var hgt = grain * 0.10 * (1 - mare * 0.75) - mare * 0.02 + micro * 0.022
+                var alb = mix(0.78, 0.68, mare)          // 고지대 밝고, 바다는 조금만 어둡다
                 var rays: Float = 0
 
                 // 3) 분화구 — 이 위도에 닿을 수 있는 것만

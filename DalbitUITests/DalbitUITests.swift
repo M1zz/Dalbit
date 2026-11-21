@@ -35,10 +35,10 @@ final class DalbitUITests: XCTestCase {
     func testKeepsPlayingPastOneMinute() throws {
         let moon = app.descendants(matching: .any)["home.moon"]
         XCTAssertTrue(moon.waitForExistence(timeout: 15), "홈의 달이 떠야 한다")
-        let before = moon.label
-        moon.tap()   // 재생
+        // 앱이 지난 소리를 이어 틀며 켜질 수 있다 — 재생 중이면 달의 이름이 "일시정지"(누르면 멈춤)다.
+        if moon.label != "일시정지" { moon.tap() }
         sleep(2)
-        XCTAssertNotEqual(moon.label, before, "달을 누르면 재생 ↔ 일시정지가 바뀌어야 한다")
+        XCTAssertEqual(moon.label, "일시정지", "소리가 재생 중이어야 한다")
         for second in stride(from: 10, through: 100, by: 10) {
             sleep(10)
             XCTAssertEqual(app.state, .runningForeground, "재생 \(second)초에 앱이 죽었다")

@@ -31,6 +31,30 @@ struct MoonAutoSpinComponent: Component {
     var radiansPerSecond: Float
 }
 
+/// 달의 위상 — 해가 비추는 방향. 그림자는 표면에 칠하는 것이 아니라 빛이 만든다.
+///
+/// 재생하는 동안 해가 천천히 옆으로, 뒤로 돌아가 보름달 → 하현 → 그믐달로 기울었다가
+/// 되돌아온다(2D 달의 MoonShadow 와 같은 주기 · 같은 쪽). 멈추면 다시 보름달로 차오른다.
+struct MoonSunComponent: Component {
+    /// 재생을 시작한 시각. nil 이면 멈춤 — 보름달로 돌아간다.
+    var playingSince: Double?
+    /// 해의 각도(라디안). 0 = 내 등 뒤(보름달), π/2 = 옆(반달), π 에 가까울수록 그믐.
+    var angle: Double = 0
+    var velocity: Double = 0
+
+    /// 그믐까지 기울었다가 되돌아오는 데 걸리는 시간(초). 2D 달의 moonWaneSeconds 와 같다.
+    static let waneSeconds: Double = 480
+    /// 가장 얇을 때의 위상(2D 와 같은 값). -1 이면 완전히 사라진다.
+    static let thinnest: Double = -0.92
+
+    /// 재생한 지 `elapsed` 초일 때의 위상(1 = 보름, 0 = 반달, -1 = 신월) — 일정한 속도로 오간다
+    static func phase(elapsed: Double) -> Double {
+        let u = elapsed / waneSeconds
+        let tri = 1 - abs(u.truncatingRemainder(dividingBy: 2) - 1)   // 0 → 1 → 0 …
+        return 1 + (thinnest - 1) * tri
+    }
+}
+
 /// 손가락으로 굴리는 회전(도). SwiftUI 가 목표만 주고, 실제 각도는 매 프레임 스프링으로 따라간다.
 ///
 /// ⚠️ 회전을 SwiftUI 값으로 바로 꽂지 말 것. RealityView 는 `withAnimation` 을 보간하지 않는다 —
@@ -47,6 +71,10 @@ struct MoonJourneySystem: System {
     private static let travel = EntityQuery(where: .has(MoonJourneyComponent.self))
     private static let spins  = EntityQuery(where: .has(MoonAutoSpinComponent.self))
     private static let rolls  = EntityQuery(where: .has(MoonRollComponent.self))
+    private static let suns   = EntityQuery(where: .has(MoonSunComponent.self))
+    /// 해가 움직이는 스프링. 느리게 — 재생을 누르면 몇 초에 걸쳐 그림자가 스며들고,
+    /// 멈추면 몇 초에 걸쳐 보름달로 차오른다.
+    private static let sunStiffness: Double = 0.9
     /// 스프링의 빠르기. 클수록 손가락에 바짝 붙는다. 16 이면 약 0.06초 뒤처지고
     /// 넘침 없이(임계 감쇠) 멈춘다 — 손을 따라오되 무게가 느껴지는 정도.
     private static let rollStiffness: Double = 16
@@ -76,6 +104,19 @@ struct MoonJourneySystem: System {
             e.components.set(r)
             e.orientation = Moon3DView.orientation(roll: r.current.x, rollY: r.current.y)
         }
+        for e in context.entities(matching: Self.suns, updatingSystemWhen: .rendering) {
+            guard var s = e.components[MoonSunComponent.self] else { continue }
+            let phase = s.playingSince.map { MoonSunComponent.phase(elapsed: t - $0) } ?? 1
+            let target = acos(max(-1, min(1, phase)))
+            let ws = Self.sunStiffness
+            s.velocity += (-ws * ws * (s.angle - target) - 2 * ws * s.velocity) * dt
+            s.angle += s.velocity * dt
+            e.components.set(s)
+            // 해는 왼쪽으로 돌아간다 → 그림자가 오른쪽에서 차오른다(2D 달과 같은 쪽).
+            // 살짝 위에서 비춰 명암 경계가 기계처럼 수직이지 않게 한다.
+            e.look(at: .zero, from: SIMD3<Float>(Float(-sin(s.angle)), 0.22, Float(cos(s.angle))),
+                   relativeTo: nil)
+        }
         for e in context.entities(matching: Self.spins, updatingSystemWhen: .rendering) {
             guard let s = e.components[MoonAutoSpinComponent.self] else { continue }
             e.orientation *= simd_quatf(angle: s.radiansPerSecond * Float(context.deltaTime),
@@ -90,6 +131,7 @@ private enum MoonSceneRegistry {
         MoonJourneyComponent.registerComponent()
         MoonAutoSpinComponent.registerComponent()
         MoonRollComponent.registerComponent()
+        MoonSunComponent.registerComponent()
         MoonJourneySystem.registerSystem()
     }()
 }
@@ -150,7 +192,8 @@ struct Moon3DView: View {
             // 한쪽에서 들어오는 빛 → 명암 경계(터미네이터)가 위상 그림자 역할을 한다
             let light = DirectionalLight()
             light.light.intensity = 3_900
-            light.look(at: .zero, from: SIMD3<Float>(1.0, 0.35, 0.85), relativeTo: nil)
+            light.look(at: .zero, from: SIMD3<Float>(0, 0.22, 1), relativeTo: nil)   // 보름달에서 시작
+            light.components.set(MoonSunComponent(playingSince: isPlaying ? Date().timeIntervalSinceReferenceDate : nil))
             content.add(light)
             sun = light
 
@@ -200,6 +243,11 @@ struct Moon3DView: View {
                 }
             }
 
+            // 재생이 켜지고 꺼지는 순간만 해에 알린다 — 그 뒤의 움직임은 시스템이 매 프레임 잇는다
+            if let sun, var s = sun.components[MoonSunComponent.self], (s.playingSince != nil) != isPlaying {
+                s.playingSince = isPlaying ? Date().timeIntervalSinceReferenceDate : nil
+                sun.components.set(s)
+            }
             sun?.light.color = Self.moonlight(tint)
             sun?.light.intensity = isPlaying ? 3_900 : 3_100
         }

@@ -66,6 +66,10 @@ extension DalbitSpec {
         .init(id: "autosave", status: .planned,
               title: L.Roadmap.autosaveTitle.localized,
               detail: L.Roadmap.autosaveDetail.localized),
+        // 사용자 요청(스레드, 2026-11-21): 저장한 소리를 틀면 그때 맞춘 타이머도 같이
+        .init(id: "mix.timer", status: .planned,
+              title: L.Roadmap.mixTimerTitle.localized,
+              detail: L.Roadmap.mixTimerDetail.localized),
     ]}
 }
 

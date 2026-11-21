@@ -73,6 +73,9 @@ struct DalbitApp: App {
                 .leeoFeedbackReplyNotice(DalbitSpec.self)
                 // 아이폰 듀오: 접힘을 재서 아래로 흘리고, 시트 · 알림창이 접힌 선을 비킨다 (LeeoKit Fold)
                 .foldAware()
+                // 유료가 되면 축하, 모든 사용자에게 한 번 감사 (LeeoKit). 이름은 그 언어의 홈 화면 이름.
+                .leeoCelebrations(appName: Bundle.main.localizedInfoDictionary?["CFBundleDisplayName"] as? String
+                                  ?? DalbitSpec.appName)
         }
         .onChange(of: scenePhase) { _, phase in
             // 사람이 실제로 앞으로 가져온 순간만 활동으로 센다(콜드 런치 + 백그라운드 복귀).

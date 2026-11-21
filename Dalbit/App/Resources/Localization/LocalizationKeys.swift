@@ -820,6 +820,8 @@ enum L {
         static let dataDeleteDetail = "roadmap.data_delete.detail"
         static let autosaveTitle = "roadmap.autosave.title"
         static let autosaveDetail = "roadmap.autosave.detail"
+        static let mixTimerTitle = "roadmap.mixtimer.title"
+        static let mixTimerDetail = "roadmap.mixtimer.detail"
     }
 
     // MARK: - App

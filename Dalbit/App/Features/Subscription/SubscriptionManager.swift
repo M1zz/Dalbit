@@ -18,7 +18,14 @@ import LeeoKit
 @MainActor
 class SubscriptionManager: ObservableObject {
 
+    /// 월 구독. ⚠️ "month" 는 App Store Connect · 기존 구독자 기기와의 계약이다 — 변경 금지.
     nonisolated static let productId = "month"
+    /// 연 구독 — 월 구독과 같은 구독 그룹·같은 단계라 서로 바꿔 탈 수 있다.
+    nonisolated static let yearlyProductId = "com.leeo.LullabyRecipe.pro.yearly"
+    /// 평생(비소모성) — 한 번 사면 끝. 권한은 구독과 똑같이 프리미엄이다.
+    nonisolated static let lifetimeProductId = "com.leeo.LullabyRecipe.pro.lifetime"
+    /// 페이월이 파는 상품 — 화면 순서와 같다(월 · 연 · 평생).
+    nonisolated static let productIDs = [productId, yearlyProductId, lifetimeProductId]
     /// 무료로 만들 수 있는 내 소리 개수 — 원본은 계약(`DalbitSpec.gatePolicy`).
     static let freeMaxCustomSounds = DalbitSpec.gatePolicy.freeLimits[DalbitSpec.GateKey.customSound] ?? 3
     /// 무료 사용 코드 (고정) — 리딤하면 1개월간 프리미엄
@@ -141,11 +148,13 @@ class SubscriptionManager: ObservableObject {
 
     // MARK: - Purchase
 
-    func purchase() async throws {
-        let succeeded = await store.purchasePrimary()
+    /// 고른 상품을 산다. `action` 은 화면의 `@Environment(\.purchase)` —
+    /// 결제 시트를 띄울 창을 화면이 알아야 아이패드에서 결제가 빗나가지 않는다(2.1(b) 거절 이력).
+    func purchase(_ product: Product,
+                  using action: (Product) async throws -> Product.PurchaseResult) async throws {
+        let succeeded = await store.purchase(product, using: action)
         if succeeded {
-            let purchasedID = store.products.first?.id ?? Self.productId
-            AnalyticsManager.shared.log(.subscriptionPurchase(productId: purchasedID))
+            AnalyticsManager.shared.log(.subscriptionPurchase(productId: product.id))
             AnalyticsManager.shared.setUserProperty("true", forName: "is_premium")
             return
         }
@@ -198,9 +207,13 @@ class SubscriptionManager: ObservableObject {
 
     // MARK: - Helpers
 
-    var monthlyProduct: Product? {
-        products.first
+    func product(_ id: String) -> Product? {
+        products.first { $0.id == id }
     }
+
+    var monthlyProduct: Product? { product(Self.productId) }
+    var yearlyProduct: Product? { product(Self.yearlyProductId) }
+    var lifetimeProduct: Product? { product(Self.lifetimeProductId) }
 
     var trialText: String? {
         guard let offer = monthlyProduct?.subscription?.introductoryOffer else { return nil }

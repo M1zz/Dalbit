@@ -15,6 +15,21 @@
   ],
   "products" : [
     {
+      "displayPrice" : "17.99",
+      "familyShareable" : true,
+      "internalID" : "D4LB1T0L1",
+      "localizations" : [
+        {
+          "description" : "Every sound and category, pay once",
+          "displayName" : "Dalbit Premium Lifetime",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.leeo.LullabyRecipe.pro.lifetime",
+      "referenceName" : "Premium Lifetime",
+      "type" : "NonConsumable"
+    },
+    {
       "displayPrice" : "1.99",
       "familyShareable" : false,
       "internalID" : "D41B71001",
@@ -112,6 +127,33 @@
           "productID" : "month",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "month",
+          "subscriptionGroupID" : "21907361",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "5.99",
+          "familyShareable" : true,
+          "groupNumber" : 1,
+          "internalID" : "D4LB1T0Y1",
+          "localizations" : [
+            {
+              "description" : "Every sound and category, billed once a year",
+              "displayName" : "Dalbit Premium Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.leeo.LullabyRecipe.pro.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium Yearly",
           "subscriptionGroupID" : "21907361",
           "type" : "RecurringSubscription",
           "winbackOffers" : [

@@ -36,6 +36,33 @@ final class ReleaseContractTests: XCTestCase {
         XCTAssertNotNil(DalbitSpec.appStoreID)
     }
 
+    // MARK: - 파는 것 (월 · 연 · 평생)
+
+    /// 월 구독("month")은 기존 구독자와의 계약이라 그대로 남고, 연 · 평생이 같은 프리미엄을 연다.
+    func testEveryPlanOpensPremium() throws {
+        let paywall = try XCTUnwrap(DalbitSpec.paywall)
+        XCTAssertEqual(paywall.productIDs, ["month", "com.leeo.LullabyRecipe.pro.yearly", "com.leeo.LullabyRecipe.pro.lifetime"])
+        for id in paywall.productIDs {
+            XCTAssertTrue(paywall.entitlementIDs.contains(id), "\(id) 를 사도 프리미엄이 안 열린다")
+        }
+    }
+
+    /// 팁은 응원일 뿐 — 권한에 섞이면 팁을 낸 사람이 프리미엄이 된다.
+    func testTipsNeverOpenPremium() throws {
+        let paywall = try XCTUnwrap(DalbitSpec.paywall)
+        for tip in DalbitSpec.tipJar.productIDs {
+            XCTAssertFalse(paywall.entitlementIDs.contains(tip), "\(tip) 가 권한에 들어 있다")
+            XCTAssertFalse(paywall.productIDs.contains(tip))
+        }
+    }
+
+    /// 새 줄 문구가 모든 언어에 있다 — 빠지면 그 나라에서 키가 그대로 보인다.
+    func testPlanStringsAreTranslated() {
+        for key in [L.Subscription.monthlyTitle, L.Subscription.buyLifetime] {
+            XCTAssertNotEqual(key.localized, key, "\(key) 번역 없음")
+        }
+    }
+
     // MARK: - 무료 문턱 (내가 만든 소리 3개)
 
     func testFreeUserCanCreateUpToThreeSounds() {

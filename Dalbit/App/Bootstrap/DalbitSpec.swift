@@ -49,7 +49,7 @@ enum DalbitSpec: LeeoAppSpec {
     /// 실제 판매 설정은 아래 `paywall` 이 우선한다(직접 선언). 둘의 상품 ID 는 같아야 한다.
     static let monetization = LeeoMonetization.freemiumSubscription(
         LeeoSubscriptionConfig(
-            productIDs: [SubscriptionManager.productId],
+            productIDs: SubscriptionManager.productIDs,
             termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!,
             gate: gatePolicy,
             tipJar: tipJar
@@ -66,13 +66,14 @@ enum DalbitSpec: LeeoAppSpec {
 
     /// 인앱 결제(구독). StoreKit 엔진은 LeeoKit(LeeoStore)이 담당하고,
     /// 앱은 이 구성과 얇은 SubscriptionManager 파사드(무료 게이트·프로모 코드)만 유지한다.
+    /// 월 · 연 구독과 평생 — 셋 다 같은 프리미엄 권한을 연다.
     /// ⚠️ 상품 ID("month")는 App Store Connect·기존 사용자 기기와의 계약이다 — 변경 금지.
     /// ⚠️ 타입을 반드시 `LeeoPaywallConfig?`로 명시할 것.
     /// non-optional로 두면(`static let paywall = LeeoPaywallConfig(...)`) 이 선언이
     /// 프로토콜의 optional 요구사항(`static var paywall: LeeoPaywallConfig?`)을 witness하지 못해,
     /// Optional 문맥(`DalbitSpec.paywall!`)에서 접근할 때 기본 구현 `{ nil }`에 바인딩되어 크래시한다.
     static let paywall: LeeoPaywallConfig? = LeeoPaywallConfig(
-        productIDs: [SubscriptionManager.productId],
+        productIDs: SubscriptionManager.productIDs,
         termsURL: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"),
         privacyURL: URL(string: "https://m1zz.github.io/Dalbit/privacy.html"),
         gate: gatePolicy,

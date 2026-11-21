@@ -7,12 +7,16 @@
 
 import SwiftUI
 import StoreKit
+import LeeoKit
 
 struct SubscriptionView: View {
 
     @EnvironmentObject var subscriptionManager: SubscriptionManager
     @Environment(\.dismiss) var dismiss
     @Environment(\.openURL) var openURL
+    @Environment(\.purchase) private var purchaseAction
+    /// 고른 줄의 상품 ID — 처음엔 연 구독.
+    @State private var pickedID = SubscriptionManager.yearlyProductId
     @State private var isPurchasing = false
     @State private var showError = false
     @State private var errorMessage = ""
@@ -237,42 +241,30 @@ struct SubscriptionView: View {
 
     // MARK: - Purchase Section
 
+    /// 월 · 연 · 평생 세 줄. 줄을 누르면 고르기만 하고, 사는 것은 아래 단추 하나다.
     @ViewBuilder
     private func purchaseSection() -> some View {
         VStack(spacing: DS.Spacing.sm) {
-            if let product = subscriptionManager.monthlyProduct {
-                // Trial info
-                if let trial = subscriptionManager.trialText {
-                    Text(trial)
-                        .font(DS.Font.subhead().weight(.semibold))
-                        .foregroundColor(DS.Colors.accent)
-                        .padding(.horizontal, DS.Spacing.md)
-                        .padding(.vertical, DS.Spacing.xxs)
-                        .background(DS.Colors.accentSoft)
-                        .cornerRadius(DS.Radius.sm)
+            if let monthly = subscriptionManager.monthlyProduct {
+                VStack(spacing: DS.Spacing.xs) {
+                    LeeoOptionRow(title: L.Subscription.monthlyTitle.localized,
+                                  detail: subscriptionManager.trialText,
+                                  price: L.Subscription.priceFormat.localized.replacingOccurrences(of: "{price}", with: monthly.displayPrice),
+                                  selected: pickedProduct?.id == monthly.id) { pickedID = monthly.id }
+                    if let yearly = subscriptionManager.yearlyProduct {
+                        LeeoOptionRow(title: LeeoLadderText.yearly,
+                                      price: String(format: LeeoLadderText.perYearFormat, yearly.displayPrice),
+                                      selected: pickedProduct?.id == yearly.id) { pickedID = yearly.id }
+                    }
+                    if let lifetime = subscriptionManager.lifetimeProduct {
+                        LeeoOptionRow(title: LeeoLadderText.lifetime,
+                                      detail: lifetimeWorth,
+                                      price: lifetime.displayPrice,
+                                      selected: pickedProduct?.id == lifetime.id) { pickedID = lifetime.id }
+                    }
                 }
 
-                // Price
-                Text(L.Subscription.priceFormat.localized.replacingOccurrences(of: "{price}", with: product.displayPrice))
-                    .font(DS.Font.body())
-                    .foregroundColor(DS.Colors.textSecondary)
-
-                // Subscribe button
-                Button(action: {
-                    isPurchasing = true
-                    Task {
-                        do {
-                            try await subscriptionManager.purchase()
-                            if subscriptionManager.isPremium {
-                                dismiss()
-                            }
-                        } catch {
-                            errorMessage = error.localizedDescription
-                            showError = true
-                        }
-                        isPurchasing = false
-                    }
-                }) {
+                Button(action: buyPicked) {
                     HStack(spacing: DS.Spacing.xs) {
                         if isPurchasing {
                             ProgressView()
@@ -280,13 +272,16 @@ struct SubscriptionView: View {
                         } else {
                             Image(systemName: "crown.fill")
                                 .font(.system(size: 16))
-                            Text(L.Subscription.subscribe.localized)
+                            Text(pickedID == SubscriptionManager.lifetimeProductId
+                                 ? L.Subscription.buyLifetime.localized
+                                 : L.Subscription.subscribe.localized)
                                 .font(DS.Font.headline().weight(.bold))
                         }
                     }
                 }
                 .buttonStyle(PrimaryButtonStyle())
                 .disabled(isPurchasing)
+                .accessibilityIdentifier("subscription.buy")
             } else {
                 VStack(spacing: DS.Spacing.sm) {
                     ProgressView()
@@ -308,6 +303,38 @@ struct SubscriptionView: View {
                 }
                 .padding()
             }
+        }
+    }
+
+    /// 고른 상품. 처음엔 연 구독 — 연 구독이 아직 안 보이면 월 구독.
+    private var pickedProduct: Product? {
+        subscriptionManager.product(pickedID)
+            ?? subscriptionManager.yearlyProduct
+            ?? subscriptionManager.monthlyProduct
+    }
+
+    /// 평생 줄의 한 줄 — "연 구독 N년치, 한 번만 내면 끝" (2년치가 안 되면 말하지 않는다).
+    private var lifetimeWorth: String? {
+        guard let yearly = subscriptionManager.yearlyProduct?.price,
+              let lifetime = subscriptionManager.lifetimeProduct?.price, yearly > 0 else { return nil }
+        let years = Int(NSDecimalNumber(decimal: lifetime / yearly).doubleValue.rounded(.down))
+        return years >= 2 ? String(format: LeeoLadderText.lifetimeWorthFormat, years) : nil
+    }
+
+    private func buyPicked() {
+        guard let product = pickedProduct else { return }
+        isPurchasing = true
+        Task {
+            do {
+                try await subscriptionManager.purchase(product) { try await purchaseAction($0) }
+                if subscriptionManager.isPremium {
+                    dismiss()
+                }
+            } catch {
+                errorMessage = error.localizedDescription
+                showError = true
+            }
+            isPurchasing = false
         }
     }
 

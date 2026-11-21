@@ -465,6 +465,8 @@ enum L {
         static let title = "subscription.title"
         static let description = "subscription.description"
         static let subscribe = "subscription.subscribe"
+        static let monthlyTitle = "subscription.monthly_title"
+        static let buyLifetime = "subscription.buy_lifetime"
         static let restore = "subscription.restore"
         static let freeTier = "subscription.free_tier"
         static let premiumTier = "subscription.premium_tier"

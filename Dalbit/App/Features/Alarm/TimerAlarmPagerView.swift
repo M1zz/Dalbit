@@ -58,7 +58,8 @@ struct TimerAlarmPagerView: View {
     private var topBar: some View {
         HStack(spacing: DS.Spacing.sm) {
             Button(action: onClose) {
-                Image(systemName: "chevron.up")
+                // 타이머는 위로 굴려 올라온 페이지다 — 돌아가려면 아래로 굴린다. 화살표도 그쪽을 가리킨다.
+                Image(systemName: "chevron.down")
                     .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(DS.Colors.accent)
                     .frame(width: 44, height: 44)

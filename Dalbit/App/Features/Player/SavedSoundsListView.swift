@@ -171,7 +171,8 @@ struct SavedSoundsListView: View {
     private func embeddedHeader(onClose: @escaping () -> Void) -> some View {
         HStack(spacing: DS.Spacing.xs) {
             Button(action: onClose) {
-                Image(systemName: "chevron.down")
+                // 보관함은 아래로 굴려 내려온 페이지다 — 돌아가려면 위로 굴린다. 화살표도 그쪽을 가리킨다.
+                Image(systemName: "chevron.up")
                     .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(DS.Colors.accent)
                     .frame(width: 44, height: 44)

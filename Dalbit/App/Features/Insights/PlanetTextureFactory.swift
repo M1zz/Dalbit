@@ -189,8 +189,8 @@ enum PlanetTextureFactory {
             }
         }
 
-        guard let color = image(from: colorPx, width: w, height: h),
-              let normal = image(from: normalPx, width: w, height: h) else { return nil }
+        guard let color = image(rgba: colorPx, width: w, height: h),
+              let normal = image(rgba: normalPx, width: w, height: h) else { return nil }
         return Maps(color: color, normal: normal, duration: Date().timeIntervalSince(start))
     }
 
@@ -282,8 +282,8 @@ enum PlanetTextureFactory {
             }
         }
 
-        guard let color = image(from: colorPx, width: w, height: h),
-              let normal = image(from: normalPx, width: w, height: h) else { return nil }
+        guard let color = image(rgba: colorPx, width: w, height: h),
+              let normal = image(rgba: normalPx, width: w, height: h) else { return nil }
 
         return Maps(color: color, normal: normal, duration: Date().timeIntervalSince(start))
     }
@@ -317,7 +317,7 @@ enum PlanetTextureFactory {
                 px[i + 3] = UInt8(clamping: Int(aF * 255))
             }
         }
-        return image(from: px, width: size, height: size)
+        return image(rgba: px, width: size, height: size)
     }
 
     // MARK: - 노이즈
@@ -382,18 +382,21 @@ enum PlanetTextureFactory {
         return t * t * (3 - 2 * t)
     }
 
-    private static func image(from pixels: [UInt8], width: Int, height: Int) -> CGImage? {
-        var data = pixels
-        return data.withUnsafeMutableBytes { buf -> CGImage? in
-            guard let ctx = CGContext(data: buf.baseAddress,
-                                      width: width,
-                                      height: height,
-                                      bitsPerComponent: 8,
-                                      bytesPerRow: width * 4,
-                                      space: CGColorSpaceCreateDeviceRGB(),
-                                      bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
-            else { return nil }
-            return ctx.makeImage()
-        }
+    /// RGBA8(premultiplied) 픽셀을 CGImage 로 만든다. **픽셀은 이미지가 직접 소유한다.**
+    ///
+    /// ⚠️ `CGContext(data: buf.baseAddress, …).makeImage()` 로 만들지 말 것. `makeImage()` 는
+    ///    copy-on-write 라서 이미지가 우리가 넘긴 버퍼를 그대로 가리킨 채 돌아올 수 있다.
+    ///    그 버퍼는 `withUnsafeMutableBytes` 를 벗어나는 순간 Swift 가 풀어 버리므로, 나중에
+    ///    텍스처를 올릴 때 이미 해제된 메모리를 읽게 된다. 메모리 태깅(MTE)이 켜진 기기에서는
+    ///    그 자리에서 앱이 죽었다(다음 곡으로 넘기다 malloc 안에서 멈춤, 2026-11-21).
+    static func image(rgba pixels: [UInt8], width: Int, height: Int) -> CGImage? {
+        guard pixels.count == width * height * 4,
+              let provider = CGDataProvider(data: Data(pixels) as CFData) else { return nil }
+        return CGImage(width: width, height: height,
+                       bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width * 4,
+                       space: CGColorSpaceCreateDeviceRGB(),
+                       bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+                       provider: provider, decode: nil, shouldInterpolate: true,
+                       intent: .defaultIntent)
     }
 }

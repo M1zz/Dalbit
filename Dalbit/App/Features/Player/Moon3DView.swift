@@ -316,16 +316,7 @@ struct Moon3DView: View {
         for i in 0..<(w * h) {
             px[i * 4 + 0] = 20; px[i * 4 + 1] = 20; px[i * 4 + 2] = 34; px[i * 4 + 3] = 255
         }
-        var data = px
-        let cg: CGImage? = data.withUnsafeMutableBytes { buf in
-            guard let ctx = CGContext(data: buf.baseAddress, width: w, height: h,
-                                      bitsPerComponent: 8, bytesPerRow: w * 4,
-                                      space: CGColorSpaceCreateDeviceRGB(),
-                                      bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
-            else { return nil }
-            return ctx.makeImage()
-        }
-        guard let cg else { return nil }
+        guard let cg = PlanetTextureFactory.image(rgba: px, width: w, height: h) else { return nil }
         return try? EnvironmentResource(equirectangular: cg)
     }
 }

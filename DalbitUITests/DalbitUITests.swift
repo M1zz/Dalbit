@@ -45,6 +45,21 @@ final class DalbitUITests: XCTestCase {
         }
     }
 
+    /// 재생 중에 다음 소리로 계속 넘겨도 앱이 살아 있어야 한다. (넘길 때 죽는다는 제보, 2026-11-21)
+    func testSkippingSoundsWhilePlaying() throws {
+        let moon = app.descendants(matching: .any)["home.moon"]
+        XCTAssertTrue(moon.waitForExistence(timeout: 15), "홈의 달이 떠야 한다")
+        if moon.label != "일시정지" { moon.tap() }
+        sleep(2)
+        XCTAssertEqual(moon.label, "일시정지", "소리가 재생 중이어야 한다")
+        for round in 1...20 {
+            // 다음 소리 — 달을 옆으로 크게 굴린다. 빠르게 넘기는 경우와 들으며 넘기는 경우를 섞는다.
+            moon.swipeLeft(velocity: .fast)
+            sleep(round % 3 == 0 ? 4 : 1)
+            XCTAssertEqual(app.state, .runningForeground, "\(round)번째로 넘길 때 앱이 죽었다")
+        }
+    }
+
     /// 실제 기기는 1분쯤이면 화면이 저절로 잠겨 앱이 백그라운드로 간다. 소리는 계속 나야 하고 앱도 살아 있어야 한다.
     func testKeepsPlayingInBackground() throws {
         let moon = app.descendants(matching: .any)["home.moon"]

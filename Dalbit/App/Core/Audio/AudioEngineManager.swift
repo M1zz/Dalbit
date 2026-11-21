@@ -1038,11 +1038,16 @@ extension AudioEngineManager {
             if !engine.attachedNodes.contains(backgroundPlayer) {
                 engine.attach(backgroundPlayer)
                 engine.attach(backgroundVolumeEffect)
-
-                if let audioFile = backgroundAudioFile {
-                    engine.connect(backgroundPlayer, to: backgroundVolumeEffect, format: audioFile.processingFormat)
-                    engine.connect(backgroundVolumeEffect, to: engine.mainMixerNode, format: audioFile.processingFormat)
-                }
+            }
+            // 파일마다 포맷이 다르다(대부분 44.1kHz, 몇은 24 · 48kHz). 처음 연결한 포맷에 묶어 두면
+            // 다른 배경음으로 넘어갈 때 재생기와 파일의 포맷이 어긋난다 — 다르면 이어 붙인다.
+            if let format = backgroundAudioFile?.processingFormat,
+               backgroundPlayer.outputFormat(forBus: 0) != format {
+                backgroundPlayer.stop()
+                engine.disconnectNodeOutput(backgroundPlayer)
+                engine.disconnectNodeOutput(backgroundVolumeEffect)
+                engine.connect(backgroundPlayer, to: backgroundVolumeEffect, format: format)
+                engine.connect(backgroundVolumeEffect, to: engine.mainMixerNode, format: format)
             }
 
             backgroundVolumeEffect.outputVolume = backgroundVolume

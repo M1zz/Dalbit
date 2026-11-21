@@ -78,8 +78,19 @@ struct MoonJourneySystem: System {
     /// 스프링의 빠르기. 클수록 손가락에 바짝 붙는다. 16 이면 약 0.06초 뒤처지고
     /// 넘침 없이(임계 감쇠) 멈춘다 — 손을 따라오되 무게가 느껴지는 정도.
     private static let rollStiffness: Double = 16
+    /// 크게 굴러갈 때(다음 소리로 넘기는 한 바퀴, 놓아서 제자리로 돌아올 때)의 스프링.
+    ///
+    /// ⚠️ 손가락 따라가기와 같은 값(16)을 쓰지 말 것. 한 바퀴(360°)를 그 빠르기로 쫓으면
+    ///    출발이 확 튀고 0.3초 만에 끝나 "휙" 하고 꺾여 보인다. 6 이면 천천히 굴러가기 시작해
+    ///    약 0.8초에 걸쳐 가라앉는다 — 묵직한 구가 굴러가는 속도다.
+    private static let rollStiffnessFar: Double = 6
 
     init(scene: RealityKit.Scene) {}
+
+    private static func smoothstep(_ a: Double, _ b: Double, _ x: Double) -> Double {
+        let k = max(0, min(1, (x - a) / (b - a)))
+        return k * k * (3 - 2 * k)
+    }
 
     func update(context: SceneUpdateContext) {
         let t = Date().timeIntervalSinceReferenceDate
@@ -94,10 +105,13 @@ struct MoonJourneySystem: System {
         }
         // 프레임이 한 번 늦어도 튀지 않게 한 걸음의 길이를 묶어 둔다
         let dt = min(context.deltaTime, 1.0 / 30.0)
-        let w = Self.rollStiffness
         for e in context.entities(matching: Self.rolls, updatingSystemWhen: .rendering) {
             guard var r = e.components[MoonRollComponent.self] else { continue }
             // 임계 감쇠 스프링 — 목표를 넘치지 않고 가장 빨리 닿는다
+            // 목표까지 멀수록 부드러운 스프링으로 — 가까우면 손가락에 붙고, 멀면 굴러간다
+            let gap = abs(r.target - r.current)
+            let far = SIMD2(Self.smoothstep(20, 90, gap.x), Self.smoothstep(20, 90, gap.y))
+            let w = Self.rollStiffness + (Self.rollStiffnessFar - Self.rollStiffness) * far
             let accel = -w * w * (r.current - r.target) - 2 * w * r.velocity
             r.velocity += accel * dt
             r.current += r.velocity * dt

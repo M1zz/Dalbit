@@ -71,6 +71,8 @@ struct DalbitApp: App {
                 .leeoSatisfactionCheck(DalbitSpec.self)
                 // 개발자가 보낸 의견에 답장하면, 앱이 앞으로 올 때 답장을 시트로 보여 준다 (LeeoKit).
                 .leeoFeedbackReplyNotice(DalbitSpec.self)
+                // App Store 이벤트 링크(<번들 ID>://paywall)로 열리면 요금제를 띄운다 (LeeoKit).
+                .leeoPaywallLink { SubscriptionView().environmentObject(subscriptionManager) }
                 // 아이폰 듀오: 접힘을 재서 아래로 흘리고, 시트 · 알림창이 접힌 선을 비킨다 (LeeoKit Fold)
                 .foldAware()
                 // 유료가 되면 축하, 모든 사용자에게 한 번 감사 (LeeoKit). 이름은 그 언어의 홈 화면 이름.

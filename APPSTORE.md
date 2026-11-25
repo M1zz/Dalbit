@@ -8,7 +8,7 @@
 
 ### 부제
 
-빗소리를 겹쳐 만드는 나만의 잠
+빗소리, 새소리 섞어 꿀잠 자요
 
 ### 키워드
 
@@ -16,11 +16,12 @@
 
 ### 프로모션 텍스트
 
-잠들 소리를 찾느라 밤을 보내지 마세요. 마음에 드는 소리를 겹쳐 한 번 저장하면, 다음 날 밤부터는 달을 한 번 누르면 됩니다.
+잠 못 드는 밤, 빗소리와 백색소음을 겹쳐 틀고 타이머에 맡기세요. 마음에 드는 조합은 한 번 저장하면 다음 날 밤부터 달을 한 번 누르면 됩니다. 모든 소리는 무료로 들을 수 있어요.
 
 ### 설명
 
-잠들 때 틀어 둘 소리를 찾느라 한 시간을 보낸 적 있나요? 달빛은 그 시간을 없애려고 만든 앱입니다.
+빗소리, 백색소음, 새소리를 겹쳐 나만의 수면 소리를 만들고, 서서히 꺼지는 타이머와 함께 잠드는 앱입니다.
+잠들 때 틀어 둘 소리를 찾느라 한 시간을 보낸 적 있나요? 달빛은 그 시간을 없애려고 만들었습니다.
 빗소리 위에 물방울, 그 위에 피아노. 마음에 드는 소리를 겹쳐 한 번 저장해 두면, 다음 날 밤부터는 달을 한 번 누르면 됩니다.
 
 달 하나로 다 합니다
@@ -74,7 +75,7 @@ Dalbit: Sleep Sounds & Noise
 
 ### 부제
 
-Layer rain, birds and piano
+Mix rain sounds, fall asleep
 
 ### 키워드
 
@@ -82,10 +83,11 @@ ambient,insomnia,lullaby,white,brown,pink,asmr,tibetan,bowl,thunderstorm,cricket
 
 ### 프로모션 텍스트
 
-Stop spending the night hunting for the right sound. Layer the ones you love, save the mix once, and from tomorrow night it is a single tap on the moon.
+Can't sleep? Layer rain, white noise and birdsong, set a timer that fades out, and drift off. Save the mix once and every night after is one tap. Every sound is free.
 
 ### 설명
 
+Dalbit layers rain, white noise and birdsong into your own sleep sound, then fades it out on a timer while you drift off.
 Ever lost an hour looking for something to fall asleep to? Dalbit exists to take that search away.
 Water drops over rain, piano over that. Layer the sounds you like, save the mix once, and from the next night on it is one tap on the moon.
 
@@ -206,7 +208,7 @@ Dalbit: Sleep Sounds & Noise
 
 ### 부제
 
-Layer rain, birds and piano
+Mix rain sounds, fall asleep
 
 ### 키워드
 
@@ -214,10 +216,11 @@ ambient,insomnia,lullaby,asmr,tibetan,thunderstorm,crickets,ocean,nap,relax,calm
 
 ### 프로모션 텍스트
 
-Stop spending the night hunting for the right sound. Layer the ones you love, save the mix once, and from tomorrow night it is a single tap on the moon.
+Can't sleep? Layer rain, white noise and birdsong, set a timer that fades out, and drift off. Save the mix once and every night after is one tap. Every sound is free.
 
 ### 설명
 
+Dalbit layers rain, white noise and birdsong into your own sleep sound, then fades it out on a timer while you drift off.
 Ever lost an hour looking for something to fall asleep to? Dalbit exists to take that search away.
 Water drops over rain, piano over that. Layer the sounds you like, save the mix once, and from the next night on it is one tap on the moon.
 

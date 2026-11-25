@@ -23,15 +23,15 @@ STORE = {"en": "en-US"}
 # (원본 파일, 헤드라인, 서브카피) — 언어마다 따로 쓴다.
 SHOTS = {
     "ko": [
-        ("01-moon.png",    "달을 누르면<br>잠이 시작돼요", "옆으로 밀면 다른 소리, 길게 누르면 즐겨찾기"),
-        ("02-studio.png",  "빗소리 위에<br>물방울 한 겹", "볼륨과 간격, 들리는 자리까지 내 마음대로"),
+        ("01-moon.png",    "빗소리 · 백색소음으로<br>스르르 잠들어요", "달을 누르면 재생, 타이머가 서서히 꺼 줘요"),
+        ("02-studio.png",  "빗소리에 새소리,<br>내 잠 소리를 섞어요", "물방울 · 싱잉볼까지, 볼륨과 간격도 내 마음대로"),
         ("03-library.png", "한 번 만들면<br>다음 밤엔 한 번에", "수면 · 집중 · 명상, 저장한 소리를 바로"),
         ("04-timer.png",   "끊기지 않고<br>스르르 멈춰요", "수면 타이머는 소리를 천천히 줄여 줘요"),
         ("05-alarm.png",   "아침은<br>싱잉볼 소리로", "요일마다 부드럽게 깨워 주는 알람"),
     ],
     "en": [
-        ("01-moon.png",    "Tap the moon.<br>Drift off.", "Swipe for another sound, hold to favorite"),
-        ("02-studio.png",  "Water drops<br>over rain", "Set each layer's volume, rhythm and space"),
+        ("01-moon.png",    "Rain and white noise<br>to fall asleep to", "Tap the moon to play. The timer fades it out."),
+        ("02-studio.png",  "Mix your own<br>sleep sounds", "Rain, water drops and birds, each at your volume"),
         ("03-library.png", "Make it once,<br>play it every night", "Sleep, focus and meditation mixes, one tap away"),
         ("04-timer.png",   "It fades.<br>It never cuts out.", "A sleep timer that won't wake you up"),
         ("05-alarm.png",   "Wake up to<br>a singing bowl", "Gentle alarms for the days you choose"),
@@ -44,8 +44,8 @@ SHOTS = {
         ("05-alarm.png",   "やさしい朝は<br>シンギングボウルで", "曜日ごとに設定できる、穏やかなアラーム"),
     ],
     "en-GB": [
-        ("01-moon.png",    "Tap the moon.<br>Drift off.", "Swipe for another sound, hold to favourite"),
-        ("02-studio.png",  "Water drops<br>over rain", "Set each layer's volume, rhythm and space"),
+        ("01-moon.png",    "Rain and white noise<br>to fall asleep to", "Tap the moon to play. The timer fades it out."),
+        ("02-studio.png",  "Mix your own<br>sleep sounds", "Rain, water drops and birds, each at your volume"),
         ("03-library.png", "Make it once,<br>play it every night", "Sleep, focus and meditation mixes, one tap away"),
         ("04-timer.png",   "It fades.<br>It never cuts out.", "A sleep timer that won't wake you up"),
         ("05-alarm.png",   "Wake up to<br>a singing bowl", "Gentle alarms for the days you choose"),

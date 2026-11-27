@@ -1,0 +1,21 @@
+{
+  "$comment": [
+    "FeedbackHubViewer 가 이 앱의 통계를 읽는 스펙. 원본은 이 파일이고, 허브는 scripts/sync-stats-specs.sh 로 복사해 간다.",
+    "release.coreAction 은 품질 탭의 '핵심 기능' 칸과 릴리즈 건강 카드가 읽는다. 이벤트 이름을 바꾸면 여기도 같이 바꿀 것."
+  ],
+  "specVersion": 1,
+  "appId": "com.leeo.LullabyRecipe",
+  "appName": "달빛",
+  "eventLabels": {
+    "listen_start": "자장가 듣기 시작"
+  },
+  "release": {
+    "coreAction": {
+      "label": "자장가를 들은 사람",
+      "events": [
+        "listen_start"
+      ],
+      "note": "자장가를 실제로 틀어야 아이를 재우는 이 앱의 쓸모를 받는다."
+    }
+  }
+}
